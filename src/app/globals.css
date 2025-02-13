@@ -7,6 +7,22 @@
   --foreground: #171717;
 }
 
+html {
+  font-size: 16px;
+}
+
+@media (min-width: 1100px) {
+  html {
+    font-size: 85%;
+  }
+}
+
+@media (min-width: 1500px) {
+  html {
+    font-size: 90%;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
