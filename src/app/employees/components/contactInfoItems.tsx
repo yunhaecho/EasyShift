@@ -1,7 +1,7 @@
-import Image from 'next/image';
+import { ReactNode } from "react"
 
 interface ContactInfoProps {
-    icon: string,
+    icon: ReactNode,
     category: string,
     contactInfo: string
 }
@@ -9,11 +9,7 @@ export default function ContactInfoItems({icon,category, contactInfo} : ContactI
     return (
         <div className="flex flex-row w-full h-60 md:mb-20">
             <div className="bg-primary-100 w-60 h-full rounded-xl flex flex-col items-center justify-center md:mr-20">
-                <Image 
-                    src={icon}
-                    width={20}
-                    height={20}
-                    alt='Phone Icon'/>
+                {icon}
             </div>
             <div className='flex flex-col justify-start items-start'>
                 <span className=' flex-[1] w-full flex items-center body-14-400 text-gray-600'>{category}</span>
