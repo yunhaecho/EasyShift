@@ -1,0 +1,58 @@
+/* Headline */
+.head-60-700 {
+  @apply text-60 font-bold leading-[3.75rem];
+}
+
+.head-30-800 {
+  @apply text-30 font-bold leading-[2.25rem];
+}
+
+.head-30-400 {
+  @apply text-30 font-normal leading-[2.25rem];
+}
+
+.head-24-700 {
+  @apply text-24 font-bold leading-[2rem];
+}
+
+.head-24-600 {
+  @apply text-24 font-semibold leading-[2rem];
+}
+
+.head-20-600 {
+  @apply text-20 font-semibold leading-[1.75rem];
+}
+
+.head-20-400 {
+  @apply text-20 font-normal leading-[1.75rem];
+}
+
+/* Body */
+.body-18-500 {
+  @apply text-18 font-medium leading-[1.75rem];
+}
+
+.body-16-500 {
+  @apply text-16 font-medium leading-[1.5rem];
+}
+
+.body-16-400 {
+  @apply text-16 font-normal leading-[1.5rem];
+}
+
+.body-14-500 {
+  @apply text-14 font-medium leading-[1.25rem];
+}
+
+.body-14-400 {
+  @apply text-14 font-normal leading-[1.25rem];
+}
+
+/* Caption */
+.caption-12-400 {
+  @apply text-12 font-normal leading-[1rem];
+}
+
+.caption-12-500 {
+  @apply text-12 font-medium leading-[1rem];
+}
