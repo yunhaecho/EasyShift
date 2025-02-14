@@ -1,0 +1,34 @@
+import React from 'react';
+import Logo from '@/../public/logo.svg';
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
+import ChevronDownIcon from '@/../public/icons/chevron-down.svg';
+import MenuBar from './MenuBar';
+export default function TopBar() {
+  return (
+    <header className="flex h-64 items-center border-b border-gray-300 bg-white px-30 py-12">
+      <div className="flex w-full items-center justify-between">
+        <div className="flex items-center gap-26">
+          <Logo />
+          <Menu>
+            <MenuButton className="body-16-400 flex w-200 justify-between border border-gray-400 py-9 pl-12 text-gray-900">
+              <div>Starbucks Reserve</div>
+              <ChevronDownIcon className="mr-8 h-24 w-24" />
+            </MenuButton>
+            <MenuItems
+              anchor="bottom"
+              className="mt-3 w-200 border border-gray-400 bg-white px-12 py-9"
+            >
+              <MenuItem>
+                <a className="block data-[focus]:bg-gray-300" href="/settings">
+                  Settings
+                </a>
+              </MenuItem>
+            </MenuItems>
+          </Menu>
+          <MenuBar />
+        </div>
+        <div className="h-32 w-32 rounded-full border border-gray-400" />
+      </div>
+    </header>
+  );
+}
