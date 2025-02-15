@@ -24,7 +24,7 @@ export default function EmployeeInfo () {
 
     return  (
         <>
-          <div className="absolute w-full h-full opacity-100 flex justify-center items-center p-0 flex-wrap bg-black bg-opacity-50 z-50">
+          <div className="absolute w-full h-full opacity-100 flex justify-center items-center p-0 flex-wrap ">
             <div className="relative w-1024 h-789 p-32 bg-white rounded-xl opacity-100 flex flex-col shadow-sm">
                 <div className='w-full flex justify-end cursor-pointer mb-20'>
                     <CloseIcon/>
