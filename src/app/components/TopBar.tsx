@@ -1,12 +1,13 @@
-import React from 'react';
-import Logo from '@/../public/logo.svg';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
-import ChevronDownIcon from '@/../public/icons/chevron-down.svg';
+import ChevronDownIcon from '../../assets/icons/chevron-down.svg';
 import MenuBar from './MenuBar';
+import Logo from '/public/logo.svg';
+
 export default function TopBar() {
   return (
     <header className="flex h-64 items-center border-b border-gray-300 bg-white px-30 py-12">
       <div className="flex w-full items-center justify-between">
+        {/* Logo & Menu */}
         <div className="flex items-center gap-26">
           <Logo />
           <Menu>
@@ -27,6 +28,7 @@ export default function TopBar() {
           </Menu>
           <MenuBar />
         </div>
+        {/* User Avatar */}
         <div className="h-32 w-32 rounded-full border border-gray-400" />
       </div>
     </header>
