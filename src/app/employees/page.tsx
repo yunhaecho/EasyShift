@@ -1,7 +1,6 @@
 "use client"
 
 import SampleProfile from '../../assets/sample.jpg';
-<<<<<<< HEAD
 import CloseIcon from '@/assets/icons/close.svg'
 import CalendarIcon from '@/assets/icons/calendar.svg'
 import PhoneIcon from '@/assets/icons/phone.svg';
@@ -9,16 +8,9 @@ import EmailIcon from '@/assets/icons/email.svg';
 import LocationIcon from '@/assets/icons/location.svg';
 import LeftArrowIcon from '@/assets/icons/left-arrow.svg';
 import RightArrowIcon from '@/assets/icons/right-arrow.svg';
-=======
-import CloseIcon from '@/../public/icons/close.svg'
-import CalendarIcon from '@/../public/icons/calendar.svg'
-import PhoneIcon from '@/../public/icons/phone.svg';
-import EmailIcon from '@/../public/icons/email.svg';
-import LocationIcon from '@/../public/icons/location.svg';
->>>>>>> 600bb01 (Refactor: Merge calendar-related components in page.tsx into a Calendar.tsx)
-import Image from "next/image"
+import ContactInfoItems from './components/ContactInfoItems';
 import Calendar from './components/calendar';
-import ContactInfoItems from './components/contactInfoItems';
+import Image from 'next/image';
 
 export default function EmployeeInfo () {
 
@@ -37,7 +29,7 @@ export default function EmployeeInfo () {
                                     src={SampleProfile} 
                                     alt="SampleProfile"
                                     className='object-cover w-full h-full rounded-[50%]'
-                                    />
+                                />
                             </div>
                             <div className='head-24-600 mt-8 mb-3 w-full'>Sarah Johnson</div>
                             <div className='flex flex-row items-center justify-center w-full text-base text-gray-600 mb-35'>

@@ -5,8 +5,6 @@ import {format} from 'date-fns';
 
 function generateCalendar (currentYear: number, currentMonth: number ) {
 
-
-  
   //현재 월 첫 날의 요일 : 0(일요일) ~ 6(토요일)
   const fstOfCurrentMonth = new Date(currentYear, currentMonth , 1).getDay(); 
   // console.log(fstOfCurrentMonth);
@@ -53,9 +51,7 @@ function generateCalendar (currentYear: number, currentMonth: number ) {
     ...currentMonthDatesArr,
     ...nextMonthDatesArr,
   ];
-  console.log(calendarDates);
   
-
   return calendarDates;
 }
 
