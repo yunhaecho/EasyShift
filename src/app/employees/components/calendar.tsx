@@ -7,7 +7,6 @@ function generateCalendar (currentYear: number, currentMonth: number ) {
 
   //현재 월 첫 날의 요일 : 0(일요일) ~ 6(토요일)
   const fstOfCurrentMonth = new Date(currentYear, currentMonth , 1).getDay(); 
-  // console.log(fstOfCurrentMonth);
   
   //현재 월 마지막 날짜
   const currentMonthLastDate = new Date(currentYear, currentMonth , 0).getDate();
@@ -27,7 +26,7 @@ function generateCalendar (currentYear: number, currentMonth: number ) {
   const prevMonthDates = Array.from({length: fstOfCurrentMonth}, (_,i)=> currentMonthDates.length - fstOfCurrentMonth + i + 1);
   const prevMonthDatesArr = prevMonthDates.map( day => ({
       date: `${format(new Date(prevYear,prevMonth,day), 'yyyy-MM-dd')}`,
-      isCurrentMonth: false 
+      isCurrentMonth: false
   }));
 
   //다음 연도, 월 (currentMonth가 11이면 currentYear + 1 처리)
@@ -105,8 +104,8 @@ export default function Calendar() {
     ];
     const calendar = generateCalendar(currentYear, currentMonth);
 
-    const workInfoArr = schedules.map(i => i.shifts).flat(); //array
-
+    const workInfoArr = schedules.map(i => i.shifts).flat();
+    
     const manageDate = (num : number) => {
       let newMonth = currentMonth + num;
       let newYear = currentYear;
@@ -168,15 +167,15 @@ export default function Calendar() {
                           shift.shiftDate === item.date 
                           ? <div key={shift.id} className='w-52 h-8 mt-14 rounded-xl bg-blue-200' />
                           : ''
-                      ))}
-
+                        ))}
                     </li>
-                  )
-              })}
-
-            </ul>
-          </div>
-        </>
-    )
+                    )
+                  }
+                )
+              }
+          </ul>
+      </div>
+    </>
+  )
 }  
 

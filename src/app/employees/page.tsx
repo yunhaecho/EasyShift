@@ -27,7 +27,7 @@ export default function EmployeeInfo () {
                                     src={SampleProfile} 
                                     alt="SampleProfile"
                                     className='object-cover w-full h-full rounded-[50%]'
-                                    />
+                                />
                             </div>
                             <div className='head-24-600 mt-8 mb-3 w-full'>Sarah Johnson</div>
                             <div className='flex flex-row items-center justify-center w-full text-base text-gray-600 mb-35'>
