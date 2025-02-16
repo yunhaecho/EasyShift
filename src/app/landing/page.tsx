@@ -1,13 +1,13 @@
 import FeatureCard from "./component/FeatureCard";
-import CalendarIcon from "@/../public/icons/calendar.svg";
-import PeopleIcon from "@/../public/icons/people.svg";
-import ChartIcon from "@/../public/icons/chart.svg";
-import CircleArrow from "@/../public/icons/circle-arrow.svg";
+import CalendarIcon from "@/assets/icons/calendar.svg";
+import PeopleIcon from "@/assets/icons/people.svg";
+import ChartIcon from "@/assets/icons/chart.svg";
+import CircleArrow from "@/assets/icons/circle-arrow.svg";
 
 export default function Landing() {
     return (
         <div className="w-full h-full flex flex-col">
-            <div className="flex flex-col items-center justify-center h-480 bg-white pt-96 pd-96">
+            <div className="flex flex-col items-center justify-center h-480 bg-white pt-96 pd">
                 <div className="text-head-60-700 text-6xl font-bold mb-24">Easy Shift</div>
                 <div className="text-head-30-400 text-3xl font-normal mb-28">Effortlessly Manage Your Team&apos;s Schedule</div>
                 <div className="text-head-20-400 text-xl font-normal ">Streamline your workforce management with our intuitive scheduling solution. Save</div>

@@ -5,7 +5,7 @@ interface ContactInfoProps {
     category: string,
     contactInfo: string
 }
-export default function ContactInfoItems({icon,category, contactInfo} : ContactInfoProps) {
+export default function ContactInfoItems({icon, category, contactInfo} : ContactInfoProps) {
     return (
         <div className="flex flex-row w-full h-60 md:mb-20">
             <div className="bg-primary-100 w-60 h-full rounded-xl flex flex-col items-center justify-center md:mr-20">
@@ -16,6 +16,5 @@ export default function ContactInfoItems({icon,category, contactInfo} : ContactI
                 <span className=' flex-[1] flex w-full items-center body-16-500'>{contactInfo}</span>
             </div>
         </div>
-
     )
 }
