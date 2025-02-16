@@ -22,21 +22,25 @@ const shifts = [
   },
 ];
 
-const WeeklyCalendar = () => {
-  const currentWeekDates = getCurrentWeekDates();
+interface WeeklyCalendarProps {
+  currentDate: Date;
+}
+
+const WeeklyCalendar = ({ currentDate }: WeeklyCalendarProps) => {
+  const currentWeekDates = getCurrentWeekDates(currentDate);
 
   return (
-    <div className="w-full rounded-8 bg-white shadow-sm">
-      <div className="grid grid-cols-8 p-16">
-        <div className="body-16-500 text-gray-600">Shifts</div>
+    <div className="w-full rounded-8 border border-gray-300 bg-white shadow-sm">
+      <div className="grid grid-cols-8">
+        <div className="body-16-500 p-16 text-gray-600">Shifts</div>
         {currentWeekDates.map((date, index) => (
           <div
             key={index}
-            className="body-16-500 text-center text-gray-900"
+            className="body-16-500 p-16 text-center text-gray-900"
           >{`${date.day} ${date.dayOfWeek.toUpperCase()}`}</div>
         ))}
       </div>
-      <div className="">
+      <div>
         {shifts.map(shift => (
           <div
             key={shift.id}
