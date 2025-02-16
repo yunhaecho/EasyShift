@@ -27,13 +27,13 @@ const WeeklyNavigator = ({
   return (
     <div className="flex items-center gap-16">
       <button onClick={handlePrevWeek}>
-        <ChevronLeftIcon className="mb-2 h-40 w-26" />
+        <ChevronLeftIcon className="mb-5 h-40 w-26" />
       </button>
       <div className="head-20-600 w-170 text-center text-gray-800">
         {`${startDate.month} ${startDate.day} - ${endDate.day}, ${startDate.year}`}
       </div>
       <button onClick={handleNextWeek}>
-        <ChevronRightIcon className="mb-2 h-40 w-26" />
+        <ChevronRightIcon className="mb-5 h-40 w-26" />
       </button>
     </div>
   );

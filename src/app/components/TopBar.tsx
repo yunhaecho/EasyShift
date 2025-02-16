@@ -17,10 +17,13 @@ export default function TopBar() {
             </MenuButton>
             <MenuItems
               anchor="bottom"
-              className="mt-3 w-200 border border-gray-400 bg-white px-12 py-9"
+              className="mt-5 w-200 border border-gray-400 bg-white"
             >
               <MenuItem>
-                <a className="block data-[focus]:bg-gray-300" href="/settings">
+                <a
+                  className="block px-12 py-9 data-[focus]:bg-gray-300"
+                  href="/settings"
+                >
                   Settings
                 </a>
               </MenuItem>
