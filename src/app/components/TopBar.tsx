@@ -5,10 +5,10 @@ import Logo from '/public/logo.svg';
 
 export default function TopBar() {
   return (
-    <header className="flex h-64 items-center border-b border-gray-300 bg-white px-30 py-12">
-      <div className="flex w-full items-center justify-between">
+    <header className="flex h-64 items-center border-b border-gray-300 bg-white px-30">
+      <div className="flex h-full w-full items-center justify-between">
         {/* Logo & Menu */}
-        <div className="flex items-center gap-26">
+        <div className="flex h-full items-center gap-26">
           <Logo />
           <Menu>
             <MenuButton className="body-16-400 flex w-200 justify-between border border-gray-400 py-9 pl-12 text-gray-900">

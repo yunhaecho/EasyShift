@@ -1,7 +1,13 @@
+'use client';
+
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import classNames from 'classnames';
+
 const menus = [
   {
     label: 'Home',
-    href: '/',
+    href: '/home',
   },
   {
     label: 'Schedules',
@@ -14,12 +20,20 @@ const menus = [
 ];
 
 const MenuBar = () => {
+  const pathname = usePathname();
+
   return (
-    <div className="flex items-center gap-30">
+    <div className="flex h-full items-center gap-30">
       {menus.map(menu => (
-        <div key={menu.label} className="body-14-500 text-gray-800">
+        <Link
+          key={menu.label}
+          href={menu.href}
+          className={classNames('body-14-500 px-14 py-21 text-gray-800', {
+            'border-b-2 border-gray-800': pathname === menu.href,
+          })}
+        >
           {menu.label}
-        </div>
+        </Link>
       ))}
     </div>
   );
