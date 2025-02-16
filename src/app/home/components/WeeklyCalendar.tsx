@@ -1,4 +1,5 @@
 import { getCurrentWeekDates } from '@/utils/dateUtils';
+import WorkerBlock from './WorkerBlock';
 
 const shifts = [
   {
@@ -39,14 +40,20 @@ const WeeklyCalendar = () => {
         {shifts.map(shift => (
           <div
             key={shift.id}
-            className="grid min-h-162 grid-cols-8 border-t border-gray-300"
+            className="grid min-h-162 grid-cols-8 border-t border-gray-400"
           >
             <div className="p-16">
               <div className="body-14-500 text-gray-900">{shift.label}</div>
               <div className="body-14-400 text-gray-600">{shift.time}</div>
             </div>
             {Array.from({ length: 7 }).map((_, index) => (
-              <div key={index} style={{ backgroundColor: shift.color }}></div>
+              <div
+                key={index}
+                style={{ backgroundColor: shift.color }}
+                className="border-l border-gray-400 p-16"
+              >
+                <WorkerBlock />
+              </div>
             ))}
           </div>
         ))}
