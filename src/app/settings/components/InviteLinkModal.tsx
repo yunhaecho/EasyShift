@@ -26,7 +26,10 @@ const InviteLinkModal = ({
 
   return (
     <Dialog open={isOpen} onClose={onClose} className="relative z-50">
+      {/* Overlay */}
       <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
+
+      {/* Modal */}
       <div className="fixed inset-0 flex items-center justify-center p-4">
         <div className="min-w-480 rounded-8 bg-white p-24">
           <DialogTitle className="head-20-600 flex items-center justify-between text-gray-900">
@@ -35,9 +38,11 @@ const InviteLinkModal = ({
               <CloseIcon />
             </button>
           </DialogTitle>
+
           <Description className="body-14-400 mt-24 text-gray-700">
             Copy this link to add members
           </Description>
+
           <div className="mt-16 flex items-center justify-between rounded-8 border border-gray-300 bg-gray-200 px-25 py-21">
             <p className="body-16-400 text-gray-800">{INVITE_LINK}</p>
             <button
