@@ -8,6 +8,7 @@ import EmailIcon from '@/assets/icons/email.svg';
 import LocationIcon from '@/assets/icons/location.svg';
 import LeftArrowIcon from '@/assets/icons/left-arrow.svg';
 import RightArrowIcon from '@/assets/icons/right-arrow.svg';
+
 import ContactInfoItems from './components/ContactInfoItems';
 import Calendar from './components/Calendar';
 import Image from 'next/image';

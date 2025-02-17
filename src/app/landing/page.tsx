@@ -8,10 +8,10 @@ export default function Landing() {
     return (
         <div className="w-full h-full flex flex-col">
             <div className="flex flex-col items-center justify-center h-480 bg-white pt-96 pd">
-                <div className="text-head-60-700 text-6xl font-bold mb-24">Easy Shift</div>
-                <div className="text-head-30-400 text-3xl font-normal mb-28">Effortlessly Manage Your Team&apos;s Schedule</div>
-                <div className="text-head-20-400 text-xl font-normal ">Streamline your workforce management with our intuitive scheduling solution. Save</div>
-                <div className="text-head-20-400 text-xl font-normal mb-48">time, reduce errors, and keep your team synchronized.</div>
+                <div className="head-60-700 mb-24">Easy Shift</div>
+                <div className="head-30-400 mb-28">Effortlessly Manage Your Team&apos;s Schedule</div>
+                <div className="head-20-400">Streamline your workforce management with our intuitive scheduling solution. Save</div>
+                <div className="head-20-400  mb-48">time, reduce errors, and keep your team synchronized.</div>
                 <div className="flex flex-row gap-18">
                     <div className="flex items-center justify-center w-195 h-62 rounded-4 body-18-500 bg-black text-white cursor-pointer" >Get Started Free</div>
                     <div className="flex items-center justify-center w-195 h-62 rounded-4 body-18-500 bg-white border border-gray-900 text-black mb-48 cursor-pointer">Learn More</div>

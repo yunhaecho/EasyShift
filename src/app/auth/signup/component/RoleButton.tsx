@@ -1,5 +1,5 @@
-import { Button } from '@headlessui/react'
-import { ReactNode } from 'react'
+import { Button } from '@headlessui/react';
+import { ReactNode } from 'react';
 
 interface RoleButtonProps {
     icon: ReactNode,
