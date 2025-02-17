@@ -11,7 +11,7 @@ export default function TopBar() {
         <div className="flex h-full items-center gap-26">
           <Logo />
           <Menu>
-            <MenuButton className="body-16-400 flex w-200 justify-between border border-gray-400 py-9 pl-12 text-gray-900">
+            <MenuButton className="body-16-400 flex min-w-250 justify-between border border-gray-400 py-9 pl-12 text-gray-900">
               <div>Starbucks Reserve</div>
               <ChevronDownIcon className="mr-8 h-24 w-24" />
             </MenuButton>
