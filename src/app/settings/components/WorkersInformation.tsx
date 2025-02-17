@@ -36,12 +36,17 @@ const initialWorkers = [
 
 const WorkersInformation = () => {
   const [workers, setWorkers] = useState<Worker[]>(initialWorkers);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleDeleteWorker = (workerId: number) => {
     setWorkers(prevWorkers =>
       prevWorkers.filter(worker => worker.id !== workerId),
     );
   };
+
+  const filteredWorkers = workers.filter(worker =>
+    worker.name.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
 
   return (
     <div className="rounded-8 border border-gray-300 bg-white shadow-sm">
@@ -51,6 +56,8 @@ const WorkersInformation = () => {
           <MagnifyingGlassIcon />
           <input
             type="text"
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
             placeholder="Search workers..."
             className="w-full focus:outline-none"
           />
@@ -69,7 +76,7 @@ const WorkersInformation = () => {
       </div>
 
       {/* Workers */}
-      {workers.map(worker => (
+      {filteredWorkers.map(worker => (
         <div
           key={worker.id}
           className="flex items-center border-t border-gray-400 px-24 py-12"
@@ -92,6 +99,13 @@ const WorkersInformation = () => {
           </div>
         </div>
       ))}
+
+      {/* Empty state */}
+      {filteredWorkers.length === 0 && (
+        <div className="flex justify-center py-24">
+          <p className="body-14-400 text-gray-600">No workers found</p>
+        </div>
+      )}
     </div>
   );
 };
