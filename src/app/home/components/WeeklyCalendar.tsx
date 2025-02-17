@@ -1,5 +1,6 @@
 import { getCurrentWeekDates } from '@/utils/dateUtils';
 import WorkerBlock from './WorkerBlock';
+import { WeeklyCalendarProps } from '../types';
 
 const shifts = [
   {
@@ -21,10 +22,6 @@ const shifts = [
     color: '#FFF1E7',
   },
 ];
-
-interface WeeklyCalendarProps {
-  currentDate: Date;
-}
 
 const WeeklyCalendar = ({ currentDate }: WeeklyCalendarProps) => {
   const currentWeekDates = getCurrentWeekDates(currentDate);

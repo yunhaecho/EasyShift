@@ -2,11 +2,7 @@ import { addWeeks, subWeeks } from 'date-fns';
 import ChevronLeftIcon from '../../../assets/icons/chevron-left.svg';
 import ChevronRightIcon from '../../../assets/icons/chevron-right.svg';
 import { getCurrentWeekDates } from '@/utils/dateUtils';
-
-interface WeeklyNavigatorProps {
-  currentDate: Date;
-  setCurrentDate: (date: Date) => void;
-}
+import { WeeklyNavigatorProps } from '../types';
 
 const WeeklyNavigator = ({
   currentDate,
