@@ -1,12 +1,12 @@
 "use client"
 
 import SampleProfile from '../../assets/sample.jpg';
-import CloseIcon from '@/../public/icons/close.svg'
-import CalendarIcon from '@/../public/icons/calendar.svg'
+import CloseIcon from '@/../public/icons/close.svg';
+import CalendarIcon from '@/../public/icons/calendar.svg';
 import PhoneIcon from '@/../public/icons/phone.svg';
 import EmailIcon from '@/../public/icons/email.svg';
 import LocationIcon from '@/../public/icons/location.svg';
-import Image from "next/image"
+import Image from "next/image";
 import ContactInfoItems from './components/ContactInfoItems';
 import Calendar from './components/Calendar';
 

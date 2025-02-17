@@ -128,16 +128,16 @@ export default function Calendar() {
     return (
         <>
           <div className='flex flex-row justify-between h-32 mb-26' >
-            <span className='text-head-20-600 font-semibold text-xl'>{`${monthName[currentMonth]} ${currentYear}`}</span>
+            <span className='head-20-600'>{`${monthName[currentMonth]} ${currentYear}`}</span>
             <div className='flex flex-row h-full gap-8 '>
               <button 
                 onClick={clickPrev}
-                className='prev pointer-cursor flex w-32 items-center justify-center rounded-1 border border-gray-300'>
+                className='pointer-cursor flex w-32 items-center justify-center rounded-1 border border-gray-300'>
                   <LeftArrowIcon />
               </button>
               <button 
                 onClick={clickNext}
-                className='next pointer-cursor flex w-32 items-center justify-center rounded-1 border border-gray-300'>
+                className='pointer-cursor flex w-32 items-center justify-center rounded-1 border border-gray-300'>
                   <RightArrowIcon/>
               </button>
             </div>

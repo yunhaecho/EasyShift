@@ -16,12 +16,12 @@ export default function SignUp() {
     const [enabled, setEnabled] = useState(false)
 
     return (
-        <div className="w-full h-full flex flex-col items-center justify-center  bg-[rgba(0, 0, 0, 0)]">
+        <div className="w-full h-1024 flex flex-col items-center justify-center">
             <div className='w-448 h-full flex flex-col items-center justify-center'>
                 
                 <div className='flex flex-col items-center justify-center w-full h-136 mb-32'>
                     <Logo className="mb-24"/>
-                    <div className='text-head-30-800 text-3xl font-extrabold mb-8'>Create your account</div>
+                    <div className='head-30-800 mb-8'>Create your account</div>
                     <div className='flex flex-row body-14-500'>
                         <div className='text-gray-700'>Or&ensp;</div>
                         <div className='text-gray-900 hover:underline cursor-pointer'>sign in to your existing account</div>

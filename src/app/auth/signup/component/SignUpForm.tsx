@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode } from 'react';
 
 interface SignUpFormProps {
     icon: ReactNode,
@@ -11,7 +11,7 @@ export default function SignUpForm({icon, formName} : SignUpFormProps) {
         <div className="body-14-500 text-gray-800 mb-4">{formName}</div>
         <div className='flex flex-row w-full h-50 border border-gray-400'>
             {icon}
-            <input className ="w-342 h-hull border-collapse outline-none text-gray-800 text-sm font-medium" type="text" />
+            <input className ="w-342 h-hull border-collapse outline-none text-gray-800" type="text" />
         </div>
     </div>
   )

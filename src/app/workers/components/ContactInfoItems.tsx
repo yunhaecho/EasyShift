@@ -7,8 +7,8 @@ interface ContactInfoProps {
 }
 export default function ContactInfoItems({icon, category, contactInfo} : ContactInfoProps) {
     return (
-        <div className="flex flex-row w-full h-60 md:mb-20">
-            <div className="bg-primary-100 w-60 h-full rounded-xl flex flex-col items-center justify-center md:mr-20">
+        <div className="flex flex-row w-full h-60 mb-20">
+            <div className="bg-primary-100 w-60 h-full rounded-xl flex flex-col items-center justify-center mr-20">
                 {icon}
             </div>
             <div className='flex flex-col justify-start items-start'>
