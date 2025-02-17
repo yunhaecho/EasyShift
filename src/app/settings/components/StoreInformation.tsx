@@ -17,7 +17,7 @@ const StoreInformation = () => {
             <p className="body-16-500 text-gray-900">Starbucks Reserve</p>
           </div>
         </div>
-        <hr />
+        <hr className="border-gray-400" />
         <div className="flex flex-col gap-16">
           <p className="head-20-600 text-gray-900">Schedule Details</p>
           <div className="flex flex-col gap-4 rounded-8 border border-gray-300 p-17">

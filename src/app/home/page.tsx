@@ -14,7 +14,7 @@ const HomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   /* 임시 */
-  const isStoreExist = true;
+  const isStoreExist = false;
 
   return isStoreExist ? (
     <div className="flex w-full flex-col gap-14 px-32 py-14">
