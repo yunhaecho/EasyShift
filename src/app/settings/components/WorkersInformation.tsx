@@ -6,6 +6,7 @@ import { Worker } from '../types';
 import PlusWhiteIcon from '../../../assets/icons/plus-white.svg';
 import MagnifyingGlassIcon from '../../../assets/icons/magnifying-glass.svg';
 import DeleteRedIcon from '../../../assets/icons/delete-red.svg';
+import InviteLinkModal from './InviteLinkModal';
 
 const initialWorkers = [
   {
@@ -37,6 +38,7 @@ const initialWorkers = [
 const WorkersInformation = () => {
   const [workers, setWorkers] = useState<Worker[]>(initialWorkers);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isInviteLinkModalOpen, setIsInviteLinkModalOpen] = useState(false);
 
   const handleDeleteWorker = (workerId: number) => {
     setWorkers(prevWorkers =>
@@ -62,7 +64,10 @@ const WorkersInformation = () => {
             className="w-full focus:outline-none"
           />
         </div>
-        <button className="flex h-fit items-center gap-12 rounded-4 bg-gray-900 px-16 py-8">
+        <button
+          onClick={() => setIsInviteLinkModalOpen(true)}
+          className="flex h-fit items-center gap-12 rounded-4 bg-gray-900 px-16 py-8"
+        >
           <PlusWhiteIcon width={14} height={14} />
           <p className="body-16-400 text-white">Add Worker</p>
         </button>
@@ -106,6 +111,12 @@ const WorkersInformation = () => {
           <p className="body-14-400 text-gray-600">No workers found</p>
         </div>
       )}
+
+      {/* Invite Link Modal */}
+      <InviteLinkModal
+        isOpen={isInviteLinkModalOpen}
+        onClose={() => setIsInviteLinkModalOpen(false)}
+      />
     </div>
   );
 };
