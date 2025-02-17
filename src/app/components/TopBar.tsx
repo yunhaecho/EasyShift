@@ -17,7 +17,7 @@ export default function TopBar() {
             </MenuButton>
             <MenuItems
               anchor="bottom"
-              className="mt-5 w-200 border border-gray-400 bg-white"
+              className="mt-5 min-w-250 border border-gray-400 bg-white"
             >
               <MenuItem>
                 <a
