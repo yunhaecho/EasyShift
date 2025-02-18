@@ -1,39 +1,72 @@
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
-import ChevronDownIcon from '../../assets/icons/chevron-down.svg';
+'use client';
+
+import { usePathname, useRouter } from 'next/navigation';
 import MenuBar from './MenuBar';
+import StoresListDropdown from './StoresListDropdown';
+import { hideNavigation } from '@/utils/hideNavigation';
+
 import Logo from '/public/logo.svg';
 
-export default function TopBar() {
+function UserAvatar() {
+  return <div className="h-32 w-32 rounded-full border border-gray-400" />;
+}
+
+function AuthButtons() {
+  const router = useRouter();
+
+  return (
+    <div className="flex gap-16">
+      <button
+        className="body-16-500 rounded-4 text-gray-900"
+        onClick={() => router.push('/signin')}
+      >
+        <p>Sign In</p>
+      </button>
+      <button
+        className="body-16-500 rounded-4 bg-gray-900 px-15 py-8 text-white"
+        onClick={() => router.push('/signup')}
+      >
+        <p>Sign Up</p>
+      </button>
+    </div>
+  );
+}
+
+function TopBar() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const isAuthenticated = true;
+
+  const routerLogo = () => {
+    if (isAuthenticated) {
+      router.push('/stores');
+    } else {
+      router.push('/landing');
+    }
+  };
+
   return (
     <header className="flex h-64 items-center border-b border-gray-300 bg-white px-30">
       <div className="flex h-full w-full items-center justify-between">
-        {/* Logo & Menu */}
         <div className="flex h-full items-center gap-26">
-          <Logo />
-          <Menu>
-            <MenuButton className="body-16-400 flex w-200 justify-between border border-gray-400 py-9 pl-12 text-gray-900">
-              <div>Starbucks Reserve</div>
-              <ChevronDownIcon className="mr-8 h-24 w-24" />
-            </MenuButton>
-            <MenuItems
-              anchor="bottom"
-              className="mt-5 w-200 border border-gray-400 bg-white"
-            >
-              <MenuItem>
-                <a
-                  className="block px-12 py-9 data-[focus]:bg-gray-300"
-                  href="/settings"
-                >
-                  Settings
-                </a>
-              </MenuItem>
-            </MenuItems>
-          </Menu>
-          <MenuBar />
+          {/* Logo */}
+          <button onClick={routerLogo}>
+            <Logo />
+          </button>
+
+          {/* Menu */}
+          {!hideNavigation(pathname, isAuthenticated) && (
+            <>
+              <StoresListDropdown />
+              <MenuBar />
+            </>
+          )}
         </div>
-        {/* User Avatar */}
-        <div className="h-32 w-32 rounded-full border border-gray-400" />
+
+        {isAuthenticated ? <UserAvatar /> : <AuthButtons />}
       </div>
     </header>
   );
 }
+
+export default TopBar;

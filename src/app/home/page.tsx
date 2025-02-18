@@ -49,7 +49,7 @@ const HomePage = () => {
           </p>
         </div>
         <button
-          className="flex items-center gap-12 rounded-4 border border-gray-400 bg-gray-900 bg-white px-16 py-8"
+          className="flex items-center gap-12 rounded-4 bg-gray-900 px-16 py-8"
           onClick={() => setIsModalOpen(true)}
         >
           <PlusWhiteIcon />
