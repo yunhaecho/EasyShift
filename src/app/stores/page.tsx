@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import CreateStoreModal from './[storeId]/home/components/CreateStoreModal';
+import CreateStoreModal from '../components/CreateStoreModal';
 
 import StoreBlackIcon from '@/assets/icons/store-black.svg';
 import StoreGrayIcon from '@/assets/icons/store-gray.svg';
