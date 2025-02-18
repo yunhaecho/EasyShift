@@ -1,21 +1,22 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+import { ROUTES } from '@/constants/routes';
 import Link from 'next/link';
 import classNames from 'classnames';
 
 const menus = [
   {
     label: 'Home',
-    href: '/home',
+    href: ROUTES.HOME,
   },
   {
     label: 'Schedules',
-    href: '/schedule',
+    href: ROUTES.SCHEDULE,
   },
   {
     label: 'Settings',
-    href: '/settings',
+    href: ROUTES.SETTINGS,
   },
 ];
 
@@ -29,7 +30,7 @@ const MenuBar = () => {
           key={menu.label}
           href={menu.href}
           className={classNames('body-14-500 px-14 py-21 text-gray-800', {
-            'border-b-2 border-gray-800': pathname === menu.href,
+            'border-b-2 border-gray-800': pathname.includes(menu.href),
           })}
         >
           {menu.label}

@@ -6,7 +6,7 @@ import WeeklyNavigator from './components/WeeklyNavigator';
 import CreateStoreModal from './components/CreateStoreModal';
 
 import ShareIcon from '../../assets/icons/share.svg';
-import StoreIcon from '../../assets/icons/store.svg';
+import StoreGrayIcon from '../../assets/icons/store-gray.svg';
 import PlusWhiteIcon from '../../assets/icons/plus-white.svg';
 
 const HomePage = () => {
@@ -41,7 +41,7 @@ const HomePage = () => {
   ) : (
     <>
       <div className="flex h-full w-full flex-col items-center justify-center gap-22">
-        <StoreIcon />
+        <StoreGrayIcon />
         <div className="flex flex-col items-center gap-4">
           <p className="body-18-500 text-gray-900">Please create a store</p>
           <p className="body-14-400 text-gray-600">

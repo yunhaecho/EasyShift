@@ -62,7 +62,7 @@ const ModalContent = ({
   <div className="flex flex-col gap-24 px-24 py-16">
     <StoreNameInput />
     <div className="flex flex-col gap-16">
-      <p className="body-16-500 text-gray-900">Store Parts</p>
+      <p className="body-16-500 text-gray-900">Store Schedules</p>
       {schedules.map(
         (schedule: { shifts: number[] }, scheduleIndex: number) => (
           <div
