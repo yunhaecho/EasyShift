@@ -54,6 +54,7 @@ const StoresPage = () => {
         </div>
       ) : (
         <div className="flex w-full flex-col gap-32 p-32">
+          {/* Header */}
           <header className="flex items-end justify-between">
             <div className="flex flex-col gap-8">
               <p className="head-40-700 text-gray-900">Hello, User!</p>
@@ -66,6 +67,7 @@ const StoresPage = () => {
             </div>
           </header>
 
+          {/* Stores List */}
           <div className="grid grid-cols-3 gap-16">
             {mockStores.map(store => (
               <button

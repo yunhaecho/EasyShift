@@ -1,27 +1,29 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import { ROUTES } from '@/constants/routes';
 import Link from 'next/link';
 import classNames from 'classnames';
 
-const menus = [
-  {
-    label: 'Home',
-    href: ROUTES.HOME,
-  },
-  {
-    label: 'Schedules',
-    href: ROUTES.SCHEDULE,
-  },
-  {
-    label: 'Settings',
-    href: ROUTES.SETTINGS,
-  },
-];
-
 const MenuBar = () => {
   const pathname = usePathname();
+  const params = useParams();
+  const storeId = params.storeId;
+
+  const menus = [
+    {
+      label: 'Home',
+      href: `/${ROUTES.STORES}/${storeId}/${ROUTES.HOME}`,
+    },
+    {
+      label: 'Schedules',
+      href: `/${ROUTES.STORES}/${storeId}/${ROUTES.SCHEDULE}`,
+    },
+    {
+      label: 'Settings',
+      href: `/${ROUTES.STORES}/${storeId}/${ROUTES.SETTINGS}`,
+    },
+  ];
 
   return (
     <div className="flex h-full items-center gap-30">

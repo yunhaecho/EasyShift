@@ -6,6 +6,7 @@ import StoresListDropdown from './StoresListDropdown';
 import { hideNavigation } from '@/utils/hideNavigation';
 
 import Logo from '@/assets/logo.svg';
+import { ROUTES } from '@/constants/routes';
 
 function UserAvatar() {
   return <div className="h-32 w-32 rounded-full border border-gray-400" />;
@@ -18,13 +19,13 @@ function AuthButtons() {
     <div className="flex gap-16">
       <button
         className="body-16-500 rounded-4 text-gray-900"
-        onClick={() => router.push('/signin')}
+        onClick={() => router.push(`/${ROUTES.SIGNIN}`)}
       >
         <p>Sign In</p>
       </button>
       <button
         className="body-16-500 rounded-4 bg-gray-900 px-15 py-8 text-white"
-        onClick={() => router.push('/signup')}
+        onClick={() => router.push(`/${ROUTES.SIGNUP}`)}
       >
         <p>Sign Up</p>
       </button>
@@ -37,11 +38,13 @@ function TopBar() {
   const pathname = usePathname();
   const isAuthenticated = true;
 
+  console.log(pathname);
+
   const routerLogo = () => {
     if (isAuthenticated) {
-      router.push('/stores');
+      router.push(`/${ROUTES.STORES}`);
     } else {
-      router.push('/landing');
+      router.push(`/${ROUTES.LANDING}`);
     }
   };
 
