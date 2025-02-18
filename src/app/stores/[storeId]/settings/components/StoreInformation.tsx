@@ -1,4 +1,4 @@
-import EditIcon from '../../../assets/icons/edit.svg';
+import EditIcon from '@/assets/icons/edit.svg';
 
 const StoreInformation = () => {
   return (

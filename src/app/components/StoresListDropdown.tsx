@@ -1,6 +1,6 @@
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/react';
 
-import ChevronDownIcon from '../../assets/icons/chevron-down.svg';
+import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
 
 const StoresListDropdown = () => {
   return (

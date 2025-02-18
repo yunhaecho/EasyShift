@@ -2,8 +2,8 @@ import { Description, DialogTitle } from '@headlessui/react';
 import { Dialog } from '@headlessui/react';
 import toast from 'react-hot-toast';
 
-import CloseIcon from '../../../assets/close.svg';
-import CopyIcon from '../../../assets/icons/copy.svg';
+import CloseIcon from '@/assets/icons/close.svg';
+import CopyIcon from '@/assets/icons/copy.svg';
 
 const INVITE_LINK = 'https://example.com/invite/xyz123';
 

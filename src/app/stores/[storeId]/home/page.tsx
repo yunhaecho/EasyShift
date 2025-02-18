@@ -5,9 +5,9 @@ import WeeklyCalendar from './components/WeeklyCalendar';
 import WeeklyNavigator from './components/WeeklyNavigator';
 import CreateStoreModal from './components/CreateStoreModal';
 
-import ShareIcon from '../../assets/icons/share.svg';
-import StoreGrayIcon from '../../assets/icons/store-gray.svg';
-import PlusWhiteIcon from '../../assets/icons/plus-white.svg';
+import ShareIcon from '@/assets/icons/share.svg';
+import StoreGrayIcon from '@/assets/icons/store-gray.svg';
+import PlusWhiteIcon from '@/assets/icons/plus-white.svg';
 
 const HomePage = () => {
   const [currentDate, setCurrentDate] = useState(new Date());

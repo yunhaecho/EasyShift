@@ -5,8 +5,8 @@ import { DialogTitle } from '@headlessui/react';
 import { Dialog } from '@headlessui/react';
 import { ModalContentProps } from '../types';
 
-import PlusBlackIcon from '../../../assets/icons/plus-black.svg';
-import DeleteIcon from '../../../assets/icons/delete.svg';
+import PlusBlackIcon from '@/assets/icons/plus-black.svg';
+import DeleteIcon from '@/assets/icons/delete.svg';
 
 // Common Style
 const buttonStyle =

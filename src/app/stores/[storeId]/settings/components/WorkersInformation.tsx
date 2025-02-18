@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import { Worker } from '../types';
-
-import PlusWhiteIcon from '../../../assets/icons/plus-white.svg';
-import MagnifyingGlassIcon from '../../../assets/icons/magnifying-glass.svg';
-import DeleteRedIcon from '../../../assets/icons/delete-red.svg';
 import InviteLinkModal from './InviteLinkModal';
+
+import PlusWhiteIcon from '@/assets/icons/plus-white.svg';
+import MagnifyingGlassIcon from '@/assets/icons/magnifying-glass.svg';
+import DeleteRedIcon from '@/assets/icons/delete-red.svg';
 
 const initialWorkers = [
   {
