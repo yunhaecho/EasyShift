@@ -5,7 +5,7 @@ import MenuBar from './MenuBar';
 import StoresListDropdown from './StoresListDropdown';
 import { hideNavigation } from '@/utils/hideNavigation';
 
-import Logo from '/public/logo.svg';
+import Logo from '@/assets/logo.svg';
 
 function UserAvatar() {
   return <div className="h-32 w-32 rounded-full border border-gray-400" />;
