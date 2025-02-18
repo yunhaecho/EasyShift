@@ -1,18 +1,73 @@
 'use client';
 
-import { usePathname, useRouter } from 'next/navigation';
-import MenuBar from './MenuBar';
-import StoresListDropdown from './StoresListDropdown';
+import { useParams, usePathname, useRouter } from 'next/navigation';
+import { ROUTES } from '@/constants/routes';
+import classNames from 'classnames';
 import { hideNavigation } from '@/utils/hideNavigation';
+import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/react';
+import { STORE_MENUS } from '@/constants/menus';
 
 import Logo from '@/assets/logo.svg';
-import { ROUTES } from '@/constants/routes';
+import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
 
-function UserAvatar() {
+/* Home, Schedule, Settings 메뉴 탭 */
+const MenuBar = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const params = useParams();
+  const storeId = params.storeId;
+
+  return (
+    <div className="flex h-full items-center gap-30">
+      {STORE_MENUS.map(menu => (
+        <button
+          key={menu.label}
+          onClick={() =>
+            router.push(`/${ROUTES.STORES}/${storeId}/${menu.path}`)
+          }
+          className={classNames('body-14-500 px-14 py-21 text-gray-800', {
+            'border-b-2 border-gray-800': pathname.includes(menu.path),
+          })}
+        >
+          {menu.label}
+        </button>
+      ))}
+    </div>
+  );
+};
+
+/* 유저가 소속된 매장 리스트 */
+const StoresListDropdown = () => {
+  return (
+    <Menu>
+      <MenuButton className="body-16-400 flex w-200 justify-between border border-gray-400 py-9 pl-12 text-gray-900">
+        <div>Starbucks Reserve</div>
+        <ChevronDownIcon className="mr-8 h-24 w-24" />
+      </MenuButton>
+      <MenuItems
+        anchor="bottom"
+        className="mt-5 w-200 border border-gray-400 bg-white"
+      >
+        <MenuItem>
+          <a
+            className="block px-12 py-9 data-[focus]:bg-gray-300"
+            href="/settings"
+          >
+            Settings
+          </a>
+        </MenuItem>
+      </MenuItems>
+    </Menu>
+  );
+};
+
+/* 유저 아바타 */
+const UserAvatar = () => {
   return <div className="h-32 w-32 rounded-full border border-gray-400" />;
-}
+};
 
-function AuthButtons() {
+/* 로그인, 회원가입 버튼 */
+const AuthButtons = () => {
   const router = useRouter();
 
   return (
@@ -31,14 +86,12 @@ function AuthButtons() {
       </button>
     </div>
   );
-}
+};
 
-function TopBar() {
+const TopBar = () => {
   const router = useRouter();
   const pathname = usePathname();
   const isAuthenticated = true;
-
-  console.log(pathname);
 
   const routerLogo = () => {
     if (isAuthenticated) {
@@ -70,6 +123,6 @@ function TopBar() {
       </div>
     </header>
   );
-}
+};
 
 export default TopBar;
