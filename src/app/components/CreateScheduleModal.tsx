@@ -3,10 +3,10 @@
 import { useState } from 'react';
 import { DialogTitle } from '@headlessui/react';
 import { Dialog } from '@headlessui/react';
-import { ModalContentProps } from '../types';
+import { ModalContentProps } from '@/app/components/types';
 
 import PlusBlackIcon from '@/assets/icons/plus-black.svg';
-import DeleteIcon from '@/assets/icons/delete.svg';
+import DeleteIcon from '@/assets/icons/delete-red.svg';
 
 // Common Style
 const buttonStyle =
@@ -14,18 +14,10 @@ const buttonStyle =
 const inputStyle =
   'body-16-400 border border-gray-400 px-12 py-9 text-gray-900 focus:outline-none';
 
-// StoreNameInput
-const StoreNameInput = () => (
-  <div className="flex flex-col gap-4">
-    <p className="body-16-500 text-gray-900">Store Name</p>
-    <input type="text" placeholder="Enter store name" className={inputStyle} />
-  </div>
-);
-
 // ScheduleInput
 const ScheduleInput = ({ deleteSchedule }: { deleteSchedule: () => void }) => (
   <div className="flex flex-col gap-4">
-    <div className="flex justify-between">
+    <div className="flex items-center justify-between">
       <p className="body-16-500 text-gray-900">Schedule Name</p>
       <DeleteIcon className="cursor-pointer" onClick={deleteSchedule} />
     </div>
@@ -60,9 +52,7 @@ const ModalContent = ({
   deleteShift,
 }: ModalContentProps) => (
   <div className="flex flex-col gap-24 px-24 py-16">
-    <StoreNameInput />
     <div className="flex flex-col gap-16">
-      <p className="body-16-500 text-gray-900">Store Schedules</p>
       {schedules.map(
         (schedule: { shifts: number[] }, scheduleIndex: number) => (
           <div
@@ -82,7 +72,7 @@ const ModalContent = ({
                   <ShiftInput label="Start Time" placeholder="--:--" />
                   <ShiftInput label="End Time" placeholder="--:--" />
                   <DeleteIcon
-                    className="mb-12 cursor-pointer"
+                    className="mb-14 cursor-pointer"
                     onClick={() => deleteShift(scheduleIndex, shiftIndex)}
                   />
                 </div>
@@ -124,12 +114,14 @@ const ModalActions = ({ onClose }: { onClose: () => void }) => (
   </div>
 );
 
-const CreateStoreModal = ({
+const CreateScheduleModal = ({
   isOpen,
   onClose,
+  dialogTitle,
 }: {
   isOpen: boolean;
   onClose: () => void;
+  dialogTitle: string;
 }) => {
   const [schedules, setSchedules] = useState<{ shifts: number[] }[]>([
     { shifts: [0] },
@@ -175,7 +167,7 @@ const CreateStoreModal = ({
       <div className="fixed inset-0 flex items-center justify-center p-4">
         <div className="max-h-[80%] w-full max-w-[50%] overflow-y-auto rounded-8 bg-white">
           <DialogTitle className="head-20-600 border-b border-gray-300 px-24 py-16 text-gray-900">
-            Create New Store
+            {dialogTitle}
           </DialogTitle>
           <ModalContent
             schedules={schedules}
@@ -191,4 +183,4 @@ const CreateStoreModal = ({
   );
 };
 
-export default CreateStoreModal;
+export default CreateScheduleModal;

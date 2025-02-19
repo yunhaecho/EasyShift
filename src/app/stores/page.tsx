@@ -92,6 +92,7 @@ const StoresPage = () => {
         <CreateStoreModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
+          dialogTitle="Create New Store"
         />
       )}
     </>

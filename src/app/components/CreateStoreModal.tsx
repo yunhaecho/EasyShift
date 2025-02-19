@@ -25,9 +25,11 @@ const ModalActions = ({ onClose }: { onClose: () => void }) => (
 const CreateStoreModal = ({
   isOpen,
   onClose,
+  dialogTitle,
 }: {
   isOpen: boolean;
   onClose: () => void;
+  dialogTitle: string;
 }) => {
   return (
     <Dialog open={isOpen} onClose={onClose} className="relative z-50">
@@ -35,7 +37,7 @@ const CreateStoreModal = ({
       <div className="fixed inset-0 flex items-center justify-center p-4">
         <div className="max-h-[80%] w-full max-w-[30%] overflow-y-auto rounded-8 bg-white">
           <DialogTitle className="head-20-600 border-b border-gray-300 px-24 py-16 text-gray-900">
-            Create New Store
+            {dialogTitle}
           </DialogTitle>
 
           {/* ModalContent */}
