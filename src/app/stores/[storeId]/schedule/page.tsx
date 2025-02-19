@@ -1,31 +1,73 @@
+"use client"
+
 import { Button } from '@headlessui/react';
-import React from 'react';
+import React, {useState } from 'react';
 import PlusIcon from '@/assets/icons/plus.svg';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
-import StatusPending from './components/StatusPending';
-import StatusCompleted from './components/StatusCompleted';
-import Submissions from './components/Submissions';
+import Status from './components/Status';
 import Actions from './components/Actions';
-export default function page() {
+import Submissions from './components/Submissions';
 
-    const category = ['Period', 'Status','Deadline','Submissions', 'Actions'];
+export default function Schedule() {
+  const [isStatusFilter, setIsStatusFilter] = useState(false);
+  const [isYearFilter, setIsYearFilter] = useState(false);
+  const [status, setStatus] = useState('');
+  const [year, setYear] = useState('');
 
-    // const data = [
-    //     {
-    //         'period' : 'March 2024',
-    //         'status' : 'Pending',
-    //         'deadline' : 'February 28, 2024',
-    //         'submissions' : '15', 
-    //         'actions' : 'generate'
-    //     }
-    // ];
-    
-    // const links = [
-    //     { href: '/settings', label: 'Settings' },
-    //     { href: '/support', label: 'Support' },
-    //     { href: '/license', label: 'License' },
-    //   ]
+  const mockData = [
+    {
+        "id": 101,
+        "scheduleName": "야간 근무",
+        "shiftDate": "2024-11",
+        "status": "pending",
+        "description": "야간 근무 일정입니다."
+    },
+    {
+        "id": 102,
+        "scheduleName": "주간 근무",
+        "shiftDate": "2023-11",
+        "status": "completed",
+        "description": "주간 근무 일정입니다."
+    }
+  ]
+
+  const column = ['Period', 'Status','Deadline','Submissions', 'Actions'];
+  const statusOption = ['All Status','Pending','Completed'];
+
+  //연도 배열(중복 제거)
+  const yearOption = Array.from(
+    new Set(mockData.map((schedule)=> schedule.shiftDate.substring(0,4)))
+  );
+  
+  
+  // 상태 필터링
+  const filterStatus = ( e: React.MouseEvent<HTMLAnchorElement> ) => {
+    const selectedStatus  = e.currentTarget?.textContent ?? '';
+  
+    if(selectedStatus === 'All Status') {
+      setIsStatusFilter(false);
+      setStatus(status);
+    } else if (selectedStatus === 'Pending'){
+      setIsStatusFilter(true);
+      setStatus('pending');
+    } else {
+      setStatus('completed');
+    }
+  }
+
+  //연도 필터링
+  const filterYear = ( e: React.MouseEvent<HTMLAnchorElement> ) => {
+    const seletedYear = e.currentTarget?.textContent ?? '';
+    setYear(seletedYear);
+    setIsYearFilter(true);
+  }
+
+  const filteredData = mockData.filter((schedule) => {
+    const sameStatus = !isStatusFilter || schedule.status === status;
+    const sameYear = !isYearFilter || schedule.shiftDate.substring(0,4) === year;
+    return sameStatus && sameYear;
+  })
 
   return (
     <div className='p-30 w-full h-full '>
@@ -37,74 +79,71 @@ export default function page() {
             </Button>
         </div>
 
-        {/* 필터링 */}
         <div className='w-full h-auto rounded-5 shadow-sm '>
             <div className='flex flex-row w-full h-71 bg-white p-16 gap-16 rounded-t-sm border-b border-gray-300'>
+                {/* 상태 드랍다운*/}
                 <Menu>
                   <MenuButton className="body-14-400 flex w-122 border border-gray-400 py-9 pl-12 text-gray-900 items-center transition-all duration-00 ease-in-out">
-                      All Status
+                      {isStatusFilter ? status : 'All Status'}
                       <ChevronDownIcon />
                   </MenuButton>
                   <MenuItems anchor="bottom" className="mt-5 w-122 border border-gray-400 bg-white">
-                    <MenuItem>
-                      <a className="block px-12 py-9 data-[focus]:bg-gray-300 cursor-pointer">
-                        Pending</a>
-                    </MenuItem>
-                    <MenuItem>
-                      <a className="block px-12 py-9 data-[focus]:bg-gray-300 cursor-pointer">
-                        Completed
-                      </a>
-                    </MenuItem>
+                    {statusOption.map((stat) => (
+                      <MenuItem as="div" key={stat}>
+                          <a 
+                            className="block px-12 py-9 data-[focus]:bg-gray-300 cursor-pointer" 
+                            onClick={filterStatus}>
+                            {stat}
+                          </a>
+                        </MenuItem>
+                    ))}
                   </MenuItems>
                 </Menu>
                 
-                {/* 매장 생성한 연도를 가져와서 -> 해당 시점 부터 현재연도 까지map을 돌려서 */}
+                {/* 연도 드랍다운*/}
                 <Menu>
-                <MenuButton className="body-14-400 flex w-86 border border-gray-400 py-9 pl-13 text-gray-900 items-center">
-                      2024
-                      <ChevronDownIcon />
+                  <MenuButton as="div" className="body-14-400 flex w-86 border border-gray-400 py-9 pl-13 text-gray-900 items-center">
+                    {isYearFilter ? year : 'Year'}
+                    <ChevronDownIcon />
                   </MenuButton>
-                  <MenuItems anchor="bottom" className="mt-5 w-86 border border-gray-400 bg-white">
-                    <MenuItem>
-                    {/* 매장 생성한 연도부터 */}
-                      <a className="block px-12 py-9 data-[focus]:bg-gray-300 cursor-pointer">
-                        2024
-                      </a>
-                    </MenuItem>
-                    
-                  </MenuItems>
+                    <MenuItems anchor="bottom" className="mt-5 w-86 border border-gray-400 bg-white">
+                      <MenuItem as="div">
+                      {yearOption.map((year) => (
+                        <a 
+                          key={year}
+                          className="block px-12 py-9 data-[focus]:bg-gray-300 cursor-pointer"
+                          onClick={filterYear}>
+                          {year}
+                        </a>
+                      ))}
+
+                      </MenuItem>
+                    </MenuItems>
                 </Menu>
             </div>
 
-            {/* 임시 */}
             <table className="table-fixed w-full">
               <thead>
                 <tr className="border-b border-gray-300 caption-12-500">
-                  {category.map((items) => (
-                    <td className="w-1/5 py-12 px-24" key={items}>{items}</td>
+                  {column.map((col) => (
+                    <td className="w-1/5 py-12 px-24" key={col}>{col}</td>
                   ))}
                 </tr>
               </thead>
 
-              <tbody>
-                <tr className="border-b border-gray-300 bg-white">
-                  <td className="py-12 px-24 body-14-500">March 2024</td>
-                  <td className="py-12 px-24"><StatusPending /></td>
-                  <td className="py-12 px-24 body-14-400 text-gray-600">Feb 28, 2024</td>
-                  <td className="py-12 px-24"><Submissions/></td>
-                  <td className="py-12 px-24"><Actions/></td>
-                </tr>
-
-                <tr className="border-b border-gray-300 bg-white">
-                  <td className="py-12 px-24 body-14-500">March 2024</td>
-                  <td className="py-12 px-24"><StatusCompleted /> </td>
-                  <td className="py-12 px-24 body-14-400 text-gray-600">Feb 28, 2024</td>
-                  <td className="py-12 px-24"><Submissions/></td>
-                  <td className="py-12 px-24"><Actions/></td>
-                </tr>
+              <tbody>    
+                {filteredData.map((item) => (
+                    <tr key={item.id} className="border-b border-gray-300 bg-white">
+                      <td className="py-12 px-24 body-14-500">{item.shiftDate}</td>
+                      <td className="py-12 px-24"><Status status={item.status}/></td>
+                      <td className="py-12 px-24 body-14-400 text-gray-600">{item.shiftDate}</td>
+                      <td className="py-12 px-24"><Submissions/></td>
+                      <td className="py-12 px-24"><Actions/></td>
+                  </tr>
+                  ))
+                }
               </tbody>
             </table>
-
       </div>
     </div>
   )
