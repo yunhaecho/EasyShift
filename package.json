@@ -12,10 +12,7 @@
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
     "@svgr/webpack": "^8.1.0",
-<<<<<<< HEAD
     "classnames": "^2.5.1",
-=======
->>>>>>> 52046c9 (Refactor : 캘린더 로직 리팩토링)
     "date-fns": "^4.1.0",
     "next": "15.1.7",
     "react": "^19.0.0",
