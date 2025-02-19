@@ -1,6 +1,6 @@
 import React from 'react'
 import Editicon from '@/assets/icons/edit.svg';
-import DeleteIcon from '@/assets/icons/delete.svg';
+import DeleteIcon from '@/assets/icons/delete-red.svg';
 import { Button } from '@headlessui/react';
 
 function Actions() {

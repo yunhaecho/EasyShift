@@ -1,8 +1,8 @@
 import { Button } from '@headlessui/react';
 import React from 'react';
-import PlusIcon from '../../assets/icons/plus.svg';
+import PlusIcon from '@/assets/icons/plus.svg';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
-import ChevronDownIcon from '../../assets/icons/chevron-down.svg';
+import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
 import StatusPending from './components/StatusPending';
 import StatusCompleted from './components/StatusCompleted';
 import Submissions from './components/Submissions';
@@ -16,8 +16,8 @@ export default function page() {
     //         'period' : 'March 2024',
     //         'status' : 'Pending',
     //         'deadline' : 'February 28, 2024',
-    //         'submissions' : '15', // 값을 동적으로 받아야 함.
-    //         'actions' : 'generate' //이벤트 리스너 연결
+    //         'submissions' : '15', 
+    //         'actions' : 'generate'
     //     }
     // ];
     
@@ -41,19 +41,18 @@ export default function page() {
         <div className='w-full h-auto rounded-5 shadow-sm '>
             <div className='flex flex-row w-full h-71 bg-white p-16 gap-16 rounded-t-sm border-b border-gray-300'>
                 <Menu>
-                  <MenuButton className="body-14-400 flex w-122 border border-gray-400 py-9 pl-12 text-gray-900 items-center">
+                  <MenuButton className="body-14-400 flex w-122 border border-gray-400 py-9 pl-12 text-gray-900 items-center transition-all duration-00 ease-in-out">
                       All Status
                       <ChevronDownIcon />
                   </MenuButton>
-                  <MenuItems anchor="bottom">
+                  <MenuItems anchor="bottom" className="mt-5 w-122 border border-gray-400 bg-white">
                     <MenuItem>
-                      <a className="block data-[focus]:bg-gray-300" href="/settings">
-                        pending
-                      </a>
+                      <a className="block px-12 py-9 data-[focus]:bg-gray-300 cursor-pointer">
+                        Pending</a>
                     </MenuItem>
                     <MenuItem>
-                      <a className="block data-[focus]:bg-blue-100" href="/support">
-                        completed
+                      <a className="block px-12 py-9 data-[focus]:bg-gray-300 cursor-pointer">
+                        Completed
                       </a>
                     </MenuItem>
                   </MenuItems>
@@ -65,11 +64,11 @@ export default function page() {
                       2024
                       <ChevronDownIcon />
                   </MenuButton>
-                  <MenuItems anchor="bottom">
+                  <MenuItems anchor="bottom" className="mt-5 w-86 border border-gray-400 bg-white">
                     <MenuItem>
                     {/* 매장 생성한 연도부터 */}
-                      <a className="block data-[focus]:bg-gray-300" href="/settings">
-                        2024(example)
+                      <a className="block px-12 py-9 data-[focus]:bg-gray-300 cursor-pointer">
+                        2024
                       </a>
                     </MenuItem>
                     
