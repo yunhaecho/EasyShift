@@ -1,58 +1,65 @@
-import WorkerInfoModal from '@/app/workers/components/WorkerInfoModal';
-import { WeekDate } from '../types';
+import { convertMonthToNumber, getCurrentWeekDates } from '@/utils/dateUtils';
 import WorkerBlock from './WorkerBlock';
-import useToggle from '@/app/hooks/useToggle';
-import { mockShifts } from '../../mocks';
+import { WeeklyCalendarProps } from '../types';
 
-const WeeklyCalendar = ({
-  currentWeekDates,
-}: {
-  currentWeekDates: WeekDate[];
-}) => {
-  const [isWorkerInfoModalOpen, toggleWorkerInfoModal] = useToggle();
+const SHIFT_COLORS = ['#EEF2FF', '#F0FDF4', '#FFF1E7'];
+
+const WeeklyCalendar = ({ currentDate, data }: WeeklyCalendarProps) => {
+  const currentWeekDates = getCurrentWeekDates(currentDate);
+  const { selectedSchedule } = data;
+  const { shifts } = selectedSchedule;
+
+  const getShiftColor = (shiftName: string) => {
+    const shiftIndex = shifts.findIndex(s => s.shiftName === shiftName);
+    return SHIFT_COLORS[shiftIndex % SHIFT_COLORS.length];
+  };
 
   return (
-    <section className="w-full rounded-8 border border-gray-300 bg-white shadow-sm">
-      <h2 className="sr-only">오늘 날짜 기준 주간 근무 일정</h2>
-      <table className="w-full border-collapse">
-        <thead>
-          <tr>
-            <th className="body-16-500 p-16 text-gray-600">Shifts</th>
-            {currentWeekDates.map((date, index) => (
-              <th
-                key={index}
-                className="body-16-500 p-16 text-center text-gray-900"
-              >
-                {`${date.day} ${date.dayOfWeek.toUpperCase()}`}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {mockShifts.map(shift => (
-            <tr key={shift.id} className="border-t border-gray-400 align-top">
-              <td className="p-16">
-                <div className="body-14-500 text-gray-900">{shift.label}</div>
-                <div className="body-14-400 text-gray-600">{shift.time}</div>
-              </td>
-              {Array.from({ length: 7 }).map((_, index) => (
-                <td
+    <div className="w-full rounded-8 border border-gray-300 bg-white shadow-sm">
+      <div className="grid grid-cols-8">
+        <div className="body-16-500 p-16 text-gray-600">Shifts</div>
+        {currentWeekDates.map((date, index) => (
+          <div
+            key={index}
+            className="body-16-500 p-16 text-center text-gray-900"
+          >{`${date.day} ${date.dayOfWeek.toUpperCase()}`}</div>
+        ))}
+      </div>
+      <div>
+        {shifts.map(shift => (
+          <div
+            key={shift.id}
+            className="grid min-h-162 grid-cols-8 border-t border-gray-400"
+          >
+            <div className="p-16">
+              <div className="body-14-500 text-gray-900">{shift.shiftName}</div>
+              <div className="body-14-400 text-gray-600">
+                {shift.startTime} - {shift.endTime}
+              </div>
+            </div>
+            {currentWeekDates.map((date, index) => {
+              const currentWeekDate = `${date.year}-${convertMonthToNumber(date.month)}-${date.day}`;
+              const workers = shift.dates.find(
+                d => d.shiftDate === currentWeekDate,
+              )?.assignedUser;
+
+              return (
+                <div
                   key={index}
-                  style={{ backgroundColor: shift.color }}
-                  className="h-162 border-l border-gray-400 p-16 align-top"
+                  style={{ backgroundColor: getShiftColor(shift.shiftName) }}
+                  className="flex flex-col gap-8 border-l border-gray-400 p-16"
                 >
-                  <WorkerBlock toggleWorkerInfoModal={toggleWorkerInfoModal} />
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <WorkerInfoModal
-        isOpen={isWorkerInfoModalOpen}
-        onClose={toggleWorkerInfoModal}
-      />
-    </section>
+                  {workers &&
+                    workers.map(worker => (
+                      <WorkerBlock key={worker.id} worker={worker} />
+                    ))}
+                </div>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 
