@@ -5,9 +5,15 @@ import WeeklyCalendar from './components/WeeklyCalendar';
 import WeeklyNavigator from './components/WeeklyNavigator';
 
 import ShareIcon from '@/assets/icons/share.svg';
+import { useFetchHome } from '@/api/endpoints/stores/useFetchHome';
 
 const HomePage = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const { data } = useFetchHome({ storeId: '1' });
+
+  if (!data) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="flex w-full flex-col gap-14 px-32 py-14">
@@ -36,7 +42,7 @@ const HomePage = () => {
       </div>
 
       {/* Weekly Calendar */}
-      <WeeklyCalendar currentDate={currentDate} />
+      <WeeklyCalendar currentDate={currentDate} data={data} />
     </div>
   );
 };
