@@ -14,6 +14,12 @@ export interface Schedule {
   shifts: number[];
 }
 
+export interface AssignedShift {
+  shiftId: number;
+  userId: number;
+  userName: string;
+}
+
 export interface ModalContentProps {
   schedules: Schedule[];
   addSchedule: () => void;

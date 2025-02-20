@@ -21,15 +21,15 @@ export const getCurrentWeekDates = (currentDate = new Date()) => {
 
 export const convertMonthToNumber = (month: string) => {
   return month
-    .replace('Jan', '1')
-    .replace('Feb', '2')
-    .replace('Mar', '3')
-    .replace('Apr', '4')
-    .replace('May', '5')
-    .replace('Jun', '6')
-    .replace('Jul', '7')
-    .replace('Aug', '8')
-    .replace('Sep', '9')
+    .replace('Jan', '01')
+    .replace('Feb', '02')
+    .replace('Mar', '03')
+    .replace('Apr', '04')
+    .replace('May', '05')
+    .replace('Jun', '06')
+    .replace('Jul', '07')
+    .replace('Aug', '08')
+    .replace('Sep', '09')
     .replace('Oct', '10')
     .replace('Nov', '11')
     .replace('Dec', '12');

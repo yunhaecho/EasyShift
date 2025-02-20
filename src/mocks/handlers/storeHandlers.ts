@@ -3,48 +3,54 @@ import { HttpResponse, http } from 'msw';
 export const storeHandlers = [
   http.get('/api/stores', () => {
     return HttpResponse.json({
-      id: 1,
-      name: 'Standard Bread',
+      storeId: 1,
+      storeName: 'Standard Bread',
       schedules: [
         {
-          id: 101,
+          scheduleId: 101,
           scheduleName: 'Barista',
         },
         {
-          id: 102,
+          scheduleId: 102,
           scheduleName: 'Bakery',
         },
       ],
       selectedSchedule: {
-        id: 101,
+        scheduleId: 101,
         scheduleName: 'Barista',
         shifts: [
           {
-            shiftName: 'Morning',
-            startTime: '08:00',
-            endTime: '12:00',
+            shiftName: 'Open',
+            startTime: '09:00',
+            endTime: '18:00',
             dates: [
               {
-                id: 201,
-                shiftDate: '2025-2-19',
-                assignedUser: [
+                date: '2025-02-18',
+                assignedShifts: [
                   {
-                    id: 1,
-                    name: '손태인',
+                    shiftId: 12,
+                    userId: 1,
+                    userName: '양소연',
                   },
                   {
-                    id: 2,
-                    name: '조장호',
+                    shiftId: 13,
+                    userId: 2,
+                    userName: '김찬호',
                   },
                 ],
               },
               {
-                id: 202,
-                shiftDate: '2025-2-20',
-                assignedUser: [
+                date: '2025-02-19',
+                assignedShifts: [
                   {
-                    id: 3,
-                    name: '김찬호',
+                    shiftId: 14,
+                    userId: 1,
+                    userName: '양소연',
+                  },
+                  {
+                    shiftId: 15,
+                    userId: 2,
+                    userName: '김찬호',
                   },
                 ],
               },
@@ -52,37 +58,38 @@ export const storeHandlers = [
           },
           {
             shiftName: 'Middle',
-            startTime: '12:00',
-            endTime: '16:00',
+            startTime: '13:00',
+            endTime: '17:00',
             dates: [
               {
-                id: 203,
-                shiftDate: '2025-2-19',
-                assignedUser: [
+                date: '2025-02-20',
+                assignedShifts: [
                   {
-                    id: 4,
-                    name: '고주형',
+                    shiftId: 16,
+                    userId: 1,
+                    userName: '양소연',
                   },
                   {
-                    id: 5,
-                    name: '조윤해',
+                    shiftId: 17,
+                    userId: 2,
+                    userName: '김찬호',
                   },
                 ],
               },
             ],
           },
           {
-            shiftName: 'Night',
-            startTime: '16:00',
-            endTime: '20:00',
+            shiftName: 'Close',
+            startTime: '17:00',
+            endTime: '23:00',
             dates: [
               {
-                id: 204,
-                shiftDate: '2025-2-20',
-                assignedUser: [
+                date: '2025-02-10',
+                assignedShifts: [
                   {
-                    id: 6,
-                    name: '양소연',
+                    shiftId: 18,
+                    userId: 1,
+                    userName: '양소연',
                   },
                 ],
               },

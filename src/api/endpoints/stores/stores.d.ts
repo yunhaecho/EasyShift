@@ -1,24 +1,22 @@
 export interface FetchHomeResponse {
-  id: number;
-  name: string;
+  storeId: number;
   schedules: Array<{
-    id: number;
+    scheduleId: number;
     scheduleName: string;
   }>;
   selectedSchedule: {
-    id: number;
+    scheduleId: number;
     scheduleName: string;
     shifts: Array<{
-      id: number;
       shiftName: string;
       startTime: string;
       endTime: string;
       dates: Array<{
-        id: number;
-        shiftDate: string;
-        assignedUser: Array<{
-          id: number;
-          name: string;
+        date: string;
+        assignedShifts: Array<{
+          shiftId: number;
+          userId: number;
+          userName: string;
         }>;
       }>;
     }>;
