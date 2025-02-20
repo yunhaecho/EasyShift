@@ -57,6 +57,7 @@ export const storeHandlers = [
             ],
           },
           {
+            shiftId: 102,
             shiftName: 'Middle',
             startTime: '13:00',
             endTime: '17:00',
