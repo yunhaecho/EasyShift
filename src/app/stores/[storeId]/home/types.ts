@@ -1,5 +1,8 @@
+import { FetchHomeResponse } from '@/api/endpoints/stores/stores';
+
 export interface WeeklyCalendarProps {
   currentDate: Date;
+  data: FetchHomeResponse;
 }
 
 export interface WeeklyNavigatorProps {

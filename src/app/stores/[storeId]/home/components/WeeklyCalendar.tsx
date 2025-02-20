@@ -1,30 +1,18 @@
-import { getCurrentWeekDates } from '@/utils/dateUtils';
+import { convertMonthToNumber, getCurrentWeekDates } from '@/utils/dateUtils';
 import WorkerBlock from './WorkerBlock';
 import { WeeklyCalendarProps } from '../types';
 
-const shifts = [
-  {
-    id: 1,
-    label: 'Opening',
-    time: '06:00-15:00',
-    color: '#EEF2FF',
-  },
-  {
-    id: 2,
-    label: 'Middle',
-    time: '11:00-18:00',
-    color: '#F0FDF4',
-  },
-  {
-    id: 3,
-    label: 'Closing',
-    time: '14:00-23:00',
-    color: '#FFF1E7',
-  },
-];
+const SHIFT_COLORS = ['#EEF2FF', '#F0FDF4', '#FFF1E7'];
 
-const WeeklyCalendar = ({ currentDate }: WeeklyCalendarProps) => {
+const WeeklyCalendar = ({ currentDate, data }: WeeklyCalendarProps) => {
   const currentWeekDates = getCurrentWeekDates(currentDate);
+  const { selectedSchedule } = data;
+  const { shifts } = selectedSchedule;
+
+  const getShiftColor = (shiftName: string) => {
+    const shiftIndex = shifts.findIndex(s => s.shiftName === shiftName);
+    return SHIFT_COLORS[shiftIndex % SHIFT_COLORS.length];
+  };
 
   return (
     <div className="w-full rounded-8 border border-gray-300 bg-white shadow-sm">
@@ -44,18 +32,30 @@ const WeeklyCalendar = ({ currentDate }: WeeklyCalendarProps) => {
             className="grid min-h-162 grid-cols-8 border-t border-gray-400"
           >
             <div className="p-16">
-              <div className="body-14-500 text-gray-900">{shift.label}</div>
-              <div className="body-14-400 text-gray-600">{shift.time}</div>
-            </div>
-            {Array.from({ length: 7 }).map((_, index) => (
-              <div
-                key={index}
-                style={{ backgroundColor: shift.color }}
-                className="border-l border-gray-400 p-16"
-              >
-                <WorkerBlock />
+              <div className="body-14-500 text-gray-900">{shift.shiftName}</div>
+              <div className="body-14-400 text-gray-600">
+                {shift.startTime} - {shift.endTime}
               </div>
-            ))}
+            </div>
+            {currentWeekDates.map((date, index) => {
+              const currentWeekDate = `${date.year}-${convertMonthToNumber(date.month)}-${date.day}`;
+              const workers = shift.dates.find(
+                d => d.shiftDate === currentWeekDate,
+              )?.assignedUser;
+
+              return (
+                <div
+                  key={index}
+                  style={{ backgroundColor: getShiftColor(shift.shiftName) }}
+                  className="flex flex-col gap-8 border-l border-gray-400 p-16"
+                >
+                  {workers &&
+                    workers.map(worker => (
+                      <WorkerBlock key={worker.id} worker={worker} />
+                    ))}
+                </div>
+              );
+            })}
           </div>
         ))}
       </div>
