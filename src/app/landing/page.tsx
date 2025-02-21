@@ -7,17 +7,20 @@ import CircleArrow from "@/assets/icons/circle-arrow.svg";
 export default function Landing() {
     return (
         <div className="w-full h-full flex flex-col">
-            <div className="flex flex-col items-center justify-center h-480 bg-white pt-96 pd">
+            {/* 메인 phrase */}
+            <div className="flex flex-col items-center justify-center h-480 bg-white pt-96">
                 <div className="head-60-700 mb-24">Easy Shift</div>
                 <div className="head-30-400 mb-28">Effortlessly Manage Your Team&apos;s Schedule</div>
                 <div className="head-20-400">Streamline your workforce management with our intuitive scheduling solution. Save</div>
-                <div className="head-20-400  mb-48">time, reduce errors, and keep your team synchronized.</div>
+                <div className="head-20-400 mb-48">time, reduce errors, and keep your team synchronized.</div>
                 <div className="flex flex-row gap-18">
-                    <div className="flex items-center justify-center w-195 h-62 rounded-4 body-18-500 bg-black text-white cursor-pointer" >Get Started Free</div>
-                    <div className="flex items-center justify-center w-195 h-62 rounded-4 body-18-500 bg-white border border-gray-900 text-black mb-48 cursor-pointer">Learn More</div>
+                    <button className="flex items-center justify-center w-195 h-62 rounded-4 body-18-500 bg-black text-white" >Get Started Free</button>
+                    <button className="flex items-center justify-center w-195 h-62 rounded-4 body-18-500 bg-white border border-gray-900 text-black mb-48">Learn More</button>
                 </div>
             </div>
-            <div className="flex flex-row w-full h-372 bg-gray-100 justify-evenly">
+            
+            {/* Feature Card */}
+            <div className="flex flex-row w-full h-372 bg-gray-100 justify-evenly border-b border-gray-300">
                 <FeatureCard icon={<CalendarIcon />} feature='Smart Scheduling' subExplain1='Intelligent scheduling algorithms that' subExplain2='consider availability, skills, and preferences'/>
                 <FeatureCard icon={<PeopleIcon/>}  feature="Team Management" subExplain1="Easily manage your team members, their" subExplain2="roles, and permissions in one place"/>
                 <FeatureCard icon={ <ChartIcon/>} feature="Optimization" subExplain1="Optimize schedules for maximum" subExplain2="efficiency and employee satisfaction"/>

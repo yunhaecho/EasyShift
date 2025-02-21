@@ -8,7 +8,7 @@ interface SignUpFormProps {
 
 export default function SignUpForm({icon, formName, type} : SignUpFormProps) {
   return (
-    <div >
+    <div className='mb-16'>
         <div className="body-14-500 text-gray-800 mb-4">{formName}</div>
         <div className='flex flex-row w-full h-50 border border-gray-400'>
             {icon}
