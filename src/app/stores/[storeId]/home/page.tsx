@@ -1,17 +1,29 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import WeeklyCalendar from './components/WeeklyCalendar';
 import WeeklyNavigator from './components/WeeklyNavigator';
 
-import ShareIcon from '@/assets/icons/share.svg';
 import { useFetchHome } from '@/api/endpoints/stores/useFetchHome';
-
+import Dropdown from '@/app/components/Dropdown';
+import { FetchHomeResponse } from '@/api/endpoints/stores/stores';
 const HomePage = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const { data } = useFetchHome({ storeId: '1' });
+  const [homeData, setHomeData] = useState<FetchHomeResponse | null>(null);
+  const [selectedScheduleId, setSelectedScheduleId] = useState<string>();
 
-  if (!data) {
+  const { data, isLoading } = useFetchHome({
+    storeId: '1',
+    selectedScheduleId,
+  });
+
+  useEffect(() => {
+    if (data) {
+      setHomeData(data);
+    }
+  }, [data]);
+
+  if (isLoading || !homeData) {
     return <div>Loading...</div>;
   }
 
@@ -35,14 +47,25 @@ const HomePage = () => {
         </div>
 
         {/* Share Button */}
-        <button className="flex h-full items-center gap-12 rounded-4 border border-gray-400 bg-white px-16 py-8">
-          <ShareIcon />
-          <p className="body-16-400 text-gray-800">Share</p>
-        </button>
+        <Dropdown
+          title={homeData.selectedSchedule.scheduleName}
+          items={homeData.schedules
+            .filter(
+              schedule =>
+                schedule.scheduleId !== homeData.selectedSchedule.scheduleId,
+            )
+            .map(schedule => schedule.scheduleName)}
+          onSelect={scheduleId => {
+            setSelectedScheduleId(scheduleId);
+          }}
+        />
       </div>
 
       {/* Weekly Calendar */}
-      <WeeklyCalendar currentDate={currentDate} data={data} />
+      <WeeklyCalendar
+        currentDate={currentDate}
+        selectedSchedule={homeData.selectedSchedule}
+      />
     </div>
   );
 };

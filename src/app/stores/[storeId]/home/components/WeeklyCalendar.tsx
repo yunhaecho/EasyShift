@@ -4,9 +4,11 @@ import { WeeklyCalendarProps } from '../types';
 
 const SHIFT_COLORS = ['#EEF2FF', '#F0FDF4', '#FFF1E7'];
 
-const WeeklyCalendar = ({ currentDate, data }: WeeklyCalendarProps) => {
+const WeeklyCalendar = ({
+  currentDate,
+  selectedSchedule,
+}: WeeklyCalendarProps) => {
   const currentWeekDates = getCurrentWeekDates(currentDate);
-  const { selectedSchedule } = data;
   const { shifts } = selectedSchedule;
 
   const getShiftColor = (shiftName: string) => {

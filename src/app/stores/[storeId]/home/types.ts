@@ -2,7 +2,7 @@ import { FetchHomeResponse } from '@/api/endpoints/stores/stores';
 
 export interface WeeklyCalendarProps {
   currentDate: Date;
-  data: FetchHomeResponse;
+  selectedSchedule: FetchHomeResponse['selectedSchedule'];
 }
 
 export interface WeeklyNavigatorProps {
