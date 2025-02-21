@@ -91,7 +91,8 @@ export default function SignUp() {
                   </span>
                     
                 </div>
-                    
+                
+                {/* 제출버튼 */}
                 <Button className="flex w-full h-46 flex-col items-center justify-center rounded-4 bg-black text-white">
                   Create Account
                 </Button>
