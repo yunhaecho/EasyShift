@@ -4,7 +4,6 @@ import SampleProfile from '../../../assets/sample.jpg';
 import CalendarIcon from '@/assets/icons/calendar.svg'
 import PhoneIcon from '@/assets/icons/phone.svg';
 import EmailIcon from '@/assets/icons/email.svg';
-import LocationIcon from '@/assets/icons/location.svg';
 
 interface ContactInfoProps {
     icon: ReactNode,
@@ -52,10 +51,6 @@ function ProfileCard() {
                 icon={<EmailIcon />}
                 category='Email'
                 contactInfo='sarah.j@example.com'/>
-            <UserContactInfo
-                icon={<LocationIcon />}
-                category='Location'
-                contactInfo='Downtown Store'/>
             </div> 
     )
 }
