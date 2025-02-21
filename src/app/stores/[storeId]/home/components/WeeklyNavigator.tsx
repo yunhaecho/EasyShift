@@ -1,38 +1,44 @@
-import { addWeeks, subWeeks } from 'date-fns';
-import { getCurrentWeekDates } from '@/utils/dateUtils';
-import { WeeklyNavigatorProps } from '../types';
-
 import ChevronLeftIcon from '@/assets/icons/chevron-left.svg';
 import ChevronRightIcon from '@/assets/icons/chevron-right.svg';
+import { WeekDate } from '../types';
 
 const WeeklyNavigator = ({
-  currentDate,
+  currentWeekDates,
   setCurrentDate,
-}: WeeklyNavigatorProps) => {
-  const currentWeekDates = getCurrentWeekDates(currentDate);
+  goToNextWeek,
+  goToPreviousWeek,
+}: {
+  currentWeekDates: WeekDate[];
+  setCurrentDate: (date: Date) => void;
+  goToNextWeek: () => void;
+  goToPreviousWeek: () => void;
+}) => {
   const startDate = currentWeekDates[0];
   const endDate = currentWeekDates[6];
 
-  const handlePrevWeek = () => {
-    setCurrentDate(subWeeks(currentDate, 1));
-  };
-
-  const handleNextWeek = () => {
-    setCurrentDate(addWeeks(currentDate, 1));
-  };
-
   return (
-    <div className="flex items-center gap-16">
-      <button onClick={handlePrevWeek}>
-        <ChevronLeftIcon className="mb-5 h-40 w-26" />
-      </button>
-      <div className="head-20-600 w-170 text-center text-gray-800">
-        {`${startDate.month} ${startDate.day} - ${endDate.day}, ${startDate.year}`}
+    <nav className="flex h-42 items-center justify-between">
+      <div className="flex items-center gap-16">
+        {/* 날짜 이동 */}
+        <button onClick={goToPreviousWeek}>
+          <ChevronLeftIcon className="mb-5 h-40 w-26" />
+        </button>
+        <div className="head-20-600 w-170 text-center text-gray-800">
+          {`${startDate.month} ${startDate.day} - ${endDate.day}, ${startDate.year}`}
+        </div>
+        <button onClick={goToNextWeek}>
+          <ChevronRightIcon className="mb-5 h-40 w-26" />
+        </button>
+
+        {/* 오늘 날짜 이동 */}
+        <button
+          className="ml-16 flex h-full items-center gap-12 rounded-4 border border-gray-400 bg-white px-16 py-8"
+          onClick={() => setCurrentDate(new Date())}
+        >
+          <p className="body-16-400 text-gray-800">Today</p>
+        </button>
       </div>
-      <button onClick={handleNextWeek}>
-        <ChevronRightIcon className="mb-5 h-40 w-26" />
-      </button>
-    </div>
+    </nav>
   );
 };
 

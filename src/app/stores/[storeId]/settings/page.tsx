@@ -17,8 +17,6 @@ const SettingsPage = () => {
         setIsCreateStoreModalOpen={setIsCreateStoreModalOpen}
         setIsCreateScheduleModalOpen={setIsCreateScheduleModalOpen}
       />
-      <WorkersInformation />
-
       {isCreateStoreModalOpen && (
         <CreateStoreModal
           isOpen={isCreateStoreModalOpen}
@@ -33,6 +31,8 @@ const SettingsPage = () => {
           dialogTitle="Edit Schedule"
         />
       )}
+
+      <WorkersInformation />
     </div>
   );
 };

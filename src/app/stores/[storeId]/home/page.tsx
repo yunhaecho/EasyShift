@@ -1,43 +1,46 @@
 'use client';
 
-import { useState } from 'react';
 import WeeklyCalendar from './components/WeeklyCalendar';
 import WeeklyNavigator from './components/WeeklyNavigator';
-
-import ShareIcon from '@/assets/icons/share.svg';
+import useCalendar from './hooks/useCalendar';
+import WorkerInfoModal from '@/app/workers/components/WorkerInfoModal';
 
 const HomePage = () => {
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const {
+    currentWeekDates,
+    setCurrentDate,
+    goToNextWeek,
+    goToPreviousWeek,
+    isWorkerInfoModalOpen,
+    toggleWorkerInfoModal,
+  } = useCalendar();
 
   return (
-    <div className="flex w-full flex-col gap-14 px-32 py-14">
-      <div className="flex h-42 items-center justify-between">
-        <div className="flex h-full gap-12">
-          {/* Weekly Navigator */}
-          <WeeklyNavigator
-            currentDate={currentDate}
-            setCurrentDate={setCurrentDate}
-          />
+    <main className="flex w-full flex-col gap-14 px-32 py-14">
+      {/* Weekly Navigator */}
+      <WeeklyNavigator
+        currentWeekDates={currentWeekDates}
+        setCurrentDate={setCurrentDate}
+        goToNextWeek={goToNextWeek}
+        goToPreviousWeek={goToPreviousWeek}
+      />
 
-          {/* Today Button */}
-          <button
-            className="flex h-full items-center gap-12 rounded-4 border border-gray-400 bg-white px-16 py-8"
-            onClick={() => setCurrentDate(new Date())}
-          >
-            <p className="body-16-400 text-gray-800">Today</p>
-          </button>
-        </div>
-
-        {/* Share Button */}
-        <button className="flex h-full items-center gap-12 rounded-4 border border-gray-400 bg-white px-16 py-8">
-          <ShareIcon />
-          <p className="body-16-400 text-gray-800">Share</p>
-        </button>
-      </div>
+      {/* Todo: 선택된 스케줄 드랍박스 추가 */}
 
       {/* Weekly Calendar */}
-      <WeeklyCalendar currentDate={currentDate} />
-    </div>
+      <WeeklyCalendar
+        currentWeekDates={currentWeekDates}
+        toggleWorkerInfoModal={toggleWorkerInfoModal}
+      />
+
+      {/* Worker Information Modal */}
+      {isWorkerInfoModalOpen && (
+        <WorkerInfoModal
+          isOpen={isWorkerInfoModalOpen}
+          onClose={toggleWorkerInfoModal}
+        />
+      )}
+    </main>
   );
 };
 
