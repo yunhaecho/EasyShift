@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 export default function Submissions() {
   const total = 17; 
-  const [current, setCurrent]  = useState(0);//assignUsers값
+  const [current, setCurrent]  = useState(0); //assignUsers값
   const currentWidth = ((current / total) * 100).toFixed(0);
   
   const handleIncrease = () => {
