@@ -1,23 +1,13 @@
-import { FetchHomeResponse } from '@/api/endpoints/stores/stores';
-
-export interface WeeklyCalendarProps {
-  currentDate: Date;
-  selectedSchedule: FetchHomeResponse['selectedSchedule'];
-}
-
-export interface WeeklyNavigatorProps {
-  currentDate: Date;
-  setCurrentDate: (date: Date) => void;
-}
-
 export interface Schedule {
   shifts: number[];
 }
 
-export interface AssignedShift {
-  shiftId: number;
-  userId: number;
-  userName: string;
+export interface WeekDate {
+  day: string;
+  month: string;
+  year: string;
+  dayOfWeek: string;
+  fullDate: Date;
 }
 
 export interface ModalContentProps {
