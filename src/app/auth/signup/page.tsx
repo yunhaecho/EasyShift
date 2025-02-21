@@ -1,11 +1,10 @@
 'use client';
 
-import Logo from '@/../../public/logo.svg';
-import AdminIcon from '@/../../public/icons/admin.svg';
-import WorkerIcon from '@/../../public/icons/worker.svg';
-import EmailIcon from '@/../../public/icons/email.svg';
-import LockIcon from '@/../../public/icons/lock.svg';
-import PhoneIcon from '@/../../public/icons/phone.svg';
+import AdminIcon from '@/assets/icons/admin.svg';
+import WorkerIcon from '@/assets/icons/worker.svg';
+import EmailIcon from '@/assets/icons/email.svg';
+import LockIcon from '@/assets/icons/lock.svg';
+import PhoneIcon from '@/assets/icons/phone.svg';
 import RoleButton from './component/RoleButton';
 import SignUpForm from './component/SignUpForm';
 import { Button, Checkbox } from '@headlessui/react';
@@ -37,32 +36,40 @@ export default function SignUp() {
                 <RoleButton icon={<AdminIcon />} role="Administrator" />
                 <RoleButton icon={<WorkerIcon />} role="Worker" />
               </div>
-              <SignUpForm
-                icon={
-                  <WorkerIcon className="ml-12 mr-12 mt-15 fill-current text-gray-500" />
-                }
-                formName="Full Name"
-              />
-              <SignUpForm
-                icon={
-                  <EmailIcon className="ml-12 mr-12 mt-18 fill-current text-gray-500" />
-                }
-                formName="Email address"
-              />
-              <SignUpForm
-                icon={<LockIcon className="ml-12 mr-12 mt-15" />}
-                formName="Password"
-              />
-              <SignUpForm
-                icon={<LockIcon className="ml-12 mr-12 mt-15" />}
-                formName="Confirm Password"
-              />
-              <SignUpForm
-                icon={
-                  <PhoneIcon className="ml-12 mr-12 mt-15 fill-current text-gray-500" />
-                }
-                formName="Phone Number (Optional)"
-              />
+
+              <form>
+                <SignUpForm
+                  icon={
+                    <WorkerIcon className="ml-12 mr-12 mt-15 fill-current text-gray-500" />
+                  }
+                  formName="Full Name"
+                  type='text'
+                />
+                <SignUpForm
+                  icon={
+                    <EmailIcon className="ml-12 mr-12 mt-18 fill-current text-gray-500" />
+                  }
+                  formName="Email address"
+                  type='email'
+                />
+                <SignUpForm
+                  icon={<LockIcon className="ml-12 mr-12 mt-15" />}
+                  formName="Password"
+                  type='password'
+                />
+                <SignUpForm
+                  icon={<LockIcon className="ml-12 mr-12 mt-15" />}
+                  formName="Confirm Password"
+                  type='password'
+                />
+                <SignUpForm
+                  icon={
+                    <PhoneIcon className="ml-12 mr-12 mt-15 fill-current text-gray-500" />
+                  }
+                  formName="Phone Number (Optional)"
+                  type="tel"
+                />
+              </form>
 
               <div className="flex h-24 w-full flex-row items-center justify-start">
                 <Checkbox
@@ -72,6 +79,7 @@ export default function SignUp() {
                 >
                   <CheckIcon className="hidden h-20 w-20 fill-black group-data-[checked]:block" />
                 </Checkbox>
+
                 <span className="body-14-400 text-gray-600">
                   I accept the&ensp;
                   <strong className="body-14-500 cursor-pointer text-gray-900">
@@ -82,6 +90,7 @@ export default function SignUp() {
                     Privacy Policy
                   </strong>
                 </span>
+
               </div>
 
               <Button className="flex h-46 flex-col items-center justify-center rounded-4 bg-black text-white">
