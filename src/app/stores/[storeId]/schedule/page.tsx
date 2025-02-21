@@ -7,7 +7,6 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
 import Status from './components/Status';
 import Actions from './components/Actions';
-import Submissions from './components/Submissions';
 
 export default function Schedule() {
   const [isStatusFilter, setIsStatusFilter] = useState(false);
@@ -33,8 +32,8 @@ export default function Schedule() {
     }
   ]
 
-  const column = ['Period', 'Status','Deadline','Submissions', 'Actions'];
-  const statusOption = ['All Status','Pending','Completed'];
+  const column = ['Period', 'Status', 'Actions'];
+  const statusOption = ['All Status', 'Pending', 'Completed'];
 
   //연도 배열(중복 제거)
   const yearOption = Array.from(
@@ -143,8 +142,6 @@ export default function Schedule() {
                   <tr key={item.id} className="border-b border-gray-300 bg-white">
                     <td className="py-12 px-24 body-14-500">{item.shiftDate}</td>
                     <td className="py-12 px-24"><Status status={item.status}/></td>
-                    <td className="py-12 px-24 body-14-400 text-gray-600">{item.shiftDate}</td>
-                    <td className="py-12 px-24"><Submissions/></td>
                     <td className="py-12 px-24"><Actions/></td>
                 </tr>
                 ))
