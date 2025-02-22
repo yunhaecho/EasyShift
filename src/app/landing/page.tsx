@@ -14,8 +14,8 @@ export default function Landing() {
                 <div className="head-20-400">Streamline your workforce management with our intuitive scheduling solution. Save</div>
                 <div className="head-20-400 mb-48">time, reduce errors, and keep your team synchronized.</div>
                 <div className="flex flex-row gap-18">
-                    <button className="flex items-center justify-center w-195 h-62 rounded-4 body-18-500 bg-black text-white" >Get Started Free</button>
-                    <button className="flex items-center justify-center w-195 h-62 rounded-4 body-18-500 bg-white border border-gray-900 text-black mb-48">Learn More</button>
+                    <button type='button' className="flex items-center justify-center w-195 h-62 rounded-4 body-18-500 bg-black text-white" >Get Started Free</button>
+                    <button type='button' className="flex items-center justify-center w-195 h-62 rounded-4 body-18-500 bg-white border border-gray-900 text-black mb-48">Learn More</button>
                 </div>
             </div>
             
