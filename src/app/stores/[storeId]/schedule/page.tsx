@@ -40,7 +40,6 @@ export default function Schedule() {
     new Set(mockData.map((schedule)=> schedule.shiftDate.substring(0,4)))
   );
   
-  
   // 상태 필터링(응답이 소문자라 소문자로 맞추기)
   const filterStatus = ( e: React.MouseEvent<HTMLAnchorElement> ) => {
     const selectedStatus  = e.currentTarget?.textContent ?? '';
@@ -75,7 +74,7 @@ export default function Schedule() {
         {/* Header */}
         <div className=' w-full h-40 flex flex-row justify-between mb-40 '>
             <span className='head-24-700'>Schedule Management</span>
-            <Button className='flex flex-row justify-center items-center w-205 h-full bg-black text-sm rounded text-white p-15'>
+            <Button type='button' className='flex flex-row justify-center items-center w-205 h-full bg-black text-sm rounded text-white p-15'>
                 <PlusIcon className='mr-8'/>
                 Create New Schedule 
             </Button>
@@ -87,7 +86,7 @@ export default function Schedule() {
                 
                 {/* 상태*/}
                 <Menu>
-                  <MenuButton className="body-14-400 flex w-122 border border-gray-400 py-9 pl-12 text-gray-900 items-center transition-all duration-00 ease-in-out">
+                  <MenuButton type='button' className="body-14-400 flex w-122 border border-gray-400 py-9 pl-12 text-gray-900 items-center transition-all duration-00 ease-in-out">
                       {isStatusFilter ? status : 'All Status'}
                       <ChevronDownIcon />
                   </MenuButton>
