@@ -106,9 +106,11 @@ const TopBar = () => {
       <div className="flex h-full w-full items-center justify-between">
         <div className="flex h-full items-center gap-26">
           {/* Logo */}
-          <button onClick={routerLogo}>
-            <Logo />
-          </button>
+          <h1>
+            <button onClick={routerLogo}>
+              <Logo aria-label="easy shift" />
+            </button>
+          </h1>
 
           {/* Menu */}
           {!hideNavigation(pathname, isAuthenticated) && (
