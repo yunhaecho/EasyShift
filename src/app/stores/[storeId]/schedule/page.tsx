@@ -7,7 +7,6 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
 import Status from './components/Status';
 import Actions from './components/Actions';
-import Submissions from './components/Submissions';
 
 export default function Schedule() {
   const [isStatusFilter, setIsStatusFilter] = useState(false);
@@ -15,6 +14,7 @@ export default function Schedule() {
   const [status, setStatus] = useState('');
   const [year, setYear] = useState('');
 
+  //현재 명세서상에는 deadline x
   const mockData = [
     {
         "id": 101,
@@ -32,16 +32,15 @@ export default function Schedule() {
     }
   ]
 
-  const column = ['Period', 'Status','Deadline','Submissions', 'Actions'];
-  const statusOption = ['All Status','Pending','Completed'];
+  const column = ['Period', 'Status', 'Actions'];
+  const statusOption = ['All Status', 'Pending', 'Completed'];
 
   //연도 배열(중복 제거)
   const yearOption = Array.from(
     new Set(mockData.map((schedule)=> schedule.shiftDate.substring(0,4)))
   );
   
-  
-  // 상태 필터링
+  // 상태 필터링(응답이 소문자라 소문자로 맞추기)
   const filterStatus = ( e: React.MouseEvent<HTMLAnchorElement> ) => {
     const selectedStatus  = e.currentTarget?.textContent ?? '';
   
@@ -71,19 +70,23 @@ export default function Schedule() {
 
   return (
     <div className='p-30 w-full h-full '>
+        
+        {/* Header */}
         <div className=' w-full h-40 flex flex-row justify-between mb-40 '>
             <span className='head-24-700'>Schedule Management</span>
-            <Button className='flex flex-row justify-center items-center w-205 h-full bg-black text-sm rounded text-white p-15'>
+            <Button type='button' className='flex flex-row justify-center items-center w-205 h-full bg-black text-sm rounded text-white p-15'>
                 <PlusIcon className='mr-8'/>
                 Create New Schedule 
             </Button>
         </div>
-
+        
+        {/* 상태 연도 드랍다운바*/}
         <div className='w-full h-auto rounded-5 shadow-sm '>
             <div className='flex flex-row w-full h-71 bg-white p-16 gap-16 rounded-t-sm border-b border-gray-300'>
-                {/* 상태 드랍다운*/}
+                
+                {/* 상태*/}
                 <Menu>
-                  <MenuButton className="body-14-400 flex w-122 border border-gray-400 py-9 pl-12 text-gray-900 items-center transition-all duration-00 ease-in-out">
+                  <MenuButton type='button' className="body-14-400 flex w-122 border border-gray-400 py-9 pl-12 text-gray-900 items-center transition-all duration-00 ease-in-out">
                       {isStatusFilter ? status : 'All Status'}
                       <ChevronDownIcon />
                   </MenuButton>
@@ -100,7 +103,7 @@ export default function Schedule() {
                   </MenuItems>
                 </Menu>
                 
-                {/* 연도 드랍다운*/}
+                {/* 연도*/}
                 <Menu>
                   <MenuButton as="div" className="body-14-400 flex w-86 border border-gray-400 py-9 pl-13 text-gray-900 items-center">
                     {isYearFilter ? year : 'Year'}
@@ -122,28 +125,30 @@ export default function Schedule() {
                 </Menu>
             </div>
 
-            <table className="table-fixed w-full">
-              <thead>
-                <tr className="border-b border-gray-300 caption-12-500">
-                  {column.map((col) => (
-                    <td className="w-1/5 py-12 px-24" key={col}>{col}</td>
-                  ))}
-                </tr>
-              </thead>
+        {/* 스케줄 조회 */}
+        <table className="table-fixed w-full">
+          
+            <thead>
+              <tr className="border-b border-gray-300 caption-12-500">
+                {column.map((col) => (
+                  <td className="w-1/5 py-12 px-24" key={col}>{col}</td>
+                ))}
+              </tr>
+            </thead>
 
-              <tbody>    
-                {filteredData.map((item) => (
-                    <tr key={item.id} className="border-b border-gray-300 bg-white">
-                      <td className="py-12 px-24 body-14-500">{item.shiftDate}</td>
-                      <td className="py-12 px-24"><Status status={item.status}/></td>
-                      <td className="py-12 px-24 body-14-400 text-gray-600">{item.shiftDate}</td>
-                      <td className="py-12 px-24"><Submissions/></td>
-                      <td className="py-12 px-24"><Actions/></td>
-                  </tr>
-                  ))
-                }
-              </tbody>
-            </table>
+            <tbody>    
+              {filteredData.map((item) => (
+                  <tr key={item.id} className="border-b border-gray-300 bg-white">
+                    <td className="py-12 px-24 body-14-500">{item.shiftDate}</td>
+                    <td className="py-12 px-24"><Status status={item.status}/></td>
+                    <td className="py-12 px-24"><Actions/></td>
+                </tr>
+                ))
+              }
+            </tbody>
+            
+          </table>
+
       </div>
     </div>
   )
