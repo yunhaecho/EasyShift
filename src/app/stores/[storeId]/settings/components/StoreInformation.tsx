@@ -1,6 +1,6 @@
-import EditIcon from '@/assets/icons/edit.svg';
 import { Schedule } from '../types';
 
+import EditIcon from '@/assets/icons/edit.svg';
 import CalendarGrayIcon from '@/assets/icons/calendar-gray.svg';
 
 const mockSchedule = [

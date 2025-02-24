@@ -1,4 +1,13 @@
-import { startOfWeek, addDays, format, eachDayOfInterval, startOfMonth, endOfMonth, endOfWeek } from 'date-fns';
+import { WeekDates } from '@/app/stores/[storeId]/home/types';
+import {
+  startOfWeek,
+  addDays,
+  format,
+  eachDayOfInterval,
+  startOfMonth,
+  endOfMonth,
+  endOfWeek,
+} from 'date-fns';
 
 /**
  * 오늘 기준 이번 주 날짜 정보 반환
@@ -16,7 +25,7 @@ export const getCurrentWeekDates = (currentDate = new Date()) => {
       dayOfWeek: format(date, 'EEE'),
       fullDate: date,
     };
-  });
+  }) as WeekDates;
 };
 
 /**
@@ -24,31 +33,28 @@ export const getCurrentWeekDates = (currentDate = new Date()) => {
  * @returns 현재 월 기준  [이전 달 마지막 주 날짜, 현재 월 날짜 전체, 다음 날 첫 주 날짜] 배열
  */
 
-export const generateCalendar  = (start : Date) => {
-  
+export const generateCalendar = (start: Date) => {
   //현재 월
   const fstOfMonth = startOfMonth(start);
   const lastOfMonth = endOfMonth(start);
 
-  const startOfCalendar =  startOfWeek(fstOfMonth);
+  const startOfCalendar = startOfWeek(fstOfMonth);
   const endOfCalendar = endOfWeek(lastOfMonth);
 
   const datesOfCurrentMonth = eachDayOfInterval({
     start: startOfCalendar,
     end: endOfCalendar,
-  })
+  });
 
-  const calendarDates = datesOfCurrentMonth.map(
-    (unformattedDate) => ({ //Wed Jan 29 2025 00:00:00 GMT+0900 (한국 표준시)
-      unformattedDate,
-      formattedDate : format(unformattedDate, 'yyyy-MM-dd'),
-      isCurrentMonth : unformattedDate.getMonth() === fstOfMonth.getMonth(),
-    })
+  const calendarDates = datesOfCurrentMonth.map(unformattedDate => ({
+    //Wed Jan 29 2025 00:00:00 GMT+0900 (한국 표준시)
+    unformattedDate,
+    formattedDate: format(unformattedDate, 'yyyy-MM-dd'),
+    isCurrentMonth: unformattedDate.getMonth() === fstOfMonth.getMonth(),
+  }));
 
-    )
-  
   return calendarDates;
-}
+};
 
 export const convertMonthToNumber = (month: string) => {
   return month

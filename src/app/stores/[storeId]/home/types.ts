@@ -1,15 +1,24 @@
-export interface WeeklyCalendarProps {
-  currentDate: Date;
-}
-
-export interface WeeklyNavigatorProps {
-  currentDate: Date;
-  setCurrentDate: (date: Date) => void;
-}
-
 export interface Schedule {
   shifts: number[];
 }
+
+export interface WeekDate {
+  day: string;
+  month: string;
+  year: string;
+  dayOfWeek: string;
+  fullDate: Date;
+}
+
+export type WeekDates = [
+  WeekDate,
+  WeekDate,
+  WeekDate,
+  WeekDate,
+  WeekDate,
+  WeekDate,
+  WeekDate,
+];
 
 export interface ModalContentProps {
   schedules: Schedule[];
