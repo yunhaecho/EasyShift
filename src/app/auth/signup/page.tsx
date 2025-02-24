@@ -1,11 +1,10 @@
 'use client';
 
-import Logo from '@/../../public/logo.svg';
-import AdminIcon from '@/../../public/icons/admin.svg';
-import WorkerIcon from '@/../../public/icons/worker.svg';
-import EmailIcon from '@/../../public/icons/email.svg';
-import LockIcon from '@/../../public/icons/lock.svg';
-import PhoneIcon from '@/../../public/icons/phone.svg';
+import AdminIcon from '@/assets/icons/admin.svg';
+import WorkerIcon from '@/assets/icons/worker.svg';
+import EmailIcon from '@/assets/icons/email.svg';
+import LockIcon from '@/assets/icons/lock.svg';
+import PhoneIcon from '@/assets/icons/phone.svg';
 import RoleButton from './component/RoleButton';
 import SignUpForm from './component/SignUpForm';
 import { Button, Checkbox } from '@headlessui/react';

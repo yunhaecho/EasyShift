@@ -15,7 +15,7 @@ const WorkerInfoModal = ({
       <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
 
       {/* Modal */}
-      <div className="fixed inset-0 flex items-center justify-center p-4">
+      <div className="fixed inset-0 flex items-center justify-center">
         <div className="w-[60%] min-w-480 rounded-8 bg-white p-24">
           <DialogTitle className="head-20-600 flex items-center justify-end text-gray-900">
             <button onClick={onClose}>

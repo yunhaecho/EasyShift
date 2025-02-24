@@ -10,6 +10,16 @@ export interface WeekDate {
   fullDate: Date;
 }
 
+export type WeekDates = [
+  WeekDate,
+  WeekDate,
+  WeekDate,
+  WeekDate,
+  WeekDate,
+  WeekDate,
+  WeekDate,
+];
+
 export interface ModalContentProps {
   schedules: Schedule[];
   addSchedule: () => void;

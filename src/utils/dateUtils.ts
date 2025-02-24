@@ -1,3 +1,4 @@
+import { WeekDates } from '@/app/stores/[storeId]/home/types';
 import { startOfWeek, addDays, format } from 'date-fns';
 
 /**
@@ -16,5 +17,5 @@ export const getCurrentWeekDates = (currentDate = new Date()) => {
       dayOfWeek: format(date, 'EEE'),
       fullDate: date,
     };
-  });
+  }) as WeekDates;
 };

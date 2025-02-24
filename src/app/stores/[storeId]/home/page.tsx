@@ -2,24 +2,17 @@
 
 import WeeklyCalendar from './components/WeeklyCalendar';
 import WeeklyNavigator from './components/WeeklyNavigator';
-import useCalendar from './hooks/useCalendar';
-import WorkerInfoModal from '@/app/workers/components/WorkerInfoModal';
+import useWeeklyCalendar from './hooks/useWeeklyCalendar';
+import { WeekDates } from './types';
 
 const HomePage = () => {
-  const {
-    currentWeekDates,
-    setCurrentDate,
-    goToNextWeek,
-    goToPreviousWeek,
-    isWorkerInfoModalOpen,
-    toggleWorkerInfoModal,
-  } = useCalendar();
+  const { currentWeekDates, setCurrentDate, goToNextWeek, goToPreviousWeek } =
+    useWeeklyCalendar();
 
   return (
     <main className="flex w-full flex-col gap-14 px-32 py-14">
-      {/* Weekly Navigator */}
       <WeeklyNavigator
-        currentWeekDates={currentWeekDates}
+        currentWeekDates={currentWeekDates as WeekDates}
         setCurrentDate={setCurrentDate}
         goToNextWeek={goToNextWeek}
         goToPreviousWeek={goToPreviousWeek}
@@ -27,19 +20,7 @@ const HomePage = () => {
 
       {/* Todo: 선택된 스케줄 드랍박스 추가 */}
 
-      {/* Weekly Calendar */}
-      <WeeklyCalendar
-        currentWeekDates={currentWeekDates}
-        toggleWorkerInfoModal={toggleWorkerInfoModal}
-      />
-
-      {/* Worker Information Modal */}
-      {isWorkerInfoModalOpen && (
-        <WorkerInfoModal
-          isOpen={isWorkerInfoModalOpen}
-          onClose={toggleWorkerInfoModal}
-        />
-      )}
+      <WeeklyCalendar currentWeekDates={currentWeekDates} />
     </main>
   );
 };

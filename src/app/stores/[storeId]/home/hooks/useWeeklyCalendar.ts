@@ -4,19 +4,8 @@ import { useCallback, useMemo, useState } from 'react';
 import { getCurrentWeekDates } from '@/utils/dateUtils';
 import { subWeeks } from 'date-fns';
 import { addWeeks } from 'date-fns';
-import { WeekDate } from '../types';
 
-interface CalendarHook {
-  currentDate: Date;
-  setCurrentDate: (date: Date) => void;
-  currentWeekDates: WeekDate[];
-  goToPreviousWeek: () => void;
-  goToNextWeek: () => void;
-  isWorkerInfoModalOpen: boolean;
-  toggleWorkerInfoModal: () => void;
-}
-
-const useCalendar = (): CalendarHook => {
+const useWeeklyCalendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isWorkerInfoModalOpen, setIsWorkerInfoModalOpen] = useState(false);
 
@@ -48,4 +37,4 @@ const useCalendar = (): CalendarHook => {
   };
 };
 
-export default useCalendar;
+export default useWeeklyCalendar;

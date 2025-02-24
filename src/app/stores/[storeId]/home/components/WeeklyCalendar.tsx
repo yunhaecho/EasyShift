@@ -1,37 +1,20 @@
+import WorkerInfoModal from '@/app/workers/components/WorkerInfoModal';
 import { WeekDate } from '../types';
 import WorkerBlock from './WorkerBlock';
-
-const shifts = [
-  {
-    id: 1,
-    label: 'Opening',
-    time: '06:00-15:00',
-    color: '#EEF2FF',
-  },
-  {
-    id: 2,
-    label: 'Middle',
-    time: '11:00-18:00',
-    color: '#F0FDF4',
-  },
-  {
-    id: 3,
-    label: 'Closing',
-    time: '14:00-23:00',
-    color: '#FFF1E7',
-  },
-];
+import useToggle from '@/app/hooks/useToggle';
+import { mockShifts } from '../../mocks';
 
 const WeeklyCalendar = ({
   currentWeekDates,
-  toggleWorkerInfoModal,
 }: {
   currentWeekDates: WeekDate[];
-  toggleWorkerInfoModal: () => void;
 }) => {
+  const [isWorkerInfoModalOpen, toggleWorkerInfoModal] = useToggle();
+
   return (
     <section className="w-full rounded-8 border border-gray-300 bg-white shadow-sm">
-      <table className="w-full border-collapse border border-gray-300">
+      <h2 className="sr-only">오늘 날짜 기준 주간 근무 일정</h2>
+      <table className="w-full border-collapse">
         <thead>
           <tr>
             <th className="body-16-500 p-16 text-gray-600">Shifts</th>
@@ -46,7 +29,7 @@ const WeeklyCalendar = ({
           </tr>
         </thead>
         <tbody>
-          {shifts.map(shift => (
+          {mockShifts.map(shift => (
             <tr key={shift.id} className="border-t border-gray-400 align-top">
               <td className="p-16">
                 <div className="body-14-500 text-gray-900">{shift.label}</div>
@@ -65,6 +48,10 @@ const WeeklyCalendar = ({
           ))}
         </tbody>
       </table>
+      <WorkerInfoModal
+        isOpen={isWorkerInfoModalOpen}
+        onClose={toggleWorkerInfoModal}
+      />
     </section>
   );
 };
