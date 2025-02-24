@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
 import './globals.css';
 import TopBar from '@/app/components/TopBar';
+import { Toaster } from 'react-hot-toast';
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -23,6 +24,7 @@ export default function RootLayout({
       <body className={`${openSans.className} bg-gray-100 antialiased`}>
         <TopBar />
         <div className="flex h-[calc(100vh-4rem)] w-full">{children}</div>
+        <Toaster position="top-center" />
       </body>
     </html>
   );
