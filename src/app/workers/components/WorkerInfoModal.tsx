@@ -1,6 +1,7 @@
 import { Dialog, DialogTitle } from '@headlessui/react';
+import WorkerInfoContent from './WorkerInfoContent';
+
 import CloseIcon from '@/assets/icons/close.svg';
-import WorkerInfoPage from '../page';
 
 const WorkerInfoModal = ({
   isOpen,
@@ -16,13 +17,15 @@ const WorkerInfoModal = ({
 
       {/* Modal */}
       <div className="fixed inset-0 flex items-center justify-center">
-        <div className="w-[60%] min-w-480 rounded-8 bg-white p-24">
+        <div className="min-h-[40%] w-[50%] rounded-8 bg-white p-24">
           <DialogTitle className="head-20-600 flex items-center justify-end text-gray-900">
             <button onClick={onClose}>
               <CloseIcon />
             </button>
           </DialogTitle>
-          <WorkerInfoPage />
+          <div className="py-20">
+            <WorkerInfoContent />
+          </div>
         </div>
       </div>
     </Dialog>
