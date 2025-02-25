@@ -9,30 +9,31 @@ import { STORE_MENUS } from '@/constants/menus';
 
 import Logo from '@/assets/logo.svg';
 import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
+import Link from 'next/link';
 
 /* Home, Schedule, Settings 메뉴 탭 */
 const MenuBar = () => {
-  const router = useRouter();
   const pathname = usePathname();
   const params = useParams();
   const storeId = params.storeId;
 
   return (
-    <div className="flex h-full items-center gap-30">
-      {STORE_MENUS.map(menu => (
-        <button
-          key={menu.label}
-          onClick={() =>
-            router.push(`/${ROUTES.STORES}/${storeId}/${menu.path}`)
-          }
-          className={classNames('body-14-500 px-14 py-21 text-gray-800', {
-            'border-b-2 border-gray-800': pathname.includes(menu.path),
-          })}
-        >
-          {menu.label}
-        </button>
-      ))}
-    </div>
+    <nav aria-label="Main navigation">
+      <ul className="flex h-full items-center gap-30">
+        {STORE_MENUS.map(menu => (
+          <li key={menu.label}>
+            <Link
+              href={`/${ROUTES.STORES}/${storeId}/${menu.path}`}
+              className={classNames('body-14-500 px-14 py-21 text-gray-800', {
+                'border-b-2 border-gray-800': pathname.includes(menu.path),
+              })}
+            >
+              {menu.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 };
 
@@ -41,20 +42,20 @@ const StoresListDropdown = () => {
   return (
     <Menu>
       <MenuButton className="body-16-400 flex w-200 justify-between border border-gray-400 py-9 pl-12 text-gray-900">
-        <div>Starbucks Reserve</div>
+        <span>Starbucks Reserve</span>
         <ChevronDownIcon className="mr-8 h-24 w-24" />
       </MenuButton>
       <MenuItems
         anchor="bottom"
-        className="mt-5 w-200 border border-gray-400 bg-white"
+        className="absolute mt-5 w-200 border border-gray-400 bg-white"
       >
         <MenuItem>
-          <a
+          <Link
             className="block px-12 py-9 data-[focus]:bg-gray-300"
             href="/settings"
           >
             Settings
-          </a>
+          </Link>
         </MenuItem>
       </MenuItems>
     </Menu>
@@ -68,22 +69,20 @@ const UserAvatar = () => {
 
 /* 로그인, 회원가입 버튼 */
 const AuthButtons = () => {
-  const router = useRouter();
-
   return (
     <div className="flex gap-16">
-      <button
+      <Link
         className="body-16-500 rounded-4 text-gray-900"
-        onClick={() => router.push(`/${ROUTES.SIGNIN}`)}
+        href={`/${ROUTES.SIGNIN}`}
       >
-        <p>Sign In</p>
-      </button>
-      <button
+        Sign In
+      </Link>
+      <Link
         className="body-16-500 rounded-4 bg-gray-900 px-15 py-8 text-white"
-        onClick={() => router.push(`/${ROUTES.SIGNUP}`)}
+        href={`/${ROUTES.SIGNUP}`}
       >
-        <p>Sign Up</p>
-      </button>
+        Sign Up
+      </Link>
     </div>
   );
 };
@@ -93,12 +92,8 @@ const TopBar = () => {
   const pathname = usePathname();
   const isAuthenticated = true;
 
-  const routerLogo = () => {
-    if (isAuthenticated) {
-      router.push(`/${ROUTES.STORES}`);
-    } else {
-      router.push(`/${ROUTES.LANDING}`);
-    }
+  const handleLogoClick = () => {
+    router.push(isAuthenticated ? `/${ROUTES.STORES}` : `/${ROUTES.LANDING}`);
   };
 
   return (
@@ -107,12 +102,12 @@ const TopBar = () => {
         <div className="flex h-full items-center gap-26">
           {/* Logo */}
           <h1 className="flex h-full items-center">
-            <button onClick={routerLogo}>
-              <Logo aria-label="easy shift" />
+            <button onClick={handleLogoClick} aria-label="Go to homepage">
+              <Logo aria-label="Easy Shift" />
             </button>
           </h1>
 
-          {/* Menu */}
+          {/* Navigation Menu */}
           {!hideNavigation(pathname, isAuthenticated) && (
             <>
               <StoresListDropdown />

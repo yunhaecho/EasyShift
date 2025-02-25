@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import CreateStoreModal from '../components/CreateStoreModal';
+import ManageStoreModal from '../components/modals/ManageStoreModal';
 
 import StoreBlackIcon from '@/assets/icons/store-black.svg';
 import StoreGrayIcon from '@/assets/icons/store-gray.svg';
@@ -19,7 +19,7 @@ const mockStores = [
   },
 ];
 
-const CreateStoreButton = ({
+const AddStoreButton = ({
   setIsModalOpen,
 }: {
   setIsModalOpen: (isOpen: boolean) => void;
@@ -28,9 +28,10 @@ const CreateStoreButton = ({
     <button
       className="flex items-center gap-12 rounded-4 bg-gray-900 px-16 py-8"
       onClick={() => setIsModalOpen(true)}
+      aria-label="Add new store"
     >
       <PlusWhiteIcon />
-      <p className="body-16-400 text-white">Create Store</p>
+      <p className="body-16-400 text-white">Add Store</p>
     </button>
   );
 };
@@ -50,7 +51,7 @@ const StoresPage = () => {
               Get started by creating your first store
             </p>
           </div>
-          <CreateStoreButton setIsModalOpen={setIsModalOpen} />
+          <AddStoreButton setIsModalOpen={setIsModalOpen} />
         </div>
       ) : (
         <div className="flex w-full flex-col gap-32 p-32">
@@ -63,7 +64,7 @@ const StoresPage = () => {
               </p>
             </div>
             <div className="h-fit">
-              <CreateStoreButton setIsModalOpen={setIsModalOpen} />
+              <AddStoreButton setIsModalOpen={setIsModalOpen} />
             </div>
           </header>
 
@@ -88,13 +89,11 @@ const StoresPage = () => {
         </div>
       )}
 
-      {isModalOpen && (
-        <CreateStoreModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          dialogTitle="Create New Store"
-        />
-      )}
+      <ManageStoreModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        mode="add"
+      />
     </>
   );
 };

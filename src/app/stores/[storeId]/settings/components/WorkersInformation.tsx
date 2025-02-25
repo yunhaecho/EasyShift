@@ -1,28 +1,17 @@
 'use client';
 
-import { useState } from 'react';
-import { Worker } from '../types';
 import InviteLinkModal from './InviteLinkModal';
-import { initialWorkers } from '../../mocks';
+import useToggle from '@/app/hooks/useToggle';
+import useManageWorkers from '../hooks/useManageWorkers';
 
 import PlusWhiteIcon from '@/assets/icons/plus-white.svg';
 import MagnifyingGlassIcon from '@/assets/icons/magnifying-glass.svg';
 import DeleteRedIcon from '@/assets/icons/delete-red.svg';
 
 const WorkersInformation = () => {
-  const [workers, setWorkers] = useState<Worker[]>(initialWorkers);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [isInviteLinkModalOpen, setIsInviteLinkModalOpen] = useState(false);
-
-  const handleDeleteWorker = (workerId: number) => {
-    setWorkers(prevWorkers =>
-      prevWorkers.filter(worker => worker.id !== workerId),
-    );
-  };
-
-  const filteredWorkers = workers.filter(worker =>
-    worker.name.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
+  const { searchQuery, setSearchQuery, handleDeleteWorker, filteredWorkers } =
+    useManageWorkers();
+  const [isInviteLinkModalOpen, toggleInviteLinkModal] = useToggle(false);
 
   return (
     <section className="rounded-8 border border-gray-300 bg-white shadow-sm">
@@ -44,7 +33,7 @@ const WorkersInformation = () => {
           />
         </div>
         <button
-          onClick={() => setIsInviteLinkModalOpen(true)}
+          onClick={toggleInviteLinkModal}
           className="flex h-fit items-center gap-12 rounded-4 bg-gray-900 px-16 py-8"
           aria-label="Add new worker"
         >
@@ -54,19 +43,19 @@ const WorkersInformation = () => {
       </header>
 
       {/* Workers Table */}
-      <table className="w-full border-collapse">
+      <table className="w-full table-fixed border-collapse">
         <thead>
-          <tr className="bg-gray-100 px-24 py-12">
-            <th className="body-14-500 px-24 py-12 text-left text-gray-600">
+          <tr className="bg-gray-100">
+            <th className="body-14-500 w-2/10 w-[30%] px-24 py-12 text-left text-gray-600">
               Worker
             </th>
-            <th className="body-14-500 px-24 py-12 text-left text-gray-600">
+            <th className="body-14-500 w-3/10 w-[30%] px-24 py-12 text-left text-gray-600">
               Phone
             </th>
-            <th className="body-14-500 px-24 py-12 text-left text-gray-600">
+            <th className="body-14-500 w-3/10 w-[30%] px-24 py-12 text-left text-gray-600">
               Email
             </th>
-            <th className="body-14-500 px-24 py-12 text-left text-gray-600">
+            <th className="body-14-500 w-2/10 w-[10%] px-24 py-12 text-left text-gray-600">
               Actions
             </th>
           </tr>
@@ -87,7 +76,7 @@ const WorkersInformation = () => {
               <td className="px-24 py-12">
                 <button
                   onClick={() => handleDeleteWorker(worker.id)}
-                  className="p-8 hover:bg-gray-100"
+                  className="pl-16 hover:bg-gray-100"
                   aria-label={`Delete ${worker.name}`}
                 >
                   <DeleteRedIcon />
@@ -108,7 +97,7 @@ const WorkersInformation = () => {
       {/* Invite Link Modal */}
       <InviteLinkModal
         isOpen={isInviteLinkModalOpen}
-        onClose={() => setIsInviteLinkModalOpen(false)}
+        onClose={toggleInviteLinkModal}
       />
     </section>
   );
