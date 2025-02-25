@@ -106,7 +106,7 @@ const TopBar = () => {
       <div className="flex h-full w-full items-center justify-between">
         <div className="flex h-full items-center gap-26">
           {/* Logo */}
-          <h1>
+          <h1 className="flex h-full items-center">
             <button onClick={routerLogo}>
               <Logo aria-label="easy shift" />
             </button>
