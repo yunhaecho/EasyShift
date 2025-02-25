@@ -1,3 +1,5 @@
+'use client';
+
 import RightArrowIcon from '@/assets/icons/right-arrow.svg';
 import LeftArrowIcon from '@/assets/icons/left-arrow.svg';
 import useMonthlyCalendar from '@/hooks/useMonthlyCalendar';
@@ -5,7 +7,7 @@ import { generateCalendar } from '@/utils/dateUtils';
 import { weekNames } from '@/constants/monthNames';
 import { monthNames } from '@/constants/weekNames';
 import classNames from 'classnames';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 export default function Calendar() {
   const { currentYear, currentMonth, goToPrevOrNextMonth } =
@@ -15,7 +17,7 @@ export default function Calendar() {
   const daysInCalendar = generateCalendar(new Date(currentYear, currentMonth));
 
   //mock data
-  const schedules = [
+  const [schedules] = useState([
     {
       id: 101,
       scheduleName: '야간 근무',
@@ -26,7 +28,7 @@ export default function Calendar() {
       scheduleName: '주간 근무',
       shifts: [{ id: 203, shiftDate: '2025-03-08' }],
     },
-  ];
+  ]);
 
   const workerSchedule = useMemo(
     () =>

@@ -1,5 +1,20 @@
 import { Schedule } from './settings/types';
 
+export const mockStores = [
+  {
+    id: 1,
+    name: 'Starbucks Reserve',
+  },
+  {
+    id: 2,
+    name: 'Standard Bread',
+  },
+  {
+    id: 3,
+    name: 'OffOff Coffee',
+  },
+];
+
 export const initialWorkers = [
   {
     id: 1,

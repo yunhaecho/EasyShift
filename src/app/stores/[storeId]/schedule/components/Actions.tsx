@@ -1,18 +1,18 @@
-import React from 'react'
-import Editicon from '@/assets/icons/edit.svg';
-import DeleteIcon from '@/assets/icons/delete-red.svg';
+import React from 'react';
+import EditBlackIcon from '@/assets/icons/edit-black.svg';
+import DeleteRedIcon from '@/assets/icons/delete-red.svg';
 import { Button } from '@headlessui/react';
 
 function Actions() {
   return (
-    <div className='flex flex-row gap-12 w-full h-28 items-center'>
-        <Button className='bg-gray-900 rounded-4 w-auto h-full text-white body-14-500 px-11'>
-            Generate
-        </Button>
-        <Editicon />
-        <DeleteIcon />
+    <div className="flex h-28 w-full flex-row items-center gap-12">
+      <Button className="body-14-500 h-full w-auto rounded-4 bg-gray-900 px-11 text-white">
+        Generate
+      </Button>
+      <EditBlackIcon />
+      <DeleteRedIcon />
     </div>
-  )
+  );
 }
 
-export default Actions
+export default Actions;

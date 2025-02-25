@@ -1,9 +1,8 @@
 import { Schedule } from '../stores/[storeId]/home/types';
 
 export interface ModalContentProps {
-  schedules: Schedule[];
-  addSchedule: () => void;
-  addShift: (scheduleIndex: number) => void;
-  deleteSchedule: (scheduleIndex: number) => void;
-  deleteShift: (scheduleIndex: number, shiftIndex: number) => void;
+  schedule: Schedule;
+  setSchedule: (schedule: Schedule) => void;
+  addShift: () => void;
+  deleteShift: (shiftIndex: number) => void;
 }
