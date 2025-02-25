@@ -1,6 +1,7 @@
 'use client';
 
 import StoreInformation from './components/StoreInformation';
+import ScheduleInformation from './components/ScheduleInformation';
 import WorkersInformation from './components/WorkersInformation';
 
 const SettingsPage = () => {
@@ -10,6 +11,7 @@ const SettingsPage = () => {
         Store Settings
       </h1>
       <StoreInformation />
+      <ScheduleInformation />
       <WorkersInformation />
     </main>
   );
