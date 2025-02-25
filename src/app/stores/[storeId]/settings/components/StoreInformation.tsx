@@ -1,5 +1,5 @@
 import useToggle from '@/app/hooks/useToggle';
-import CreateStoreModal from '@/app/components/modals/ManageStoreModal';
+import ManageStoreModal from '@/app/components/modals/ManageStoreModal';
 
 import EditWhiteIcon from '@/assets/icons/edit-white.svg';
 
@@ -26,10 +26,10 @@ const StoreInformation = () => {
         <dd className="body-16-500 text-gray-900">Starbucks Reserve</dd>
       </dl>
 
-      <CreateStoreModal
+      <ManageStoreModal
         isOpen={isCreateStoreModalOpen}
         onClose={toggleCreateStoreModal}
-        dialogTitle="Edit Store"
+        mode="edit"
       />
     </section>
   );

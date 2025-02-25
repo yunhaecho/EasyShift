@@ -1,3 +1,5 @@
+'use client';
+
 import RightArrowIcon from '@/assets/icons/right-arrow.svg';
 import LeftArrowIcon from '@/assets/icons/left-arrow.svg';
 import useMonthlyCalendar from '@/hooks/useMonthlyCalendar';
