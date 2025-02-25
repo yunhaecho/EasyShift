@@ -53,12 +53,17 @@ const WeeklyCalendar = ({
                 </div>
               </td>
               {currentWeekDates.map(date => {
+                /* TODO: 백엔드 날짜 포멧 변경 후 수정 필요 */
                 const assignedShifts = shift.dates
-                  .filter(
-                    d =>
-                      new Date(d.date).getTime() ===
-                      new Date(date.fullDate).getTime(),
-                  )
+                  .filter(d => {
+                    const backendDate = new Date(d.date);
+                    backendDate.setHours(0, 0, 0, 0);
+
+                    const frontendDate = new Date(date.fullDate);
+                    frontendDate.setHours(0, 0, 0, 0);
+
+                    return backendDate.getTime() === frontendDate.getTime();
+                  })
                   .flatMap(d => d.assignedShifts);
 
                 return (

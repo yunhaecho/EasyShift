@@ -1,8 +1,8 @@
 import FeatureCard from './component/FeatureCard';
-import CalendarIcon from '@/../public/icons/calendar.svg';
-import PeopleIcon from '@/../public/icons/people.svg';
-import ChartIcon from '@/../public/icons/chart.svg';
-import CircleArrow from '@/../public/icons/circle-arrow.svg';
+import CalendarIcon from '@/assets/icons/calendar.svg';
+import PeopleIcon from '@/assets/icons/people.svg';
+import ChartIcon from '@/assets/icons/chart.svg';
+import CircleArrow from '@/assets/icons/circle-arrow.svg';
 
 export default function Landing() {
   return (

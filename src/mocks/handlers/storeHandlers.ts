@@ -16,40 +16,41 @@ export const storeHandlers = [
         },
       ],
       selectedSchedule: {
-        scheduleId: 101,
+        scheduleId: 201,
         scheduleName: 'Barista',
         shifts: [
           {
+            shiftId: 301,
             shiftName: 'Open',
             startTime: '09:00',
             endTime: '18:00',
             dates: [
               {
-                date: '2025-02-18',
+                date: '2025-02-27',
                 assignedShifts: [
                   {
-                    shiftId: 12,
-                    userId: 1,
+                    assignedShiftId: 401,
+                    userId: 501,
                     userName: '양소연',
                   },
                   {
-                    shiftId: 13,
-                    userId: 2,
+                    assignedShiftId: 402,
+                    userId: 502,
                     userName: '김찬호',
                   },
                 ],
               },
               {
-                date: '2025-02-19',
+                date: '2025-02-28',
                 assignedShifts: [
                   {
-                    shiftId: 14,
-                    userId: 1,
+                    assignedShiftId: 403,
+                    userId: 503,
                     userName: '양소연',
                   },
                   {
-                    shiftId: 15,
-                    userId: 2,
+                    assignedShiftId: 404,
+                    userId: 504,
                     userName: '김찬호',
                   },
                 ],
@@ -57,22 +58,22 @@ export const storeHandlers = [
             ],
           },
           {
-            shiftId: 102,
+            shiftId: 302,
             shiftName: 'Middle',
             startTime: '13:00',
             endTime: '17:00',
             dates: [
               {
-                date: '2025-02-20',
+                date: '2025-02-27',
                 assignedShifts: [
                   {
-                    shiftId: 16,
-                    userId: 1,
+                    assignedShiftId: 405,
+                    userId: 505,
                     userName: '양소연',
                   },
                   {
-                    shiftId: 17,
-                    userId: 2,
+                    assignedShiftId: 406,
+                    userId: 506,
                     userName: '김찬호',
                   },
                 ],
@@ -80,16 +81,17 @@ export const storeHandlers = [
             ],
           },
           {
+            shiftId: 303,
             shiftName: 'Close',
             startTime: '17:00',
             endTime: '23:00',
             dates: [
               {
-                date: '2025-02-10',
+                date: '2025-02-28',
                 assignedShifts: [
                   {
-                    shiftId: 18,
-                    userId: 1,
+                    assignedShiftId: 407,
+                    userId: 507,
                     userName: '양소연',
                   },
                 ],

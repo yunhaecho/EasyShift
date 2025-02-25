@@ -1,13 +1,19 @@
 import ChevronLeftIcon from '@/assets/icons/chevron-left.svg';
 import ChevronRightIcon from '@/assets/icons/chevron-right.svg';
 import { WeekDates } from '../types';
+import Dropdown from '@/app/components/Dropdown';
+import { FetchHomeResponse } from '@/api/endpoints/stores/stores';
 
 const WeeklyNavigator = ({
+  homeData,
+  setSelectedScheduleId,
   currentWeekDates,
   setCurrentDate,
   goToNextWeek,
   goToPreviousWeek,
 }: {
+  homeData: FetchHomeResponse;
+  setSelectedScheduleId: (scheduleId: string) => void;
   currentWeekDates: WeekDates;
   setCurrentDate: (date: Date) => void;
   goToNextWeek: () => void;
@@ -38,6 +44,19 @@ const WeeklyNavigator = ({
           <span className="body-16-400 text-gray-800">Today</span>
         </button>
       </div>
+
+      <Dropdown
+        title={homeData.selectedSchedule.scheduleName}
+        items={homeData.schedules
+          .filter(
+            schedule =>
+              schedule.scheduleId !== homeData.selectedSchedule.scheduleId,
+          )
+          .map(schedule => schedule.scheduleName)}
+        onSelect={scheduleId => {
+          setSelectedScheduleId(scheduleId);
+        }}
+      />
     </nav>
   );
 };

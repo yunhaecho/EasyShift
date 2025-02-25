@@ -8,13 +8,14 @@ export interface FetchHomeResponse {
     scheduleId: number;
     scheduleName: string;
     shifts: Array<{
+      shiftId: number;
       shiftName: string;
       startTime: string;
       endTime: string;
       dates: Array<{
         date: string;
         assignedShifts: Array<{
-          shiftId: number;
+          assignedShiftId: number;
           userId: number;
           userName: string;
         }>;
