@@ -26,7 +26,6 @@ export const useFetchHome = (props: {
   selectedScheduleId?: string;
 }) => {
   const { storeId, selectedScheduleId } = props;
-
   return useQuery({
     queryKey: queryKeys.home(storeId, selectedScheduleId),
     queryFn: fetchHome,

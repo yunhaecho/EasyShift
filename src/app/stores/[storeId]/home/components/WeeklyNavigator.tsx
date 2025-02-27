@@ -1,8 +1,9 @@
+import { WeekDates } from '../types';
+import { FetchHomeResponse } from '@/api/endpoints/stores/stores';
+import SelectedStoreDropdown from './SelectedStoreDropdown';
+
 import ChevronLeftIcon from '@/assets/icons/chevron-left.svg';
 import ChevronRightIcon from '@/assets/icons/chevron-right.svg';
-import { WeekDates } from '../types';
-import Dropdown from '@/app/components/Dropdown';
-import { FetchHomeResponse } from '@/api/endpoints/stores/stores';
 
 const WeeklyNavigator = ({
   homeData,
@@ -45,17 +46,13 @@ const WeeklyNavigator = ({
         </button>
       </div>
 
-      <Dropdown
+      <SelectedStoreDropdown
         title={homeData.selectedSchedule.scheduleName}
-        items={homeData.schedules
-          .filter(
-            schedule =>
-              schedule.scheduleId !== homeData.selectedSchedule.scheduleId,
-          )
-          .map(schedule => schedule.scheduleName)}
+        schedules={homeData.schedules}
         onSelect={scheduleId => {
-          setSelectedScheduleId(scheduleId);
+          setSelectedScheduleId(scheduleId.toString());
         }}
+        selectedScheduleId={homeData.selectedSchedule.scheduleId}
       />
     </nav>
   );

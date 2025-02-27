@@ -4,7 +4,6 @@ export const storeHandlers = [
   http.get('/api/stores', () => {
     return HttpResponse.json({
       storeId: 1,
-      storeName: 'Standard Bread',
       schedules: [
         {
           scheduleId: 101,
@@ -16,11 +15,11 @@ export const storeHandlers = [
         },
       ],
       selectedSchedule: {
-        scheduleId: 201,
+        scheduleId: 101,
         scheduleName: 'Barista',
         shifts: [
           {
-            shiftId: 301,
+            shiftId: 201,
             shiftName: 'Open',
             startTime: '09:00',
             endTime: '18:00',
@@ -29,13 +28,13 @@ export const storeHandlers = [
                 date: '2025-02-27',
                 assignedShifts: [
                   {
-                    assignedShiftId: 401,
-                    userId: 501,
+                    assignedShiftId: 301,
+                    userId: 401,
                     userName: '양소연',
                   },
                   {
-                    assignedShiftId: 402,
-                    userId: 502,
+                    assignedShiftId: 302,
+                    userId: 402,
                     userName: '김찬호',
                   },
                 ],
@@ -44,13 +43,13 @@ export const storeHandlers = [
                 date: '2025-02-28',
                 assignedShifts: [
                   {
-                    assignedShiftId: 403,
-                    userId: 503,
+                    assignedShiftId: 303,
+                    userId: 403,
                     userName: '양소연',
                   },
                   {
-                    assignedShiftId: 404,
-                    userId: 504,
+                    assignedShiftId: 304,
+                    userId: 404,
                     userName: '김찬호',
                   },
                 ],
@@ -58,7 +57,7 @@ export const storeHandlers = [
             ],
           },
           {
-            shiftId: 302,
+            shiftId: 202,
             shiftName: 'Middle',
             startTime: '13:00',
             endTime: '17:00',
@@ -67,13 +66,13 @@ export const storeHandlers = [
                 date: '2025-02-27',
                 assignedShifts: [
                   {
-                    assignedShiftId: 405,
-                    userId: 505,
+                    assignedShiftId: 305,
+                    userId: 405,
                     userName: '양소연',
                   },
                   {
-                    assignedShiftId: 406,
-                    userId: 506,
+                    assignedShiftId: 306,
+                    userId: 406,
                     userName: '김찬호',
                   },
                 ],
@@ -81,7 +80,7 @@ export const storeHandlers = [
             ],
           },
           {
-            shiftId: 303,
+            shiftId: 203,
             shiftName: 'Close',
             startTime: '17:00',
             endTime: '23:00',
@@ -90,8 +89,8 @@ export const storeHandlers = [
                 date: '2025-02-28',
                 assignedShifts: [
                   {
-                    assignedShiftId: 407,
-                    userId: 507,
+                    assignedShiftId: 307,
+                    userId: 407,
                     userName: '양소연',
                   },
                 ],

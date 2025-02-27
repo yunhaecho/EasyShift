@@ -1,14 +1,17 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
 
-const Dropdown = ({
+const StoresListDropdown = ({
   title,
-  items,
+  stores,
   onSelect,
 }: {
   title: string;
-  items: string[];
-  onSelect: (item: string) => void;
+  stores: {
+    id: number;
+    name: string;
+  }[];
+  onSelect: (storeId: number) => void;
 }) => {
   return (
     <Menu>
@@ -20,13 +23,13 @@ const Dropdown = ({
         anchor="bottom"
         className="mt-5 w-200 border border-gray-400 bg-white"
       >
-        {items.map(item => (
-          <MenuItem key={item}>
+        {stores.map(store => (
+          <MenuItem key={store.id}>
             <button
-              className="block flex w-full justify-start px-12 py-9 data-[focus]:bg-gray-300"
-              onClick={() => onSelect(item)}
+              className="flex w-full justify-start px-12 py-9 data-[focus]:bg-gray-300"
+              onClick={() => onSelect(store.id)}
             >
-              {item}
+              {store.name}
             </button>
           </MenuItem>
         ))}
@@ -35,4 +38,4 @@ const Dropdown = ({
   );
 };
 
-export default Dropdown;
+export default StoresListDropdown;
