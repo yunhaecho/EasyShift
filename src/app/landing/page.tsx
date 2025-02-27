@@ -7,33 +7,37 @@ import CircleArrow from '@/assets/icons/circle-arrow.svg';
 export default function Landing() {
   return (
     <div className="flex h-full w-full flex-col">
-      {/* Hero Section */}
-      <section className="flex h-480 flex-col items-center justify-center bg-white pt-96">
-        <h1 className="text-head-60-700 mb-24 text-6xl font-bold">
-          Easy Shift
-        </h1>
-        <h2 className="text-head-30-400 mb-28 text-3xl font-normal">
+      {/* 메인 phrase */}
+      <div className="flex h-480 flex-col items-center justify-center bg-white pt-96">
+        <div className="head-60-700 mb-24">Easy Shift</div>
+        <div className="head-30-400 mb-28">
           Effortlessly Manage Your Team&apos;s Schedule
-        </h2>
-        <p className="text-head-20-400 text-xl font-normal">
+        </div>
+        <div className="head-20-400">
           Streamline your workforce management with our intuitive scheduling
           solution. Save
-        </p>
-        <p className="text-head-20-400 mb-48 text-xl font-normal">
+        </div>
+        <div className="head-20-400 mb-48">
           time, reduce errors, and keep your team synchronized.
-        </p>
+        </div>
         <div className="flex flex-row gap-18">
-          <button className="body-18-500 flex h-62 w-195 cursor-pointer items-center justify-center rounded-4 bg-black text-white">
+          <button
+            type="button"
+            className="body-18-500 flex h-62 w-195 items-center justify-center rounded-4 bg-black text-white"
+          >
             Get Started Free
           </button>
-          <button className="body-18-500 mb-48 flex h-62 w-195 cursor-pointer items-center justify-center rounded-4 border border-gray-900 bg-white text-black">
+          <button
+            type="button"
+            className="body-18-500 mb-48 flex h-62 w-195 items-center justify-center rounded-4 border border-gray-900 bg-white text-black"
+          >
             Learn More
           </button>
         </div>
-      </section>
+      </div>
 
-      {/* Features Section */}
-      <section className="flex h-372 w-full flex-row justify-evenly bg-gray-100">
+      {/* Feature Card */}
+      <div className="flex h-372 w-full flex-row justify-evenly border-b border-gray-300 bg-gray-100">
         <FeatureCard
           icon={<CalendarIcon />}
           feature="Smart Scheduling"
@@ -58,12 +62,10 @@ export default function Landing() {
           subExplain1="Instant notifications and updates for"
           subExplain2="schedule changes and requests"
         />
-      </section>
-
-      {/* Footer */}
-      <footer className="body-14-400 flex h-116 flex-col items-center justify-center bg-white">
-        © 2024 Easy Shift. All rights reserved.
-      </footer>
+      </div>
+      <div className="body-14-400 flex h-116 flex-col items-center justify-center bg-white">
+        © 2024 Easy Shift. All rights reserved.{' '}
+      </div>
     </div>
   );
 }

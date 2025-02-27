@@ -4,6 +4,7 @@ import SelectedStoreDropdown from './SelectedStoreDropdown';
 
 import ChevronLeftIcon from '@/assets/icons/chevron-left.svg';
 import ChevronRightIcon from '@/assets/icons/chevron-right.svg';
+import { WeekDates } from '../types';
 
 const WeeklyNavigator = ({
   homeData,
