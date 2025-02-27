@@ -10,7 +10,6 @@ import { STORE_MENUS } from '@/constants/menus';
 
 import Logo from '@/assets/logo.svg';
 import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
-import Link from 'next/link';
 
 /* Home, Schedule, Settings 메뉴 탭 */
 const MenuBar = () => {
