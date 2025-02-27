@@ -8,16 +8,6 @@ import {
   endOfMonth,
   endOfWeek,
 } from 'date-fns';
-import { WeekDates } from '@/app/stores/[storeId]/home/types';
-import {
-  startOfWeek,
-  addDays,
-  format,
-  eachDayOfInterval,
-  startOfMonth,
-  endOfMonth,
-  endOfWeek,
-} from 'date-fns';
 
 /**
  * 오늘 기준 이번 주 날짜 정보 반환

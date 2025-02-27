@@ -34,8 +34,6 @@ export default function Schedule() {
 
   const column = ['Period', 'Status', 'Actions'];
   const statusOption = ['All Status', 'Pending', 'Completed'];
-  const column = ['Period', 'Status', 'Actions'];
-  const statusOption = ['All Status', 'Pending', 'Completed'];
 
   //연도 배열(중복 제거)
   const yearOption = Array.from(
