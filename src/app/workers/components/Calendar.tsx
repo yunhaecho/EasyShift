@@ -16,9 +16,9 @@ export default function Calendar({data} : {data : WorkerScheduleResponse} ) {
   // 캘린더에 표시
   const daysInCalendar = generateCalendar(new Date(currentYear, currentMonth));  
   
-  // workerSchedule: 현재 월에 해당하는 shift들을 날짜와 색상 정보와 함께 배열로 만들기 
+  // workerSchedule: 현재 월에 해당하는 shift들을 날짜와 색상 정보와 함께 배열로 만들기
   const workerSchedule = useMemo(() => {
-     return data.schedules.flatMap(scheduleDetail => 
+     return data?.schedules.flatMap(scheduleDetail => 
        scheduleDetail.shifts
          .filter(
            shiftDetail => new Date(shiftDetail.shiftDate).getMonth() === currentMonth,
@@ -87,8 +87,8 @@ export default function Calendar({data} : {data : WorkerScheduleResponse} ) {
               )}
             >
               <span>{`${eachDay.kstDate.getDate()}`}</span>
-              {workerSchedule
-                .filter(shift => shift.date === eachDay.formattedDate)
+              {workerSchedule && workerSchedule
+                .filter(shift  => shift.date === eachDay.formattedDate)
                 .map(shift => (
                   <div 
                     key={shift.date}
