@@ -14,6 +14,7 @@ export default function Schedule() {
   const [year, setYear] = useState('');
 
   //현재 명세서상에는 deadline x
+  //현재 명세서상에는 deadline x
   const mockData = [
     {
       id: 101,
@@ -31,6 +32,8 @@ export default function Schedule() {
     },
   ];
 
+  const column = ['Period', 'Status', 'Actions'];
+  const statusOption = ['All Status', 'Pending', 'Completed'];
   const column = ['Period', 'Status', 'Actions'];
   const statusOption = ['All Status', 'Pending', 'Completed'];
 

@@ -105,7 +105,36 @@ export default function Calendar() {
             );
           })}
         </ul>
+        <ul className="grid auto-rows-[3.875rem] grid-cols-7 gap-8">
+          {/* days */}
+          {daysInCalendar.map(eachDay => {
+            return (
+              <li
+                key={eachDay.unformattedDate.getTime()}
+                className={classNames(
+                  'body-14-400 flex cursor-pointer flex-col items-center justify-start rounded-lg border border-gray-300 p-9 pt-8',
+                  `${eachDay.isCurrentMonth ? 'text-gray-700' : 'text-gray-400'}`,
+                )}
+              >
+                {`${eachDay.unformattedDate.getDate()}`}
+                {workerSchedule.map(datesOfWorkDay => {
+                  if (datesOfWorkDay === eachDay.formattedDate) {
+                    return (
+                      <div
+                        key={datesOfWorkDay}
+                        className="mt-14 h-8 w-52 rounded-xl bg-blue-200"
+                      />
+                    );
+                  }
+                })}
+              </li>
+            );
+          })}
+        </ul>
       </div>
+    </div>
+  );
+}
     </div>
   );
 }

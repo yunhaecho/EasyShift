@@ -5,6 +5,7 @@ import { ROUTES } from '@/constants/routes';
 import classNames from 'classnames';
 import { hideNavigation } from '@/utils/hideNavigation';
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/react';
+import Link from 'next/link';
 import { STORE_MENUS } from '@/constants/menus';
 
 import Logo from '@/assets/logo.svg';

@@ -1,20 +1,32 @@
 import WorkerInfoModal from '@/app/workers/components/WorkerInfoModal';
 import { WeekDate } from '../types';
+import WorkerInfoModal from '@/app/workers/components/WorkerInfoModal';
+import { WeekDate } from '../types';
 import WorkerBlock from './WorkerBlock';
 import useToggle from '@/app/hooks/useToggle';
-import { mockShifts } from '../../mocks';
+import { FetchHomeResponse } from '@/api/endpoints/stores/stores';
+
+const SHIFT_COLORS = ['#EEF2FF', '#F0FDF4', '#FFF1E7'];
 
 const WeeklyCalendar = ({
   currentWeekDates,
+  shifts,
 }: {
   currentWeekDates: WeekDate[];
+  shifts: FetchHomeResponse['selectedSchedule']['shifts'];
 }) => {
   const [isWorkerInfoModalOpen, toggleWorkerInfoModal] = useToggle();
+
+  // 임시 컬러 배열
+  const getShiftColor = (shiftName: string) => {
+    const shiftIndex = shifts.findIndex(s => s.shiftName === shiftName);
+    return SHIFT_COLORS[shiftIndex % SHIFT_COLORS.length];
+  };
 
   return (
     <section className="w-full rounded-8 border border-gray-300 bg-white shadow-sm">
       <h2 className="sr-only">오늘 날짜 기준 주간 근무 일정</h2>
-      <table className="w-full border-collapse">
+      <table className="w-full table-fixed border-collapse">
         <thead>
           <tr>
             <th className="body-16-500 p-16 text-gray-600">Shifts</th>
@@ -29,21 +41,53 @@ const WeeklyCalendar = ({
           </tr>
         </thead>
         <tbody>
-          {mockShifts.map(shift => (
-            <tr key={shift.id} className="border-t border-gray-400 align-top">
+          {shifts.map(shift => (
+            <tr
+              key={shift.shiftId}
+              className="border-t border-gray-400 align-top"
+            >
               <td className="p-16">
-                <div className="body-14-500 text-gray-900">{shift.label}</div>
-                <div className="body-14-400 text-gray-600">{shift.time}</div>
+                <div className="body-14-500 text-gray-900">
+                  {shift.shiftName}
+                </div>
+                <div className="body-14-400 text-gray-600">
+                  {shift.startTime} - {shift.endTime}
+                </div>
               </td>
-              {Array.from({ length: 7 }).map((_, index) => (
-                <td
-                  key={index}
-                  style={{ backgroundColor: shift.color }}
-                  className="h-162 border-l border-gray-400 p-16 align-top"
-                >
-                  <WorkerBlock toggleWorkerInfoModal={toggleWorkerInfoModal} />
-                </td>
-              ))}
+              {currentWeekDates.map(date => {
+                /* TODO: 백엔드 날짜 포멧 변경 후 수정 필요 */
+                const assignedShifts = shift.dates
+                  .filter(d => {
+                    const backendDate = new Date(d.date);
+                    backendDate.setHours(0, 0, 0, 0);
+
+                    const frontendDate = new Date(date.fullDate);
+                    frontendDate.setHours(0, 0, 0, 0);
+
+                    return backendDate.getTime() === frontendDate.getTime();
+                  })
+                  .flatMap(d => d.assignedShifts);
+
+                return (
+                  <td
+                    key={`${shift.shiftId}-${date.fullDate.getTime()}`}
+                    style={{
+                      backgroundColor: getShiftColor(shift.shiftName),
+                    }}
+                    className="h-162 border-l border-gray-400 p-16 align-top"
+                  >
+                    <div className="flex flex-col gap-8">
+                      {assignedShifts?.map(shift => (
+                        <WorkerBlock
+                          key={shift.assignedShiftId}
+                          toggleWorkerInfoModal={toggleWorkerInfoModal}
+                          shift={shift}
+                        />
+                      ))}
+                    </div>
+                  </td>
+                );
+              })}
             </tr>
           ))}
         </tbody>

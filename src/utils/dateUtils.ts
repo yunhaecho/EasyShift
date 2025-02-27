@@ -8,6 +8,16 @@ import {
   endOfMonth,
   endOfWeek,
 } from 'date-fns';
+import { WeekDates } from '@/app/stores/[storeId]/home/types';
+import {
+  startOfWeek,
+  addDays,
+  format,
+  eachDayOfInterval,
+  startOfMonth,
+  endOfMonth,
+  endOfWeek,
+} from 'date-fns';
 
 /**
  * 오늘 기준 이번 주 날짜 정보 반환
@@ -54,20 +64,4 @@ export const generateCalendar = (start: Date) => {
   }));
 
   return calendarDates;
-};
-
-export const convertMonthToNumber = (month: string) => {
-  return month
-    .replace('Jan', '1')
-    .replace('Feb', '2')
-    .replace('Mar', '3')
-    .replace('Apr', '4')
-    .replace('May', '5')
-    .replace('Jun', '6')
-    .replace('Jul', '7')
-    .replace('Aug', '8')
-    .replace('Sep', '9')
-    .replace('Oct', '10')
-    .replace('Nov', '11')
-    .replace('Dec', '12');
 };
