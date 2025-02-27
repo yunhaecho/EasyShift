@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import WeeklyCalendar from './components/WeeklyCalendar';
 import WeeklyNavigator from './components/WeeklyNavigator';
 import useWeeklyCalendar from './hooks/useWeeklyCalendar';
