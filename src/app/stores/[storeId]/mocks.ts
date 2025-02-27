@@ -1,4 +1,4 @@
-import { Schedule } from './settings/types';
+import { ScheduleTemplate } from './settings/types';
 
 export const mockStores = [
   {
@@ -45,7 +45,7 @@ export const initialWorkers = [
 export const mockSchedule = [
   {
     id: 1,
-    name: 'Schedule1',
+    name: 'Schedule Template 1',
     shifts: [
       {
         id: 1,
@@ -69,7 +69,7 @@ export const mockSchedule = [
   },
   {
     id: 2,
-    name: 'Schedule2',
+    name: 'Schedule Template 2',
     shifts: [
       {
         id: 1,
@@ -87,7 +87,7 @@ export const mockSchedule = [
   },
   {
     id: 3,
-    name: 'Schedule3',
+    name: 'Schedule Template 3',
     shifts: [
       {
         id: 1,
@@ -103,7 +103,7 @@ export const mockSchedule = [
       },
     ],
   },
-] as Schedule[];
+] as ScheduleTemplate[];
 
 export const mockShifts = [
   {
