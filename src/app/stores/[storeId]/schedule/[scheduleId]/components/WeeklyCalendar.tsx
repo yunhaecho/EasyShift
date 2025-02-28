@@ -4,6 +4,7 @@ import { WeekDate } from '@/app/stores/[storeId]/home/types';
 import useToggle from '@/app/hooks/useToggle';
 import { FetchHomeResponse } from '@/api/endpoints/stores/stores';
 import WorkerBlock from '../../../home/components/WorkerBlock';
+import { useSearchParams } from 'next/navigation';
 
 const SHIFT_COLORS = ['#EEF2FF', '#F0FDF4', '#FFF1E7'];
 
@@ -11,15 +12,22 @@ const WeeklyCalendar = ({
   currentWeekDates,
   shifts,
 }: {
-  currentWeekDates: (WeekDate | null)[];
+  currentWeekDates: WeekDate[];
   shifts: FetchHomeResponse['selectedSchedule']['shifts'];
 }) => {
   const [isWorkerInfoModalOpen, toggleWorkerInfoModal] = useToggle();
+
+  const searchParams = useSearchParams();
+  const selectedMonth = searchParams.get('date')?.split('-')[1];
 
   // 임시 컬러 배열
   const getShiftColor = (shiftName: string) => {
     const shiftIndex = shifts.findIndex(s => s.shiftName === shiftName);
     return SHIFT_COLORS[shiftIndex % SHIFT_COLORS.length];
+  };
+
+  const isNotSelectedMonth = (date: WeekDate) => {
+    return date?.fullDate.getMonth() + 1 !== Number(selectedMonth);
   };
 
   return (
@@ -32,7 +40,9 @@ const WeeklyCalendar = ({
             {currentWeekDates.map((date, index) => (
               <th
                 key={index}
-                className="body-16-500 p-16 text-center text-gray-900"
+                className={`body-16-500 p-16 text-center text-gray-900 ${
+                  isNotSelectedMonth(date) && 'opacity-40'
+                }`}
               >
                 {date ? `${date.day} ${date.dayOfWeek.toUpperCase()}` : ''}
               </th>
@@ -70,7 +80,9 @@ const WeeklyCalendar = ({
                   <td
                     key={`${shift.shiftId}-${date?.fullDate?.getTime()}`}
                     style={{
-                      backgroundColor: getShiftColor(shift.shiftName),
+                      backgroundColor: isNotSelectedMonth(date)
+                        ? '#F3F4F6'
+                        : getShiftColor(shift.shiftName),
                     }}
                     className="h-162 border-l border-gray-400 p-16 align-top"
                   >

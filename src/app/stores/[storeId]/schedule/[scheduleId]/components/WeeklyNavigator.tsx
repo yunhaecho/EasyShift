@@ -26,14 +26,12 @@ const WeeklyNavigator = ({
         <button onClick={goToPreviousWeek} aria-label="이전 주 이동 버튼">
           <ChevronLeftIcon className="mb-5 h-40 w-26" />
         </button>
-        <div className="head-20-600 w-170 text-center text-gray-800">
-          {startDate && endDate
-            ? `${startDate.month} ${startDate.day} - ${endDate.day}, ${startDate.year}`
-            : startDate
-              ? `${startDate.month} ${startDate.day}, ${startDate.year}`
-              : endDate
-                ? `${endDate.month} ${endDate.day}, ${endDate.year}`
-                : '날짜 없음'}
+        <div className="head-20-600 w-200 text-center text-gray-800">
+          {`${startDate?.month} ${startDate?.day} ${
+            startDate?.month !== endDate?.month
+              ? `- ${endDate?.month} ${endDate?.day}`
+              : `- ${endDate?.day}`
+          }, ${startDate?.year}`}
         </div>
         <button onClick={goToNextWeek} aria-label="다음 주 이동 버튼">
           <ChevronRightIcon className="mb-5 h-40 w-26" />

@@ -6,7 +6,17 @@ import Link from 'next/link';
 import EditBlackIcon from '@/assets/icons/edit-black.svg';
 import DeleteRedIcon from '@/assets/icons/delete-red.svg';
 
-function Actions({ scheduleId }: { scheduleId: number }) {
+function Actions({
+  schedule,
+}: {
+  schedule: {
+    id: number;
+    scheduleName: string;
+    shiftDate: string;
+    status: string;
+    description: string;
+  };
+}) {
   const params = useParams();
   const storeId = params.storeId;
 
@@ -15,7 +25,9 @@ function Actions({ scheduleId }: { scheduleId: number }) {
       <Button className="body-14-500 h-full w-auto rounded-4 bg-gray-900 px-11 text-white">
         Generate
       </Button>
-      <Link href={`/stores/${storeId}/schedule/${scheduleId}`}>
+      <Link
+        href={`/stores/${storeId}/schedule/${schedule.id}?date=${schedule.shiftDate}`}
+      >
         <EditBlackIcon />
       </Link>
       <DeleteRedIcon />

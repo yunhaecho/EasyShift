@@ -45,7 +45,7 @@ export const initialWorkers = [
 export const mockSchedule = [
   {
     id: 1,
-    name: 'Schedule Template 1',
+    name: '홀',
     shifts: [
       {
         id: 1,
@@ -69,25 +69,7 @@ export const mockSchedule = [
   },
   {
     id: 2,
-    name: 'Schedule Template 2',
-    shifts: [
-      {
-        id: 1,
-        name: 'Open',
-        startTime: '6:00 AM',
-        endTime: '2:00 PM',
-      },
-      {
-        id: 2,
-        name: 'Close',
-        startTime: '3:00 PM',
-        endTime: '9:00 PM',
-      },
-    ],
-  },
-  {
-    id: 3,
-    name: 'Schedule Template 3',
+    name: '주방',
     shifts: [
       {
         id: 1,

@@ -143,7 +143,10 @@ export default function Schedule() {
               <thead>
                 <tr className="caption-12-500 border-b border-gray-300">
                   {column.map(col => (
-                    <td className="w-1/5 px-24 py-12" key={col}>
+                    <td
+                      className="body-14-500 px-24 py-12 text-center"
+                      key={col}
+                    >
                       {col}
                     </td>
                   ))}
@@ -156,17 +159,17 @@ export default function Schedule() {
                     key={item.id}
                     className="border-b border-gray-300 bg-white"
                   >
-                    <td className="body-14-500 px-24 py-12">
+                    <td className="body-14-500 px-24 py-12 text-center">
                       <span>{item.scheduleName}</span>
                     </td>
-                    <td className="body-14-500 px-24 py-12">
+                    <td className="body-14-500 px-24 py-12 text-center">
                       {item.shiftDate}
                     </td>
-                    <td className="px-24 py-12">
+                    <td className="body-14-500 px-24 py-12 text-center">
                       <Status status={item.status} />
                     </td>
-                    <td className="px-24 py-12">
-                      <Actions scheduleId={item.id} />
+                    <td className="body-14-500 px-24 py-12 text-center">
+                      <Actions schedule={item} />
                     </td>
                   </tr>
                 ))}

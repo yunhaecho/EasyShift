@@ -1,12 +1,13 @@
 'use client';
 
-import InviteLinkModal from './InviteLinkModal';
-import WorkerInfoModal from "@/app/workers/components/WorkerInfoModal"
 import useToggle from '@/app/hooks/useToggle';
 import useManageWorkers from '../hooks/useManageWorkers';
 
+import InviteLinkModal from './InviteLinkModal';
+import WorkerInfoModal from '@/app/workers/components/WorkerInfoModal';
+import WorkerSearchBar from './WorkerSearchBar';
+
 import PlusWhiteIcon from '@/assets/icons/plus-white.svg';
-import MagnifyingGlassIcon from '@/assets/icons/magnifying-glass.svg';
 import DeleteRedIcon from '@/assets/icons/delete-red.svg';
 
 const WorkersInformation = () => {
@@ -23,15 +24,10 @@ const WorkersInformation = () => {
 
       {/* Search bar & Invite Link Button */}
       <header className="flex items-center justify-between border-b border-gray-400 p-24">
-        <div className="flex w-[30%] items-center gap-12 border border-gray-400 p-12">
-          <MagnifyingGlassIcon />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
-            placeholder="Search workers..."
-            className="w-full focus:outline-none"
-            aria-label="Search workers"
+        <div className="w-[30%]">
+          <WorkerSearchBar
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
           />
         </div>
         <button
@@ -64,7 +60,11 @@ const WorkersInformation = () => {
         </thead>
         <tbody>
           {filteredWorkers.map(worker => (
-            <tr key={worker.id} className="border-t border-gray-400"  onClick={toggleWorkerInfoModal}>
+            <tr
+              key={worker.id}
+              className="border-t border-gray-400"
+              onClick={toggleWorkerInfoModal}
+            >
               <td className="flex items-center gap-16 px-24 py-12">
                 <div className="h-40 w-40 rounded-full bg-gray-300" />
                 <span className="body-14-500 text-gray-800">{worker.name}</span>
