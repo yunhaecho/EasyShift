@@ -166,7 +166,7 @@ export default function Schedule() {
                       <Status status={item.status} />
                     </td>
                     <td className="px-24 py-12">
-                      <Actions />
+                      <Actions scheduleId={item.id} />
                     </td>
                   </tr>
                 ))}

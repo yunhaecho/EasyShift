@@ -1,9 +1,10 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
-import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
 import { useState } from 'react';
 import { format, addYears, subYears, addMonths } from 'date-fns';
 import { mockSchedule } from '../../mocks';
 import { ScheduleTemplate } from '../../settings/types';
+
+import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
 
 const ScheduleTemplateDropdown = ({
   onSelect,
