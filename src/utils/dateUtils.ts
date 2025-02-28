@@ -46,11 +46,11 @@ export const generateCalendar = (start: Date) => {
     end: endOfCalendar,
   });
 
-  const calendarDates = datesOfCurrentMonth.map(unformattedDate => ({
+  const calendarDates = datesOfCurrentMonth.map(kstDate => ({
     //Wed Jan 29 2025 00:00:00 GMT+0900 (한국 표준시)
-    unformattedDate,
-    formattedDate: format(unformattedDate, 'yyyy-MM-dd'),
-    isCurrentMonth: unformattedDate.getMonth() === fstOfMonth.getMonth(),
+    kstDate: kstDate,
+    formattedDate: format(kstDate, 'yyyy-MM-dd'),
+    isCurrentMonth: kstDate.getMonth() === fstOfMonth.getMonth(),
   }));
 
   return calendarDates;

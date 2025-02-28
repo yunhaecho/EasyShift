@@ -1,6 +1,7 @@
 'use client';
 
 import InviteLinkModal from './InviteLinkModal';
+import WorkerInfoModal from "@/app/workers/components/WorkerInfoModal"
 import useToggle from '@/app/hooks/useToggle';
 import useManageWorkers from '../hooks/useManageWorkers';
 
@@ -12,6 +13,7 @@ const WorkersInformation = () => {
   const { searchQuery, setSearchQuery, handleDeleteWorker, filteredWorkers } =
     useManageWorkers();
   const [isInviteLinkModalOpen, toggleInviteLinkModal] = useToggle(false);
+  const [isWorkerInfoModalOpen, toggleWorkerInfoModal] = useToggle(false);
 
   return (
     <section className="rounded-8 border border-gray-300 bg-white shadow-sm">
@@ -62,7 +64,7 @@ const WorkersInformation = () => {
         </thead>
         <tbody>
           {filteredWorkers.map(worker => (
-            <tr key={worker.id} className="border-t border-gray-400">
+            <tr key={worker.id} className="border-t border-gray-400"  onClick={toggleWorkerInfoModal}>
               <td className="flex items-center gap-16 px-24 py-12">
                 <div className="h-40 w-40 rounded-full bg-gray-300" />
                 <span className="body-14-500 text-gray-800">{worker.name}</span>
@@ -98,6 +100,11 @@ const WorkersInformation = () => {
       <InviteLinkModal
         isOpen={isInviteLinkModalOpen}
         onClose={toggleInviteLinkModal}
+      />
+
+      <WorkerInfoModal
+        isOpen={isWorkerInfoModalOpen}
+        onClose={toggleWorkerInfoModal}
       />
     </section>
   );
