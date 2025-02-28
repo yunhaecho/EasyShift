@@ -10,7 +10,6 @@ import useScheduleCalendar from './\bhooks/useScheduleCalendar';
 import WeeklyCalendar from './components/WeeklyCalendar';
 import { useSearchParams } from 'next/navigation';
 import { parse } from 'date-fns/parse';
-import WorkersListSidebar from './components/WorkersListSidebar';
 
 const ScheduleEditPage = () => {
   const [selectedScheduleId] = useState<string>();
@@ -37,7 +36,7 @@ const ScheduleEditPage = () => {
 
   return (
     <>
-      <main className="flex w-[80%] flex-col gap-14 px-32 py-14">
+      <main className="flex w-full flex-col gap-14 px-32 py-14">
         <WeeklyNavigator
           currentWeekDates={currentWeekDates as WeekDates}
           goToNextWeek={goToNextWeek}
@@ -48,7 +47,6 @@ const ScheduleEditPage = () => {
           shifts={homeData.selectedSchedule.shifts}
         />
       </main>
-      <WorkersListSidebar />
 
       <WorkerInfoModal
         isOpen={isWorkerInfoModalOpen}

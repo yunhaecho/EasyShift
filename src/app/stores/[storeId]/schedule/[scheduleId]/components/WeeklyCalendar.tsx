@@ -3,8 +3,8 @@ import { WeekDate } from '@/app/stores/[storeId]/home/types';
 
 import useToggle from '@/app/hooks/useToggle';
 import { FetchHomeResponse } from '@/api/endpoints/stores/stores';
-import WorkerBlock from '../../../home/components/WorkerBlock';
 import { useSearchParams } from 'next/navigation';
+import WorkerBlock from './WorkerBlock';
 
 const SHIFT_COLORS = ['#EEF2FF', '#F0FDF4', '#FFF1E7'];
 
