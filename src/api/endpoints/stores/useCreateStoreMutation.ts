@@ -1,20 +1,19 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { queryKeys } from './stores.keys';
-import { PostStoreRequest } from './types';
+import { CreateStoreRequest } from './types';
 import toast from 'react-hot-toast';
 
-/* 매장 생성 */
-const postStore = async (storeData: PostStoreRequest) => {
+const createStore = async (storeData: CreateStoreRequest) => {
   const response = await axios.post('/api/stores', storeData);
   return response.data;
 };
 
-export const usePostStore = () => {
+export const useCreateStoreMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (storeData: PostStoreRequest) => postStore(storeData),
+    mutationFn: (storeData: CreateStoreRequest) => createStore(storeData),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.stores });
       toast.success('Store created successfully');

@@ -15,10 +15,7 @@ const ModalActions = ({
       Cancel
     </button>
     <button
-      onClick={e => {
-        console.log('clicked');
-        onSubmit(e);
-      }}
+      onClick={onSubmit}
       className="body-14-500 rounded-4 bg-gray-900 px-16 py-8 text-white"
     >
       {mode === 'default' ? 'Confirm' : mode === 'add' ? 'Create' : 'Update'}

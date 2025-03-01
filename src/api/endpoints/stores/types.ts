@@ -1,11 +1,15 @@
-export type PostStoreRequest = {
+export type GetStoresResponse = {
+  stores: Array<Store>;
+};
+
+export type StoreRequest = {
   storeName: string;
   description: string;
 };
 
-export type GetStoresResponse = {
-  stores: Array<Store>;
-};
+export type CreateStoreRequest = StoreRequest;
+
+export type UpdateStoreRequest = StoreRequest;
 
 export type GetStoresStoreIdResponse = {
   storeId: number;

@@ -10,7 +10,7 @@ export const storeHandlers = [
     });
   }),
 
-  /* 매장 조회 */
+  /* 매장 목록 조회 */
   http.get('/api/stores', () => {
     return HttpResponse.json({
       stores: [
@@ -33,6 +33,16 @@ export const storeHandlers = [
             'Cozy neighborhood cafe serving specialty coffee and light bites',
         },
       ],
+    });
+  }),
+
+  /* 매장 수정 */
+  http.patch('/api/stores/:storeId', ({ params }) => {
+    return HttpResponse.json({
+      storeId: params.storeId,
+      storeName: 'Starbucks Reserve',
+      description:
+        'Premium coffee experience with rare and unique coffee beans',
     });
   }),
 

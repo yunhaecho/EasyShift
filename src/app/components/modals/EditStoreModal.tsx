@@ -1,32 +1,35 @@
 import { DialogTitle } from '@headlessui/react';
 import { Dialog } from '@headlessui/react';
 import ModalActions from './ModalActions';
-import { PostStoreRequest } from '@/api/endpoints/stores/types';
 import { useState } from 'react';
+import { useUpdateStoreMutation } from '@/api/endpoints/stores/useUpdateStoreMutation';
+import { Store } from '@/api/endpoints/stores/types';
 
-const ManageStoreModal = ({
+const EditStoreModal = ({
   isOpen,
   onClose,
-  mode,
-  mutate,
+  storeData,
 }: {
   isOpen: boolean;
   onClose: () => void;
-  mode: 'add' | 'edit';
-  mutate: (storeData: PostStoreRequest) => void;
+  storeData: Store;
 }) => {
-  const [storeName, setStoreName] = useState('');
-  const [storeDescription, setStoreDescription] = useState('');
+  const [storeName, setStoreName] = useState(storeData.storeName);
+  const [storeDescription, setStoreDescription] = useState(
+    storeData.description,
+  );
+  const { mutate: updateStore } = useUpdateStoreMutation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    mutate({
-      storeName,
-      description: storeDescription,
+    updateStore({
+      storeId: storeData.storeId,
+      storeData: {
+        storeName: storeName,
+        description: storeDescription,
+      },
     });
     onClose();
-    setStoreName('');
-    setStoreDescription('');
   };
 
   return (
@@ -38,7 +41,7 @@ const ManageStoreModal = ({
       <div className="fixed inset-0 flex items-center justify-center p-4">
         <div className="max-h-[80%] w-full max-w-[30%] overflow-y-auto rounded-8 bg-white">
           <DialogTitle className="head-20-600 border-b border-gray-300 px-24 py-16 text-gray-900">
-            {mode === 'add' ? 'Add Store' : 'Edit Store'}
+            Edit Store
           </DialogTitle>
 
           {/* ModalContent */}
@@ -83,9 +86,9 @@ const ManageStoreModal = ({
           </form>
           <footer>
             <ModalActions
-              mode={mode}
+              mode="edit"
               onClose={onClose}
-              onSubmit={e => handleSubmit(e)}
+              onSubmit={handleSubmit}
             />
           </footer>
         </div>
@@ -94,4 +97,4 @@ const ManageStoreModal = ({
   );
 };
 
-export default ManageStoreModal;
+export default EditStoreModal;

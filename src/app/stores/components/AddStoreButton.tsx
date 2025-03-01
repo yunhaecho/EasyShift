@@ -1,14 +1,12 @@
 'use client';
 
-import { usePostStore } from '@/api/endpoints/stores/usePostStore';
-import ManageStoreModal from '@/app/components/modals/ManageStoreModal';
+import AddStoreModal from '@/app/components/modals/AddStoreModal';
 import useToggle from '@/app/hooks/useToggle';
 
 import PlusWhiteIcon from '@/assets/icons/plus-white.svg';
 
 const AddStoreButton = () => {
   const [isModalOpen, toggleModal] = useToggle(false);
-  const { mutate: postStore } = usePostStore();
 
   return (
     <>
@@ -21,12 +19,7 @@ const AddStoreButton = () => {
         <p className="body-16-400 text-white">Add Store</p>
       </button>
 
-      <ManageStoreModal
-        isOpen={isModalOpen}
-        onClose={toggleModal}
-        mode="add"
-        mutate={postStore}
-      />
+      <AddStoreModal isOpen={isModalOpen} onClose={toggleModal} />
     </>
   );
 };

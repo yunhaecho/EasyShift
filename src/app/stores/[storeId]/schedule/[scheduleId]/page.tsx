@@ -2,7 +2,6 @@
 
 import WorkerInfoModal from '@/app/workers/components/WorkerInfoModal';
 import useToggle from '@/app/hooks/useToggle';
-import { useState } from 'react';
 import WeeklyNavigator from './components/WeeklyNavigator';
 import { WeekDates } from '../../home/types';
 import useScheduleCalendar from './\bhooks/useScheduleCalendar';

@@ -31,7 +31,7 @@ const EditScheduleTemplateModal = ({
             addShift={addShift}
             deleteShift={deleteShift}
           />
-          <ModalActions onClose={onClose} mode="edit" />
+          <ModalActions onClose={onClose} mode="edit" onSubmit={() => {}} />
         </div>
       </div>
     </Dialog>
