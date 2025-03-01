@@ -102,10 +102,10 @@ const WorkersInformation = () => {
         onClose={toggleInviteLinkModal}
       />
 
-      <WorkerInfoModal
-        isOpen={isWorkerInfoModalOpen}
-        onClose={toggleWorkerInfoModal}
-      />
+        <WorkerInfoModal
+          isOpen={isWorkerInfoModalOpen}
+          onClose={toggleWorkerInfoModal}
+        />
     </section>
   );
 };
