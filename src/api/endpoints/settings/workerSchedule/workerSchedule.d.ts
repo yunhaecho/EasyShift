@@ -1,4 +1,4 @@
-export type WorkerSchedule = {
+type WorkerSchedule = {
   id: string;
   scheduleName: string;
   shifts: Array<{

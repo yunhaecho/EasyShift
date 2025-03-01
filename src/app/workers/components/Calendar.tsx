@@ -7,18 +7,19 @@ import { generateCalendar } from '@/utils/dateUtils';
 import { weekNames } from '@/constants/monthNames';
 import { monthNames } from '@/constants/weekNames';
 import classNames from 'classnames';
-import {useMemo} from 'react';
-import { WorkerScheduleResponse } from '@/api/endpoints/settings/workerSchedule/workerSchedule';
+import {useContext, useMemo} from 'react';
+import { DialogContext } from '@/app/workers/components/WorkerInfoModal.context'
 
-export default function Calendar({data} : {data : WorkerScheduleResponse} ) {
+export default function Calendar() {
   const { currentYear, currentMonth, goToPrevOrNextMonth } = useMonthlyCalendar();
-  
+  const value = useContext(DialogContext);
+
   // 캘린더에 표시
   const daysInCalendar = generateCalendar(new Date(currentYear, currentMonth));  
   
   // workerSchedule: 현재 월에 해당하는 shift들을 날짜와 색상 정보와 함께 배열로 만들기
   const workerSchedule = useMemo(() => {
-     return data?.schedules.flatMap(scheduleDetail => 
+     return value.schedules.flatMap(scheduleDetail => 
        scheduleDetail.shifts
          .filter(
            shiftDetail => new Date(shiftDetail.shiftDate).getMonth() === currentMonth,
@@ -34,7 +35,7 @@ export default function Calendar({data} : {data : WorkerScheduleResponse} ) {
            : '',
          }))
        );
-       }, [currentMonth, data]);
+       }, [currentMonth, value]);
 
   
   const clickPrev = () => goToPrevOrNextMonth(-1);
