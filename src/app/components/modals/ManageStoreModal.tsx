@@ -1,16 +1,34 @@
 import { DialogTitle } from '@headlessui/react';
 import { Dialog } from '@headlessui/react';
 import ModalActions from './ModalActions';
+import { PostStoreRequest } from '@/api/endpoints/stores/types';
+import { useState } from 'react';
 
 const ManageStoreModal = ({
   isOpen,
   onClose,
   mode,
+  mutate,
 }: {
   isOpen: boolean;
   onClose: () => void;
   mode: 'add' | 'edit';
+  mutate: (storeData: PostStoreRequest) => void;
 }) => {
+  const [storeName, setStoreName] = useState('');
+  const [storeDescription, setStoreDescription] = useState('');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    mutate({
+      storeName,
+      description: storeDescription,
+    });
+    onClose();
+    setStoreName('');
+    setStoreDescription('');
+  };
+
   return (
     <Dialog open={isOpen} onClose={onClose} className="relative z-50">
       {/* Overlay */}
@@ -38,6 +56,8 @@ const ManageStoreModal = ({
                   id="store-name"
                   type="text"
                   placeholder="Enter store name"
+                  value={storeName}
+                  onChange={e => setStoreName(e.target.value)}
                   className="body-16-400 border border-gray-400 px-12 py-9 text-gray-900 focus:outline-none"
                   aria-labelledby="store-name"
                 />
@@ -53,6 +73,8 @@ const ManageStoreModal = ({
                   id="store-description"
                   type="text"
                   placeholder="Enter store description"
+                  value={storeDescription}
+                  onChange={e => setStoreDescription(e.target.value)}
                   className="body-16-400 border border-gray-400 px-12 py-9 text-gray-900 focus:outline-none"
                   aria-labelledby="store-description"
                 />
@@ -60,7 +82,11 @@ const ManageStoreModal = ({
             </fieldset>
           </form>
           <footer>
-            <ModalActions mode={mode} onClose={onClose} />
+            <ModalActions
+              mode={mode}
+              onClose={onClose}
+              onSubmit={e => handleSubmit(e)}
+            />
           </footer>
         </div>
       </div>

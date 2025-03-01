@@ -4,7 +4,7 @@ const WorkerBlock = ({
 }: {
   toggleWorkerInfoModal: () => void;
   shift: {
-    assignedShiftId: number;
+    shiftId: number;
     userId: number;
     userName: string;
   };

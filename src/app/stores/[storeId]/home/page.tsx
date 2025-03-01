@@ -1,49 +1,38 @@
 'use client';
 
-import { useState } from 'react';
 import WeeklyCalendar from './components/WeeklyCalendar';
 import WeeklyNavigator from './components/WeeklyNavigator';
 import useWeeklyCalendar from './hooks/useWeeklyCalendar';
 import { WeekDates } from './types';
-import { useFetchHome } from '@/api/endpoints/stores/useFetchHome';
 import WorkerInfoModal from '@/app/workers/components/WorkerInfoModal';
 import useToggle from '@/app/hooks/useToggle';
+import HomePageProvider from './components/HomePageProvider';
+import { Suspense } from 'react';
 
 const HomePage = () => {
-  const [selectedScheduleId, setSelectedScheduleId] = useState<string>();
   const [isWorkerInfoModalOpen, toggleWorkerInfoModal] = useToggle();
   const { currentWeekDates, setCurrentDate, goToNextWeek, goToPreviousWeek } =
     useWeeklyCalendar();
 
-  const { data: homeData, isLoading } = useFetchHome({
-    storeId: '1',
-    selectedScheduleId,
-  });
-
-  if (isLoading || !homeData) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <main className="flex w-full flex-col gap-14 px-32 py-14">
-      <WeeklyNavigator
-        homeData={homeData}
-        setSelectedScheduleId={setSelectedScheduleId}
-        currentWeekDates={currentWeekDates as WeekDates}
-        setCurrentDate={setCurrentDate}
-        goToNextWeek={goToNextWeek}
-        goToPreviousWeek={goToPreviousWeek}
-      />
+      <Suspense fallback={<div>Loading...</div>}>
+        <HomePageProvider storeId="1">
+          <WeeklyNavigator
+            currentWeekDates={currentWeekDates as WeekDates}
+            setCurrentDate={setCurrentDate}
+            goToNextWeek={goToNextWeek}
+            goToPreviousWeek={goToPreviousWeek}
+          />
 
-      <WeeklyCalendar
-        currentWeekDates={currentWeekDates}
-        shifts={homeData.selectedSchedule.shifts}
-      />
+          <WeeklyCalendar currentWeekDates={currentWeekDates} />
 
-      <WorkerInfoModal
-        isOpen={isWorkerInfoModalOpen}
-        onClose={toggleWorkerInfoModal}
-      />
+          <WorkerInfoModal
+            isOpen={isWorkerInfoModalOpen}
+            onClose={toggleWorkerInfoModal}
+          />
+        </HomePageProvider>
+      </Suspense>
     </main>
   );
 };

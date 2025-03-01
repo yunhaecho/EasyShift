@@ -7,34 +7,34 @@ export type GetStoresResponse = {
   stores: Array<Store>;
 };
 
-export type Store = {
+export type GetStoresStoreIdResponse = {
   storeId: number;
-  storeName: string;
-  description: string;
-};
-
-export interface FetchHomeResponse {
-  storeId: number;
-  schedules: Array<{
-    scheduleId: number;
-    scheduleName: string;
+  scheduleTemplates: Array<{
+    scheduleTemplateId: number;
+    scheduleTemplateName: string;
   }>;
-  selectedSchedule: {
-    scheduleId: number;
-    scheduleName: string;
+  selectedScheduleTemplate: {
+    scheduleTemplateId: number;
+    scheduleTemplateName: string;
     shifts: Array<{
-      shiftId: number;
-      shiftName: string;
+      shiftTemplateId: number;
+      shiftTemplateName: string;
       startTime: string;
       endTime: string;
       dates: Array<{
         date: string;
         assignedShifts: Array<{
-          assignedShiftId: number;
+          shiftId: number;
           userId: number;
           userName: string;
         }>;
       }>;
     }>;
   };
-}
+};
+
+export type Store = {
+  storeId: number;
+  storeName: string;
+  description: string;
+};

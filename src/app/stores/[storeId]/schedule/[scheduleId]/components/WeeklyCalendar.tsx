@@ -2,7 +2,6 @@ import WorkerInfoModal from '@/app/workers/components/WorkerInfoModal';
 import { WeekDate } from '@/app/stores/[storeId]/home/types';
 
 import useToggle from '@/app/hooks/useToggle';
-import { FetchHomeResponse } from '@/api/endpoints/stores/types';
 import { useSearchParams } from 'next/navigation';
 import WorkerBlock from './WorkerBlock';
 
@@ -10,10 +9,8 @@ const SHIFT_COLORS = ['#EEF2FF', '#F0FDF4', '#FFF1E7'];
 
 const WeeklyCalendar = ({
   currentWeekDates,
-  shifts,
 }: {
   currentWeekDates: WeekDate[];
-  shifts: FetchHomeResponse['selectedSchedule']['shifts'];
 }) => {
   const [isWorkerInfoModalOpen, toggleWorkerInfoModal] = useToggle();
 

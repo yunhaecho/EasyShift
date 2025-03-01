@@ -36,27 +36,27 @@ export const storeHandlers = [
     });
   }),
 
-  /* 매장 스케쥴 조회 */
-  http.get('/api/stores', () => {
+  /* 매장 Home 조회 */
+  http.get('/api/stores/:storeId', ({ params }) => {
     return HttpResponse.json({
-      storeId: 1,
-      schedules: [
+      storeId: params.storeId,
+      scheduleTemplates: [
         {
-          scheduleId: 101,
-          scheduleName: 'Barista',
+          scheduleTemplateId: 101,
+          scheduleTemplateName: 'Barista',
         },
         {
-          scheduleId: 102,
-          scheduleName: 'Bakery',
+          scheduleTemplateId: 102,
+          scheduleTemplateName: 'Bakery',
         },
       ],
-      selectedSchedule: {
-        scheduleId: 101,
-        scheduleName: 'Barista',
+      selectedScheduleTemplate: {
+        scheduleTemplateId: 101,
+        scheduleTemplateName: 'Barista',
         shifts: [
           {
-            shiftId: 201,
-            shiftName: 'Open',
+            shiftTemplateId: 201,
+            shiftTemplateName: 'Open',
             startTime: '09:00',
             endTime: '18:00',
             dates: [
@@ -64,12 +64,12 @@ export const storeHandlers = [
                 date: '2025-02-27',
                 assignedShifts: [
                   {
-                    assignedShiftId: 301,
+                    shiftId: 301,
                     userId: 401,
                     userName: '양소연',
                   },
                   {
-                    assignedShiftId: 302,
+                    shiftId: 302,
                     userId: 402,
                     userName: '김찬호',
                   },
@@ -79,12 +79,12 @@ export const storeHandlers = [
                 date: '2025-02-28',
                 assignedShifts: [
                   {
-                    assignedShiftId: 303,
+                    shiftId: 303,
                     userId: 403,
                     userName: '양소연',
                   },
                   {
-                    assignedShiftId: 304,
+                    shiftId: 304,
                     userId: 404,
                     userName: '김찬호',
                   },
@@ -93,8 +93,8 @@ export const storeHandlers = [
             ],
           },
           {
-            shiftId: 202,
-            shiftName: 'Middle',
+            shiftTemplateId: 202,
+            shiftTemplateName: 'Middle',
             startTime: '13:00',
             endTime: '17:00',
             dates: [
@@ -102,12 +102,12 @@ export const storeHandlers = [
                 date: '2025-02-27',
                 assignedShifts: [
                   {
-                    assignedShiftId: 305,
+                    shiftId: 305,
                     userId: 405,
                     userName: '양소연',
                   },
                   {
-                    assignedShiftId: 306,
+                    shiftId: 306,
                     userId: 406,
                     userName: '김찬호',
                   },
@@ -116,8 +116,8 @@ export const storeHandlers = [
             ],
           },
           {
-            shiftId: 203,
-            shiftName: 'Close',
+            shiftTemplateId: 203,
+            shiftTemplateName: 'Close',
             startTime: '17:00',
             endTime: '23:00',
             dates: [
@@ -125,7 +125,7 @@ export const storeHandlers = [
                 date: '2025-02-28',
                 assignedShifts: [
                   {
-                    assignedShiftId: 307,
+                    shiftId: 307,
                     userId: 407,
                     userName: '양소연',
                   },
