@@ -1,3 +1,18 @@
+export type PostStoreRequest = {
+  storeName: string;
+  description: string;
+};
+
+export type GetStoresResponse = {
+  stores: Array<Store>;
+};
+
+export type Store = {
+  storeId: number;
+  storeName: string;
+  description: string;
+};
+
 export interface FetchHomeResponse {
   storeId: number;
   schedules: Array<{

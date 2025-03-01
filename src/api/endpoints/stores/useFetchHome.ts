@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { queryKeys } from './stores.keys';
-import { FetchHomeResponse } from './stores';
+import { FetchHomeResponse } from './types';
 
 const fetchHome = async ({ queryKey }: { queryKey: readonly unknown[] }) => {
   const [, storeId, selectedScheduleId] = queryKey as [

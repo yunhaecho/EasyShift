@@ -1,5 +1,5 @@
 import { WeekDates } from '../types';
-import { FetchHomeResponse } from '@/api/endpoints/stores/stores';
+import { FetchHomeResponse } from '@/api/endpoints/stores/types';
 import SelectedStoreDropdown from './SelectedStoreDropdown';
 
 import ChevronLeftIcon from '@/assets/icons/chevron-left.svg';

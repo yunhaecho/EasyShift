@@ -2,7 +2,7 @@ import WorkerInfoModal from '@/app/workers/components/WorkerInfoModal';
 import { WeekDate } from '@/app/stores/[storeId]/home/types';
 
 import useToggle from '@/app/hooks/useToggle';
-import { FetchHomeResponse } from '@/api/endpoints/stores/stores';
+import { FetchHomeResponse } from '@/api/endpoints/stores/types';
 import { useSearchParams } from 'next/navigation';
 import WorkerBlock from './WorkerBlock';
 

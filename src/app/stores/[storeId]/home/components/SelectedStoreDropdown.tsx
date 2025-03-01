@@ -1,5 +1,5 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
-import { FetchHomeResponse } from '@/api/endpoints/stores/stores';
+import { FetchHomeResponse } from '@/api/endpoints/stores/types';
 
 import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
 

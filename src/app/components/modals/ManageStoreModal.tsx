@@ -25,7 +25,7 @@ const ManageStoreModal = ({
 
           {/* ModalContent */}
           <form className="flex flex-col gap-24 px-24 py-16">
-            <fieldset>
+            <fieldset className="flex flex-col gap-16">
               <legend className="sr-only">Store Information</legend>
               <div className="flex flex-col gap-4">
                 <label
@@ -42,10 +42,26 @@ const ManageStoreModal = ({
                   aria-labelledby="store-name"
                 />
               </div>
+              <div className="flex flex-col gap-4">
+                <label
+                  htmlFor="store-description"
+                  className="body-16-500 text-gray-900"
+                >
+                  Description
+                </label>
+                <input
+                  id="store-description"
+                  type="text"
+                  placeholder="Enter store description"
+                  className="body-16-400 border border-gray-400 px-12 py-9 text-gray-900 focus:outline-none"
+                  aria-labelledby="store-description"
+                />
+              </div>
             </fieldset>
-
-            <ModalActions mode={mode} onClose={onClose} />
           </form>
+          <footer>
+            <ModalActions mode={mode} onClose={onClose} />
+          </footer>
         </div>
       </div>
     </Dialog>

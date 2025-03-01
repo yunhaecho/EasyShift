@@ -2,7 +2,7 @@ import WorkerInfoModal from '@/app/workers/components/WorkerInfoModal';
 import { WeekDate } from '@/app/stores/[storeId]/home/types';
 import WorkerBlock from './WorkerBlock';
 import useToggle from '@/app/hooks/useToggle';
-import { FetchHomeResponse } from '@/api/endpoints/stores/stores';
+import { FetchHomeResponse } from '@/api/endpoints/stores/types';
 
 const SHIFT_COLORS = ['#EEF2FF', '#F0FDF4', '#FFF1E7'];
 
