@@ -17,7 +17,7 @@ const HomePage = () => {
   return (
     <main className="flex w-full flex-col gap-14 px-32 py-14">
       <Suspense fallback={<div>Loading...</div>}>
-        <HomePageProvider storeId="1">
+        <HomePageProvider storeId={1}>
           <WeeklyNavigator
             currentWeekDates={currentWeekDates as WeekDates}
             setCurrentDate={setCurrentDate}

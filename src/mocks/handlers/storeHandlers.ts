@@ -46,6 +46,13 @@ export const storeHandlers = [
     });
   }),
 
+  /* 매장 삭제 */
+  http.delete('/api/stores/:storeId', ({ params }) => {
+    return HttpResponse.json({
+      storeId: params.storeId,
+    });
+  }),
+
   /* 매장 Home 조회 */
   http.get('/api/stores/:storeId', ({ params }) => {
     return HttpResponse.json({
@@ -207,7 +214,7 @@ export const storeHandlers = [
       users: [
         {
           userId: 1,
-          name: '고주형',
+          name: 'Ko Juhyong',
           email: 'dury.ko@gmail.com',
           phoneNumber: '010-1234-5678',
           avatarUrl: 'https://example.com/avatar5.png',
@@ -215,7 +222,7 @@ export const storeHandlers = [
         },
         {
           userId: 2,
-          name: '김찬호',
+          name: 'Kim Chanho',
           email: 'nh0903@pusan.ac.kr',
           phoneNumber: '010-9876-5432',
           avatarUrl: 'https://example.com/avatar6.png',
@@ -223,7 +230,7 @@ export const storeHandlers = [
         },
         {
           userId: 3,
-          name: '손태인',
+          name: 'Son Taein',
           email: 'handtaein@gmail.com',
           phoneNumber: '010-9876-5432',
           avatarUrl: 'https://example.com/avatar6.png',
@@ -231,7 +238,7 @@ export const storeHandlers = [
         },
         {
           userId: 4,
-          name: '양소연',
+          name: 'Yang Soyeon',
           email: 'jayy_19@ewhain.net',
           phoneNumber: '010-9876-5432',
           avatarUrl: 'https://example.com/avatar6.png',
@@ -239,7 +246,7 @@ export const storeHandlers = [
         },
         {
           userId: 5,
-          name: '이영재',
+          name: 'Lee Youngjae',
           email: 'zerojae175@gmail.com',
           phoneNumber: '010-9876-5432',
           avatarUrl: 'https://example.com/avatar6.png',
@@ -247,7 +254,7 @@ export const storeHandlers = [
         },
         {
           userId: 6,
-          name: '조윤해',
+          name: 'Cho Yunhae',
           email: 'susu12356@gmail.com',
           phoneNumber: '010-9876-5432',
           avatarUrl: 'https://example.com/avatar6.png',
@@ -255,7 +262,7 @@ export const storeHandlers = [
         },
         {
           userId: 7,
-          name: '조장호',
+          name: 'Jo Jangho',
           email: '26dev@naver.com',
           phoneNumber: '010-9876-5432',
           avatarUrl: 'https://example.com/avatar6.png',
