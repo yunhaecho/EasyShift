@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React, { ReactNode } from 'react';
 import SampleProfile from '../../../assets/sample.jpg';
-import CalendarIcon from '@/assets/icons/calendar.svg';
+import CalendarBlackIcon from '@/assets/icons/calendar-black.svg';
 import PhoneIcon from '@/assets/icons/phone.svg';
 import EmailIcon from '@/assets/icons/email.svg';
 
@@ -42,7 +42,7 @@ function ProfileCard() {
         </div>
         <div className="head-24-600 mb-3 mt-8 w-full">Sarah Johnson</div>
         <div className="body-16-400 mb-35 flex w-full flex-row items-center justify-center text-gray-600">
-          <CalendarIcon className="mr-8" />
+          <CalendarBlackIcon className="mr-8" />
           <span className="text-gray-600">started March 15,2023</span>
         </div>
       </div>

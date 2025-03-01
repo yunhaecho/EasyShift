@@ -90,7 +90,6 @@ const WeeklyCalendar = ({
                       {assignedShifts?.map(shift => (
                         <WorkerBlock
                           key={shift.assignedShiftId}
-                          toggleWorkerInfoModal={toggleWorkerInfoModal}
                           shift={shift}
                         />
                       ))}

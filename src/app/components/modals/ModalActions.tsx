@@ -1,8 +1,8 @@
 const ModalActions = ({
-  mode,
+  mode = 'default',
   onClose,
 }: {
-  mode: 'add' | 'edit';
+  mode: 'default' | 'add' | 'edit';
   onClose: () => void;
 }) => (
   <div className="flex justify-end gap-12 border-t border-gray-300 p-16">
@@ -16,7 +16,7 @@ const ModalActions = ({
       onClick={onClose}
       className="body-14-500 rounded-4 bg-gray-900 px-16 py-8 text-white"
     >
-      {mode === 'add' ? 'Create' : 'Update'}
+      {mode === 'default' ? 'Confirm' : mode === 'add' ? 'Create' : 'Update'}
     </button>
   </div>
 );

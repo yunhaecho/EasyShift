@@ -10,6 +10,7 @@ import useScheduleCalendar from './\bhooks/useScheduleCalendar';
 import WeeklyCalendar from './components/WeeklyCalendar';
 import { useSearchParams } from 'next/navigation';
 import { parse } from 'date-fns/parse';
+import WorkersListSidebar from './components/WorkersListSidebar';
 
 const ScheduleEditPage = () => {
   const [selectedScheduleId] = useState<string>();
@@ -47,6 +48,7 @@ const ScheduleEditPage = () => {
           shifts={homeData.selectedSchedule.shifts}
         />
       </main>
+      <WorkersListSidebar />
 
       <WorkerInfoModal
         isOpen={isWorkerInfoModalOpen}
