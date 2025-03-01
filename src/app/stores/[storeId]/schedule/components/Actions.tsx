@@ -1,15 +1,35 @@
 import React from 'react';
+import { Button } from '@headlessui/react';
+import { useParams } from 'next/navigation';
+import Link from 'next/link';
+
 import EditBlackIcon from '@/assets/icons/edit-black.svg';
 import DeleteRedIcon from '@/assets/icons/delete-red.svg';
-import { Button } from '@headlessui/react';
 
-function Actions() {
+function Actions({
+  schedule,
+}: {
+  schedule: {
+    id: number;
+    scheduleName: string;
+    shiftDate: string;
+    status: string;
+    description: string;
+  };
+}) {
+  const params = useParams();
+  const storeId = params.storeId;
+
   return (
-    <div className="flex h-28 w-full flex-row items-center gap-12">
+    <div className="flex h-28 w-full flex-row items-center justify-center gap-12">
       <Button className="body-14-500 h-full w-auto rounded-4 bg-gray-900 px-11 text-white">
         Generate
       </Button>
-      <EditBlackIcon />
+      <Link
+        href={`/stores/${storeId}/schedule/${schedule.id}?date=${schedule.shiftDate}`}
+      >
+        <EditBlackIcon />
+      </Link>
       <DeleteRedIcon />
     </div>
   );

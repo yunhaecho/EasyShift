@@ -11,7 +11,7 @@ export const scheduleHandlers = [
         {
           id: 201,
           scheduleName: '새벽 근무',
-          shiftDate: '2024-12',
+          shiftDate: '2025-02',
           status: 'pending',
           description: '새벽 근무 일정입니다.',
         },
