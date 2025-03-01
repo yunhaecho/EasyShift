@@ -11,7 +11,7 @@ const HomePageProvider = ({
   storeId,
 }: {
   children: React.ReactNode;
-  storeId: string;
+  storeId: number;
 }) => {
   const { data } = useSuspenseQuery<GetStoresStoreIdResponse>(
     storesQueryOptions.getStoresStoreId(storeId),

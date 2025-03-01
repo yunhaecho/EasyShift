@@ -60,13 +60,12 @@ const WorkersInformation = () => {
         </thead>
         <tbody>
           {filteredWorkers.map(worker => (
-            <tr
-              key={worker.id}
-              className="border-t border-gray-400"
-              onClick={toggleWorkerInfoModal}
-            >
-              <td className="flex items-center gap-16 px-24 py-12">
-                <div className="h-40 w-40 rounded-full bg-gray-300" />
+            <tr key={worker.userId} className="border-t border-gray-400">
+              <td
+                className="flex cursor-pointer items-center gap-16 px-24 py-12"
+                onClick={toggleWorkerInfoModal}
+              >
+                <div className="h-40 w-40 rounded-full border border-gray-300" />
                 <span className="body-14-500 text-gray-800">{worker.name}</span>
               </td>
               <td className="body-14-400 px-24 py-12 text-gray-600">
@@ -77,7 +76,7 @@ const WorkersInformation = () => {
               </td>
               <td className="px-24 py-12">
                 <button
-                  onClick={() => handleDeleteWorker(worker.id)}
+                  onClick={() => handleDeleteWorker(worker.userId)}
                   className="pl-16 hover:bg-gray-100"
                   aria-label={`Delete ${worker.name}`}
                 >
@@ -96,7 +95,6 @@ const WorkersInformation = () => {
         </section>
       )}
 
-      {/* Invite Link Modal */}
       <InviteLinkModal
         isOpen={isInviteLinkModalOpen}
         onClose={toggleInviteLinkModal}

@@ -37,8 +37,44 @@ export type GetStoresStoreIdResponse = {
   };
 };
 
+export type GetStoresStoreIdScheduleTemplatesResponse = {
+  scheduleTemplates: Array<{
+    scheduleTemplateId: number;
+    scheduleTemplateName: string;
+    shiftTemplates: Array<ShiftTemplate>;
+  }>;
+};
+
+export type GetStoresStoreIdUsersResponse = {
+  storeId: number;
+  storeName: string;
+  description: string;
+  users: Array<User>;
+};
+
 export type Store = {
   storeId: number;
   storeName: string;
   description: string;
+};
+
+export type ScheduleTemplate = {
+  scheduleTemplateId: number;
+  scheduleTemplateName: string;
+  shiftTemplates: Array<ShiftTemplate>;
+};
+
+export type ShiftTemplate = {
+  shiftTemplateId: number;
+  shiftTemplateName: string;
+  startTime: string;
+  endTime: string;
+};
+
+export type User = {
+  userId: number;
+  name: string;
+  email: string;
+  phoneNumber: string;
+  avatarUrl: string;
 };

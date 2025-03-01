@@ -147,4 +147,121 @@ export const storeHandlers = [
       },
     });
   }),
+
+  /* 매장 스케줄 템플릿 조회 */
+  http.get('/api/stores/:storeId/schedule-templates', () => {
+    return HttpResponse.json({
+      scheduleTemplates: [
+        {
+          scheduleTemplateId: 1,
+          scheduleTemplateName: 'Barista',
+          shiftTemplates: [
+            {
+              shiftTemplateId: 10,
+              shiftTemplateName: 'Open',
+              startTime: '09:00',
+              endTime: '18:00',
+            },
+            {
+              shiftTemplateId: 11,
+              shiftTemplateName: 'Middle',
+              startTime: '13:00',
+              endTime: '17:00',
+            },
+            {
+              shiftTemplateId: 13,
+              shiftTemplateName: 'Close',
+              startTime: '17:00',
+              endTime: '23:00',
+            },
+          ],
+        },
+        {
+          scheduleTemplateId: 2,
+          scheduleTemplateName: 'Bakery',
+          shiftTemplates: [
+            {
+              shiftTemplateId: 12,
+              shiftTemplateName: 'Open',
+              startTime: '09:00',
+              endTime: '18:00',
+            },
+            {
+              shiftTemplateId: 13,
+              shiftTemplateName: 'Close',
+              startTime: '17:00',
+              endTime: '23:00',
+            },
+          ],
+        },
+      ],
+    });
+  }),
+
+  /* 매장 사용자 목록 조회 */
+  http.get('/api/stores/:storeId/users', () => {
+    return HttpResponse.json({
+      storeId: 1,
+      storeName: 'BurnToBurn Coffee',
+      description: 'To Infinity and Beyond! 🚀',
+      users: [
+        {
+          userId: 1,
+          name: '고주형',
+          email: 'dury.ko@gmail.com',
+          phoneNumber: '010-1234-5678',
+          avatarUrl: 'https://example.com/avatar5.png',
+          role: 'worker',
+        },
+        {
+          userId: 2,
+          name: '김찬호',
+          email: 'nh0903@pusan.ac.kr',
+          phoneNumber: '010-9876-5432',
+          avatarUrl: 'https://example.com/avatar6.png',
+          role: 'worker',
+        },
+        {
+          userId: 3,
+          name: '손태인',
+          email: 'handtaein@gmail.com',
+          phoneNumber: '010-9876-5432',
+          avatarUrl: 'https://example.com/avatar6.png',
+          role: 'worker',
+        },
+        {
+          userId: 4,
+          name: '양소연',
+          email: 'jayy_19@ewhain.net',
+          phoneNumber: '010-9876-5432',
+          avatarUrl: 'https://example.com/avatar6.png',
+          role: 'worker',
+        },
+        {
+          userId: 5,
+          name: '이영재',
+          email: 'zerojae175@gmail.com',
+          phoneNumber: '010-9876-5432',
+          avatarUrl: 'https://example.com/avatar6.png',
+          role: 'worker',
+        },
+        {
+          userId: 6,
+          name: '조윤해',
+          email: 'susu12356@gmail.com',
+          phoneNumber: '010-9876-5432',
+          avatarUrl: 'https://example.com/avatar6.png',
+          role: 'worker',
+        },
+        {
+          userId: 7,
+          name: '조장호',
+          email: '26dev@naver.com',
+          phoneNumber: '010-9876-5432',
+          avatarUrl: 'https://example.com/avatar6.png',
+          role: 'worker',
+        },
+      ],
+    });
+  }),
 ];
