@@ -18,8 +18,6 @@ const WeeklyCalendar = ({
   const [isWorkerInfoModalOpen, toggleWorkerInfoModal] = useToggle();
   const { scheduleData } = useContext(ScheduleDetailPageContext);
 
-  console.log(scheduleData);
-
   const searchParams = useSearchParams();
   const selectedMonth = searchParams.get('date')?.split('-')[1];
 
@@ -74,7 +72,6 @@ const WeeklyCalendar = ({
                     date.date ===
                     currentWeekDate.fullDate.toISOString().split('T')[0],
                 );
-                console.log('assignedShifts', assignedShifts);
 
                 return (
                   <td
