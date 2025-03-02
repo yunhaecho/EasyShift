@@ -20,20 +20,7 @@ export type GetStoresStoreIdResponse = {
   selectedScheduleTemplate: {
     scheduleTemplateId: number;
     scheduleTemplateName: string;
-    shifts: Array<{
-      shiftTemplateId: number;
-      shiftTemplateName: string;
-      startTime: string;
-      endTime: string;
-      dates: Array<{
-        date: string;
-        assignedShifts: Array<{
-          shiftId: number;
-          userId: number;
-          userName: string;
-        }>;
-      }>;
-    }>;
+    shifts: Array<ShiftTemplateResponse>;
   };
 };
 
@@ -59,6 +46,21 @@ export type GetStoresStoreIdUsersResponse = {
   storeName: string;
   description: string;
   users: Array<User>;
+};
+
+export type ShiftTemplateResponse = {
+  shiftTemplateId: number;
+  shiftTemplateName: string;
+  startTime: string;
+  endTime: string;
+  dates: Array<{
+    date: string;
+    assignedShifts: Array<{
+      shiftId: number;
+      userId: number;
+      userName: string;
+    }>;
+  }>;
 };
 
 export type Store = {

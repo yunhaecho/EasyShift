@@ -1,10 +1,10 @@
 import { useState, useContext } from 'react';
-import { SettingsPageContext } from '@/app/context/SettingsPageContext';
 import { User } from '@/api/endpoints/stores/types';
+import { ScheduleDetailPageContext } from '@/app/context/ScheduleDetailPageContext';
 
-const useManageWorkers = () => {
-  const { storeUserData } = useContext(SettingsPageContext);
-  const [workers, setWorkers] = useState<User[]>(storeUserData?.users || []);
+const useWorkerList = () => {
+  const { workerData } = useContext(ScheduleDetailPageContext);
+  const [workers, setWorkers] = useState<User[]>(workerData?.users || []);
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleDeleteWorker = (workerId: number) => {
@@ -26,4 +26,4 @@ const useManageWorkers = () => {
   };
 };
 
-export default useManageWorkers;
+export default useWorkerList;

@@ -7,7 +7,6 @@ import { useContext } from 'react';
 const SelectedScheduleTemplateDropdown = () => {
   const { data, setSelectedScheduleTemplateId } = useContext(HomePageContext);
   const { selectedScheduleTemplate, scheduleTemplates } = data || {};
-  console.log(data);
 
   return (
     <Menu>

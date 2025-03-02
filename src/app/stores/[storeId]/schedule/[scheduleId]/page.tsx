@@ -9,8 +9,9 @@ import WeeklyCalendar from './components/WeeklyCalendar';
 import { useSearchParams } from 'next/navigation';
 import { parse } from 'date-fns/parse';
 import WorkersListSidebar from './components/WorkersListSidebar';
+import ScheduleDetailPageProvider from './components/ScheduleDetailPageProvider';
 
-const ScheduleEditPage = () => {
+const ScheduleDetailPage = () => {
   const [isWorkerInfoModalOpen, toggleWorkerInfoModal] = useToggle();
 
   const searchParams = useSearchParams();
@@ -24,7 +25,7 @@ const ScheduleEditPage = () => {
     useScheduleCalendar(date);
 
   return (
-    <>
+    <ScheduleDetailPageProvider>
       <main className="flex w-full flex-col gap-14 px-32 py-14">
         <WeeklyNavigator
           currentWeekDates={currentWeekDates as WeekDates}
@@ -39,8 +40,8 @@ const ScheduleEditPage = () => {
         isOpen={isWorkerInfoModalOpen}
         onClose={toggleWorkerInfoModal}
       />
-    </>
+    </ScheduleDetailPageProvider>
   );
 };
 
-export default ScheduleEditPage;
+export default ScheduleDetailPage;

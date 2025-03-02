@@ -3,9 +3,12 @@ import { WeekDate } from '@/app/stores/[storeId]/home/types';
 
 import useToggle from '@/app/hooks/useToggle';
 import { useSearchParams } from 'next/navigation';
-// import WorkerBlock from './WorkerBlock';
+import { useContext } from 'react';
+import { ScheduleDetailPageContext } from '@/app/context/ScheduleDetailPageContext';
+import { ShiftTemplateResponse } from '@/api/endpoints/stores/types';
+import WorkerBlock from './WorkerBlock';
 
-// const SHIFT_COLORS = ['#EEF2FF', '#F0FDF4', '#FFF1E7'];
+const SHIFT_COLORS = ['#EEF2FF', '#F0FDF4', '#FFF1E7'];
 
 const WeeklyCalendar = ({
   currentWeekDates,
@@ -13,15 +16,18 @@ const WeeklyCalendar = ({
   currentWeekDates: WeekDate[];
 }) => {
   const [isWorkerInfoModalOpen, toggleWorkerInfoModal] = useToggle();
+  const { scheduleData } = useContext(ScheduleDetailPageContext);
 
   const searchParams = useSearchParams();
   const selectedMonth = searchParams.get('date')?.split('-')[1];
 
   // 임시 컬러 배열
-  // const getShiftColor = (shiftName: string) => {
-  //   const shiftIndex = shifts.findIndex(s => s.shiftName === shiftName);
-  //   return SHIFT_COLORS[shiftIndex % SHIFT_COLORS.length];
-  // };
+  const getShiftColor = (shiftName: string) => {
+    const shiftIndex = scheduleData?.shifts.findIndex(
+      (s: ShiftTemplateResponse) => s.shiftTemplateName === shiftName,
+    );
+    return SHIFT_COLORS[shiftIndex ?? 0 % SHIFT_COLORS.length];
+  };
 
   const isNotSelectedMonth = (date: WeekDate) => {
     return date?.fullDate.getMonth() + 1 !== Number(selectedMonth);
@@ -47,55 +53,57 @@ const WeeklyCalendar = ({
           </tr>
         </thead>
         <tbody>
-          {/* {shifts.map(shift => (
+          {scheduleData?.shifts.map(shift => (
             <tr
-              key={shift.shiftId}
+              key={shift.shiftTemplateId}
               className="border-t border-gray-400 align-top"
             >
               <td className="p-16">
                 <div className="body-14-500 text-gray-900">
-                  {shift.shiftName}
+                  {shift.shiftTemplateName}
                 </div>
                 <div className="body-14-400 text-gray-600">
                   {shift.startTime} - {shift.endTime}
                 </div>
               </td>
-              {currentWeekDates.map(date => {
-                const assignedShifts = shift.dates
-                  .filter(d => {
-                    const backendDate = new Date(d.date);
-                    backendDate.setHours(0, 0, 0, 0);
-
-                    const frontendDate = new Date(date?.fullDate ?? '');
-                    frontendDate.setHours(0, 0, 0, 0);
-
-                    return backendDate.getTime() === frontendDate.getTime();
-                  })
-                  .flatMap(d => d.assignedShifts);
+              {currentWeekDates.map(currentWeekDate => {
+                const assignedShifts = shift.dates.filter(
+                  date =>
+                    date.date ===
+                    currentWeekDate.fullDate.toISOString().split('T')[0],
+                );
 
                 return (
                   <td
-                    key={`${shift.shiftId}-${date?.fullDate?.getTime()}`}
+                    key={`${shift.shiftTemplateId}-${currentWeekDate?.fullDate?.getTime()}`}
                     style={{
-                      backgroundColor: isNotSelectedMonth(date)
+                      backgroundColor: isNotSelectedMonth(currentWeekDate)
                         ? '#F3F4F6'
-                        : getShiftColor(shift.shiftName),
+                        : getShiftColor(shift.shiftTemplateName),
                     }}
                     className="h-162 border-l border-gray-400 p-16 align-top"
                   >
                     <div className="flex flex-col gap-8">
-                      {assignedShifts?.map(shift => (
-                        <WorkerBlock
-                          key={shift.assignedShiftId}
-                          shift={shift}
-                        />
-                      ))}
+                      {assignedShifts.length > 0 &&
+                        assignedShifts[0]?.assignedShifts?.map(
+                          assignedShift => (
+                            <WorkerBlock
+                              key={`${assignedShift.userId}-${assignedShift.shiftId}`}
+                              assignedShift={assignedShift}
+                              targetDate={
+                                currentWeekDate.fullDate
+                                  .toISOString()
+                                  .split('T')[0]
+                              }
+                            />
+                          ),
+                        )}
                     </div>
                   </td>
                 );
               })}
             </tr>
-          ))} */}
+          ))}
         </tbody>
       </table>
       <WorkerInfoModal

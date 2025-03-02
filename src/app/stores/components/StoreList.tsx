@@ -2,7 +2,6 @@
 
 import { useContext, useState } from 'react';
 import { StoresPageContext } from '@/app/context/StoresPageContext';
-import useToggle from '@/app/hooks/useToggle';
 import Link from 'next/link';
 import { useDeleteStoreMutation } from '@/api/endpoints/stores/useDeleteStoreMutation';
 
@@ -15,7 +14,6 @@ import DeleteRedIcon from '@/assets/icons/delete-red.svg';
 import StoreBlackIcon from '@/assets/icons/store-black.svg';
 
 const StoreList = () => {
-  const [isConfirmationModalOpen, toggleConfirmationModal] = useToggle();
   const [storeToDelete, setStoreToDelete] = useState<Store | null>(null);
 
   const data = useContext(StoresPageContext);
@@ -28,13 +26,11 @@ const StoreList = () => {
     e.preventDefault();
     e.stopPropagation();
     setStoreToDelete(store);
-    toggleConfirmationModal();
   };
 
   const handleDeleteStore = () => {
     if (storeToDelete) {
       deleteStoreMutation.mutate({ storeId: storeToDelete.storeId });
-      toggleConfirmationModal();
       setStoreToDelete(null);
     }
   };
@@ -94,11 +90,8 @@ const StoreList = () => {
             ))}
           </section>
           <ConfirmationModal
-            isOpen={isConfirmationModalOpen}
-            onClose={() => {
-              toggleConfirmationModal();
-              setStoreToDelete(null);
-            }}
+            isOpen={storeToDelete !== null}
+            onClose={() => setStoreToDelete(null)}
             onConfirm={handleDeleteStore}
             title={`Are you sure you want to delete '${storeToDelete?.storeName}' store?`}
             description={`This action cannot be undone. All data associated with this store will be permanently deleted.`}

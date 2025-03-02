@@ -1,10 +1,10 @@
 import useToggle from '@/app/hooks/useToggle';
 import WorkerSearchBar from '../../../settings/components/WorkerSearchBar';
-import useManageWorkers from '../../../settings/hooks/useManageWorkers';
 import WorkerInfoModal from '@/app/workers/components/WorkerInfoModal';
+import useWorkerList from '../hooks/useWorkerList';
 
 const WorkersListSidebar = () => {
-  const { searchQuery, setSearchQuery, filteredWorkers } = useManageWorkers();
+  const { searchQuery, setSearchQuery, filteredWorkers } = useWorkerList();
   const [isWorkerInfoModalOpen, toggleWorkerInfoModal] = useToggle(false);
 
   return (
