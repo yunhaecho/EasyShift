@@ -47,9 +47,11 @@ export const storeHandlers = [
   }),
 
   /* 매장 삭제 */
-  http.delete('/api/stores/:storeId', ({ params }) => {
+  http.delete('/api/stores/:storeId', () => {
     return HttpResponse.json({
-      storeId: params.storeId,
+      success: true,
+      response: null,
+      error: null,
     });
   }),
 

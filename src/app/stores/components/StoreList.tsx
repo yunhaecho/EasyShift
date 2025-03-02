@@ -4,6 +4,7 @@ import { useContext, useState } from 'react';
 import { StoresPageContext } from '@/app/context/StoresPageContext';
 import useToggle from '@/app/hooks/useToggle';
 import Link from 'next/link';
+import { useDeleteStoreMutation } from '@/api/endpoints/stores/useDeleteStoreMutation';
 
 import AddStoreButton from './AddStoreButton';
 import EmptyStoreState from './EmptyStoreState';
@@ -12,11 +13,11 @@ import { Store } from '@/api/endpoints/stores/types';
 
 import DeleteRedIcon from '@/assets/icons/delete-red.svg';
 import StoreBlackIcon from '@/assets/icons/store-black.svg';
-import { useDeleteStoreMutation } from '@/api/endpoints/stores/useDeleteStoreMutation';
 
 const StoreList = () => {
   const [isConfirmationModalOpen, toggleConfirmationModal] = useToggle();
   const [storeToDelete, setStoreToDelete] = useState<Store | null>(null);
+
   const data = useContext(StoresPageContext);
   const deleteStoreMutation = useDeleteStoreMutation();
 
@@ -40,7 +41,7 @@ const StoreList = () => {
 
   return (
     <>
-      {data?.stores?.length !== 0 ? (
+      {data?.stores?.length === 0 ? (
         <EmptyStoreState />
       ) : (
         <>
