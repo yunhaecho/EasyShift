@@ -1,16 +1,34 @@
 'use client';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useMemo } from 'react';
 import { CreateScheduleTemplateRequest } from '@/api/endpoints/stores/types';
 
-const initialState: CreateScheduleTemplateRequest = {
+const getInitialState = (): CreateScheduleTemplateRequest => ({
   scheduleTemplateName: '',
   shiftTemplates: [{ shiftTemplateName: '', startTime: '', endTime: '' }],
-};
+});
 
 const useScheduleTemplate = () => {
   const [scheduleTemplate, setScheduleTemplate] =
-    useState<CreateScheduleTemplateRequest>(initialState);
+    useState<CreateScheduleTemplateRequest>(getInitialState);
+
+  const updateScheduleTemplate = useCallback(
+    (
+      updater: (
+        prev: CreateScheduleTemplateRequest,
+      ) => CreateScheduleTemplateRequest,
+    ) => {
+      setScheduleTemplate(updater);
+    },
+    [],
+  );
+
+  const setScheduleTemplateValue = useCallback(
+    (newTemplate: CreateScheduleTemplateRequest) => {
+      setScheduleTemplate(newTemplate);
+    },
+    [],
+  );
 
   const addShiftTemplate = useCallback(() => {
     setScheduleTemplate(prev => ({
@@ -34,16 +52,27 @@ const useScheduleTemplate = () => {
   }, []);
 
   const resetScheduleTemplate = useCallback(() => {
-    setScheduleTemplate(initialState);
+    setScheduleTemplate(getInitialState());
   }, []);
 
-  return {
-    scheduleTemplate,
-    setScheduleTemplate,
-    addShiftTemplate,
-    deleteShiftTemplate,
-    resetScheduleTemplate,
-  };
+  return useMemo(
+    () => ({
+      scheduleTemplate,
+      setScheduleTemplate: updateScheduleTemplate,
+      setScheduleTemplateValue,
+      addShiftTemplate,
+      deleteShiftTemplate,
+      resetScheduleTemplate,
+    }),
+    [
+      scheduleTemplate,
+      updateScheduleTemplate,
+      setScheduleTemplateValue,
+      addShiftTemplate,
+      deleteShiftTemplate,
+      resetScheduleTemplate,
+    ],
+  );
 };
 
 export default useScheduleTemplate;

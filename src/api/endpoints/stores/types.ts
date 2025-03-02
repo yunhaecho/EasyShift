@@ -74,7 +74,6 @@ export type ScheduleTemplate = {
 };
 
 export type ShiftTemplate = {
-  shiftTemplateId: number;
   shiftTemplateName: string;
   startTime: string;
   endTime: string;
