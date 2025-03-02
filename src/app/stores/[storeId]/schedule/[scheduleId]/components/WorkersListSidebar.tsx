@@ -26,7 +26,7 @@ const WorkersListSidebar = () => {
             <ul className="flex flex-col" role="list">
               {filteredWorkers.map(worker => (
                 <li
-                  key={worker.id}
+                  key={worker.userId}
                   className="flex cursor-pointer items-center gap-16 px-16 py-12 hover:bg-gray-100"
                   role="listitem"
                   onClick={toggleWorkerInfoModal}

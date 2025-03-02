@@ -1,8 +1,10 @@
 'use client';
 
 import StoreInformation from './components/StoreInformation';
-import ScheduleInformation from './components/ScheduleInformation';
+import ScheduleTemplateInformation from './components/ScheduleTemplateInformation';
 import WorkersInformation from './components/WorkersInformation';
+import SettingsPageProvider from './components/SettingsPageProvider';
+import { Suspense } from 'react';
 
 const SettingsPage = () => {
   return (
@@ -10,9 +12,13 @@ const SettingsPage = () => {
       <h1 id="settings-page-title" className="sr-only">
         Store Settings
       </h1>
-      <StoreInformation />
-      <ScheduleInformation />
-      <WorkersInformation />
+      <Suspense fallback={<div>Loading...</div>}>
+        <SettingsPageProvider>
+          <StoreInformation />
+          <ScheduleTemplateInformation />
+          <WorkersInformation />
+        </SettingsPageProvider>
+      </Suspense>
     </main>
   );
 };

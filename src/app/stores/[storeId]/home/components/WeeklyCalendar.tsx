@@ -2,23 +2,28 @@ import WorkerInfoModal from '@/app/workers/components/WorkerInfoModal';
 import { WeekDate } from '@/app/stores/[storeId]/home/types';
 import WorkerBlock from './WorkerBlock';
 import useToggle from '@/app/hooks/useToggle';
-import { FetchHomeResponse } from '@/api/endpoints/stores/stores';
+import { useContext } from 'react';
+import { HomePageContext } from '@/app/context/HomePageContext';
 
 const SHIFT_COLORS = ['#EEF2FF', '#F0FDF4', '#FFF1E7'];
 
 const WeeklyCalendar = ({
   currentWeekDates,
-  shifts,
 }: {
   currentWeekDates: WeekDate[];
-  shifts: FetchHomeResponse['selectedSchedule']['shifts'];
 }) => {
+  const { data } = useContext(HomePageContext);
   const [isWorkerInfoModalOpen, toggleWorkerInfoModal] = useToggle();
 
+  const { selectedScheduleTemplate } = data || {};
+  const { shifts } = selectedScheduleTemplate || {};
+
   // 임시 컬러 배열
-  const getShiftColor = (shiftName: string) => {
-    const shiftIndex = shifts.findIndex(s => s.shiftName === shiftName);
-    return SHIFT_COLORS[shiftIndex % SHIFT_COLORS.length];
+  const getShiftColor = (shiftTemplateName: string) => {
+    const shiftIndex = shifts?.findIndex(
+      s => s.shiftTemplateName === shiftTemplateName,
+    );
+    return SHIFT_COLORS[(shiftIndex ?? 0) % SHIFT_COLORS.length];
   };
 
   return (
@@ -39,14 +44,14 @@ const WeeklyCalendar = ({
           </tr>
         </thead>
         <tbody>
-          {shifts.map(shift => (
+          {shifts?.map(shift => (
             <tr
-              key={shift.shiftId}
+              key={shift.shiftTemplateId}
               className="border-t border-gray-400 align-top"
             >
               <td className="p-16">
                 <div className="body-14-500 text-gray-900">
-                  {shift.shiftName}
+                  {shift.shiftTemplateName}
                 </div>
                 <div className="body-14-400 text-gray-600">
                   {shift.startTime} - {shift.endTime}
@@ -68,16 +73,16 @@ const WeeklyCalendar = ({
 
                 return (
                   <td
-                    key={`${shift.shiftId}-${date.fullDate.getTime()}`}
+                    key={`${shift.shiftTemplateId}-${date.fullDate.getTime()}`}
                     style={{
-                      backgroundColor: getShiftColor(shift.shiftName),
+                      backgroundColor: getShiftColor(shift.shiftTemplateName),
                     }}
                     className="h-162 border-l border-gray-400 p-16 align-top"
                   >
                     <div className="flex flex-col gap-8">
                       {assignedShifts?.map(shift => (
                         <WorkerBlock
-                          key={shift.assignedShiftId}
+                          key={shift.shiftId}
                           toggleWorkerInfoModal={toggleWorkerInfoModal}
                           shift={shift}
                         />

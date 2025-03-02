@@ -2,18 +2,15 @@ import WorkerInfoModal from '@/app/workers/components/WorkerInfoModal';
 import { WeekDate } from '@/app/stores/[storeId]/home/types';
 
 import useToggle from '@/app/hooks/useToggle';
-import { FetchHomeResponse } from '@/api/endpoints/stores/stores';
 import { useSearchParams } from 'next/navigation';
-import WorkerBlock from './WorkerBlock';
+// import WorkerBlock from './WorkerBlock';
 
-const SHIFT_COLORS = ['#EEF2FF', '#F0FDF4', '#FFF1E7'];
+// const SHIFT_COLORS = ['#EEF2FF', '#F0FDF4', '#FFF1E7'];
 
 const WeeklyCalendar = ({
   currentWeekDates,
-  shifts,
 }: {
   currentWeekDates: WeekDate[];
-  shifts: FetchHomeResponse['selectedSchedule']['shifts'];
 }) => {
   const [isWorkerInfoModalOpen, toggleWorkerInfoModal] = useToggle();
 
@@ -21,10 +18,10 @@ const WeeklyCalendar = ({
   const selectedMonth = searchParams.get('date')?.split('-')[1];
 
   // 임시 컬러 배열
-  const getShiftColor = (shiftName: string) => {
-    const shiftIndex = shifts.findIndex(s => s.shiftName === shiftName);
-    return SHIFT_COLORS[shiftIndex % SHIFT_COLORS.length];
-  };
+  // const getShiftColor = (shiftName: string) => {
+  //   const shiftIndex = shifts.findIndex(s => s.shiftName === shiftName);
+  //   return SHIFT_COLORS[shiftIndex % SHIFT_COLORS.length];
+  // };
 
   const isNotSelectedMonth = (date: WeekDate) => {
     return date?.fullDate.getMonth() + 1 !== Number(selectedMonth);
@@ -50,7 +47,7 @@ const WeeklyCalendar = ({
           </tr>
         </thead>
         <tbody>
-          {shifts.map(shift => (
+          {/* {shifts.map(shift => (
             <tr
               key={shift.shiftId}
               className="border-t border-gray-400 align-top"
@@ -98,7 +95,7 @@ const WeeklyCalendar = ({
                 );
               })}
             </tr>
-          ))}
+          ))} */}
         </tbody>
       </table>
       <WorkerInfoModal

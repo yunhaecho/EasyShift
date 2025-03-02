@@ -1,10 +1,13 @@
 import useToggle from '@/app/hooks/useToggle';
-import ManageStoreModal from '@/app/components/modals/ManageStoreModal';
+import { SettingsPageContext } from '@/app/context/SettingsPageContext';
+import { useContext } from 'react';
 
 import EditWhiteIcon from '@/assets/icons/edit-white.svg';
+import EditStoreModal from '@/app/components/modals/EditStoreModal';
 
 const StoreInformation = () => {
   const [isCreateStoreModalOpen, toggleCreateStoreModal] = useToggle(false);
+  const { storeUserData } = useContext(SettingsPageContext);
 
   return (
     <section className="flex flex-col gap-29 rounded-8 border border-gray-300 bg-white p-24 shadow-sm">
@@ -21,15 +24,30 @@ const StoreInformation = () => {
           <span className="body-16-400 text-white">Edit</span>
         </button>
       </header>
-      <dl className="flex flex-col gap-4">
-        <dt className="body-14-500 text-gray-700">Store Name</dt>
-        <dd className="body-16-500 text-gray-900">Starbucks Reserve</dd>
+      <dl className="flex justify-between">
+        <div className="flex flex-1 flex-col gap-4">
+          <dt className="body-14-500 text-gray-700">Store Name</dt>
+          <dd className="body-16-500 text-gray-900">
+            {storeUserData?.storeName}
+          </dd>
+        </div>
+        <div className="flex flex-1 flex-col gap-4">
+          <dt className="body-14-500 text-gray-700">Description</dt>
+          <dd className="body-16-500 text-gray-900">
+            {storeUserData?.description}
+          </dd>
+        </div>
       </dl>
 
-      <ManageStoreModal
+      <EditStoreModal
         isOpen={isCreateStoreModalOpen}
         onClose={toggleCreateStoreModal}
-        mode="edit"
+        storeData={{
+          storeId: 1,
+          storeName: 'Starbucks Reserve',
+          description:
+            'Premium coffee experience with rare and unique coffee beans',
+        }}
       />
     </section>
   );

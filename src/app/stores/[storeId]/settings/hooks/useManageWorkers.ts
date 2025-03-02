@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import { Worker } from '../types';
-import { initialWorkers } from '../../mocks';
-
+import { useState, useContext } from 'react';
+import { SettingsPageContext } from '@/app/context/SettingsPageContext';
+import { User } from '@/api/endpoints/stores/types';
 const useManageWorkers = () => {
-  const [workers, setWorkers] = useState<Worker[]>(initialWorkers);
+  const { storeUserData } = useContext(SettingsPageContext);
+  const [workers, setWorkers] = useState<User[]>(storeUserData?.users || []);
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleDeleteWorker = (workerId: number) => {
     setWorkers(prevWorkers =>
-      prevWorkers.filter(worker => worker.id !== workerId),
+      prevWorkers.filter(worker => worker.userId !== workerId),
     );
   };
 

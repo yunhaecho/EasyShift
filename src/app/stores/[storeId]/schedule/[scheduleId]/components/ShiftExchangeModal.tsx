@@ -5,11 +5,7 @@ import UserBlackIcon from '@/assets/icons/user-black.svg';
 import { Dialog } from '@headlessui/react';
 import useManageWorkers from '../../../settings/hooks/useManageWorkers';
 import { useEffect, useState } from 'react';
-
-type Worker = {
-  id: number;
-  name: string;
-};
+import { User } from '@/api/endpoints/stores/types';
 
 const ShiftExchangeModal = ({
   isOpen,
@@ -20,7 +16,7 @@ const ShiftExchangeModal = ({
 }) => {
   const { searchQuery, setSearchQuery, filteredWorkers } = useManageWorkers();
   const [showResults, setShowResults] = useState(false);
-  const [selectedWorker, setSelectedWorker] = useState<Worker | null>(null);
+  const [selectedWorker, setSelectedWorker] = useState<User | null>(null);
 
   useEffect(() => {
     if (!isOpen) {
@@ -30,7 +26,7 @@ const ShiftExchangeModal = ({
     }
   }, [isOpen, setSearchQuery]);
 
-  const handleWorkerSelect = (worker: Worker) => {
+  const handleWorkerSelect = (worker: User) => {
     setSelectedWorker(worker);
     setSearchQuery(worker.name);
     setShowResults(false);
@@ -107,11 +103,13 @@ const ShiftExchangeModal = ({
                           <ul className="flex flex-col gap-16">
                             {filteredWorkers.map(worker => (
                               <li
-                                key={worker.id}
+                                key={worker.userId}
                                 className="flex cursor-pointer flex-row items-center gap-8 p-12 hover:bg-gray-100"
                                 onClick={() => handleWorkerSelect(worker)}
                                 role="option"
-                                aria-selected={selectedWorker?.id === worker.id}
+                                aria-selected={
+                                  selectedWorker?.userId === worker.userId
+                                }
                               >
                                 <div
                                   className="h-40 w-40 rounded-full border border-gray-300"
@@ -170,7 +168,11 @@ const ShiftExchangeModal = ({
           </main>
 
           <footer>
-            <ModalActions mode="default" onClose={onClose} />
+            <ModalActions
+              mode="default"
+              onClose={onClose}
+              onSubmit={() => {}}
+            />
           </footer>
         </article>
       </div>
