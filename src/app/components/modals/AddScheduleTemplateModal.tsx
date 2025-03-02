@@ -22,6 +22,7 @@ const AddScheduleTemplateModal = ({
     addShiftTemplate,
     deleteShiftTemplate,
     resetScheduleTemplate,
+    checkScheduleTemplate,
   } = useScheduleTemplate();
   const { storeUserData } = useContext(SettingsPageContext);
   const createScheduleTemplateMutation = useCreateScheduleTemplateMutation();
@@ -33,14 +34,15 @@ const AddScheduleTemplateModal = ({
   }, [isOpen, resetScheduleTemplate]);
 
   const handleSubmit = () => {
+    const isValid = checkScheduleTemplate();
+    if (!isValid) return;
+
     createScheduleTemplateMutation.mutate({
       storeId: storeUserData!.storeId, // [고민] suspense query를 통해 storeUserData의 존재 보장으로 assertion 사용
       scheduleTemplateData: scheduleTemplate,
     });
     onClose();
   };
-
-  console.log(scheduleTemplate);
 
   return (
     <Dialog open={isOpen} onClose={onClose} className="relative z-50">
