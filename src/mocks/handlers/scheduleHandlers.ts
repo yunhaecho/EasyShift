@@ -57,8 +57,8 @@ export const scheduleHandlers = [
   }),
 
   /* 일주일치 스케줄 조회(캘린더 인디케이터) */
-  http.get('/api/schedules/:scheduleTemplateId?date=:date', ({ params }) => {
-    const { scheduleTemplateId } = params;
+  http.get('/api/schedules/:scheduleTemplateId', ({ params }) => {
+    const scheduleTemplateId = params.scheduleTemplateId;
 
     return HttpResponse.json({
       scheduleTemplateId: scheduleTemplateId,
