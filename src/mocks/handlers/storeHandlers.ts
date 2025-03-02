@@ -229,6 +229,15 @@ export const storeHandlers = [
     });
   }),
 
+  /* 매장 스케줄 템플릿 삭제 */
+  http.delete('/api/schedule-templates/:scheduleTemplateId', () => {
+    return HttpResponse.json({
+      success: true,
+      response: null,
+      error: null,
+    });
+  }),
+
   /* 매장 사용자 목록 조회 */
   http.get('/api/stores/:storeId/users', () => {
     return HttpResponse.json({

@@ -7,10 +7,14 @@ const ConfirmationModal = ({
   isOpen,
   onClose,
   onConfirm,
+  title,
+  description,
 }: {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
+  title: string;
+  description: string;
 }) => {
   return (
     <Dialog open={isOpen} onClose={onClose} className="relative z-50">
@@ -22,14 +26,11 @@ const ConfirmationModal = ({
         <div className="flex w-[30%] flex-col items-center rounded-8 bg-white p-32">
           <DialogTitle className="flex flex-col items-center gap-24">
             <AlertCircleIcon className="flex-shrink-0" />
-            <p className="head-24-600 text-center text-gray-900">
-              Are you sure you want to delete this store?
-            </p>
+            <p className="head-24-600 text-center text-gray-900">{title}</p>
           </DialogTitle>
 
           <Description className="body-16-400 mt-16 text-center text-gray-700">
-            This action cannot be undone. All data associated with this store
-            will be permanently deleted.
+            {description}
           </Description>
 
           <footer className="mt-32 flex w-full gap-16">

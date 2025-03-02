@@ -100,6 +100,8 @@ const StoreList = () => {
               setStoreToDelete(null);
             }}
             onConfirm={handleDeleteStore}
+            title={`Are you sure you want to delete '${storeToDelete?.storeName}' store?`}
+            description={`This action cannot be undone. All data associated with this store will be permanently deleted.`}
           />
         </>
       )}
