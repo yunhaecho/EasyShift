@@ -6,7 +6,7 @@ import { useFetchHome } from '@/api/endpoints/stores/useFetchHome';
 import { useState } from 'react';
 import WeeklyNavigator from './components/WeeklyNavigator';
 import { WeekDates } from '../../home/types';
-import useScheduleCalendar from './\bhooks/useScheduleCalendar';
+import useScheduleCalendar from './hooks/useScheduleCalendar';
 import WeeklyCalendar from './components/WeeklyCalendar';
 import { useSearchParams } from 'next/navigation';
 import { parse } from 'date-fns/parse';
