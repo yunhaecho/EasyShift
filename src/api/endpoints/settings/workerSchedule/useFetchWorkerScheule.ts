@@ -1,7 +1,15 @@
-import { useQuery } from '@tanstack/react-query';
+import {
+  // useQuery,
+  queryOptions,
+  // useQueryClient,
+  // skipToken,
+  useSuspenseQuery,
+} from '@tanstack/react-query';
 import axios from 'axios';
-// import { useParams } from 'next/navigation';
 import { WorkerScheduleResponse } from './workerSchedule';
+// import { useParams } from 'next/navigation';
+//
+// 데이터 있다 가정하고 부르기
 
 type WorkerScheduleParams = {
   storeId: string;
@@ -9,19 +17,20 @@ type WorkerScheduleParams = {
   date: string;
 };
 
-const workerSchedule = async ({
-  storeId,
-  userId,
-  date,
-}: WorkerScheduleParams) => {
-  const scheduleOfWorker = await axios.get<WorkerScheduleResponse>(
-    `/api/stores/${storeId}/workers/${userId}/schedules?date=${date}`,
-  );
+const workerScheduleQueryOptions = (
+  workerScheduleParams: WorkerScheduleParams,
+) =>
+  queryOptions({
+    queryKey: ['workerSchedule', workerScheduleParams],
+    queryFn: () =>
+      workerSchedule({
+        storeId: workerScheduleParams.storeId,
+        userId: workerScheduleParams.userId,
+        date: workerScheduleParams.date,
+      }),
+  });
 
-  return scheduleOfWorker.data;
-};
-
-export const useWorkerSchedule = (dateInfo: string) => {
+export const useWorkerScheduleQuery = (dateInfo: string) => {
   // const params = useParams();
   const storeId = '2';
   const date = dateInfo;
@@ -32,10 +41,32 @@ export const useWorkerSchedule = (dateInfo: string) => {
     date: date,
   };
 
-  return useQuery({
-    queryKey: ['workerSchedule'],
-    queryFn: () => workerSchedule(workerScheduleParams),
-    enabled: !!workerScheduleParams.storeId && !!workerScheduleParams.userId,
-    staleTime: 1000 * 5,
-  });
+  return useSuspenseQuery(workerScheduleQueryOptions(workerScheduleParams));
 };
+
+const workerSchedule = async ({
+  storeId,
+  userId,
+  date,
+}: WorkerScheduleParams) => {
+  const scheduleOfWorker = await axios.get<WorkerScheduleResponse>(
+    `/api/stores/${storeId}/workers/${userId}/schedules`,
+    {
+      params: { date },
+    },
+  );
+
+  return scheduleOfWorker.data;
+};
+
+// useWorkerScheduleQuery({
+//   ...workerScheduleQueryOptions(workerScheduleParams),
+// });
+
+// const queryClient = useQueryClient();
+
+// queryClient.getQueryData(workerScheduleOptions().queryKey);
+
+// queryClient.invalidateQueries({
+//   queryKey: workerScheduleOptions().queryKey,
+// });
