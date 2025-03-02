@@ -1,5 +1,4 @@
-import { Shift } from '@/app/stores/[storeId]/settings/types';
-import { ModalContentProps } from '../types';
+import { CreateScheduleTemplateRequest } from '@/api/endpoints/stores/types';
 
 import PlusBlackIcon from '@/assets/icons/plus-black.svg';
 import DeleteIcon from '@/assets/icons/delete-red.svg';
@@ -54,63 +53,96 @@ const ShiftInput = ({
 );
 
 const ScheduleTemplateModalContent = ({
-  schedule,
-  setSchedule,
-  addShift,
-  deleteShift,
-}: ModalContentProps) => (
+  scheduleTemplate,
+  setScheduleTemplate,
+  addShiftTemplate,
+  deleteShiftTemplate,
+}: {
+  scheduleTemplate: CreateScheduleTemplateRequest;
+  setScheduleTemplate: (
+    scheduleTemplate: CreateScheduleTemplateRequest,
+  ) => void;
+  addShiftTemplate: () => void;
+  deleteShiftTemplate: (shiftTemplateIndex: number) => void;
+}) => (
   <form className="flex flex-col gap-24 px-24 py-16">
     <ScheduleInput
-      value={schedule.name}
-      onChange={e => setSchedule({ ...schedule, name: e.target.value })}
+      value={scheduleTemplate.scheduleTemplateName}
+      onChange={e =>
+        setScheduleTemplate({
+          ...scheduleTemplate,
+          scheduleTemplateName: e.target.value,
+        })
+      }
     />
 
     <section className="flex flex-col gap-16 rounded-8 border border-gray-300 p-16">
       <h2 className="sr-only">Shift List</h2>
-      {schedule.shifts.map((shift: Shift, index: number) => (
-        <fieldset key={shift.id} className="flex flex-wrap items-end gap-16">
-          <legend className="sr-only">Shift {index + 1}</legend>
-          <ShiftInput
-            label={`Shift ${index + 1}`}
-            placeholder="Enter shift name (e.g. '오픈')"
-            value={shift.name}
-            onChange={e => {
-              const newShifts = [...schedule.shifts];
-              newShifts[index].name = e.target.value;
-              setSchedule({ ...schedule, shifts: newShifts });
-            }}
-          />
-          <ShiftInput
-            label="Start Time"
-            placeholder="--:--"
-            value={shift.startTime}
-            onChange={e => {
-              const newShifts = [...schedule.shifts];
-              newShifts[index].startTime = e.target.value;
-              setSchedule({ ...schedule, shifts: newShifts });
-            }}
-          />
-          <ShiftInput
-            label="End Time"
-            placeholder="--:--"
-            value={shift.endTime}
-            onChange={e => {
-              const newShifts = [...schedule.shifts];
-              newShifts[index].endTime = e.target.value;
-              setSchedule({ ...schedule, shifts: newShifts });
-            }}
-          />
-          <button
-            type="button"
-            className="p-2"
-            aria-label={`Delete Shift ${index + 1}`}
-            onClick={() => deleteShift(index)}
+      {scheduleTemplate.shiftTemplates.map(
+        (
+          shift: {
+            shiftTemplateName: string;
+            startTime: string;
+            endTime: string;
+          },
+          index: number,
+        ) => (
+          <fieldset
+            key={`${shift.shiftTemplateName}-${index}`}
+            className="flex flex-wrap items-end gap-16"
           >
-            <DeleteIcon className="mb-14 cursor-pointer" />
-          </button>
-        </fieldset>
-      ))}
-      <button type="button" onClick={addShift} className={buttonStyle}>
+            <legend className="sr-only">Shift {index + 1}</legend>
+            <ShiftInput
+              label={`Shift ${index + 1}`}
+              placeholder="Enter shift name (e.g. '오픈')"
+              value={shift.shiftTemplateName}
+              onChange={e => {
+                const newShifts = [...scheduleTemplate.shiftTemplates];
+                newShifts[index].shiftTemplateName = e.target.value;
+                setScheduleTemplate({
+                  ...scheduleTemplate,
+                  shiftTemplates: newShifts,
+                });
+              }}
+            />
+            <ShiftInput
+              label="Start Time"
+              placeholder="--:--"
+              value={shift.startTime}
+              onChange={e => {
+                const newShifts = [...scheduleTemplate.shiftTemplates];
+                newShifts[index].startTime = e.target.value;
+                setScheduleTemplate({
+                  ...scheduleTemplate,
+                  shiftTemplates: newShifts,
+                });
+              }}
+            />
+            <ShiftInput
+              label="End Time"
+              placeholder="--:--"
+              value={shift.endTime}
+              onChange={e => {
+                const newShifts = [...scheduleTemplate.shiftTemplates];
+                newShifts[index].endTime = e.target.value;
+                setScheduleTemplate({
+                  ...scheduleTemplate,
+                  shiftTemplates: newShifts,
+                });
+              }}
+            />
+            <button
+              type="button"
+              className="p-2"
+              aria-label={`Delete Shift ${index + 1}`}
+              onClick={() => deleteShiftTemplate(index)}
+            >
+              <DeleteIcon className="mb-14 cursor-pointer" />
+            </button>
+          </fieldset>
+        ),
+      )}
+      <button type="button" onClick={addShiftTemplate} className={buttonStyle}>
         <PlusBlackIcon />
         <span className="body-16-500">Add Shift</span>
       </button>

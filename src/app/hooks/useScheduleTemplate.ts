@@ -1,49 +1,48 @@
 'use client';
 
-import { useState } from 'react';
-import { Schedule } from '../stores/[storeId]/home/types';
+import { useCallback, useState } from 'react';
+import { CreateScheduleTemplateRequest } from '@/api/endpoints/stores/types';
 
-const useScheduleTemplate = (initialSchedule?: Schedule) => {
-  const [schedule, setSchedule] = useState<Schedule>(
-    initialSchedule || {
-      id: '',
-      name: '',
-      shifts: [{ id: 1, name: '', startTime: '', endTime: '' }],
-    },
-  );
+const initialState: CreateScheduleTemplateRequest = {
+  scheduleTemplateName: '',
+  shiftTemplates: [{ shiftTemplateName: '', startTime: '', endTime: '' }],
+};
 
-  const addShift = () => {
-    setSchedule(prev => ({
+const useScheduleTemplate = () => {
+  const [scheduleTemplate, setScheduleTemplate] =
+    useState<CreateScheduleTemplateRequest>(initialState);
+
+  const addShiftTemplate = useCallback(() => {
+    setScheduleTemplate(prev => ({
       ...prev,
-      shifts: [
-        ...prev.shifts,
+      shiftTemplates: [
+        ...prev.shiftTemplates,
         {
-          id:
-            prev.shifts.length > 0
-              ? Math.max(...prev.shifts.map(shift => shift.id)) + 1
-              : 1,
-          name: '',
+          shiftTemplateName: '',
           startTime: '',
           endTime: '',
         },
       ],
     }));
-  };
+  }, []);
 
-  const deleteShift = (shiftIndex: number) => {
-    if (schedule.shifts.length > 1) {
-      setSchedule(prev => ({
-        ...prev,
-        shifts: prev.shifts.filter((_, index) => index !== shiftIndex),
-      }));
-    }
-  };
+  const deleteShiftTemplate = useCallback((index: number) => {
+    setScheduleTemplate(prev => ({
+      ...prev,
+      shiftTemplates: prev.shiftTemplates.filter((_, i) => i !== index),
+    }));
+  }, []);
+
+  const resetScheduleTemplate = useCallback(() => {
+    setScheduleTemplate(initialState);
+  }, []);
 
   return {
-    schedule,
-    setSchedule,
-    addShift,
-    deleteShift,
+    scheduleTemplate,
+    setScheduleTemplate,
+    addShiftTemplate,
+    deleteShiftTemplate,
+    resetScheduleTemplate,
   };
 };
 

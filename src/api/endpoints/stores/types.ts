@@ -45,6 +45,15 @@ export type GetStoresStoreIdScheduleTemplatesResponse = {
   }>;
 };
 
+export type CreateScheduleTemplateRequest = {
+  scheduleTemplateName: string;
+  shiftTemplates: Array<{
+    shiftTemplateName: string;
+    startTime: string;
+    endTime: string;
+  }>;
+};
+
 export type GetStoresStoreIdUsersResponse = {
   storeId: number;
   storeName: string;

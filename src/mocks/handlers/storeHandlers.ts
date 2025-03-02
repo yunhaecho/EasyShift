@@ -207,6 +207,28 @@ export const storeHandlers = [
     });
   }),
 
+  /* 매장 스케줄 템플릿 생성 */
+  http.post('/api/stores/:storeId/schedule-templates', () => {
+    return HttpResponse.json({
+      scheduleTemplateId: 3,
+      scheduleTemplateName: 'Storage',
+      shiftTemplates: [
+        {
+          shiftTemplateId: 1,
+          shiftTemplateName: 'Open',
+          startTime: '09:00',
+          endTime: '18:00',
+        },
+        {
+          shiftTemplateId: 2,
+          shiftTemplateName: 'Close',
+          startTime: '18:00',
+          endTime: '23:00',
+        },
+      ],
+    });
+  }),
+
   /* 매장 사용자 목록 조회 */
   http.get('/api/stores/:storeId/users', () => {
     return HttpResponse.json({

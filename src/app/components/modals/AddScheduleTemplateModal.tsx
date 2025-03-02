@@ -5,6 +5,9 @@ import { Dialog } from '@headlessui/react';
 import ScheduleTemplateModalContent from './ScheduleTemplateModalContent';
 import ModalActions from './ModalActions';
 import useScheduleTemplate from '@/app/hooks/useScheduleTemplate';
+import { useContext, useEffect } from 'react';
+import { SettingsPageContext } from '@/app/context/SettingsPageContext';
+import { useCreateScheduleTemplateMutation } from '@/api/endpoints/stores/useCreateScheduleTemplateMutation';
 
 const AddScheduleTemplateModal = ({
   isOpen,
@@ -13,8 +16,29 @@ const AddScheduleTemplateModal = ({
   isOpen: boolean;
   onClose: () => void;
 }) => {
-  const { schedule, setSchedule, addShift, deleteShift } =
-    useScheduleTemplate();
+  const {
+    scheduleTemplate,
+    setScheduleTemplate,
+    addShiftTemplate,
+    deleteShiftTemplate,
+    resetScheduleTemplate,
+  } = useScheduleTemplate();
+  const { storeUserData } = useContext(SettingsPageContext);
+  const createScheduleTemplateMutation = useCreateScheduleTemplateMutation();
+
+  useEffect(() => {
+    if (isOpen) {
+      resetScheduleTemplate();
+    }
+  }, [isOpen, resetScheduleTemplate]);
+
+  const handleSubmit = () => {
+    createScheduleTemplateMutation.mutate({
+      storeId: storeUserData!.storeId, // [고민] suspense query를 통해 storeUserData의 존재 보장으로 assertion 사용
+      scheduleTemplateData: scheduleTemplate,
+    });
+    onClose();
+  };
 
   return (
     <Dialog open={isOpen} onClose={onClose} className="relative z-50">
@@ -25,12 +49,12 @@ const AddScheduleTemplateModal = ({
             Add Schedule Template
           </DialogTitle>
           <ScheduleTemplateModalContent
-            schedule={schedule}
-            setSchedule={setSchedule}
-            addShift={addShift}
-            deleteShift={deleteShift}
+            scheduleTemplate={scheduleTemplate}
+            setScheduleTemplate={setScheduleTemplate}
+            addShiftTemplate={addShiftTemplate}
+            deleteShiftTemplate={deleteShiftTemplate}
           />
-          <ModalActions mode="add" onClose={onClose} />
+          <ModalActions mode="add" onClose={onClose} onSubmit={handleSubmit} />
         </div>
       </div>
     </Dialog>
