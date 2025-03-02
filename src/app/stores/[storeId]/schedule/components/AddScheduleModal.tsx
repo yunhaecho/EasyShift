@@ -19,7 +19,7 @@ const AddScheduleModal = ({
             Add Schedule
           </DialogTitle>
           <AddScheduleModalContent />
-          <ModalActions mode="add" onClose={onClose} />
+          <ModalActions mode="add" onClose={onClose} onSubmit={() => {}} />
         </div>
       </div>
     </Dialog>

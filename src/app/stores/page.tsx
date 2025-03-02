@@ -1,5 +1,3 @@
-'use client';
-
 import { Suspense } from 'react';
 import StoreList from './components/StoreList';
 import StoresPageProvider from './components/StoresPageProvider';

@@ -1,7 +1,5 @@
-import useToggle from '@/app/hooks/useToggle';
 import { useContext, useState } from 'react';
 import { SettingsPageContext } from '@/app/context/SettingsPageContext';
-import EditScheduleTemplateModal from '@/app/components/modals/EditScheduleTemplateModal';
 import { ScheduleTemplate } from '@/api/endpoints/stores/types';
 
 import DeleteRedIcon from '@/assets/icons/delete-red.svg';
@@ -9,7 +7,6 @@ import ConfirmationModal from '@/app/components/modals/ConfirmationModal';
 import useDeleteScheduleTemplateMutation from '@/api/endpoints/stores/useDeleteScheduleTemplateMutation';
 
 const ScheduleTemplateList = () => {
-  const [isEditScheduleModalOpen, toggleEditScheduleModal] = useToggle(false);
   const [templateToDelete, setTemplateToDelete] =
     useState<ScheduleTemplate | null>(null);
   const { scheduleTemplateData } = useContext(SettingsPageContext);
@@ -72,11 +69,6 @@ const ScheduleTemplateList = () => {
           </article>
         ))}
       </ul>
-
-      <EditScheduleTemplateModal
-        isOpen={isEditScheduleModalOpen}
-        onClose={toggleEditScheduleModal}
-      />
 
       <ConfirmationModal
         isOpen={templateToDelete !== null}
