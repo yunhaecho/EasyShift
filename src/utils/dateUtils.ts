@@ -55,3 +55,12 @@ export const generateCalendar = (start: Date) => {
 
   return calendarDates;
 };
+
+/**
+ * YYYY-MM-DD 형식의 날짜를 받아 텍스트 날짜 형식으로 반환
+ * @returns 텍스트 날짜 형식
+ */
+export const formatDateToText = (date: string) => {
+  const dateObj = new Date(date);
+  return format(dateObj, 'MMMM d, yyyy (EEE)');
+};

@@ -3,20 +3,32 @@ import { DialogTitle } from '@headlessui/react';
 import CalendarBlackIcon from '@/assets/icons/calendar-black.svg';
 import UserBlackIcon from '@/assets/icons/user-black.svg';
 import { Dialog } from '@headlessui/react';
-import useManageWorkers from '../../../settings/hooks/useManageWorkers';
 import { useEffect, useState } from 'react';
+import { formatDateToText } from '@/utils/dateUtils';
+import useWorkerList from '../hooks/useWorkerList';
 import { User } from '@/api/endpoints/stores/types';
+import MagnifyingGlassIcon from '@/assets/icons/magnifying-glass.svg';
+import useUpdateShiftMutation from '@/api/endpoints/shifts/useUpdateShiftMutation';
 
 const ShiftExchangeModal = ({
   isOpen,
   onClose,
+  assignedShift,
+  targetDate,
 }: {
   isOpen: boolean;
   onClose: () => void;
+  assignedShift: {
+    shiftId: number;
+    userId: number;
+    userName: string;
+  };
+  targetDate: string;
 }) => {
-  const { searchQuery, setSearchQuery, filteredWorkers } = useManageWorkers();
+  const { searchQuery, setSearchQuery, filteredWorkers } = useWorkerList();
   const [showResults, setShowResults] = useState(false);
   const [selectedWorker, setSelectedWorker] = useState<User | null>(null);
+  const { mutate: updateShift } = useUpdateShiftMutation();
 
   useEffect(() => {
     if (!isOpen) {
@@ -30,6 +42,16 @@ const ShiftExchangeModal = ({
     setSelectedWorker(worker);
     setSearchQuery(worker.name);
     setShowResults(false);
+  };
+
+  const handleExchange = () => {
+    if (selectedWorker) {
+      updateShift({
+        shiftId: assignedShift.shiftId,
+        userId: selectedWorker.userId,
+      });
+      onClose();
+    }
   };
 
   return (
@@ -49,13 +71,13 @@ const ShiftExchangeModal = ({
               <div className="flex items-center gap-8">
                 <CalendarBlackIcon aria-hidden="true" />
                 <span className="body-16-400 text-gray-700">
-                  Selected Date: February 15, 2024 (Thu)
+                  Selected Date: {formatDateToText(targetDate)}
                 </span>
               </div>
               <div className="flex items-center gap-8">
                 <UserBlackIcon aria-hidden="true" />
                 <span className="body-16-400 text-gray-700">
-                  Current Assignment: Kim Ji-hoon
+                  Current Assignment: {assignedShift.userName}
                 </span>
               </div>
             </div>
@@ -73,13 +95,14 @@ const ShiftExchangeModal = ({
                   >
                     Worker Name
                   </label>
-                  <div className="relative">
+                  <div className="relative flex w-[50%] items-center gap-12 border border-gray-400 px-12 py-9">
+                    <MagnifyingGlassIcon />
                     <input
                       id="worker-search"
                       type="text"
                       placeholder="Search worker name"
                       role="combobox"
-                      className="body-16-400 w-[50%] border border-gray-400 px-12 py-9 text-gray-900 focus:outline-none"
+                      className="body-16-400 text-gray-900 focus:outline-none"
                       value={searchQuery}
                       onChange={e => {
                         setSearchQuery(e.target.value);
@@ -96,11 +119,11 @@ const ShiftExchangeModal = ({
                     {showResults && searchQuery && (
                       <div
                         id="worker-search-results"
-                        className="absolute left-0 right-0 top-full z-10 mt-4 max-h-200 w-[50%] overflow-y-auto rounded-4 border border-gray-300 bg-white shadow-lg"
+                        className="absolute left-0 right-0 top-full z-10 mt-4 max-h-200 overflow-y-auto rounded-4 border border-gray-300 bg-white shadow-lg"
                         role="listbox"
                       >
                         {filteredWorkers.length > 0 ? (
-                          <ul className="flex flex-col gap-16">
+                          <ul className="flex flex-col">
                             {filteredWorkers.map(worker => (
                               <li
                                 key={worker.userId}
@@ -140,9 +163,9 @@ const ShiftExchangeModal = ({
                     <dt className="body-14-500 text-gray-700">
                       Before Exchange
                     </dt>
-                    <dd className="body-14-400 rounded-8 border border-gray-300 bg-white p-16 text-gray-700">
-                      <div>Kim Ji-hoon</div>
-                      <div>February 15, 2024 (Thu) 09:00 - 18:00</div>
+                    <dd className="body-14-400 flex items-center gap-8 rounded-8 border border-gray-300 bg-white p-16 text-gray-700">
+                      <div className="h-40 w-40 rounded-full border border-gray-300" />
+                      <div>{assignedShift.userName}</div>
                     </dd>
                   </div>
                   <div className="flex flex-1 flex-col gap-8">
@@ -151,10 +174,10 @@ const ShiftExchangeModal = ({
                     </dt>
                     <dd className="body-14-400 h-full rounded-8 border border-gray-300 bg-white p-16 text-gray-700">
                       {selectedWorker ? (
-                        <>
+                        <div className="flex items-center gap-8">
+                          <div className="h-40 w-40 rounded-full border border-gray-300" />
                           <div>{selectedWorker.name}</div>
-                          <div>February 15, 2024 (Thu) 09:00 - 18:00</div>
-                        </>
+                        </div>
                       ) : (
                         <div className="flex h-full items-center justify-center text-gray-500">
                           Select a worker to exchange
@@ -171,7 +194,7 @@ const ShiftExchangeModal = ({
             <ModalActions
               mode="default"
               onClose={onClose}
-              onSubmit={() => {}}
+              onSubmit={handleExchange}
             />
           </footer>
         </article>

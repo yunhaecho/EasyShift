@@ -74,6 +74,7 @@ const WeeklyCalendar = ({
                     date.date ===
                     currentWeekDate.fullDate.toISOString().split('T')[0],
                 );
+                console.log('assignedShifts', assignedShifts);
 
                 return (
                   <td
@@ -87,13 +88,19 @@ const WeeklyCalendar = ({
                   >
                     <div className="flex flex-col gap-8">
                       {assignedShifts.length > 0 &&
-                        assignedShifts[0].assignedShifts &&
-                        assignedShifts[0].assignedShifts.map(worker => (
-                          <WorkerBlock
-                            key={`${worker.userId}-${worker.shiftId}`}
-                            shift={worker}
-                          />
-                        ))}
+                        assignedShifts[0]?.assignedShifts?.map(
+                          assignedShift => (
+                            <WorkerBlock
+                              key={`${assignedShift.userId}-${assignedShift.shiftId}`}
+                              assignedShift={assignedShift}
+                              targetDate={
+                                currentWeekDate.fullDate
+                                  .toISOString()
+                                  .split('T')[0]
+                              }
+                            />
+                          ),
+                        )}
                     </div>
                   </td>
                 );
