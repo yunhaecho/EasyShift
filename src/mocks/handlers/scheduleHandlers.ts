@@ -11,7 +11,7 @@ export const scheduleHandlers = [
         {
           id: 201,
           scheduleName: '새벽 근무',
-          shiftDate: '2025-02',
+          shiftDate: '2025-03',
           status: 'pending',
           description: '새벽 근무 일정입니다.',
         },
@@ -54,5 +54,211 @@ export const scheduleHandlers = [
     }
 
     return HttpResponse.json({ schedules });
+  }),
+
+  /* 일주일치 스케줄 조회(캘린더 인디케이터) */
+  http.get('/api/schedules/:scheduleTemplateId?date=:date', ({ params }) => {
+    const { scheduleTemplateId } = params;
+
+    return HttpResponse.json({
+      scheduleTemplateId: scheduleTemplateId,
+      scheduleTemplateName: 'Bakery',
+      shifts: [
+        {
+          shiftTemplateId: 1,
+          shiftTemplateName: 'Open',
+          startTime: '09:00',
+          endTime: '18:00',
+          dates: [
+            {
+              date: '2025-03-01',
+              assignedShifts: [
+                {
+                  shiftId: 12,
+                  userId: 1,
+                  userName: 'Yang Soyeon',
+                },
+                {
+                  shiftId: 13,
+                  userId: 2,
+                  userName: 'Kim Chanho',
+                },
+              ],
+            },
+            {
+              date: '2025-03-02',
+              assignedShifts: [
+                {
+                  shiftId: 14,
+                  userId: 1,
+                  userName: 'Yang Soyeon',
+                },
+                {
+                  shiftId: 15,
+                  userId: 2,
+                  userName: 'Kim Chanho',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          shiftTemplateId: 2,
+          shiftTemplateName: 'Close',
+          startTime: '18:00',
+          endTime: '22:00',
+          dates: [
+            {
+              date: '2025-03-01',
+              assignedShifts: [
+                {
+                  shiftId: 14,
+                  userId: 3,
+                  userName: 'Lee Youngjae',
+                },
+              ],
+            },
+            {
+              date: '2025-03-02',
+              assignedShifts: [
+                {
+                  shiftId: 15,
+                  userId: 3,
+                  userName: 'Lee Youngjae',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
+  }),
+
+  /* 스케줄 조회(all) */
+  http.get('/api/schedules/:scheduleId/all', ({ params }) => {
+    const { scheduleId } = params;
+
+    return HttpResponse.json({
+      scheduleId: scheduleId,
+      scheduleName: 'Bakery',
+      shifts: [
+        {
+          shiftTemplateId: 1,
+          shiftTemplateName: 'Open',
+          startTime: '09:00',
+          endTime: '18:00',
+          dates: [
+            {
+              date: '2025-03-01',
+              assignedShifts: [
+                {
+                  shiftId: 12,
+                  userId: 1,
+                  userName: 'Yang Soyeon',
+                },
+                {
+                  shiftId: 13,
+                  userId: 2,
+                  userName: 'Kim Chanho',
+                },
+              ],
+            },
+            {
+              date: '2025-03-02',
+              assignedShifts: [
+                {
+                  shiftId: 14,
+                  userId: 1,
+                  userName: 'Yang Soyeon',
+                },
+                {
+                  shiftId: 15,
+                  userId: 2,
+                  userName: 'Kim Chanho',
+                },
+              ],
+            },
+            {
+              date: '2025-03-03',
+              assignedShifts: [
+                {
+                  shiftId: 16,
+                  userId: 1,
+                  userName: 'Yang Soyeon',
+                },
+                {
+                  shiftId: 17,
+                  userId: 2,
+                  userName: 'Kim Chanho',
+                },
+              ],
+            },
+            {
+              date: '2025-03-04',
+              assignedShifts: [
+                {
+                  shiftId: 18,
+                  userId: 1,
+                  userName: 'Yang Soyeon',
+                },
+                {
+                  shiftId: 19,
+                  userId: 2,
+                  userName: 'Kim Chanho',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          shiftTemplateId: 2,
+          shiftTemplateName: 'Close',
+          startTime: '18:00',
+          endTime: '22:00',
+          dates: [
+            {
+              date: '2025-03-01',
+              assignedShifts: [
+                {
+                  shiftId: 20,
+                  userId: 3,
+                  userName: 'Lee Youngjae',
+                },
+              ],
+            },
+            {
+              date: '2025-03-02',
+              assignedShifts: [
+                {
+                  shiftId: 21,
+                  userId: 3,
+                  userName: 'Lee Youngjae',
+                },
+              ],
+            },
+            {
+              date: '2025-03-03',
+              assignedShifts: [
+                {
+                  shiftId: 22,
+                  userId: 4,
+                  userName: 'Jo Jangho',
+                },
+              ],
+            },
+            {
+              date: '2025-03-04',
+              assignedShifts: [
+                {
+                  shiftId: 23,
+                  userId: 4,
+                  userName: 'Jo Jangho',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
   }),
 ];

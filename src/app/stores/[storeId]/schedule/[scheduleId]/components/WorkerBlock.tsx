@@ -7,7 +7,7 @@ const WorkerBlock = ({
   shift,
 }: {
   shift: {
-    assignedShiftId: number;
+    shiftId: number;
     userId: number;
     userName: string;
   };
