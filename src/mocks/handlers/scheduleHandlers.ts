@@ -104,6 +104,24 @@ export const scheduleHandlers = [
         },
         {
           shiftTemplateId: 2,
+          shiftTemplateName: 'Middle',
+          startTime: '12:00',
+          endTime: '18:00',
+          dates: [
+            {
+              date: '2025-03-01',
+              assignedShifts: [
+                {
+                  shiftId: 16,
+                  userId: 3,
+                  userName: 'Lee Youngjae',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          shiftTemplateId: 3,
           shiftTemplateName: 'Close',
           startTime: '18:00',
           endTime: '22:00',
@@ -112,9 +130,9 @@ export const scheduleHandlers = [
               date: '2025-03-01',
               assignedShifts: [
                 {
-                  shiftId: 14,
-                  userId: 3,
-                  userName: 'Lee Youngjae',
+                  shiftId: 17,
+                  userId: 4,
+                  userName: 'Jo Jangho',
                 },
               ],
             },
@@ -122,9 +140,9 @@ export const scheduleHandlers = [
               date: '2025-03-02',
               assignedShifts: [
                 {
-                  shiftId: 15,
-                  userId: 3,
-                  userName: 'Lee Youngjae',
+                  shiftId: 18,
+                  userId: 4,
+                  userName: 'Jo Jangho',
                 },
               ],
             },
