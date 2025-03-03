@@ -46,28 +46,21 @@ export const generateCalendar = (start: Date) => {
     end: endOfCalendar,
   });
 
-  const calendarDates = datesOfCurrentMonth.map(unformattedDate => ({
+  const calendarDates = datesOfCurrentMonth.map(kstDate => ({
     //Wed Jan 29 2025 00:00:00 GMT+0900 (한국 표준시)
-    unformattedDate,
-    formattedDate: format(unformattedDate, 'yyyy-MM-dd'),
-    isCurrentMonth: unformattedDate.getMonth() === fstOfMonth.getMonth(),
+    kstDate: kstDate,
+    formattedDate: format(kstDate, 'yyyy-MM-dd'),
+    isCurrentMonth: kstDate.getMonth() === fstOfMonth.getMonth(),
   }));
 
   return calendarDates;
 };
 
-export const convertMonthToNumber = (month: string) => {
-  return month
-    .replace('Jan', '1')
-    .replace('Feb', '2')
-    .replace('Mar', '3')
-    .replace('Apr', '4')
-    .replace('May', '5')
-    .replace('Jun', '6')
-    .replace('Jul', '7')
-    .replace('Aug', '8')
-    .replace('Sep', '9')
-    .replace('Oct', '10')
-    .replace('Nov', '11')
-    .replace('Dec', '12');
+/**
+ * YYYY-MM-DD 형식의 날짜를 받아 텍스트 날짜 형식으로 반환
+ * @returns 텍스트 날짜 형식
+ */
+export const formatDateToText = (date: string) => {
+  const dateObj = new Date(date);
+  return format(dateObj, 'MMMM d, yyyy (EEE)');
 };

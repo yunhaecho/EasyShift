@@ -2,8 +2,7 @@
 
 import { useCallback, useMemo, useState } from 'react';
 import { getCurrentWeekDates } from '@/utils/dateUtils';
-import { subWeeks } from 'date-fns';
-import { addWeeks } from 'date-fns';
+import { addWeeks, subWeeks } from 'date-fns';
 
 const useWeeklyCalendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());

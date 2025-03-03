@@ -1,18 +1,14 @@
+import { useContext } from 'react';
+import { HomePageContext } from '@/app/context/HomePageContext';
+import SelectedScheduleTemplateDropdown from './SelectedScheduleTemplateDropdown';
+
 import ChevronLeftIcon from '@/assets/icons/chevron-left.svg';
 import ChevronRightIcon from '@/assets/icons/chevron-right.svg';
-import { WeekDates } from '../types';
 
-const WeeklyNavigator = ({
-  currentWeekDates,
-  setCurrentDate,
-  goToNextWeek,
-  goToPreviousWeek,
-}: {
-  currentWeekDates: WeekDates;
-  setCurrentDate: (date: Date) => void;
-  goToNextWeek: () => void;
-  goToPreviousWeek: () => void;
-}) => {
+const WeeklyNavigator = () => {
+  const { currentWeekDates, setCurrentDate, goToPreviousWeek, goToNextWeek } =
+    useContext(HomePageContext);
+
   const startDate = currentWeekDates[0];
   const endDate = currentWeekDates[6];
 
@@ -38,6 +34,7 @@ const WeeklyNavigator = ({
           <span className="body-16-400 text-gray-800">Today</span>
         </button>
       </div>
+      <SelectedScheduleTemplateDropdown />
     </nav>
   );
 };
