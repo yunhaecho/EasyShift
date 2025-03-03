@@ -1,7 +1,6 @@
 'use client';
 
 import { useContext, useState } from 'react';
-import { StoresPageContext } from '@/app/context/StoresPageContext';
 import Link from 'next/link';
 import { useDeleteStoreMutation } from '@/api/endpoints/stores/useDeleteStoreMutation';
 
@@ -12,11 +11,12 @@ import { Store } from '@/api/endpoints/stores/types';
 
 import DeleteRedIcon from '@/assets/icons/delete-red.svg';
 import StoreBlackIcon from '@/assets/icons/store-black.svg';
+import { GlobalNavBarContext } from '@/app/context/GlobalNavBarContext';
 
 const StoreList = () => {
   const [storeToDelete, setStoreToDelete] = useState<Store | null>(null);
 
-  const data = useContext(StoresPageContext);
+  const { data } = useContext(GlobalNavBarContext);
   const deleteStoreMutation = useDeleteStoreMutation();
 
   const handleDeleteStoreClick = (

@@ -10,6 +10,8 @@ import { STORE_MENUS } from '@/constants/menus';
 
 import Logo from '@/assets/logo.svg';
 import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
+import { useContext } from 'react';
+import { GlobalNavBarContext } from '../context/GlobalNavBarContext';
 
 /* Home, Schedule, Settings 메뉴 탭 */
 const MenuBar = () => {
@@ -39,24 +41,36 @@ const MenuBar = () => {
 
 /* 유저가 소속된 매장 리스트 */
 const StoresListDropdown = () => {
+  const params = useParams();
+  const storeId = params.storeId;
+
+  const { data } = useContext(GlobalNavBarContext);
+
   return (
     <Menu>
       <MenuButton className="body-16-400 flex w-200 justify-between border border-gray-400 py-9 pl-12 text-gray-900">
-        <span>Starbucks Reserve</span>
+        <span>
+          {
+            data?.stores.find(store => store.storeId === Number(storeId))
+              ?.storeName
+          }
+        </span>
         <ChevronDownIcon className="mr-8 h-24 w-24" />
       </MenuButton>
       <MenuItems
         anchor="bottom"
         className="absolute mt-5 w-200 border border-gray-400 bg-white"
       >
-        <MenuItem>
-          <Link
-            className="block px-12 py-9 data-[focus]:bg-gray-300"
-            href="/settings"
-          >
-            Settings
-          </Link>
-        </MenuItem>
+        {data?.stores.map(store => (
+          <MenuItem key={store.storeId}>
+            <Link
+              className="block px-12 py-9 data-[focus]:bg-gray-300"
+              href={`/${ROUTES.STORES}/${store.storeId}/home`}
+            >
+              {store.storeName}
+            </Link>
+          </MenuItem>
+        ))}
       </MenuItems>
     </Menu>
   );
