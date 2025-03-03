@@ -5,71 +5,57 @@ import { ROUTES } from '@/constants/routes';
 import classNames from 'classnames';
 import { hideNavigation } from '@/utils/hideNavigation';
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/react';
-import Link from 'next/link';
 import { STORE_MENUS } from '@/constants/menus';
 
 import Logo from '@/assets/logo.svg';
 import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
-import { useContext } from 'react';
-import { GlobalNavBarContext } from '../context/GlobalNavBarContext';
 
 /* Home, Schedule, Settings 메뉴 탭 */
 const MenuBar = () => {
+  const router = useRouter();
   const pathname = usePathname();
   const params = useParams();
   const storeId = params.storeId;
 
   return (
-    <nav aria-label="Main navigation">
-      <ul className="flex h-full items-center gap-30">
-        {STORE_MENUS.map(menu => (
-          <li key={menu.label}>
-            <Link
-              href={`/${ROUTES.STORES}/${storeId}/${menu.path}`}
-              className={classNames('body-14-500 px-14 py-21 text-gray-800', {
-                'border-b-2 border-gray-800': pathname.includes(menu.path),
-              })}
-            >
-              {menu.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <div className="flex h-full items-center gap-30">
+      {STORE_MENUS.map(menu => (
+        <button
+          key={menu.label}
+          onClick={() =>
+            router.push(`/${ROUTES.STORES}/${storeId}/${menu.path}`)
+          }
+          className={classNames('body-14-500 px-14 py-21 text-gray-800', {
+            'border-b-2 border-gray-800': pathname.includes(menu.path),
+          })}
+        >
+          {menu.label}
+        </button>
+      ))}
+    </div>
   );
 };
 
 /* 유저가 소속된 매장 리스트 */
 const StoresListDropdown = () => {
-  const { data, selectedStoreId, setSelectedStoreId } =
-    useContext(GlobalNavBarContext);
-
   return (
     <Menu>
       <MenuButton className="body-16-400 flex w-200 justify-between border border-gray-400 py-9 pl-12 text-gray-900">
-        <span>
-          {
-            data?.stores.find(store => store.storeId === selectedStoreId)
-              ?.storeName
-          }
-        </span>
+        <div>Starbucks Reserve</div>
         <ChevronDownIcon className="mr-8 h-24 w-24" />
       </MenuButton>
       <MenuItems
         anchor="bottom"
-        className="absolute mt-5 w-200 border border-gray-400 bg-white"
+        className="mt-5 w-200 border border-gray-400 bg-white"
       >
-        {data?.stores.map(store => (
-          <MenuItem key={store.storeId}>
-            <Link
-              className="block px-12 py-9 data-[focus]:bg-gray-300"
-              href={`/${ROUTES.STORES}/${store.storeId}/home`}
-              onClick={() => setSelectedStoreId(store.storeId)}
-            >
-              {store.storeName}
-            </Link>
-          </MenuItem>
-        ))}
+        <MenuItem>
+          <a
+            className="block px-12 py-9 data-[focus]:bg-gray-300"
+            href="/settings"
+          >
+            Settings
+          </a>
+        </MenuItem>
       </MenuItems>
     </Menu>
   );
@@ -82,20 +68,22 @@ const UserAvatar = () => {
 
 /* 로그인, 회원가입 버튼 */
 const AuthButtons = () => {
+  const router = useRouter();
+
   return (
     <div className="flex gap-16">
-      <Link
+      <button
         className="body-16-500 rounded-4 text-gray-900"
-        href={`/${ROUTES.SIGNIN}`}
+        onClick={() => router.push(`/${ROUTES.SIGNIN}`)}
       >
-        Sign In
-      </Link>
-      <Link
+        <p>Sign In</p>
+      </button>
+      <button
         className="body-16-500 rounded-4 bg-gray-900 px-15 py-8 text-white"
-        href={`/${ROUTES.SIGNUP}`}
+        onClick={() => router.push(`/${ROUTES.SIGNUP}`)}
       >
-        Sign Up
-      </Link>
+        <p>Sign Up</p>
+      </button>
     </div>
   );
 };
@@ -105,8 +93,12 @@ const TopBar = () => {
   const pathname = usePathname();
   const isAuthenticated = true;
 
-  const handleLogoClick = () => {
-    router.push(isAuthenticated ? `/${ROUTES.STORES}` : `/${ROUTES.LANDING}`);
+  const routerLogo = () => {
+    if (isAuthenticated) {
+      router.push(`/${ROUTES.STORES}`);
+    } else {
+      router.push(`/${ROUTES.LANDING}`);
+    }
   };
 
   return (
@@ -114,13 +106,13 @@ const TopBar = () => {
       <div className="flex h-full w-full items-center justify-between">
         <div className="flex h-full items-center gap-26">
           {/* Logo */}
-          <h1 className="flex h-full items-center">
-            <button onClick={handleLogoClick} aria-label="Go to homepage">
-              <Logo aria-label="Easy Shift" />
+          <h1>
+            <button onClick={routerLogo}>
+              <Logo aria-label="easy shift" />
             </button>
           </h1>
 
-          {/* Navigation Menu */}
+          {/* Menu */}
           {!hideNavigation(pathname, isAuthenticated) && (
             <>
               <StoresListDropdown />

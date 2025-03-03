@@ -34,68 +34,68 @@ export default function SignUp() {
             <RoleButton icon={<AdminIcon />} role="Administrator" />
             <RoleButton icon={<WorkerIcon />} role="Worker" />
           </div>
+
+          <form>
+            <SignUpForm
+              icon={
+                <WorkerIcon className="ml-12 mr-12 mt-15 fill-current text-gray-500" />
+              }
+              formName="Full Name"
+              type="text"
+            />
+            <SignUpForm
+              icon={
+                <EmailIcon className="ml-12 mr-12 mt-18 fill-current text-gray-500" />
+              }
+              formName="Email address"
+              type="email"
+            />
+            <SignUpForm
+              icon={<LockIcon className="ml-12 mr-12 mt-15" />}
+              formName="Password"
+              type="password"
+            />
+            <SignUpForm
+              icon={<LockIcon className="ml-12 mr-12 mt-15" />}
+              formName="Confirm Password"
+              type="password"
+            />
+            <SignUpForm
+              icon={
+                <PhoneIcon className="ml-12 mr-12 mt-15 fill-current text-gray-500" />
+              }
+              formName="Phone Number (Optional)"
+              type="tel"
+            />
+          </form>
+
+          {/* 약관동의 파트 */}
+          <div className="mb-16 flex h-24 w-full flex-row items-center justify-start">
+            <Checkbox
+              checked={enabled}
+              onChange={setEnabled}
+              className="group mr-6 flex size-20 cursor-pointer flex-col items-center justify-center rounded-md border border-gray-400 bg-white/10 p-1 ring-1 ring-inset ring-white/15 data-[checked]:bg-white"
+            >
+              <CheckIcon className="hidden h-20 w-20 fill-black group-data-[checked]:block" />
+            </Checkbox>
+
+            <span className="body-14-400 text-gray-600">
+              I accept the&ensp;
+              <strong className="body-14-500 cursor-pointer text-gray-900">
+                Terms of Service
+              </strong>
+              &ensp;and&ensp;
+              <strong className="body-14-500 cursor-pointer text-gray-900">
+                Privacy Policy
+              </strong>
+            </span>
+          </div>
+
+          {/* 제출버튼 */}
+          <Button className="flex h-46 w-full flex-col items-center justify-center rounded-4 bg-black text-white">
+            Create Account
+          </Button>
         </div>
-
-        <form>
-          <SignUpForm
-            icon={
-              <WorkerIcon className="ml-12 mr-12 mt-15 fill-current text-gray-500" />
-            }
-            formName="Full Name"
-            type="text"
-          />
-          <SignUpForm
-            icon={
-              <EmailIcon className="ml-12 mr-12 mt-18 fill-current text-gray-500" />
-            }
-            formName="Email address"
-            type="email"
-          />
-          <SignUpForm
-            icon={<LockIcon className="ml-12 mr-12 mt-15" />}
-            formName="Password"
-            type="password"
-          />
-          <SignUpForm
-            icon={<LockIcon className="ml-12 mr-12 mt-15" />}
-            formName="Confirm Password"
-            type="password"
-          />
-          <SignUpForm
-            icon={
-              <PhoneIcon className="ml-12 mr-12 mt-15 fill-current text-gray-500" />
-            }
-            formName="Phone Number (Optional)"
-            type="tel"
-          />
-        </form>
-
-        {/* 약관동의 파트 */}
-        <div className="mb-16 flex h-24 w-full flex-row items-center justify-start">
-          <Checkbox
-            checked={enabled}
-            onChange={setEnabled}
-            className="group mr-6 flex size-20 cursor-pointer flex-col items-center justify-center rounded-md border border-gray-400 bg-white/10 p-1 ring-1 ring-inset ring-white/15 data-[checked]:bg-white"
-          >
-            <CheckIcon className="hidden h-20 w-20 fill-black group-data-[checked]:block" />
-          </Checkbox>
-
-          <span className="body-14-400 text-gray-600">
-            I accept the&ensp;
-            <strong className="body-14-500 cursor-pointer text-gray-900">
-              Terms of Service
-            </strong>
-            &ensp;and&ensp;
-            <strong className="body-14-500 cursor-pointer text-gray-900">
-              Privacy Policy
-            </strong>
-          </span>
-        </div>
-
-        {/* 제출버튼 */}
-        <Button className="flex h-46 w-full flex-col items-center justify-center rounded-4 bg-black text-white">
-          Create Account
-        </Button>
       </div>
     </div>
   );

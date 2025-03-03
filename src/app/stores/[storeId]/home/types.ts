@@ -1,12 +1,5 @@
 export interface Schedule {
-  id: string;
-  name: string;
-  shifts: {
-    id: number;
-    name: string;
-    startTime: string;
-    endTime: string;
-  }[];
+  shifts: number[];
 }
 
 export interface WeekDate {

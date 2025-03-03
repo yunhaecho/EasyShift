@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import CloseIcon from '@/assets/icons/close.svg';
 import CopyIcon from '@/assets/icons/copy.svg';
 
-const INVITE_CODE = 'a1b2c3d4e5';
+const INVITE_LINK = 'https://example.com/invite/xyz123';
 
 const InviteLinkModal = ({
   isOpen,
@@ -16,11 +16,11 @@ const InviteLinkModal = ({
 }) => {
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(INVITE_CODE);
-      toast.success('Code copied to clipboard!');
+      await navigator.clipboard.writeText(INVITE_LINK);
+      toast.success('Link copied to clipboard!');
     } catch (err) {
       console.error('Failed to copy text: ', err);
-      toast.error('Failed to copy code');
+      toast.error('Failed to copy link');
     }
   };
 
@@ -33,18 +33,18 @@ const InviteLinkModal = ({
       <div className="fixed inset-0 flex items-center justify-center p-4">
         <div className="min-w-480 rounded-8 bg-white p-24">
           <DialogTitle className="head-20-600 flex items-center justify-between text-gray-900">
-            <p>Invite Code</p>
+            <p>Invite Link</p>
             <button onClick={onClose}>
               <CloseIcon />
             </button>
           </DialogTitle>
 
           <Description className="body-14-400 mt-24 text-gray-700">
-            Copy this code to add members
+            Copy this link to add members
           </Description>
 
           <div className="mt-16 flex items-center justify-between rounded-8 border border-gray-300 bg-gray-200 px-25 py-21">
-            <p className="body-16-400 text-gray-800">{INVITE_CODE}</p>
+            <p className="body-16-400 text-gray-800">{INVITE_LINK}</p>
             <button
               onClick={handleCopy}
               className="flex items-center justify-between gap-5 hover:text-gray-600"
