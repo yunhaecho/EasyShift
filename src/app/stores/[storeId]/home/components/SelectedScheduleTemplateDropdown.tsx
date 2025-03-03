@@ -5,8 +5,9 @@ import { HomePageContext } from '@/app/context/HomePageContext';
 import { useContext } from 'react';
 
 const SelectedScheduleTemplateDropdown = () => {
-  const { data, setSelectedScheduleTemplateId } = useContext(HomePageContext);
-  const { selectedScheduleTemplate, scheduleTemplates } = data || {};
+  const { storeData, setSelectedScheduleTemplateId } =
+    useContext(HomePageContext);
+  const { selectedScheduleTemplate, scheduleTemplates } = storeData || {};
 
   return (
     <Menu>
@@ -24,7 +25,7 @@ const SelectedScheduleTemplateDropdown = () => {
               className="flex w-full justify-start px-12 py-9 data-[focus]:bg-gray-300"
               onClick={() =>
                 setSelectedScheduleTemplateId(
-                  scheduleTemplate.scheduleTemplateId.toString(),
+                  scheduleTemplate.scheduleTemplateId,
                 )
               }
             >

@@ -80,32 +80,32 @@ export const storeHandlers = [
             endTime: '18:00',
             dates: [
               {
-                date: '2025-02-27',
+                date: '2025-03-03',
                 assignedShifts: [
                   {
                     shiftId: 301,
                     userId: 401,
-                    userName: '양소연',
+                    userName: 'Yang Soyeon',
                   },
                   {
                     shiftId: 302,
                     userId: 402,
-                    userName: '김찬호',
+                    userName: 'Kim Chanho',
                   },
                 ],
               },
               {
-                date: '2025-02-28',
+                date: '2025-03-04',
                 assignedShifts: [
                   {
                     shiftId: 303,
                     userId: 403,
-                    userName: '양소연',
+                    userName: 'Yang Soyeon',
                   },
                   {
                     shiftId: 304,
                     userId: 404,
-                    userName: '김찬호',
+                    userName: 'Kim Chanho',
                   },
                 ],
               },
@@ -118,17 +118,17 @@ export const storeHandlers = [
             endTime: '17:00',
             dates: [
               {
-                date: '2025-02-27',
+                date: '2025-03-03',
                 assignedShifts: [
                   {
                     shiftId: 305,
                     userId: 405,
-                    userName: '양소연',
+                    userName: 'Jo Jangho',
                   },
                   {
                     shiftId: 306,
                     userId: 406,
-                    userName: '김찬호',
+                    userName: 'Cho Yunhae',
                   },
                 ],
               },
@@ -141,12 +141,12 @@ export const storeHandlers = [
             endTime: '23:00',
             dates: [
               {
-                date: '2025-02-28',
+                date: '2025-03-03',
                 assignedShifts: [
                   {
                     shiftId: 307,
                     userId: 407,
-                    userName: '양소연',
+                    userName: 'Lee Youngjae',
                   },
                 ],
               },

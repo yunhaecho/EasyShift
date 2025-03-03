@@ -1,24 +1,17 @@
 import WorkerInfoModal from '@/app/workers/components/WorkerInfoModal';
-import { WeekDate } from '@/app/stores/[storeId]/home/types';
 import WorkerBlock from './WorkerBlock';
-import useToggle from '@/app/hooks/useToggle';
 import { useContext } from 'react';
 import { HomePageContext } from '@/app/context/HomePageContext';
+import useToggle from '@/app/hooks/useToggle';
 
 const SHIFT_COLORS = ['#EEF2FF', '#F0FDF4', '#FFF1E7'];
 
-const WeeklyCalendar = ({
-  currentWeekDates,
-}: {
-  currentWeekDates: WeekDate[];
-}) => {
-  const { data } = useContext(HomePageContext);
+const WeeklyCalendar = () => {
+  const { shiftData, currentWeekDates } = useContext(HomePageContext);
   const [isWorkerInfoModalOpen, toggleWorkerInfoModal] = useToggle();
 
-  const { selectedScheduleTemplate } = data || {};
-  const { shifts } = selectedScheduleTemplate || {};
+  const { shifts } = shiftData || {};
 
-  // 임시 컬러 배열
   const getShiftColor = (shiftTemplateName: string) => {
     const shiftIndex = shifts?.findIndex(
       s => s.shiftTemplateName === shiftTemplateName,

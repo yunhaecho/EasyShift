@@ -27,6 +27,15 @@ export const useFetchSchedule = (shiftDate?: string, status?: string) => {
   });
 };
 
+/* 스케줄 조회(all) */
+const getSchedulesScheduleIdAll = async (scheduleId: number) => {
+  const response = await axios.get<GetSchedulesScheduleIdAllResponse>(
+    `/api/schedules/${scheduleId}/all`,
+  );
+
+  return response.data;
+};
+
 /* 일주일치 스케줄 조회(캘린더 인디케이터) */
 const getSchedulesScheduleTemplateIdDate = async (
   scheduleTemplateId: number,
@@ -34,15 +43,6 @@ const getSchedulesScheduleTemplateIdDate = async (
 ) => {
   const response = await axios.get<GetSchedulesScheduleTemplateIdDateResponse>(
     `/api/schedules/${scheduleTemplateId}?date=${date}`,
-  );
-
-  return response.data;
-};
-
-/* 스케줄 조회(all) */
-const getSchedulesScheduleIdAll = async (scheduleId: number) => {
-  const response = await axios.get<GetSchedulesScheduleIdAllResponse>(
-    `/api/schedules/${scheduleId}/all`,
   );
 
   return response.data;
