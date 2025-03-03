@@ -5,14 +5,24 @@ import { HomePageContext } from '@/app/context/HomePageContext';
 import { useContext } from 'react';
 
 const SelectedScheduleTemplateDropdown = () => {
-  const { storeData, setSelectedScheduleTemplateId } =
-    useContext(HomePageContext);
-  const { selectedScheduleTemplate, scheduleTemplates } = storeData || {};
+  const {
+    storeData,
+    selectedScheduleTemplateId,
+    setSelectedScheduleTemplateId,
+    fetchShifts,
+  } = useContext(HomePageContext);
+  const { scheduleTemplates } = storeData || {};
 
   return (
     <Menu>
       <MenuButton className="body-16-400 flex w-200 justify-between border border-gray-400 bg-white py-9 pl-12 text-gray-900">
-        <div>{selectedScheduleTemplate?.scheduleTemplateName}</div>
+        <div>
+          {
+            scheduleTemplates?.find(
+              t => t.scheduleTemplateId === selectedScheduleTemplateId,
+            )?.scheduleTemplateName
+          }
+        </div>
         <ChevronDownIcon className="mr-8 h-24 w-24" />
       </MenuButton>
       <MenuItems
@@ -23,11 +33,12 @@ const SelectedScheduleTemplateDropdown = () => {
           <MenuItem key={scheduleTemplate.scheduleTemplateId}>
             <button
               className="flex w-full justify-start px-12 py-9 data-[focus]:bg-gray-300"
-              onClick={() =>
+              onClick={() => {
                 setSelectedScheduleTemplateId(
                   scheduleTemplate.scheduleTemplateId,
-                )
-              }
+                );
+                fetchShifts(scheduleTemplate.scheduleTemplateId);
+              }}
             >
               {scheduleTemplate.scheduleTemplateName}
             </button>

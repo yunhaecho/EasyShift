@@ -10,10 +10,8 @@ const WeeklyCalendar = () => {
   const { shiftData, currentWeekDates } = useContext(HomePageContext);
   const [isWorkerInfoModalOpen, toggleWorkerInfoModal] = useToggle();
 
-  const { shifts } = shiftData || {};
-
   const getShiftColor = (shiftTemplateName: string) => {
-    const shiftIndex = shifts?.findIndex(
+    const shiftIndex = shiftData?.findIndex(
       s => s.shiftTemplateName === shiftTemplateName,
     );
     return SHIFT_COLORS[(shiftIndex ?? 0) % SHIFT_COLORS.length];
@@ -37,7 +35,7 @@ const WeeklyCalendar = () => {
           </tr>
         </thead>
         <tbody>
-          {shifts?.map(shift => (
+          {shiftData?.map(shift => (
             <tr
               key={shift.shiftTemplateId}
               className="border-t border-gray-400 align-top"
