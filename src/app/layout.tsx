@@ -5,6 +5,8 @@ import TopBar from '@/app/components/TopBar';
 import { Toaster } from 'react-hot-toast';
 import mockEnable from '@/utils/mockEnable';
 import { Providers } from '@/providers';
+import GlobalNavBarProvider from './components/GlobalNavBarProvider';
+import { Suspense } from 'react';
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -29,9 +31,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${openSans.className} bg-gray-100 antialiased`}>
         <Providers>
-          <TopBar />
-          <div className="flex h-[calc(100vh-4rem)] w-full">{children}</div>
-          <Toaster position="top-center" />
+          <Suspense fallback={<div>Loading...</div>}>
+            <GlobalNavBarProvider>
+              <TopBar />
+              <div className="flex h-[calc(100vh-4rem)] w-full">{children}</div>
+              <Toaster position="top-center" />
+            </GlobalNavBarProvider>
+          </Suspense>
         </Providers>
       </body>
     </html>
