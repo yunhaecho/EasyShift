@@ -1,13 +1,11 @@
 'use client';
 
 import { GlobalNavBarContext } from '../context/GlobalNavBarContext';
-import { useState } from 'react';
 
 const GlobalNavBarProvider = ({ children }: { children: React.ReactNode }) => {
   // const { data } = useSuspenseQuery<GetStoresResponse>(
   //   storesQueryOptions.getStores(),
   // );
-  const [selectedStoreId, setSelectedStoreId] = useState<number | null>(null);
 
   /* 임시 */
   const data = {
@@ -34,9 +32,7 @@ const GlobalNavBarProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <GlobalNavBarContext.Provider
-      value={{ data, selectedStoreId, setSelectedStoreId }}
-    >
+    <GlobalNavBarContext.Provider value={{ data }}>
       {children}
     </GlobalNavBarContext.Provider>
   );

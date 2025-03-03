@@ -41,15 +41,17 @@ const MenuBar = () => {
 
 /* 유저가 소속된 매장 리스트 */
 const StoresListDropdown = () => {
-  const { data, selectedStoreId, setSelectedStoreId } =
-    useContext(GlobalNavBarContext);
+  const params = useParams();
+  const storeId = params.storeId;
+
+  const { data } = useContext(GlobalNavBarContext);
 
   return (
     <Menu>
       <MenuButton className="body-16-400 flex w-200 justify-between border border-gray-400 py-9 pl-12 text-gray-900">
         <span>
           {
-            data?.stores.find(store => store.storeId === selectedStoreId)
+            data?.stores.find(store => store.storeId === Number(storeId))
               ?.storeName
           }
         </span>
@@ -64,7 +66,6 @@ const StoresListDropdown = () => {
             <Link
               className="block px-12 py-9 data-[focus]:bg-gray-300"
               href={`/${ROUTES.STORES}/${store.storeId}/home`}
-              onClick={() => setSelectedStoreId(store.storeId)}
             >
               {store.storeName}
             </Link>
