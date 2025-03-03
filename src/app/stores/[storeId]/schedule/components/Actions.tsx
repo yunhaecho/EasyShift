@@ -5,20 +5,29 @@ import Link from 'next/link';
 
 import EditBlackIcon from '@/assets/icons/edit-black.svg';
 import DeleteRedIcon from '@/assets/icons/delete-red.svg';
+import { useDeleteScheduleMutation } from '@/api/endpoints/schedule/useDeleteSchedule';
 
-function Actions({
-  schedule,
-}: {
+function Actions( {schedule , onDeleteSuccess}: {
   schedule: {
-    id: number;
-    scheduleName: string;
+    id: string;
     shiftDate: string;
-    status: string;
-    description: string;
   };
-}) {
+  onDeleteSuccess : (deletedScheduleId: string) => void; 
+  
+}, ) {
+
   const params = useParams();
   const storeId = params.storeId;
+  // const [rmScheduleId , setRmDeleteScheduleId] = useState('');
+  const { mutate } = useDeleteScheduleMutation();
+
+  const handleClickDeleteScheduleButton = () => {
+    mutate(schedule.id, {
+      onSuccess : () => {
+        onDeleteSuccess(schedule.id);
+      },
+    });
+  }
 
   return (
     <div className="flex h-28 w-full flex-row items-center justify-center gap-12">
@@ -30,7 +39,10 @@ function Actions({
       >
         <EditBlackIcon />
       </Link>
-      <DeleteRedIcon />
+      
+      <Button>
+        <DeleteRedIcon onClick={handleClickDeleteScheduleButton} />
+      </Button>
     </div>
   );
 }
