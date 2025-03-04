@@ -11,7 +11,7 @@ const WorkerBlock = ({
 }) => {
   return (
     <button
-      className="w-full rounded-4 border border-gray-400 bg-white p-8"
+      className="w-full rounded-4 border border-gray-400 bg-white p-8 hover:bg-gray-100"
       onClick={toggleWorkerInfoModal}
     >
       <p className="body-14-400 truncate text-left text-gray-900">
