@@ -23,7 +23,7 @@ export default function Schedule() {
   const [status, setStatus] = useState('');
   const [year, setYear] = useState('');
   const [isAddScheduleModalOpen, toggleAddScheduleModal] = useToggle(false);
-  const [isLeaveRequestModalOpen, toggleLeaveRequestModal] = useToggle(false);
+  const [isLeaveRequestModalOpen, toggleLeaveRequestModal] = useToggle(true);
   const { data = [], isLoading } = useFetchSchedule();
 
   const column = ['Name', 'Period', 'Status', 'Actions'];
