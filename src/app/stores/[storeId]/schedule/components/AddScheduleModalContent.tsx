@@ -16,7 +16,7 @@ const ScheduleTemplateDropdown = ({
 
   return (
     <Menu>
-      <MenuButton className="flex w-300 justify-between border border-gray-400 bg-white py-9 pl-12">
+      <MenuButton className="flex w-full justify-between border border-gray-400 bg-white py-9 pl-12">
         <div className="flex w-full items-center justify-between">
           <span
             className={`body-16-400 ${
@@ -32,7 +32,8 @@ const ScheduleTemplateDropdown = ({
       </MenuButton>
       <MenuItems
         anchor="bottom"
-        className="mt-5 w-300 border border-gray-400 bg-white"
+        transition
+        className="w-[var(--button-width)] border border-gray-400 bg-white transition duration-200 ease-out [--anchor-gap:0.25rem] data-[closed]:scale-95 data-[closed]:opacity-0"
       >
         {mockSchedule.map(schedule => (
           <MenuItem key={schedule.id}>
@@ -61,25 +62,27 @@ const MonthYearPicker = ({
 }) => {
   return (
     <Menu>
-      <MenuButton className="body-16-400 flex w-300 justify-between border border-gray-400 bg-white py-9 pl-12 text-gray-900">
+      <MenuButton className="body-16-400 flex w-full justify-between border border-gray-400 bg-white py-9 pl-12 text-gray-900">
         <span>{format(selectedDate, 'yyyy년 M월')}</span>
         <ChevronDownIcon className="mr-8 h-24 w-24" />
       </MenuButton>
+
       <MenuItems
         anchor="bottom"
-        className="mt-5 w-300 border border-gray-400 bg-white p-16"
+        transition
+        className="w-[var(--button-width)] border border-gray-400 bg-white p-16 transition duration-200 ease-out [--anchor-gap:0.25rem] data-[closed]:scale-95 data-[closed]:opacity-0"
       >
         <div className="flex items-center justify-between pb-16">
           <button
             onClick={() => onChange(subYears(selectedDate, 1))}
-            className="p-8 hover:bg-gray-100"
+            className="rounded-4 p-8 hover:bg-gray-100"
           >
             ←
           </button>
           <span className="body-16-500">{format(selectedDate, 'yyyy년')}</span>
           <button
             onClick={() => onChange(addYears(selectedDate, 1))}
-            className="p-8 hover:bg-gray-100"
+            className="rounded-4 p-8 hover:bg-gray-100"
           >
             →
           </button>
@@ -163,13 +166,43 @@ const AddScheduleModalContent = () => {
       <fieldset className="flex flex-col gap-16">
         <legend className="sr-only">Add New Schedule</legend>
 
+        <section className="flex w-full gap-16">
+          <div className="flex flex-1 flex-col gap-4">
+            <label
+              htmlFor="schedule-name"
+              className="body-16-500 text-gray-900"
+            >
+              Schedule Name
+            </label>
+            <input
+              type="text"
+              placeholder="Enter Schedule Name"
+              className="body-16-400 w-full border border-gray-400 px-12 py-8 text-gray-900 focus:outline-none"
+            />
+          </div>
+          <div className="flex flex-1 flex-col gap-4">
+            <label
+              htmlFor="schedule-date"
+              className="body-16-500 text-gray-900"
+            >
+              Schedule Date
+            </label>
+            <MonthYearPicker
+              selectedDate={selectedDate}
+              onChange={setSelectedDate}
+            />
+          </div>
+        </section>
         <section className="flex flex-col gap-4">
-          <label htmlFor="schedule-date" className="body-16-500 text-gray-900">
-            Schedule Date
+          <label
+            htmlFor="schedule-description"
+            className="body-16-500 text-gray-900"
+          >
+            Schedule Description
           </label>
-          <MonthYearPicker
-            selectedDate={selectedDate}
-            onChange={setSelectedDate}
+          <input
+            placeholder="Enter Schedule Description"
+            className="body-16-400 w-full border border-gray-400 px-12 py-8 text-gray-900 focus:outline-none"
           />
         </section>
 
