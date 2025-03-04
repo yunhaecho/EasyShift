@@ -15,6 +15,7 @@ import Actions from './components/Actions';
 import { useFetchSchedule } from '@/api/endpoints/schedule/useFetchAllSchedule';
 import useToggle from '@/app/hooks/useToggle';
 import AddScheduleModal from './components/AddScheduleModal';
+import LeaveRequestModal from './components/LeaveRequestModal';
 
 export default function Schedule() {
   const [isStatusFilter, setIsStatusFilter] = useState(false);
@@ -22,7 +23,7 @@ export default function Schedule() {
   const [status, setStatus] = useState('');
   const [year, setYear] = useState('');
   const [isAddScheduleModalOpen, toggleAddScheduleModal] = useToggle(false);
-
+  const [isLeaveRequestModalOpen, toggleLeaveRequestModal] = useToggle(true);
   const { data = [], isLoading } = useFetchSchedule();
 
   const column = ['Name', 'Period', 'Status', 'Actions'];
@@ -179,6 +180,11 @@ export default function Schedule() {
           <AddScheduleModal
             isOpen={isAddScheduleModalOpen}
             onClose={toggleAddScheduleModal}
+          />
+          <LeaveRequestModal
+            isOpen={isLeaveRequestModalOpen}
+            onClose={toggleLeaveRequestModal}
+            scheduleDate={'2025-03'}
           />
         </>
       )}

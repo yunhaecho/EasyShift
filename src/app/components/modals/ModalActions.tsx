@@ -3,7 +3,7 @@ const ModalActions = ({
   onClose,
   onSubmit,
 }: {
-  mode: 'default' | 'add' | 'edit';
+  mode: 'default' | 'add' | 'edit' | 'submit';
   onClose: () => void;
   onSubmit: (e: React.FormEvent<HTMLButtonElement>) => void;
 }) => (
@@ -18,7 +18,13 @@ const ModalActions = ({
       onClick={onSubmit}
       className="body-14-500 rounded-4 bg-gray-900 px-16 py-8 text-white"
     >
-      {mode === 'default' ? 'Confirm' : mode === 'add' ? 'Create' : 'Update'}
+      {mode === 'default'
+        ? 'Confirm'
+        : mode === 'add'
+          ? 'Create'
+          : mode === 'submit'
+            ? 'Submit'
+            : 'Update'}
     </button>
   </div>
 );

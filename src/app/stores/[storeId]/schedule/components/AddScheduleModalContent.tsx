@@ -16,7 +16,7 @@ const ScheduleTemplateDropdown = ({
 
   return (
     <Menu>
-      <MenuButton className="flex w-300 justify-between border border-gray-400 bg-white py-9 pl-12">
+      <MenuButton className="flex w-full justify-between border border-gray-400 bg-white py-9 pl-12">
         <div className="flex w-full items-center justify-between">
           <span
             className={`body-16-400 ${
@@ -33,7 +33,7 @@ const ScheduleTemplateDropdown = ({
       <MenuItems
         anchor="bottom"
         transition
-        className="w-300 border border-gray-400 bg-white transition duration-200 ease-out [--anchor-gap:0.25rem] data-[closed]:scale-95 data-[closed]:opacity-0"
+        className="w-[var(--button-width)] border border-gray-400 bg-white transition duration-200 ease-out [--anchor-gap:0.25rem] data-[closed]:scale-95 data-[closed]:opacity-0"
       >
         {mockSchedule.map(schedule => (
           <MenuItem key={schedule.id}>
