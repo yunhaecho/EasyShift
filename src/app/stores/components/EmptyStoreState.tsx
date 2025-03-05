@@ -1,4 +1,4 @@
-import AddStoreButton from './AddStoreButton';
+import ManageStoreButton from './ManageStoreButton';
 
 import StoreGrayIcon from '@/assets/icons/store-gray.svg';
 
@@ -17,7 +17,7 @@ const EmptyStoreState = () => {
           Get started by creating your first store
         </p>
       </div>
-      <AddStoreButton />
+      <ManageStoreButton />
     </section>
   );
 };

@@ -8,6 +8,8 @@ import useScheduleTemplate from '@/app/hooks/useScheduleTemplate';
 import { useContext, useEffect } from 'react';
 import { SettingsPageContext } from '@/app/context/SettingsPageContext';
 import { useCreateScheduleTemplateMutation } from '@/api/endpoints/stores/useCreateScheduleTemplateMutation';
+import ConfirmationModal from './ConfirmationModal';
+import useToggle from '@/app/hooks/useToggle';
 
 const AddScheduleTemplateModal = ({
   isOpen,
@@ -26,6 +28,7 @@ const AddScheduleTemplateModal = ({
   } = useScheduleTemplate();
   const { storeUserData } = useContext(SettingsPageContext);
   const createScheduleTemplateMutation = useCreateScheduleTemplateMutation();
+  const [isConfirmationModalOpen, toggleConfirmationModal] = useToggle(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -35,33 +38,50 @@ const AddScheduleTemplateModal = ({
 
   const handleSubmit = () => {
     const isValid = checkScheduleTemplate();
-    if (!isValid) return;
+    if (!isValid) {
+      toggleConfirmationModal();
+      return;
+    }
 
     createScheduleTemplateMutation.mutate({
       storeId: storeUserData!.storeId, // [고민] suspense query를 통해 storeUserData의 존재 보장으로 assertion 사용
       scheduleTemplateData: scheduleTemplate,
     });
     onClose();
+    toggleConfirmationModal();
   };
 
   return (
-    <Dialog open={isOpen} onClose={onClose} className="relative z-50">
-      <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
-      <div className="fixed inset-0 flex items-center justify-center p-4">
-        <div className="max-h-[80%] min-w-[40%] overflow-y-auto rounded-8 bg-white">
-          <DialogTitle className="head-20-600 border-b border-gray-300 px-24 py-16 text-gray-900">
-            Add Schedule Template
-          </DialogTitle>
-          <ScheduleTemplateModalContent
-            scheduleTemplate={scheduleTemplate}
-            setScheduleTemplate={setScheduleTemplate}
-            addShiftTemplate={addShiftTemplate}
-            deleteShiftTemplate={deleteShiftTemplate}
-          />
-          <ModalActions mode="add" onClose={onClose} onSubmit={handleSubmit} />
+    <>
+      <Dialog open={isOpen} onClose={onClose} className="relative z-50">
+        <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
+        <div className="fixed inset-0 flex items-center justify-center p-4">
+          <div className="max-h-[80%] min-w-[40%] overflow-y-auto rounded-8 bg-white">
+            <DialogTitle className="head-20-600 border-b border-gray-300 px-24 py-16 text-gray-900">
+              Add Schedule Template
+            </DialogTitle>
+            <ScheduleTemplateModalContent
+              scheduleTemplate={scheduleTemplate}
+              setScheduleTemplate={setScheduleTemplate}
+              addShiftTemplate={addShiftTemplate}
+              deleteShiftTemplate={deleteShiftTemplate}
+            />
+            <ModalActions
+              mode="add"
+              onClose={onClose}
+              onSubmit={toggleConfirmationModal}
+            />
+          </div>
         </div>
-      </div>
-    </Dialog>
+      </Dialog>
+      <ConfirmationModal
+        isOpen={isConfirmationModalOpen}
+        onClose={toggleConfirmationModal}
+        onConfirm={handleSubmit}
+        title="Would you like to create this schedule template?"
+        description="Once created, the time of the schedule template cannot be modified."
+      />
+    </>
   );
 };
 

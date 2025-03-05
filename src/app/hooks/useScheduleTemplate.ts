@@ -67,7 +67,7 @@ const useScheduleTemplate = () => {
       return false;
     }
 
-    const invalidShift = scheduleTemplate.shiftTemplates.find(
+    const invalidShift = scheduleTemplate.shiftTemplates.some(
       shift =>
         !shift.shiftTemplateName.trim() || !shift.startTime || !shift.endTime,
     );

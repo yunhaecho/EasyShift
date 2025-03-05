@@ -4,6 +4,7 @@ import SelectedScheduleTemplateDropdown from './SelectedScheduleTemplateDropdown
 
 import ChevronLeftIcon from '@/assets/icons/chevron-left.svg';
 import ChevronRightIcon from '@/assets/icons/chevron-right.svg';
+import PersonalScheduleToggle from './PersonalScheduleToggle';
 
 const WeeklyNavigator = () => {
   const { currentWeekDates, setCurrentDate, goToPreviousWeek, goToNextWeek } =
@@ -34,7 +35,10 @@ const WeeklyNavigator = () => {
           <span className="body-16-400 text-gray-800">Today</span>
         </button>
       </div>
-      <SelectedScheduleTemplateDropdown />
+      <div className="flex items-center gap-16">
+        <PersonalScheduleToggle />
+        <SelectedScheduleTemplateDropdown />
+      </div>
     </nav>
   );
 };

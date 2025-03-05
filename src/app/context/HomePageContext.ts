@@ -12,6 +12,8 @@ export const HomePageContext = createContext<{
   shiftData: ShiftTemplateResponse[] | null;
   selectedScheduleTemplateId: number | null;
   setSelectedScheduleTemplateId: (id: number | null) => void;
+  showMyScheduleOnly: boolean;
+  setShowMyScheduleOnly: (show: boolean) => void;
   currentWeekDates: WeekDate[];
   setCurrentDate: (date: Date) => void;
   goToNextWeek: () => void;
@@ -22,6 +24,8 @@ export const HomePageContext = createContext<{
   shiftData: null,
   selectedScheduleTemplateId: null,
   setSelectedScheduleTemplateId: () => {},
+  showMyScheduleOnly: false,
+  setShowMyScheduleOnly: () => {},
   currentWeekDates: [],
   setCurrentDate: () => {},
   goToNextWeek: () => {},

@@ -88,3 +88,13 @@ export type User = {
   phoneNumber: string;
   avatarUrl: string;
 };
+
+export type GetStoresInfoStoreCodeResponse = {
+  storeId: number;
+  storeName: string;
+  description: string;
+};
+
+export type JoinStoreRequest = {
+  storeCode: string;
+};

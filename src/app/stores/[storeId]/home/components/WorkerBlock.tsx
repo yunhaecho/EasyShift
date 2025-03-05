@@ -1,3 +1,5 @@
+import { UserRole } from '@/app/stores/components/ManageStoreButton';
+
 const WorkerBlock = ({
   toggleWorkerInfoModal,
   shift,
@@ -9,15 +11,19 @@ const WorkerBlock = ({
     userName: string;
   };
 }) => {
+  const userRole = 'WORKER' as UserRole;
+
   return (
-    <button
-      className="w-full rounded-4 border border-gray-400 bg-white p-8 hover:bg-gray-100"
-      onClick={toggleWorkerInfoModal}
+    <div
+      className={`w-full rounded-4 border border-gray-400 bg-white p-8 ${
+        userRole === 'ADMIN' && 'cursor-pointer hover:bg-gray-100'
+      }`}
+      onClick={userRole === 'ADMIN' ? toggleWorkerInfoModal : undefined}
     >
       <p className="body-14-400 truncate text-left text-gray-900">
         {shift.userName}
       </p>
-    </button>
+    </div>
   );
 };
 

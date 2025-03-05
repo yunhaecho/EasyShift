@@ -7,8 +7,10 @@ import useToggle from '@/app/hooks/useToggle';
 const SHIFT_COLORS = ['#EEF2FF', '#F0FDF4', '#FFF1E7'];
 
 const WeeklyCalendar = () => {
-  const { shiftData, currentWeekDates } = useContext(HomePageContext);
+  const { shiftData, showMyScheduleOnly, currentWeekDates } =
+    useContext(HomePageContext);
   const [isWorkerInfoModalOpen, toggleWorkerInfoModal] = useToggle();
+  const mockUserId = 401;
 
   const getShiftColor = (shiftTemplateName: string) => {
     const shiftIndex = shiftData?.findIndex(
@@ -71,13 +73,18 @@ const WeeklyCalendar = () => {
                     className="h-162 border-l border-gray-400 p-16 align-top"
                   >
                     <div className="flex flex-col gap-8">
-                      {assignedShifts?.map(shift => (
-                        <WorkerBlock
-                          key={shift.shiftId}
-                          toggleWorkerInfoModal={toggleWorkerInfoModal}
-                          shift={shift}
-                        />
-                      ))}
+                      {assignedShifts
+                        ?.filter(
+                          shift =>
+                            !showMyScheduleOnly || shift.userId === mockUserId,
+                        )
+                        .map(shift => (
+                          <WorkerBlock
+                            key={shift.shiftId}
+                            toggleWorkerInfoModal={toggleWorkerInfoModal}
+                            shift={shift}
+                          />
+                        ))}
                     </div>
                   </td>
                 );

@@ -28,6 +28,7 @@ const HomePageProvider = ({
   const [selectedScheduleTemplateId, setSelectedScheduleTemplateId] = useState<
     number | null
   >(null);
+  const [showMyScheduleOnly, setShowMyScheduleOnly] = useState(false);
 
   const { currentWeekDates, setCurrentDate, goToNextWeek, goToPreviousWeek } =
     useWeeklyCalendar();
@@ -81,6 +82,8 @@ const HomePageProvider = ({
         shiftData: shiftsData || null,
         selectedScheduleTemplateId,
         setSelectedScheduleTemplateId,
+        showMyScheduleOnly,
+        setShowMyScheduleOnly,
         currentWeekDates,
         setCurrentDate,
         goToNextWeek,

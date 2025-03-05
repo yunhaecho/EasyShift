@@ -1,21 +1,25 @@
 import { Description, DialogTitle } from '@headlessui/react';
-
 import { Dialog } from '@headlessui/react';
-import AlertCircleIcon from '@/assets/icons/alert.svg';
+import StoreCircleIcon from '@/assets/icons/store-circle.svg';
+import { useQuery } from '@tanstack/react-query';
+import { storesQueryOptions } from '@/api/endpoints/stores/storesQueryOptions';
 
 const ConfirmationModal = ({
   isOpen,
   onClose,
   onConfirm,
-  title,
-  description,
+  storeCode,
 }: {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
-  title: string;
-  description: string;
+  storeCode: string;
 }) => {
+  const { data: storeData, isLoading } = useQuery({
+    ...storesQueryOptions.getStoresInfoStoreCode(storeCode),
+    enabled: isOpen,
+  });
+
   return (
     <Dialog open={isOpen} onClose={onClose} className="relative z-50">
       {/* Overlay */}
@@ -25,12 +29,16 @@ const ConfirmationModal = ({
       <div className="fixed inset-0 flex items-center justify-center">
         <div className="flex w-[30%] flex-col items-center rounded-8 bg-white p-32">
           <DialogTitle className="flex flex-col items-center gap-24">
-            <AlertCircleIcon className="flex-shrink-0" />
-            <p className="head-24-600 text-center text-gray-900">{title}</p>
+            <StoreCircleIcon className="flex-shrink-0" />
+            <p className="head-24-600 text-center text-gray-900">
+              Would you like to join this store?
+            </p>
           </DialogTitle>
 
           <Description className="body-16-400 mt-16 text-center text-gray-700">
-            {description}
+            {isLoading
+              ? 'Loading...'
+              : `'${storeData?.storeName}', ${storeData?.description}`}
           </Description>
 
           <footer className="mt-32 flex w-full gap-16">
@@ -43,10 +51,10 @@ const ConfirmationModal = ({
             </button>
             <button
               type="button"
-              className="body-16-500 flex-1 rounded-4 bg-red-300 py-12 text-white"
+              className="body-16-500 flex-1 rounded-4 bg-gray-900 py-12 text-white"
               onClick={onConfirm}
             >
-              Confirm
+              Join
             </button>
           </footer>
         </div>

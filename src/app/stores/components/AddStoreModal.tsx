@@ -2,7 +2,7 @@
 
 import { DialogTitle } from '@headlessui/react';
 import { Dialog } from '@headlessui/react';
-import ModalActions from './ModalActions';
+import ModalActions from '../../components/modals/ModalActions';
 import { useEffect, useState } from 'react';
 import { useCreateStoreMutation } from '@/api/endpoints/stores/useCreateStoreMutation';
 
