@@ -12,17 +12,23 @@ import Logo from '@/assets/logo.svg';
 import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
 import { useContext } from 'react';
 import { GlobalNavBarContext } from '../context/GlobalNavBarContext';
+import { UserRole } from '../stores/components/ManageStoreButton';
 
 /* Home, Schedule, Settings 메뉴 탭 */
 const MenuBar = () => {
   const pathname = usePathname();
   const params = useParams();
   const storeId = params.storeId;
+  const userRole = 'ADMIN' as UserRole;
+
+  const filteredMenus = STORE_MENUS.filter(menu =>
+    menu.requiredRoles.includes(userRole),
+  );
 
   return (
     <nav aria-label="Main navigation">
       <ul className="flex h-full items-center gap-30">
-        {STORE_MENUS.map(menu => (
+        {filteredMenus.map(menu => (
           <li key={menu.label}>
             <Link
               href={`/${ROUTES.STORES}/${storeId}/${menu.path}`}
