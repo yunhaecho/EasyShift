@@ -1,10 +1,12 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
-import { useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { format, addYears, subYears, addMonths } from 'date-fns';
 import { mockSchedule } from '../../mocks';
 import { ScheduleTemplate } from '../../settings/types';
 
 import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
+import {ShiftDetail , AddNewScheduleParams} from '@/app/stores/[storeId]/settings/types';
+import { useParams } from 'next/navigation';
 
 const ScheduleTemplateDropdown = ({
   onSelect,
@@ -113,9 +115,14 @@ const MonthYearPicker = ({
 
 const ShiftRequirementsTable = ({
   shifts,
+  shiftDetails,
+  onChange,
 }: {
   shifts: ScheduleTemplate['shifts'];
-}) => (
+  shiftDetails: ShiftDetail[];
+  onChange: (index: number, newValue: number) => void
+}) => {
+ return (
   <table className="w-full table-fixed border-collapse">
     <thead>
       <tr className="bg-gray-100">
@@ -131,7 +138,7 @@ const ShiftRequirementsTable = ({
       </tr>
     </thead>
     <tbody>
-      {shifts.map(shift => (
+      {shifts.map((shift ,index) => (
         <tr key={shift.id} className="border-t border-gray-400">
           <td className="body-14-500 px-24 py-12 text-center text-gray-900">
             {shift.name}
@@ -145,6 +152,12 @@ const ShiftRequirementsTable = ({
               type="number"
               min="1"
               className="body-14-400 w-full border border-gray-400 px-12 py-8 text-gray-900 focus:outline-none"
+              name="expectedWorkers"
+              value={shiftDetails[index]?.expectedWorkers ?? 0} //
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  // 자식에서 값이 변경되면 부모에 index와 새로운 값을 전달
+                  onChange(index, e.currentTarget.valueAsNumber);
+                }}
             />
           </td>
         </tr>
@@ -152,14 +165,59 @@ const ShiftRequirementsTable = ({
     </tbody>
   </table>
 );
+}
 
-const AddScheduleModalContent = () => {
+const AddScheduleModalContent = ( {onParamsChange } :{onParamsChange : (params: AddNewScheduleParams) => void;} ) => {
+  const { storeId } = useParams();
+
   const [selectedDate, setSelectedDate] = useState<Date>(() => {
     const today = new Date();
     return addMonths(today, 1);
   });
+
   const [selectedScheduleTemplate, setSelectedScheduleTemplate] =
     useState<ScheduleTemplate | null>(null);
+
+  const [addNewScheduleParameters, setAddNewScheduleParameters] = useState<AddNewScheduleParams>({
+    storeId: storeId as string,
+    scheduleTemplateId: selectedScheduleTemplate ? selectedScheduleTemplate.id : 0,
+    scheduleName: '',
+    scheduleMonth: format(selectedDate, 'yyyy-MM'),
+    description: '',
+    shiftDetails: [],
+  })
+
+  // 스케줄 템플릿이 선택되면, 해당 템플릿의 shift 목록을 기반으로 shiftDetails를 초기화
+  useEffect(() => {
+    if (selectedScheduleTemplate) {
+      setAddNewScheduleParameters(prev => ({
+        ...prev,
+        shiftDetails: selectedScheduleTemplate.shifts.map(shift => ({
+          shiftTemplateId: shift.id,
+          expectedWorkers: 0, 
+        })),
+      }));
+    }
+  }, [selectedScheduleTemplate]);
+
+  useEffect(() => {
+    onParamsChange(addNewScheduleParameters);
+  }, [addNewScheduleParameters, onParamsChange]);
+
+  // ShiftRequirementsTable에서 호출할 업데이트 함수
+  const handleShiftChange = (index: number, newExpectedWorkers: number) => {
+    setAddNewScheduleParameters(prev => ({
+      ...prev,
+      shiftDetails: prev.shiftDetails.map((detail, i) =>
+        i === index ? { ...detail, expectedWorkers: newExpectedWorkers } : detail
+      ),
+    }));
+  };
+
+  const handleAddNewScheduleParamsChange = (e : ChangeEvent<HTMLInputElement>) => {
+    const {name , value} = e.currentTarget;
+    setAddNewScheduleParameters(prev => ({...prev, [name] : value }))
+  }
 
   return (
     <form className="flex flex-col gap-24 px-24 py-16">
@@ -178,6 +236,8 @@ const AddScheduleModalContent = () => {
               type="text"
               placeholder="Enter Schedule Name"
               className="body-16-400 w-full border border-gray-400 px-12 py-8 text-gray-900 focus:outline-none"
+              name='scheduleName'
+              onChange={handleAddNewScheduleParamsChange}
             />
           </div>
           <div className="flex flex-1 flex-col gap-4">
@@ -203,6 +263,8 @@ const AddScheduleModalContent = () => {
           <input
             placeholder="Enter Schedule Description"
             className="body-16-400 w-full border border-gray-400 px-12 py-8 text-gray-900 focus:outline-none"
+            name='description'
+            onChange={handleAddNewScheduleParamsChange}
           />
         </section>
 
@@ -219,7 +281,10 @@ const AddScheduleModalContent = () => {
         {selectedScheduleTemplate && (
           <section className="mt-4 flex flex-col gap-16 border border-gray-300">
             <h3 className="sr-only">Shift Requirements</h3>
-            <ShiftRequirementsTable shifts={selectedScheduleTemplate.shifts} />
+            <ShiftRequirementsTable 
+              shifts={selectedScheduleTemplate.shifts} 
+              shiftDetails={addNewScheduleParameters.shiftDetails} 
+              onChange={handleShiftChange}/>
           </section>
         )}
       </fieldset>

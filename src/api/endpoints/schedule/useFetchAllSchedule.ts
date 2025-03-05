@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { queryOptions, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { FetchAllSchedulesResponse } from './schedules';
 import { useParams } from 'next/navigation';
@@ -8,7 +8,17 @@ import {
   GetSchedulesScheduleTemplateIdDateResponse,
 } from './types';
 
-export const fetchSchedules = async (storeId: string) => {
+const fetchSchedulesQueryOptions = (
+  storeId: number,
+  shiftDate?: string,
+  status?: string,
+) =>
+  queryOptions({
+    queryKey: ['schedule', { shiftDate, status }],
+    queryFn: () => fetchSchedulesQuery(storeId),
+  });
+
+export const fetchSchedulesQuery = async (storeId: number) => {
   const allSchedule = await axios.get<FetchAllSchedulesResponse>(
     `/api/stores/${storeId}/schedules`,
   );
@@ -16,15 +26,15 @@ export const fetchSchedules = async (storeId: string) => {
   return allSchedule.data.schedules;
 };
 
-export const useFetchSchedule = (shiftDate?: string, status?: string) => {
+export const useFetchAllScheduleQuery = (
+  shiftDate?: string,
+  status?: string,
+) => {
   const { storeId } = useParams();
 
-  return useQuery({
-    queryKey: ['schedule', { shiftDate, status }],
-    queryFn: () => fetchSchedules(storeId as string),
-    enabled: !!storeId,
-    staleTime: 1000 * 5,
-  });
+  return useQuery(
+    fetchSchedulesQueryOptions(parseInt(storeId as string), shiftDate, status),
+  );
 };
 
 /* 스케줄 조회(all) */

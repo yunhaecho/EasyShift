@@ -11,7 +11,28 @@ export const scheduleHandlers = [
         {
           id: 201,
           scheduleName: '새벽 근무',
-          shiftDate: '2025-03',
+          shiftDate: '2024-12',
+          status: 'pending',
+          description: '새벽 근무 일정입니다.',
+        },
+        {
+          id: 202,
+          scheduleName: '새벽 근무',
+          shiftDate: '2024-12',
+          status: 'pending',
+          description: '새벽 근무 일정입니다.',
+        },
+        {
+          id: 203,
+          scheduleName: '새벽 근무',
+          shiftDate: '2024-12',
+          status: 'pending',
+          description: '새벽 근무 일정입니다.',
+        },
+        {
+          id: 204,
+          scheduleName: '새벽 근무',
+          shiftDate: '2024-12',
           status: 'pending',
           description: '새벽 근무 일정입니다.',
         },
@@ -20,14 +41,14 @@ export const scheduleHandlers = [
       schedules = [
         {
           id: 301,
-          scheduleName: '오픈조 ',
+          scheduleName: '홀 ',
           shiftDate: '2024-10',
           status: 'completed',
           description: '야간 근무 일정입니다.',
         },
         {
           id: 302,
-          scheduleName: '주말 근무',
+          scheduleName: '주방',
           shiftDate: '2024-11',
           status: 'pending',
           description: '주말 근무 일정입니다.',

@@ -1,6 +1,6 @@
 export type FetchAllSchedulesResponse = {
   schedules: Array<{
-    id: number;
+    id: string;
     scheduleName: string;
     shiftDate: string;
     status: string;
