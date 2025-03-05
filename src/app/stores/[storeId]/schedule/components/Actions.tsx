@@ -18,7 +18,6 @@ function Actions( {schedule , onDeleteSuccess}: {
 
   const params = useParams();
   const storeId = params.storeId;
-  // const [rmScheduleId , setRmDeleteScheduleId] = useState('');
   const { mutate } = useDeleteScheduleMutation();
 
   const handleClickDeleteScheduleButton = () => {

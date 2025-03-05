@@ -66,8 +66,6 @@ export default function Schedule() {
     setIsYearFilter(true);
   };
 
-
-
   const handleDeleteSuccess = (deletedScheduleId: string) => {
     setFilteredDate((prevState) =>
       prevState.filter((schedule) => schedule.id !== deletedScheduleId)
@@ -93,7 +91,6 @@ export default function Schedule() {
           {/* 상태 연도 드랍다운바*/}
           <div className="h-auto w-full rounded-5 shadow-sm">
             {isLoading ? ( 'loading') : (
-                    <div>
               <div className="flex h-71 w-full flex-row gap-16 rounded-t-sm border-b border-gray-300 bg-white p-16">
                 {/* 상태*/}
                 <Menu>
@@ -147,7 +144,7 @@ export default function Schedule() {
                     </MenuItem>
                   </MenuItems>
                 </Menu>
-              </div>
+              
               <ScheduleDataTable filteredData={filteredData} onDeleteSuccess={handleDeleteSuccess} />
               <AddScheduleModal
             isOpen={isAddScheduleModalOpen}
