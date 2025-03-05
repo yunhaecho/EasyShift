@@ -19,3 +19,18 @@ export type Shift = {
   startTime: string;
   endTime: string;
 };
+
+//스케줄 생성 api type
+export type ShiftDetail = {
+  shiftTemplateId: number;
+  expectedWorkers: number;
+};
+
+export type AddNewScheduleParams = {
+  storeId: string;
+  scheduleTemplateId: number;
+  scheduleName: string;
+  scheduleMonth: string;
+  description: string;
+  shiftDetails: ShiftDetail[];
+};

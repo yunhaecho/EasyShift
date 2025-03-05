@@ -3,6 +3,7 @@ import { scheduleHandlers } from './scheduleHandlers';
 import { workerSchedulesHandlers } from './workerScheduleHandlers';
 import { shiftHandlers } from './shiftHandlers';
 import { scheduleDeleteHandlers } from './scheduleDeleteHandlers';
+import { scheduleAddHandlers } from './scheduleAddHandler';
 
 export const handlers = [
   ...storeHandlers,
@@ -10,4 +11,5 @@ export const handlers = [
   ...workerSchedulesHandlers,
   ...shiftHandlers,
   ...scheduleDeleteHandlers,
+  ...scheduleAddHandlers,
 ];

@@ -9,16 +9,16 @@ import {
 } from './types';
 
 const fetchSchedulesQueryOptions = (
-  storeId: string,
+  storeId: number,
   shiftDate?: string,
   status?: string,
 ) =>
   queryOptions({
     queryKey: ['schedule', { shiftDate, status }],
-    queryFn: () => fetchSchedulesQuery(storeId as string),
+    queryFn: () => fetchSchedulesQuery(storeId),
   });
 
-export const fetchSchedulesQuery = async (storeId: string) => {
+export const fetchSchedulesQuery = async (storeId: number) => {
   const allSchedule = await axios.get<FetchAllSchedulesResponse>(
     `/api/stores/${storeId}/schedules`,
   );
@@ -33,7 +33,7 @@ export const useFetchAllScheduleQuery = (
   const { storeId } = useParams();
 
   return useQuery(
-    fetchSchedulesQueryOptions(storeId as string, shiftDate, status),
+    fetchSchedulesQueryOptions(parseInt(storeId as string), shiftDate, status),
   );
 };
 
