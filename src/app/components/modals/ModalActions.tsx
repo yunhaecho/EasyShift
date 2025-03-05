@@ -23,7 +23,7 @@ const ModalActions = ({
         : mode === 'add'
           ? 'Create'
           : mode === 'submit'
-            ? 'Submit'
+            ? 'Confirm'
             : 'Update'}
     </button>
   </div>

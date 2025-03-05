@@ -4,7 +4,7 @@ import { useContext, useState } from 'react';
 import Link from 'next/link';
 import { useDeleteStoreMutation } from '@/api/endpoints/stores/useDeleteStoreMutation';
 
-import AddStoreButton from './AddStoreButton';
+import ManageStoreButton from './ManageStoreButton';
 import EmptyStoreState from './EmptyStoreState';
 import ConfirmationModal from '@/app/components/modals/ConfirmationModal';
 import { Store } from '@/api/endpoints/stores/types';
@@ -49,7 +49,7 @@ const StoreList = () => {
               </p>
             </div>
             <div className="h-fit">
-              <AddStoreButton />
+              <ManageStoreButton />
             </div>
           </header>
 
