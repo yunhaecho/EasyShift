@@ -5,7 +5,6 @@ import JoinStoreModal from '@/app/stores/components/JoinStoreModal';
 import useToggle from '@/app/hooks/useToggle';
 
 import PlusWhiteIcon from '@/assets/icons/plus-white.svg';
-
 export type UserRole = 'ADMIN' | 'WORKER';
 
 const ManageStoreButton = () => {

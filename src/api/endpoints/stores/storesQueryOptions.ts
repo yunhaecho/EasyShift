@@ -5,6 +5,7 @@ import {
   GetStoresStoreIdResponse,
   GetStoresStoreIdScheduleTemplatesResponse,
   GetStoresStoreIdUsersResponse,
+  GetStoresInfoStoreCodeResponse,
 } from './types';
 
 /* 매장 목록 조회 */
@@ -37,6 +38,14 @@ const getStoresStoreIdUsers = async (storeId: number) => {
   return response.data;
 };
 
+/* 매장 정보 조회 */
+const getStoresInfoStoreCode = async (storeCode: string) => {
+  const response = await axios.get<GetStoresInfoStoreCodeResponse>(
+    `/api/stores/info?storeCode=${storeCode}`,
+  );
+  return response.data;
+};
+
 export const storesQueryOptions = {
   getStores: () => ({
     queryKey: queryKeys.stores,
@@ -53,5 +62,9 @@ export const storesQueryOptions = {
   getStoresStoreIdUsers: (storeId: number) => ({
     queryKey: queryKeys.storesStoreIdUsers(storeId),
     queryFn: () => getStoresStoreIdUsers(storeId),
+  }),
+  getStoresInfoStoreCode: (storeCode: string) => ({
+    queryKey: queryKeys.storesInfoStoreCode(storeCode),
+    queryFn: () => getStoresInfoStoreCode(storeCode),
   }),
 };

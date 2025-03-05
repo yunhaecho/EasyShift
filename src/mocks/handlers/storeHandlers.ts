@@ -304,4 +304,22 @@ export const storeHandlers = [
       ],
     });
   }),
+
+  /* 매장 정보 조회 */
+  http.get('/api/stores/info?storeCode=:storeCode', () => {
+    return HttpResponse.json({
+      storeId: 1,
+      storeName: 'BurnToBurn Coffee',
+      description: 'To Infinity and Beyond! 🚀',
+    });
+  }),
+
+  /* 매장 참여 */
+  http.post('/api/stores/join', () => {
+    return HttpResponse.json({
+      success: true,
+      response: null,
+      error: null,
+    });
+  }),
 ];

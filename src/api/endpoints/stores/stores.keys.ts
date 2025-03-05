@@ -5,6 +5,8 @@ export const queryKeys = {
   storesStoreId: (storeId: number) => [...queryKeys.stores, storeId] as const,
   storesStoreIdUsers: (storeId: number) =>
     [...queryKeys.storesStoreId(storeId), 'users'] as const,
+  storesInfoStoreCode: (storeCode: string) =>
+    [...queryKeys.stores, storeCode] as const,
 
   scheduleTemplates: ['schedule-templates'] as const,
   storesStoreIdScheduleTemplates: (storeId: number) =>
