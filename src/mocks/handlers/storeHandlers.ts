@@ -99,12 +99,12 @@ export const storeHandlers = [
                 assignedShifts: [
                   {
                     shiftId: 303,
-                    userId: 403,
+                    userId: 401,
                     userName: 'Yang Soyeon',
                   },
                   {
                     shiftId: 304,
-                    userId: 404,
+                    userId: 402,
                     userName: 'Kim Chanho',
                   },
                 ],
@@ -122,12 +122,12 @@ export const storeHandlers = [
                 assignedShifts: [
                   {
                     shiftId: 305,
-                    userId: 405,
+                    userId: 403,
                     userName: 'Jo Jangho',
                   },
                   {
                     shiftId: 306,
-                    userId: 406,
+                    userId: 404,
                     userName: 'Cho Yunhae',
                   },
                 ],
@@ -145,7 +145,7 @@ export const storeHandlers = [
                 assignedShifts: [
                   {
                     shiftId: 307,
-                    userId: 407,
+                    userId: 405,
                     userName: 'Lee Youngjae',
                   },
                 ],

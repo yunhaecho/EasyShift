@@ -1,18 +1,23 @@
-'use client';
-
-import { Fragment, useState } from 'react';
+import { Fragment, useContext } from 'react';
 import { Switch } from '@headlessui/react';
 import InfoIcon from '@/assets/icons/info.svg';
+import { HomePageContext } from '@/app/context/HomePageContext';
+
 const PersonalScheduleToggle = () => {
-  const [enabled, setEnabled] = useState(false);
+  const { showMyScheduleOnly, setShowMyScheduleOnly } =
+    useContext(HomePageContext);
 
   return (
     <div className="flex items-center gap-8">
       <div className="flex items-center gap-4">
-        <InfoIcon className="h-20 w-20 text-gray-600" />
+        <InfoIcon className="h-20 w-20 pt-1 text-gray-600" />
         <span className="body-14-500 text-gray-600">Show My Schedule Only</span>
       </div>
-      <Switch checked={enabled} onChange={setEnabled} as={Fragment}>
+      <Switch
+        checked={showMyScheduleOnly}
+        onChange={setShowMyScheduleOnly}
+        as={Fragment}
+      >
         {({ checked }) => (
           <button
             className={`${
