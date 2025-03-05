@@ -5,7 +5,7 @@ import { UserRole } from './app/stores/components/ManageStoreButton';
 export function middleware(request: NextRequest) {
   // 임시
   const isAuthenticated = true;
-  const userRole: UserRole = 'WORKER'; // 실제로는 토큰이나 세션에서 가져와야 함
+  const userRole: UserRole = 'ADMIN'; // 실제로는 토큰이나 세션에서 가져와야 함
   const path = request.nextUrl.pathname;
 
   if (request.nextUrl.pathname === '/') {

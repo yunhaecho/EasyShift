@@ -46,7 +46,7 @@ const ConfirmationModal = ({
               className="body-16-500 flex-1 rounded-4 bg-red-300 py-12 text-white"
               onClick={onConfirm}
             >
-              Delete
+              Confirm
             </button>
           </footer>
         </div>
