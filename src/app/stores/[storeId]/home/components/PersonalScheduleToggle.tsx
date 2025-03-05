@@ -22,13 +22,13 @@ const PersonalScheduleToggle = () => {
           <button
             className={`${
               checked ? 'bg-primary-300' : 'bg-gray-300'
-            } relative inline-flex h-30 w-50 items-center rounded-full`}
+            } relative inline-flex h-35 w-50 items-center rounded-full`}
           >
             <span className="sr-only">Enable notifications</span>
             <span
               className={`${
-                checked ? 'translate-x-25' : 'translate-x-5'
-              } inline-block h-20 w-20 transform rounded-full bg-white transition`}
+                checked ? 'translate-x-20' : 'translate-x-6'
+              } inline-block h-24 w-24 transform rounded-full bg-white transition`}
             />
           </button>
         )}
