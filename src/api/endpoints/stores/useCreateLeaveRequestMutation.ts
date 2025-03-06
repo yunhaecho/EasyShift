@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
-import { LeaveRequest } from './types';
 import toast from 'react-hot-toast';
-import { queryKeys } from './stores.keys';
+import { queryKeys } from '../schedule/schedules.keys';
+import { LeaveRequest } from '../schedule/types';
 
 const createLeaveRequest = async ({
   scheduleId,

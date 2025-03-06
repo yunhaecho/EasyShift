@@ -122,9 +122,9 @@ const ShiftExchangeModal = ({
                         className="absolute left-0 right-0 top-full z-10 mt-4 max-h-200 overflow-y-auto rounded-4 border border-gray-300 bg-white shadow-lg"
                         role="listbox"
                       >
-                        {filteredWorkers.length > 0 ? (
+                        {filteredWorkers && filteredWorkers.length > 0 ? (
                           <ul className="flex flex-col">
-                            {filteredWorkers.map(worker => (
+                            {filteredWorkers?.map(worker => (
                               <li
                                 key={worker.userId}
                                 className="flex cursor-pointer flex-row items-center gap-8 p-12 hover:bg-gray-100"
