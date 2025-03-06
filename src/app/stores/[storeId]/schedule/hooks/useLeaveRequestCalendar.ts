@@ -26,6 +26,10 @@ function useCalendarDays(currentMonth: Date) {
     return days;
   }, [calendarStart, calendarEnd]);
 
+  const resetSelectedDates = () => {
+    setSelectedDates([]);
+  };
+
   const handleDateClick = (date: Date) => {
     setSelectedDates(prevDates => {
       const isSelected = prevDates.some(d => isSameDay(d, date));
@@ -40,6 +44,7 @@ function useCalendarDays(currentMonth: Date) {
     monthStart,
     monthEnd,
     selectedDates,
+    resetSelectedDates,
     handleDateClick,
   };
 }

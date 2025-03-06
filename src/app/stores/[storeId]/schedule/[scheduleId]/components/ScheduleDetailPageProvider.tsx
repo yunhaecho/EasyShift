@@ -1,6 +1,9 @@
 'use client';
 
-import { GetSchedulesScheduleIdAllResponse } from '@/api/endpoints/schedule/types';
+import {
+  GetSchedulesScheduleIdAllResponse,
+  GetSchedulesScheduleIdLeaveRequestsResponse,
+} from '@/api/endpoints/schedule/types';
 import { schedulesQueryOptions } from '@/api/endpoints/schedule/useFetchAllSchedule';
 import { storesQueryOptions } from '@/api/endpoints/stores/storesQueryOptions';
 import { GetStoresStoreIdUsersResponse } from '@/api/endpoints/stores/types';
@@ -26,8 +29,15 @@ const ScheduleDetailPageProvider = ({
     storesQueryOptions.getStoresStoreIdUsers(storeId),
   );
 
+  const { data: leaveRequestData } =
+    useSuspenseQuery<GetSchedulesScheduleIdLeaveRequestsResponse>(
+      schedulesQueryOptions.getScheduleScheduleIdLeaveRequests(scheduleId),
+    );
+
   return (
-    <ScheduleDetailPageContext.Provider value={{ scheduleData, workerData }}>
+    <ScheduleDetailPageContext.Provider
+      value={{ scheduleData, workerData, leaveRequestData }}
+    >
       {children}
     </ScheduleDetailPageContext.Provider>
   );

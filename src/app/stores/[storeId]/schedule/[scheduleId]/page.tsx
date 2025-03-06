@@ -3,7 +3,6 @@
 import WorkerInfoModal from '@/app/workers/components/WorkerInfoModal';
 import useToggle from '@/app/hooks/useToggle';
 import WeeklyNavigator from './components/WeeklyNavigator';
-import { WeekDates } from '../../home/types';
 import useScheduleCalendar from './hooks/useScheduleCalendar';
 import WeeklyCalendar from './components/WeeklyCalendar';
 import { useSearchParams } from 'next/navigation';
@@ -28,7 +27,6 @@ const ScheduleDetailPage = () => {
     <ScheduleDetailPageProvider>
       <main className="flex w-full flex-col gap-14 px-32 py-14">
         <WeeklyNavigator
-          currentWeekDates={currentWeekDates as WeekDates}
           goToNextWeek={goToNextWeek}
           goToPreviousWeek={goToPreviousWeek}
         />

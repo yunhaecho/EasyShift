@@ -1,6 +1,6 @@
 import ModalActions from '@/app/components/modals/ModalActions';
 import { Dialog, DialogTitle } from '@headlessui/react';
-import { isSameMonth, isSameDay } from 'date-fns';
+import { isSameMonth, isSameDay, format } from 'date-fns';
 import {
   CalendarHeader,
   DateButton,
@@ -8,6 +8,9 @@ import {
   WeekdayHeader,
 } from './LeaveRequestCalendarContents';
 import useLeaveRequestCalendar from '../hooks/useLeaveRequestCalendar';
+import { useEffect } from 'react';
+import useCreateLeaveRequestMutation from '@/api/endpoints/stores/useCreateLeaveRequestMutation';
+import { useParams } from 'next/navigation';
 
 const LeaveRequestModal = ({
   isOpen,
@@ -18,12 +21,22 @@ const LeaveRequestModal = ({
   onClose: () => void;
   scheduleDate: string;
 }) => {
+  const { scheduleId } = useParams();
+  const { mutate: createLeaveRequest } = useCreateLeaveRequestMutation();
+
   const currentMonth = new Date(scheduleDate);
-  const { calendarDays, selectedDates, handleDateClick } =
+  const { calendarDays, selectedDates, resetSelectedDates, handleDateClick } =
     useLeaveRequestCalendar(currentMonth);
 
+  useEffect(() => {
+    resetSelectedDates();
+  }, [isOpen]);
+
   const handleSubmit = () => {
-    console.log('Submitting leave request for dates:', selectedDates);
+    createLeaveRequest({
+      scheduleId: Number(scheduleId),
+      leaveRequest: selectedDates.map(date => format(date, 'yyyy-MM-dd')),
+    });
     onClose();
   };
 
@@ -39,7 +52,7 @@ const LeaveRequestModal = ({
             Submit Leave Request
           </DialogTitle>
 
-          {/* 캘린더 */}
+          {/* Calendar */}
           <main className="px-24 py-16">
             <CalendarHeader currentMonth={currentMonth} />
 
@@ -66,7 +79,6 @@ const LeaveRequestModal = ({
               <SelectedDates dates={selectedDates} />
             )}
           </main>
-
           <footer>
             <ModalActions
               mode="submit"

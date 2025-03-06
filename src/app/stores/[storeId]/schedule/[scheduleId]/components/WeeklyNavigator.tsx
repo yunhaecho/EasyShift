@@ -1,39 +1,36 @@
-import { WeekDate } from '../../../home/types';
+import { useContext } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { format } from 'date-fns';
+import { ScheduleDetailPageContext } from '@/app/context/ScheduleDetailPageContext';
 
 import ChevronLeftIcon from '@/assets/icons/chevron-left.svg';
 import ChevronRightIcon from '@/assets/icons/chevron-right.svg';
 
 const WeeklyNavigator = ({
-  currentWeekDates,
   goToNextWeek,
   goToPreviousWeek,
 }: {
-  currentWeekDates: (WeekDate | null)[];
   goToNextWeek: () => void;
   goToPreviousWeek: () => void;
 }) => {
-  const findFirstValidDate = (dates: (WeekDate | null)[]) =>
-    dates.find(date => date !== null) ?? null;
-
-  const startDate = findFirstValidDate(currentWeekDates);
-  const endDate =
-    [...currentWeekDates].reverse().find(date => date !== null) ?? null;
+  const searchParams = useSearchParams();
+  const scheduleDate = searchParams.get('date');
+  const { leaveRequestData } = useContext(ScheduleDetailPageContext);
 
   return (
     <nav className="flex h-42 items-center justify-between">
-      <h2 className="sr-only">스케줄 상세 페이지 주간 네비게이터</h2>
+      <h2 className="sr-only">Schedule Detail Page Weekly Navigator</h2>
       <div className="flex items-center gap-16">
-        <button onClick={goToPreviousWeek} aria-label="이전 주 이동 버튼">
+        <button onClick={goToPreviousWeek} aria-label="Previous Week Button">
           <ChevronLeftIcon className="mb-5 h-40 w-26" />
         </button>
         <div className="head-20-600 w-200 text-center text-gray-800">
-          {`${startDate?.month} ${startDate?.day} ${
-            startDate?.month !== endDate?.month
-              ? `- ${endDate?.month} ${endDate?.day}`
-              : `- ${endDate?.day}`
-          }, ${startDate?.year}`}
+          {`${leaveRequestData?.schedule.scheduleName}, ${format(
+            new Date(scheduleDate || new Date()),
+            'MMM yyyy',
+          )}`}
         </div>
-        <button onClick={goToNextWeek} aria-label="다음 주 이동 버튼">
+        <button onClick={goToNextWeek} aria-label="Next Week Button">
           <ChevronRightIcon className="mb-5 h-40 w-26" />
         </button>
       </div>

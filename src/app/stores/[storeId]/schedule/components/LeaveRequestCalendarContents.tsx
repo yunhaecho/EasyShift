@@ -33,7 +33,7 @@ export const DateButton = ({
   <button
     key={day.toString()}
     onClick={onClick}
-    className={`mx-auto flex h-30 w-30 items-center justify-center rounded-full ${isSelected ? 'bg-gray-400 text-white' : ''} ${!isCurrentMonth ? 'text-gray-400 disabled:cursor-not-allowed' : 'text-gray-900'}`}
+    className={`mx-auto flex h-30 w-30 items-center justify-center rounded-full ${isSelected ? 'bg-gray-400 text-white' : ''} ${!isCurrentMonth ? 'text-gray-400 disabled:cursor-default' : 'text-gray-900'}`}
     disabled={!isCurrentMonth}
   >
     <span className="body-14-400">{format(day, 'd')}</span>

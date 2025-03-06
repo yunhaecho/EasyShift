@@ -1,10 +1,11 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { FetchAllSchedulesResponse } from './schedules';
 import { useParams } from 'next/navigation';
 import { queryKeys } from './schedules.keys';
 import {
+  FetchAllSchedulesResponse,
   GetSchedulesScheduleIdAllResponse,
+  GetSchedulesScheduleIdLeaveRequestsResponse,
   GetSchedulesScheduleTemplateIdDateResponse,
 } from './types';
 
@@ -58,6 +59,15 @@ const getSchedulesScheduleTemplateIdDate = async (
   return response.data;
 };
 
+/* 휴무 신청 유저 조회 */
+const getScheduleScheduleIdLeaveRequests = async (scheduleId: number) => {
+  const response = await axios.get<GetSchedulesScheduleIdLeaveRequestsResponse>(
+    `/api/schedules/${scheduleId}/leave-requests`,
+  );
+
+  return response.data;
+};
+
 export const schedulesQueryOptions = {
   getSchedulesScheduleTemplateIdDate: (
     scheduleTemplateId: number,
@@ -72,5 +82,9 @@ export const schedulesQueryOptions = {
   getSchedulesScheduleIdAll: (scheduleId: number) => ({
     queryKey: queryKeys.schedulesScheduleIdAll(scheduleId),
     queryFn: () => getSchedulesScheduleIdAll(scheduleId),
+  }),
+  getScheduleScheduleIdLeaveRequests: (scheduleId: number) => ({
+    queryKey: queryKeys.schedulesScheduleIdLeaveRequests(scheduleId),
+    queryFn: () => getScheduleScheduleIdLeaveRequests(scheduleId),
   }),
 };
