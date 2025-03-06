@@ -4,4 +4,8 @@ export const queryKeys = {
     [...queryKeys.schedules, scheduleTemplateId, date] as const,
   schedulesScheduleIdAll: (scheduleId: number) =>
     [...queryKeys.schedules, scheduleId] as const,
+
+  leaveRequests: ['leave-requests'] as const,
+  schedulesScheduleIdLeaveRequests: (scheduleId: number) =>
+    [...queryKeys.leaveRequests, scheduleId] as const,
 };

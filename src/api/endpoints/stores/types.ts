@@ -1,3 +1,5 @@
+import { LeaveRequest } from '../schedule/types';
+
 export type GetStoresResponse = {
   stores: Array<Store>;
 };
@@ -84,9 +86,10 @@ export type ShiftTemplate = {
 export type User = {
   userId: number;
   name: string;
-  email: string;
-  phoneNumber: string;
-  avatarUrl: string;
+  email?: string;
+  phoneNumber?: string;
+  avatarUrl?: string;
+  leaveRequests?: LeaveRequest;
 };
 
 export type GetStoresInfoStoreCodeResponse = {
@@ -97,8 +100,4 @@ export type GetStoresInfoStoreCodeResponse = {
 
 export type JoinStoreRequest = {
   storeCode: string;
-};
-
-export type LeaveRequest = {
-  dates: Array<string>;
 };

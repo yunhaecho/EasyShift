@@ -321,44 +321,17 @@ export const scheduleHandlers = [
         {
           userId: 401,
           name: 'Yang Soyeon',
-          leaveRequests: [
-            {
-              date: '2025-03-03',
-            },
-            {
-              date: '2025-03-04',
-            },
-            {
-              date: '2025-03-05',
-            },
-          ],
+          leaveRequests: ['2025-03-03', '2025-03-04', '2025-03-05'],
         },
         {
           userId: 402,
           name: 'Kim Chanho',
-          leaveRequests: [
-            {
-              date: '2025-03-03',
-            },
-            {
-              date: '2025-03-04',
-            },
-            {
-              date: '2025-03-05',
-            },
-          ],
+          leaveRequests: ['2025-03-03', '2025-03-04', '2025-03-05'],
         },
         {
           userId: 403,
           name: 'Jo Jangho',
-          leaveRequests: [
-            {
-              date: '2025-03-21',
-            },
-            {
-              date: '2025-03-28',
-            },
-          ],
+          leaveRequests: ['2025-03-21', '2025-03-28'],
         },
       ],
     });

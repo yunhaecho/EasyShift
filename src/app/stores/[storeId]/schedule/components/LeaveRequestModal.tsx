@@ -35,9 +35,7 @@ const LeaveRequestModal = ({
   const handleSubmit = () => {
     createLeaveRequest({
       scheduleId: Number(scheduleId),
-      leaveRequest: {
-        dates: selectedDates.map(date => format(date, 'yyyy-MM-dd')),
-      },
+      leaveRequest: selectedDates.map(date => format(date, 'yyyy-MM-dd')),
     });
     onClose();
   };

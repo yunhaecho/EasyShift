@@ -20,7 +20,7 @@ function ScheduleDataTable({
   onDeleteSuccess,
 }: ScheduleDataTableProps) {
   const column = ['Name', 'Description', 'Period', 'Status', 'Actions'];
-  const userRole = 'WORKER' as UserRole;
+  const userRole = 'ADMIN' as UserRole;
 
   return (
     <table className="w-full table-fixed">
