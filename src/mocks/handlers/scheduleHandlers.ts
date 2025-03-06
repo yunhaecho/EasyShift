@@ -300,4 +300,67 @@ export const scheduleHandlers = [
       ],
     });
   }),
+
+  /* 휴무 신청 */
+  http.post('/api/schedules/:scheduleId/leave-requests', () => {
+    return HttpResponse.json({
+      success: true,
+      response: null,
+      error: null,
+    });
+  }),
+
+  /* 휴무 신청 유저 조회 */
+  http.get('/api/schedules/:scheduleId/leave-requests', () => {
+    return HttpResponse.json({
+      schedule: {
+        scheduleId: 1,
+        scheduleName: 'Barista',
+      },
+      users: [
+        {
+          userId: 401,
+          name: 'Yang Soyeon',
+          leaveRequests: [
+            {
+              date: '2025-03-03',
+            },
+            {
+              date: '2025-03-04',
+            },
+            {
+              date: '2025-03-05',
+            },
+          ],
+        },
+        {
+          userId: 402,
+          name: 'Kim Chanho',
+          leaveRequests: [
+            {
+              date: '2025-03-03',
+            },
+            {
+              date: '2025-03-04',
+            },
+            {
+              date: '2025-03-05',
+            },
+          ],
+        },
+        {
+          userId: 403,
+          name: 'Jo Jangho',
+          leaveRequests: [
+            {
+              date: '2025-03-21',
+            },
+            {
+              date: '2025-03-28',
+            },
+          ],
+        },
+      ],
+    });
+  }),
 ];

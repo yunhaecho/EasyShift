@@ -16,4 +16,8 @@ export const queryKeys = {
     ] as const, // [고민] 매장에 대한 정보가 아닌, 매장의 템플릿 정보만 조회라서 'stores'를 넣어야 하는지?
   scheduleTemplatesScheduleTemplateId: (scheduleTemplateId: number) =>
     [...queryKeys.scheduleTemplates, scheduleTemplateId] as const,
+
+  leaveRequests: ['leave-requests'] as const,
+  schedulesScheduleIdLeaveRequests: (scheduleId: number) =>
+    [...queryKeys.leaveRequests, scheduleId] as const,
 };

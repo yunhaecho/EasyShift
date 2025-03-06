@@ -98,3 +98,7 @@ export type GetStoresInfoStoreCodeResponse = {
 export type JoinStoreRequest = {
   storeCode: string;
 };
+
+export type LeaveRequest = {
+  dates: Array<string>;
+};
