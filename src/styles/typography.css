@@ -32,6 +32,10 @@
 }
 
 /* Body */
+.body-18-600 {
+  @apply text-18 font-semibold leading-[1.75rem];
+}
+
 .body-18-500 {
   @apply text-18 font-medium leading-[1.75rem];
 }

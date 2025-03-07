@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React, { ReactNode } from 'react';
-import SampleProfile from '../../../assets/sample.jpg';
+import SampleProfile from '@/assets/sample.png';
 import CalendarBlackIcon from '@/assets/icons/calendar-black.svg';
 import PhoneIcon from '@/assets/icons/phone.svg';
 import EmailIcon from '@/assets/icons/email.svg';
