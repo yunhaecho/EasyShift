@@ -84,7 +84,12 @@ const StoresListDropdown = () => {
 
 /* 유저 아바타 */
 const UserAvatar = () => {
-  return <div className="h-32 w-32 rounded-full border border-gray-400" />;
+  const userId = 401; // [TODO] 유저 아이디 받아오기
+  return (
+    <Link href={`/${ROUTES.USERS}/${userId}`}>
+      <div className="h-32 w-32 rounded-full border border-gray-400" />
+    </Link>
+  );
 };
 
 /* 로그인, 회원가입 버튼 */
@@ -111,6 +116,7 @@ const TopBar = () => {
   const router = useRouter();
   const pathname = usePathname();
   const isAuthenticated = true;
+  console.log(pathname);
 
   const handleLogoClick = () => {
     router.push(isAuthenticated ? `/${ROUTES.STORES}` : `/${ROUTES.LANDING}`);
