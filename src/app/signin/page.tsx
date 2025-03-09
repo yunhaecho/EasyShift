@@ -4,7 +4,6 @@ import KakaoLoginButton from '@/assets/kakao_login_medium_narrow.png';
 
 function Login() {
 
-  
   return (
     <div>
       {/* <a href={`${process.env.NEXT_PUBLIC_KAKAO_LOGIN_URL}/oauth2/authorization/kakao?redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}`}> */}
