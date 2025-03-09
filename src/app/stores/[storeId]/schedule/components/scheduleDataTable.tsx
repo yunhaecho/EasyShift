@@ -35,7 +35,8 @@ function ScheduleDataTable({
       </thead>
 
       <tbody>
-        {filteredData.map(schedule => (
+        {filteredData &&
+        filteredData.map(schedule => (
           <tr key={schedule.id} className="border-b border-gray-300 bg-white">
             <td className="body-14-500 px-24 py-12 text-center">
               <span>{schedule.scheduleName}</span>
