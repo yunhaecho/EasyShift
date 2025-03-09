@@ -26,7 +26,6 @@ const WorkersListSidebar = () => {
             <h3 className="sr-only">Available Workers</h3>
             <ul className="flex flex-col gap-8 p-8" role="list">
               {filteredWorkers?.map(worker => {
-                console.log(worker);
                 return (
                   <li
                     key={worker.userId}

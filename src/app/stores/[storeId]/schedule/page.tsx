@@ -27,7 +27,7 @@ export default function Schedule() {
   const statusOption = ['All Status', 'Pending', 'Completed'];
 
   const { data = [], isLoading } = useFetchAllScheduleQuery();
-  const userRole = 'WORKER' as UserRole; // [TODO] 유저 역할 가져오기
+  const userRole = 'ADMIN' as UserRole; // [TODO] 유저 역할 가져오기
 
   //연도 배열(중복 제거)
   const yearOption = Array.from(

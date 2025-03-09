@@ -116,7 +116,6 @@ const TopBar = () => {
   const router = useRouter();
   const pathname = usePathname();
   const isAuthenticated = true;
-  console.log(pathname);
 
   const handleLogoClick = () => {
     router.push(isAuthenticated ? `/${ROUTES.STORES}` : `/${ROUTES.LANDING}`);
