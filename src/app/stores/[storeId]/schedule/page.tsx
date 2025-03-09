@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import PlusWhiteIcon from '@/assets/icons/plus-white.svg';
 import {
   Button,
@@ -26,34 +26,54 @@ export default function Schedule() {
 
   const statusOption = ['All Status', 'Pending', 'Completed'];
 
-  const { data = [], isLoading } = useFetchAllScheduleQuery();
-  const userRole = 'ADMIN' as UserRole; // [TODO] 유저 역할 가져오기
+  const {
+    data = [],
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useFetchAllScheduleQuery();
 
-  //연도 배열(중복 제거)
-  const yearOption = Array.from(
-    new Set(data.map(schedule => schedule.shiftDate.substring(0, 4))),
-  );
-
-  const [filteredData, setFilteredDate] = useState(
-    data.filter(schedule => {
-      const sameStatus = !isStatusFilter || schedule.status === status;
+  const filteredData = useMemo(() => {
+    return data.filter(schedule => {
+      const sameStatus =
+        !isStatusFilter || schedule.status.toLowerCase() === status;
       const sameYear =
         !isYearFilter || schedule.shiftDate.substring(0, 4) === year;
       return sameStatus && sameYear;
-    }),
-  );
+    });
+  }, [data, isStatusFilter, status, isYearFilter, year]);
+
+  //연도 배열(중복 제거)
+  const yearOption = useMemo(() => {
+    return Array.from(
+      new Set(data.map(schedule => schedule.shiftDate.substring(0, 4))),
+    );
+  }, [data]);
+
+  if (isError) {
+    return (
+      <div>
+        <p>에러가 발생했습니다: {error.message}</p>
+        <button onClick={() => refetch()}>다시 시도</button>
+      </div>
+    );
+  }
+
+  const userRole = 'WORKER' as UserRole; // [TODO] 유저 역할 가져오기
 
   // 상태 필터링(응답이 소문자라 소문자로 맞추기)
   const filterStatus = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const selectedStatus = e.currentTarget?.textContent ?? '';
+    const selectedStatus = e.currentTarget.textContent ?? '';
 
     if (selectedStatus === 'All Status') {
       setIsStatusFilter(false);
-      setStatus(status);
+      setStatus('');
     } else if (selectedStatus === 'Pending') {
       setIsStatusFilter(true);
       setStatus('pending');
     } else {
+      setIsStatusFilter(true);
       setStatus('completed');
     }
   };
@@ -65,10 +85,8 @@ export default function Schedule() {
     setIsYearFilter(true);
   };
 
-  const handleDeleteSuccess = (deletedScheduleId: string) => {
-    setFilteredDate(prevState =>
-      prevState.filter(schedule => schedule.id !== deletedScheduleId),
-    );
+  const handleDeleteSuccess = () => {
+    refetch();
   };
 
   return (

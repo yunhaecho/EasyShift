@@ -9,28 +9,28 @@ export const scheduleHandlers = [
     if (storeId === '1') {
       schedules = [
         {
-          id: 201,
+          id: 101,
           scheduleName: '새벽 근무',
           shiftDate: '2024-12',
           status: 'pending',
           description: '새벽 근무 일정입니다.',
         },
         {
-          id: 202,
+          id: 102,
           scheduleName: '새벽 근무',
           shiftDate: '2024-12',
           status: 'pending',
           description: '새벽 근무 일정입니다.',
         },
         {
-          id: 203,
+          id: 103,
           scheduleName: '새벽 근무',
           shiftDate: '2024-12',
           status: 'pending',
           description: '새벽 근무 일정입니다.',
         },
         {
-          id: 204,
+          id: 104,
           scheduleName: '새벽 근무',
           shiftDate: '2024-12',
           status: 'pending',
@@ -40,36 +40,35 @@ export const scheduleHandlers = [
     } else if (storeId === '2') {
       schedules = [
         {
-          id: 301,
-          scheduleName: '홀 ',
+          id: 201,
+          scheduleName: ' 주간 근무',
           shiftDate: '2024-10',
           status: 'completed',
-          description: '야간 근무 일정입니다.',
+          description: '주간 근무일정입니다.',
+        },
+        {
+          id: 202,
+          scheduleName: '주간 근무',
+          shiftDate: '2024-11',
+          status: 'pending',
+          description: '주간 근무 일정입니다.',
+        },
+      ];
+    } else if (storeId === '3') {
+      schedules = [
+        {
+          id: 301,
+          scheduleName: '나이트 근무 ',
+          shiftDate: '2024-10',
+          status: 'completed',
+          description: '나이트 근무  일정입니다.',
         },
         {
           id: 302,
-          scheduleName: '주방',
+          scheduleName: '나이트 근무 ',
           shiftDate: '2024-11',
           status: 'pending',
-          description: '주말 근무 일정입니다.',
-        },
-      ];
-    } else {
-      // 기본 응답 (storeId가 정의되지 않거나, 특정 ID가 아닐 경우)
-      schedules = [
-        {
-          id: 101,
-          scheduleName: '야간 근무',
-          shiftDate: '2024-11',
-          status: 'pending',
-          description: '야간 근무 일정입니다.',
-        },
-        {
-          id: 102,
-          scheduleName: '주간 근무',
-          shiftDate: '2024-11',
-          status: 'completed',
-          description: '주간 근무 일정입니다.',
+          description: '나이트 근무 일정입니다.',
         },
       ];
     }
