@@ -12,7 +12,8 @@ import { CheckIcon } from '@heroicons/react/16/solid';
 import { useState } from 'react';
 
 export default function SignUp() {
-  const [enabled, setEnabled] = useState(false);
+  const [ enabled, setEnabled ] = useState(false);
+
 
   return (
     <div className="flex w-full flex-col items-center justify-center">

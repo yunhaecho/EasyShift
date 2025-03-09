@@ -20,11 +20,11 @@ const fetchSchedulesQueryOptions = (
   });
 
 export const fetchSchedulesQuery = async (storeId: number) => {
-  const allSchedule = await axios.get<FetchAllSchedulesResponse>(
+  const response = await axios.get<FetchAllSchedulesResponse>(
     `/api/stores/${storeId}/schedules`,
   );
 
-  return allSchedule.data.schedules;
+  return response.data.schedules;
 };
 
 export const useFetchAllScheduleQuery = (
