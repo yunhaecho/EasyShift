@@ -1,7 +1,9 @@
 import { monthNames } from '@/constants/weekNames';
-
+import { useContext } from 'react';
+import UserPageContext from '@/app/context/UserPageContext';
 import LeftArrowIcon from '@/assets/icons/left-arrow.svg';
 import RightArrowIcon from '@/assets/icons/right-arrow.svg';
+import StoresListDropdown from '@/app/components/StoresListDropdown';
 
 const CalendarHeader = ({
   currentMonth,
@@ -14,13 +16,16 @@ const CalendarHeader = ({
   goToPrevMonth: () => void;
   goToNextMonth: () => void;
 }) => {
+  const { stores, selectedStoreId, setSelectedStoreId } =
+    useContext(UserPageContext);
+
   return (
-    <header className="mb-26 flex h-32 items-center justify-between">
-      <h2 className="head-24-600">
-        {`${monthNames[currentMonth]} ${currentYear}`}
-      </h2>
+    <header
+      className="mb-26 flex h-32 items-center justify-between"
+      aria-label="Calendar header"
+    >
       <nav
-        className="flex h-full items-center gap-34"
+        className="flex items-center gap-30"
         aria-label="Calendar navigation"
       >
         <button
@@ -30,10 +35,21 @@ const CalendarHeader = ({
         >
           <LeftArrowIcon aria-hidden="true" />
         </button>
+        <h2 className="head-24-600">
+          {`${monthNames[currentMonth]} ${currentYear}`}
+        </h2>
         <button type="button" onClick={goToNextMonth} aria-label="Next month">
           <RightArrowIcon aria-hidden="true" />
         </button>
       </nav>
+      <StoresListDropdown
+        title={
+          stores.find(store => store.storeId === selectedStoreId)?.storeName ||
+          'No Store Joined'
+        }
+        stores={stores}
+        onSelect={setSelectedStoreId}
+      />
     </header>
   );
 };

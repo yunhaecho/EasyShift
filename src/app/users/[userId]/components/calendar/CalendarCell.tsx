@@ -1,3 +1,5 @@
+import { UserSchedule } from '@/api/endpoints/settings/userSchedule/types';
+
 const CalendarCell = ({
   day,
   isCurrentMonth,
@@ -12,10 +14,7 @@ const CalendarCell = ({
   isCurrentMonth: boolean;
   isLastDayOfWeek: boolean;
   isFirstWeek: boolean;
-  shifts: {
-    date: string;
-    color: string;
-  }[];
+  shifts: UserSchedule['shifts'];
 }) => {
   return (
     <li
@@ -38,22 +37,18 @@ const CalendarCell = ({
         </time>
 
         {/* 근무 정보 표시 */}
-        {/* <div className="caption-12-400 w-full rounded-4 bg-primary-100 px-8 py-4 text-primary-600">
-          shift info
-        </div> */}
+        {shifts &&
+          shifts
+            .filter(shift => shift.shiftDate === day.formattedDate)
+            .map(shift => (
+              <div
+                key={shift.shiftDate}
+                className="caption-12-400 w-full rounded-4 bg-primary-100 px-8 py-4 text-primary-600"
+              >
+                {shift.shiftName}
+              </div>
+            ))}
       </div>
-
-      {/* 근무 표시기 */}
-      {shifts &&
-        shifts
-          .filter(shift => shift.date === day.formattedDate)
-          .map(shift => (
-            <div
-              key={shift.date}
-              className={`mt-14 h-8 w-52 rounded-xl ${shift.color}`}
-              aria-label={`Shift on ${day.formattedDate}`}
-            />
-          ))}
     </li>
   );
 };

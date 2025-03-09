@@ -1,46 +1,27 @@
 'use client';
 
-import { useContext, useMemo } from 'react';
+import { useContext } from 'react';
 import useMonthlyCalendar from '@/hooks/useMonthlyCalendar';
 import { generateCalendar } from '@/utils/dateUtils';
-import { DialogContext } from '@/app/workers/components/WorkerInfoModal.context';
 import {
   CalendarCell,
   MonthlySummaryCard,
   CalendarHeader,
   WeekdayHeader,
 } from './calendar';
+import UserPageContext from '@/app/context/UserPageContext';
 
 export default function UserShiftCalendar() {
   const { currentYear, currentMonth, goToPrevOrNextMonth } =
     useMonthlyCalendar();
-  const value = useContext(DialogContext);
+  const { schedules } = useContext(UserPageContext);
   const daysInCalendar = generateCalendar(new Date(currentYear, currentMonth));
-
-  const workerSchedule = useMemo(() => {
-    return value.schedules.flatMap(scheduleDetail =>
-      scheduleDetail.shifts
-        .filter(
-          shiftDetail =>
-            new Date(shiftDetail.shiftDate).getMonth() === currentMonth,
-        )
-        .map(shiftDetail => ({
-          date: shiftDetail.shiftDate,
-          color:
-            scheduleDetail.scheduleName === '야간 근무'
-              ? 'bg-green-400'
-              : scheduleDetail.scheduleName === '주간 근무'
-                ? 'bg-orange-400'
-                : '',
-        })),
-    );
-  }, [currentMonth, value]);
 
   const goToPrevMonth = () => goToPrevOrNextMonth(-1);
   const goToNextMonth = () => goToPrevOrNextMonth(1);
 
   return (
-    <section className="h-full w-[75%] overflow-y-auto p-32">
+    <section className="flex h-full w-[75%] flex-col gap-24 overflow-y-auto p-32">
       <article className="rounded-8 bg-white p-24 shadow-md">
         <CalendarHeader
           currentMonth={currentMonth}
@@ -65,12 +46,14 @@ export default function UserShiftCalendar() {
                   isCurrentMonth={isCurrentMonth}
                   isLastDayOfWeek={isLastDayOfWeek}
                   isFirstWeek={isFirstWeek}
-                  shifts={workerSchedule}
+                  shifts={schedules.flatMap(schedule => schedule.shifts)}
                 />
               );
             })}
           </ul>
         </div>
+      </article>
+      <article className="rounded-8 bg-white p-24 shadow-md">
         <MonthlySummaryCard />
       </article>
     </section>

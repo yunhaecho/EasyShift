@@ -1,49 +1,48 @@
+import UserPageContext from '@/app/context/UserPageContext';
+import { getShiftSummaryBySchedule } from '@/utils/getShiftSummaryBySchedule';
+import { useContext, useMemo } from 'react';
+
 const MonthlySummaryItem = ({
-  title,
-  count,
-  color,
-  percentage,
+  summaryItem,
+  isLastItem,
 }: {
-  title: string;
-  count: number;
-  color: string;
-  percentage: number;
+  summaryItem: [string, Record<string, number>];
+  isLastItem: boolean;
 }) => {
+  const [scheduleName, shifts] = summaryItem;
+
   return (
-    <li className="flex flex-1 flex-col gap-8 rounded-8 bg-gray-100 p-16">
-      <div className="flex items-center justify-between">
-        <h4 className="body-14-500 text-gray-600">{title}</h4>
-        <span className={`head-24-600 text-${color}`}>{count}</span>
-      </div>
-      <div className="relative h-8 w-full rounded-full bg-gray-300">
-        <div
-          className={`absolute left-0 top-0 h-8 rounded-full bg-${color}`}
-          style={{ width: `${percentage}%` }}
-          aria-label={`${percentage}% of shifts are ${title}`}
-        />
-      </div>
+    <li className={`flex-1 ${!isLastItem && 'border-r border-gray-300 pr-24'}`}>
+      <h4 className="body-14-500 text-gray-800">{scheduleName}</h4>
+      <dl className="mt-12 flex flex-col gap-8">
+        {Object.entries(shifts).map(([shiftName, count]) => (
+          <div key={shiftName} className="flex items-center justify-between">
+            <dt className="body-16-400 text-gray-700">{shiftName}</dt>
+            <dd className="head-16-500">{count}</dd>
+          </div>
+        ))}
+      </dl>
     </li>
   );
 };
 
 const MonthlySummaryCard = () => {
-  const summaryItems = [
-    { title: 'Open', count: 8, color: 'primary-400', percentage: 50 },
-    { title: 'Middle', count: 8, color: 'orange-400', percentage: 50 },
-    { title: 'Close', count: 8, color: 'green-400', percentage: 50 },
-  ];
+  const { schedules } = useContext(UserPageContext);
+  const summaryItems = useMemo(
+    () => getShiftSummaryBySchedule(schedules),
+    [schedules],
+  );
+  console.log(summaryItems);
 
   return (
-    <section className="mt-32 flex flex-col gap-16">
-      <h3 className="body-18-600">Monthly Summary</h3>
+    <section className="flex flex-col gap-16">
+      <h3 className="body-18-600">Monthly Shift Summary</h3>
       <ul className="flex gap-24">
-        {summaryItems.map(item => (
+        {Object.entries(summaryItems).map((summaryItem, index) => (
           <MonthlySummaryItem
-            key={item.title}
-            title={item.title}
-            count={item.count}
-            color={item.color}
-            percentage={item.percentage}
+            key={`${summaryItem}-${index}`}
+            summaryItem={summaryItem}
+            isLastItem={index === Object.entries(summaryItems).length - 1}
           />
         ))}
       </ul>
