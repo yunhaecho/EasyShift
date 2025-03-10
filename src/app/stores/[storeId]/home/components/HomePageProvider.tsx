@@ -7,7 +7,7 @@ import {
   ShiftTemplateResponse,
 } from '@/api/endpoints/stores/types';
 import { HomePageContext } from '@/app/context/HomePageContext';
-import { useQueryClient, useQuery } from '@tanstack/react-query';
+import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import useWeeklyCalendar from '../hooks/useWeeklyCalendar';
 import { useParams } from 'next/navigation';
@@ -15,7 +15,7 @@ import { addDays } from 'date-fns';
 
 const HomePageProvider = ({ children }: { children: React.ReactNode }) => {
   const { storeId } = useParams();
-  const { data: storeData } = useQuery<GetStoresStoreIdResponse>(
+  const { data: storeData } = useSuspenseQuery<GetStoresStoreIdResponse>(
     storesQueryOptions.getStoresStoreId(parseInt(storeId as string)),
   );
   const [shiftsData, setShiftsData] = useState<ShiftTemplateResponse[] | null>(
