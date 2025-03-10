@@ -7,7 +7,7 @@ import mockEnable from '@/utils/mockEnable';
 import { Providers } from '@/providers';
 import GlobalNavBarProvider from './components/GlobalNavBarProvider';
 import { Suspense } from 'react';
-
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 const openSans = Open_Sans({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800'],
@@ -36,6 +36,7 @@ export default function RootLayout({
               <TopBar />
               <div className="flex h-[calc(100vh-4rem)] w-full">{children}</div>
               <Toaster position="top-center" />
+              <ReactQueryDevtools />
             </GlobalNavBarProvider>
           </Suspense>
         </Providers>

@@ -11,24 +11,25 @@ export const HomePageContext = createContext<{
   storeData: GetStoresStoreIdResponse | null;
   shiftData: ShiftTemplateResponse[] | null;
   selectedScheduleTemplateId: number | null;
-  setSelectedScheduleTemplateId: (id: number | null) => void;
   showMyScheduleOnly: boolean;
   setShowMyScheduleOnly: (show: boolean) => void;
   currentWeekDates: WeekDate[];
   setCurrentDate: (date: Date) => void;
   goToNextWeek: () => void;
   goToPreviousWeek: () => void;
-  fetchShifts: (scheduleTemplateId: number) => void;
+  handleSelectedScheduleTemplate: (scheduleTemplateId: number) => void;
+
+  handleToday: () => void;
 }>({
   storeData: null,
   shiftData: null,
   selectedScheduleTemplateId: null,
-  setSelectedScheduleTemplateId: () => {},
   showMyScheduleOnly: false,
   setShowMyScheduleOnly: () => {},
   currentWeekDates: [],
   setCurrentDate: () => {},
   goToNextWeek: () => {},
   goToPreviousWeek: () => {},
-  fetchShifts: () => {},
+  handleSelectedScheduleTemplate: () => {},
+  handleToday: () => {},
 });

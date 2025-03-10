@@ -1,5 +1,6 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
+import { Store } from '@/api/endpoints/stores/types';
 
 const StoresListDropdown = ({
   title,
@@ -7,10 +8,7 @@ const StoresListDropdown = ({
   onSelect,
 }: {
   title: string;
-  stores: {
-    id: number;
-    name: string;
-  }[];
+  stores: Store[];
   onSelect: (storeId: number) => void;
 }) => {
   return (
@@ -24,12 +22,12 @@ const StoresListDropdown = ({
         className="mt-5 w-200 border border-gray-400 bg-white"
       >
         {stores.map(store => (
-          <MenuItem key={store.id}>
+          <MenuItem key={store.storeId}>
             <button
               className="flex w-full justify-start px-12 py-9 data-[focus]:bg-gray-300"
-              onClick={() => onSelect(store.id)}
+              onClick={() => onSelect(store.storeId)}
             >
-              {store.name}
+              {store.storeName}
             </button>
           </MenuItem>
         ))}

@@ -53,8 +53,6 @@ export default function Schedule() {
   
   const userRole = 'WORKER' as UserRole; // [TODO] 유저 역할 가져오기
 
-
-
   // 상태 필터링(응답이 소문자라 소문자로 맞추기)
   const filterStatus = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const selectedStatus = e.currentTarget.textContent ?? '';

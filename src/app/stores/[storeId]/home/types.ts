@@ -14,7 +14,7 @@ export interface WeekDate {
   month: string;
   year: string;
   dayOfWeek: string;
-  fullDate: Date;
+  fullDateString: string;
 }
 
 export type WeekDates = [

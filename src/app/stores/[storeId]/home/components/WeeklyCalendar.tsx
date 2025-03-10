@@ -1,15 +1,19 @@
-import WorkerInfoModal from '@/app/workers/components/WorkerInfoModal';
+'use client';
+
 import WorkerBlock from './WorkerBlock';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { HomePageContext } from '@/app/context/HomePageContext';
 import useToggle from '@/app/hooks/useToggle';
+import UserInfoModal from '@/app/components/modals/UserInfoModal';
 
 const SHIFT_COLORS = ['#EEF2FF', '#F0FDF4', '#FFF1E7'];
 
 const WeeklyCalendar = () => {
   const { shiftData, showMyScheduleOnly, currentWeekDates } =
     useContext(HomePageContext);
-  const [isWorkerInfoModalOpen, toggleWorkerInfoModal] = useToggle();
+  const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
+  const [isUserInfoModalOpen, toggleUserInfoModal] = useToggle();
+
   const mockUserId = 401;
 
   const getShiftColor = (shiftTemplateName: string) => {
@@ -17,6 +21,11 @@ const WeeklyCalendar = () => {
       s => s.shiftTemplateName === shiftTemplateName,
     );
     return SHIFT_COLORS[(shiftIndex ?? 0) % SHIFT_COLORS.length];
+  };
+
+  const handleWorkerBlockClick = (userId: number) => {
+    setSelectedUserId(userId);
+    toggleUserInfoModal();
   };
 
   return (
@@ -53,20 +62,12 @@ const WeeklyCalendar = () => {
               {currentWeekDates.map(date => {
                 /* TODO: 백엔드 날짜 포멧 변경 후 수정 필요 */
                 const assignedShifts = shift.dates
-                  .filter(d => {
-                    const backendDate = new Date(d.date);
-                    backendDate.setHours(0, 0, 0, 0);
-
-                    const frontendDate = new Date(date.fullDate);
-                    frontendDate.setHours(0, 0, 0, 0);
-
-                    return backendDate.getTime() === frontendDate.getTime();
-                  })
+                  .filter(d => d.date === date.fullDateString)
                   .flatMap(d => d.assignedShifts);
 
                 return (
                   <td
-                    key={`${shift.shiftTemplateId}-${date.fullDate.getTime()}`}
+                    key={`${shift.shiftTemplateId}-${date.fullDateString}`}
                     style={{
                       backgroundColor: getShiftColor(shift.shiftTemplateName),
                     }}
@@ -81,8 +82,8 @@ const WeeklyCalendar = () => {
                         .map(shift => (
                           <WorkerBlock
                             key={shift.shiftId}
-                            toggleWorkerInfoModal={toggleWorkerInfoModal}
                             shift={shift}
+                            onClick={() => handleWorkerBlockClick(shift.userId)}
                           />
                         ))}
                     </div>
@@ -93,9 +94,10 @@ const WeeklyCalendar = () => {
           ))}
         </tbody>
       </table>
-      <WorkerInfoModal
-        isOpen={isWorkerInfoModalOpen}
-        onClose={toggleWorkerInfoModal}
+      <UserInfoModal
+        isOpen={isUserInfoModalOpen}
+        onClose={toggleUserInfoModal}
+        userId={selectedUserId}
       />
     </section>
   );

@@ -1,4 +1,4 @@
-import WorkerInfoModal from '@/app/workers/components/WorkerInfoModal';
+import UserInfoModal from '@/app/components/modals/UserInfoModal';
 import { WeekDate } from '@/app/stores/[storeId]/home/types';
 
 import useToggle from '@/app/hooks/useToggle';
@@ -10,13 +10,11 @@ import WorkerBlock from './WorkerBlock';
 
 const SHIFT_COLORS = ['#EEF2FF', '#F0FDF4', '#FFF1E7'];
 
-const WeeklyCalendar = ({
-  currentWeekDates,
-}: {
-  currentWeekDates: WeekDate[];
-}) => {
-  const [isWorkerInfoModalOpen, toggleWorkerInfoModal] = useToggle();
-  const { scheduleData } = useContext(ScheduleDetailPageContext);
+const WeeklyCalendar = () => {
+  const [isUserInfoModalOpen, toggleUserInfoModal] = useToggle();
+  const { scheduleData, currentWeekDates } = useContext(
+    ScheduleDetailPageContext,
+  );
 
   const searchParams = useSearchParams();
   const selectedMonth = searchParams.get('date')?.split('-')[1];
@@ -30,7 +28,7 @@ const WeeklyCalendar = ({
   };
 
   const isNotSelectedMonth = (date: WeekDate) => {
-    return date?.fullDate.getMonth() + 1 !== Number(selectedMonth);
+    return date?.fullDateString.split('-')[1] !== selectedMonth;
   };
 
   return (
@@ -68,14 +66,12 @@ const WeeklyCalendar = ({
               </td>
               {currentWeekDates.map(currentWeekDate => {
                 const assignedShifts = shift.dates.filter(
-                  date =>
-                    date.date ===
-                    currentWeekDate.fullDate.toISOString().split('T')[0],
+                  date => date.date === currentWeekDate.fullDateString,
                 );
 
                 return (
                   <td
-                    key={`${shift.shiftTemplateId}-${currentWeekDate?.fullDate?.getTime()}`}
+                    key={`${shift.shiftTemplateId}-${currentWeekDate.fullDateString}`}
                     style={{
                       backgroundColor: isNotSelectedMonth(currentWeekDate)
                         ? '#F3F4F6'
@@ -90,11 +86,7 @@ const WeeklyCalendar = ({
                             <WorkerBlock
                               key={`${assignedShift.userId}-${assignedShift.shiftId}`}
                               assignedShift={assignedShift}
-                              targetDate={
-                                currentWeekDate.fullDate
-                                  .toISOString()
-                                  .split('T')[0]
-                              }
+                              targetDate={currentWeekDate.fullDateString}
                             />
                           ),
                         )}
@@ -106,9 +98,10 @@ const WeeklyCalendar = ({
           ))}
         </tbody>
       </table>
-      <WorkerInfoModal
-        isOpen={isWorkerInfoModalOpen}
-        onClose={toggleWorkerInfoModal}
+      <UserInfoModal
+        isOpen={isUserInfoModalOpen}
+        onClose={toggleUserInfoModal}
+        userId={401}
       />
     </section>
   );

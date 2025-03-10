@@ -7,7 +7,7 @@ import ChevronRightIcon from '@/assets/icons/chevron-right.svg';
 import PersonalScheduleToggle from './PersonalScheduleToggle';
 
 const WeeklyNavigator = () => {
-  const { currentWeekDates, setCurrentDate, goToPreviousWeek, goToNextWeek } =
+  const { currentWeekDates, goToPreviousWeek, goToNextWeek, handleToday } =
     useContext(HomePageContext);
 
   const startDate = currentWeekDates[0];
@@ -29,7 +29,7 @@ const WeeklyNavigator = () => {
 
         <button
           className="ml-16 flex h-full items-center gap-12 rounded-4 border border-gray-400 bg-white px-16 py-8"
-          onClick={() => setCurrentDate(new Date())}
+          onClick={handleToday}
           aria-label="오늘 날짜 이동 버튼"
         >
           <span className="body-16-400 text-gray-800">Today</span>
