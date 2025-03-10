@@ -24,42 +24,33 @@ export default function Schedule() {
   const [year, setYear] = useState('');
   const [isAddScheduleModalOpen, toggleAddScheduleModal] = useToggle(false);
 
+
   const statusOption = ['All Status', 'Pending', 'Completed'];
 
-  const {
-    data = [],
-    isLoading,
-    isError,
-    error,
-    refetch,
-  } = useFetchAllScheduleQuery();
+  const { data = [] , isLoading, isError, error, refetch } = useFetchAllScheduleQuery();
 
   const filteredData = useMemo(() => {
     return data.filter(schedule => {
-      const sameStatus =
-        !isStatusFilter || schedule.status.toLowerCase() === status;
-      const sameYear =
-        !isYearFilter || schedule.shiftDate.substring(0, 4) === year;
+      const sameStatus = !isStatusFilter || schedule.status.toLowerCase() === status;
+      const sameYear = !isYearFilter || schedule.shiftDate.substring(0, 4) === year;
       return sameStatus && sameYear;
     });
   }, [data, isStatusFilter, status, isYearFilter, year]);
 
   //연도 배열(중복 제거)
   const yearOption = useMemo(() => {
-    return Array.from(
-      new Set(data.map(schedule => schedule.shiftDate.substring(0, 4))),
-    );
+    return Array.from(new Set(data.map(schedule => schedule.shiftDate.substring(0, 4))));
   }, [data]);
 
-  if (isError) {
-    return (
+  if(isError) {
+    return(
       <div>
         <p>에러가 발생했습니다: {error.message}</p>
         <button onClick={() => refetch()}>다시 시도</button>
       </div>
-    );
+    )
   }
-
+  
   const userRole = 'WORKER' as UserRole; // [TODO] 유저 역할 가져오기
 
   // 상태 필터링(응답이 소문자라 소문자로 맞추기)
