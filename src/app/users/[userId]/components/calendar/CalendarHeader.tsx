@@ -37,7 +37,7 @@ const CalendarHeader = ({
         >
           <LeftArrowIcon aria-hidden="true" />
         </button>
-        <h2 className="head-24-600">
+        <h2 className="head-24-600 w-200 text-center">
           {`${monthNames[currentMonth]} ${currentYear}`}
         </h2>
         <button type="button" onClick={goToNextMonth} aria-label="Next month">

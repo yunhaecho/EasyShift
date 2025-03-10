@@ -1,6 +1,3 @@
-'use client';
-
-import useMonthlyCalendar from '@/hooks/useMonthlyCalendar';
 import { generateCalendar } from '@/utils/dateUtils';
 import {
   CalendarCell,
@@ -11,18 +8,21 @@ import {
 import { UserSchedule } from '@/api/endpoints/settings/userSchedule/types';
 
 const UserShiftCalendar = ({
-  schedules,
   mode,
+  schedules,
+  currentYear,
+  currentMonth,
+  goToPrevMonth,
+  goToNextMonth,
 }: {
-  schedules: UserSchedule[];
   mode: 'modal' | 'page';
+  schedules: UserSchedule[];
+  currentYear: number;
+  currentMonth: number;
+  goToPrevMonth: () => void;
+  goToNextMonth: () => void;
 }) => {
-  const { currentYear, currentMonth, goToPrevOrNextMonth } =
-    useMonthlyCalendar();
   const daysInCalendar = generateCalendar(new Date(currentYear, currentMonth));
-
-  const goToPrevMonth = () => goToPrevOrNextMonth(-1);
-  const goToNextMonth = () => goToPrevOrNextMonth(1);
 
   return (
     <section className="flex h-full w-[75%] flex-col gap-24 overflow-y-auto border-l border-gray-300 p-32">
@@ -31,8 +31,8 @@ const UserShiftCalendar = ({
           currentMonth={currentMonth}
           currentYear={currentYear}
           goToPrevMonth={goToPrevMonth}
-          mode={mode}
           goToNextMonth={goToNextMonth}
+          mode={mode}
         />
 
         <div className="w-full text-center">

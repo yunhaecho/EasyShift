@@ -10,12 +10,14 @@ import PlusWhiteIcon from '@/assets/icons/plus-white.svg';
 import DeleteRedIcon from '@/assets/icons/delete-red.svg';
 import UserInfoModal from '@/app/components/modals/UserInfoModal';
 import { useState } from 'react';
+
 const WorkersInformation = () => {
   const { searchQuery, setSearchQuery, handleDeleteWorker, filteredWorkers } =
     useManageWorkers();
   const [isInviteLinkModalOpen, toggleInviteLinkModal] = useToggle(false);
   const [isUserInfoModalOpen, toggleUserInfoModal] = useToggle(false);
   const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
+  console.log(selectedUserId, 'selectedUserId');
 
   const handleWorkerClick = (userId: number) => {
     setSelectedUserId(userId);

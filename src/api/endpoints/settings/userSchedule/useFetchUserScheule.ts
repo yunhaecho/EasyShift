@@ -25,21 +25,20 @@ const getUserSchedule = async ({
   return scheduleOfWorker.data;
 };
 
-export const userScheduleQueryOptions = (
-  userScheduleParams: UserScheduleParams,
-) =>
+export const userScheduleQueryOptions = ({
+  storeId,
+  userId,
+  date,
+}: UserScheduleParams) =>
   queryOptions({
-    queryKey: ['userSchedule', userScheduleParams],
+    queryKey: ['userSchedule', { storeId, userId, date }],
     queryFn: () =>
       getUserSchedule({
-        storeId: userScheduleParams.storeId as number,
-        userId: userScheduleParams.userId as number,
-        date: userScheduleParams.date,
+        storeId: storeId as number,
+        userId: userId as number,
+        date: date,
       }),
-    enabled:
-      !!userScheduleParams.storeId &&
-      !!userScheduleParams.userId &&
-      !!userScheduleParams.date,
+    enabled: !!storeId && !!userId && !!date,
   });
 
 // useWorkerScheduleQuery({
