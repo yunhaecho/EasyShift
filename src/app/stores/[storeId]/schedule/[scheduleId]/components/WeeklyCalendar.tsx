@@ -10,13 +10,11 @@ import WorkerBlock from './WorkerBlock';
 
 const SHIFT_COLORS = ['#EEF2FF', '#F0FDF4', '#FFF1E7'];
 
-const WeeklyCalendar = ({
-  currentWeekDates,
-}: {
-  currentWeekDates: WeekDate[];
-}) => {
+const WeeklyCalendar = () => {
   const [isUserInfoModalOpen, toggleUserInfoModal] = useToggle();
-  const { scheduleData } = useContext(ScheduleDetailPageContext);
+  const { scheduleData, currentWeekDates } = useContext(
+    ScheduleDetailPageContext,
+  );
 
   const searchParams = useSearchParams();
   const selectedMonth = searchParams.get('date')?.split('-')[1];

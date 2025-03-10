@@ -9,8 +9,9 @@ import { storesQueryOptions } from '@/api/endpoints/stores/storesQueryOptions';
 import { GetStoresStoreIdUsersResponse } from '@/api/endpoints/stores/types';
 import { ScheduleDetailPageContext } from '@/app/context/ScheduleDetailPageContext';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { useParams } from 'next/navigation';
-
+import { useParams, useSearchParams } from 'next/navigation';
+import useScheduleCalendar from '../hooks/useScheduleCalendar';
+import { parse } from 'date-fns/parse';
 const ScheduleDetailPageProvider = ({
   children,
 }: {
@@ -34,9 +35,33 @@ const ScheduleDetailPageProvider = ({
       schedulesQueryOptions.getScheduleScheduleIdLeaveRequests(scheduleId),
     );
 
+  const searchParams = useSearchParams();
+  const date = parse(
+    searchParams.get('date') + '-01',
+    'yyyy-MM-dd',
+    new Date(),
+  );
+
+  const {
+    currentWeekDates,
+    goToNextWeek,
+    goToPreviousWeek,
+    canGoNext,
+    canGoPrevious,
+  } = useScheduleCalendar(date);
+
   return (
     <ScheduleDetailPageContext.Provider
-      value={{ scheduleData, workerData, leaveRequestData }}
+      value={{
+        scheduleData,
+        workerData,
+        leaveRequestData,
+        currentWeekDates,
+        goToNextWeek,
+        goToPreviousWeek,
+        canGoNext,
+        canGoPrevious,
+      }}
     >
       {children}
     </ScheduleDetailPageContext.Provider>

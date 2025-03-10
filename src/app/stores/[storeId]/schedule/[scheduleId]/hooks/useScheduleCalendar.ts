@@ -31,6 +31,26 @@ const useScheduleCalendar = (initialDate: Date) => {
       : [];
   }, [currentDate, initialMonthStart, initialMonthEnd]);
 
+  const canGoPrevious = useMemo(() => {
+    const previousWeekDates = getCurrentWeekDates(subWeeks(currentDate, 1));
+    return previousWeekDates.some(date =>
+      isWithinInterval(date.fullDateString, {
+        start: initialMonthStart,
+        end: initialMonthEnd,
+      }),
+    );
+  }, [currentDate, initialMonthStart, initialMonthEnd]);
+
+  const canGoNext = useMemo(() => {
+    const nextWeekDates = getCurrentWeekDates(addWeeks(currentDate, 1));
+    return nextWeekDates.some(date =>
+      isWithinInterval(date.fullDateString, {
+        start: initialMonthStart,
+        end: initialMonthEnd,
+      }),
+    );
+  }, [currentDate, initialMonthStart, initialMonthEnd]);
+
   const goToPreviousWeek = useCallback(() => {
     setCurrentDate(prevDate => {
       const newDate = subWeeks(prevDate, 1);
@@ -69,6 +89,8 @@ const useScheduleCalendar = (initialDate: Date) => {
     currentWeekDates,
     goToPreviousWeek,
     goToNextWeek,
+    canGoPrevious,
+    canGoNext,
   };
 };
 
