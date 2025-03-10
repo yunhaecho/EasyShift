@@ -13,6 +13,7 @@ import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
 import { useContext } from 'react';
 import { GlobalNavBarContext } from '../context/GlobalNavBarContext';
 import { UserRole } from '../stores/components/ManageStoreButton';
+import { signIn } from 'next-auth/react';
 
 /* Home, Schedule, Settings 메뉴 탭 */
 const MenuBar = () => {
@@ -96,12 +97,16 @@ const UserAvatar = () => {
 const AuthButtons = () => {
   return (
     <div className="flex gap-16">
-      <Link
+      <a 
         className="body-16-500 rounded-4 text-gray-900"
-        href={`/${ROUTES.SIGNIN}`}
+        href={`${ROUTES.SIGNIN}`}
+        onClick={(e) => {
+          e.preventDefault();
+          signIn('kakao')
+        }}
       >
         Sign In
-      </Link>
+      </a>
       <Link
         className="body-16-500 rounded-4 bg-gray-900 px-15 py-8 text-white"
         href={`/${ROUTES.SIGNUP}`}
@@ -115,7 +120,7 @@ const AuthButtons = () => {
 const TopBar = () => {
   const router = useRouter();
   const pathname = usePathname();
-  const isAuthenticated = true;
+  const isAuthenticated = false;
 
   const handleLogoClick = () => {
     router.push(isAuthenticated ? `/${ROUTES.STORES}` : `/${ROUTES.LANDING}`);

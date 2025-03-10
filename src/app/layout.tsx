@@ -8,6 +8,8 @@ import { Providers } from '@/providers';
 import GlobalNavBarProvider from './components/GlobalNavBarProvider';
 import { Suspense } from 'react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import AuthSession from './components/SessionProvider';
+
 import Loader from './components/Loader';
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -31,6 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${openSans.className} bg-gray-100 antialiased`}>
+      <AuthSession>
         <Providers>
           <Suspense fallback={<Loader />}>
             <GlobalNavBarProvider>
@@ -38,9 +41,10 @@ export default function RootLayout({
               <div className="flex h-[calc(100vh-4rem)] w-full">{children}</div>
               <Toaster position="top-center" />
               <ReactQueryDevtools />
-            </GlobalNavBarProvider>
-          </Suspense>
-        </Providers>
+              </GlobalNavBarProvider>
+            </Suspense>
+          </Providers>
+        </AuthSession>
       </body>
     </html>
   );
