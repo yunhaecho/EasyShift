@@ -1,6 +1,6 @@
-import UserPageContext from '@/app/context/UserPageContext';
+import { UserSchedule } from '@/api/endpoints/settings/userSchedule/types';
 import { getShiftSummaryBySchedule } from '@/utils/getShiftSummaryBySchedule';
-import { useContext, useMemo } from 'react';
+import { useMemo } from 'react';
 
 const MonthlySummaryItem = ({
   summaryItem,
@@ -26,13 +26,11 @@ const MonthlySummaryItem = ({
   );
 };
 
-const MonthlySummaryCard = () => {
-  const { schedules } = useContext(UserPageContext);
+const MonthlySummaryCard = ({ schedules }: { schedules: UserSchedule[] }) => {
   const summaryItems = useMemo(
     () => getShiftSummaryBySchedule(schedules),
     [schedules],
   );
-  console.log(summaryItems);
 
   return (
     <section className="flex flex-col gap-16">

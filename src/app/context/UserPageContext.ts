@@ -1,25 +1,18 @@
 'use client';
 
-import { UserSchedule } from '@/api/endpoints/settings/userSchedule/types';
-import { Store } from '@/api/endpoints/stores/types';
+import { GetStoresResponse } from '@/api/endpoints/stores/types';
 import { createContext } from 'react';
 
 interface UserPageContextType {
-  schedules: UserSchedule[];
-  stores: Store[];
+  stores: GetStoresResponse['stores'] | null;
   selectedStoreId: number | null;
   setSelectedStoreId: (storeId: number | null) => void;
-  selectedUserId: number | null;
-  setSelectedUserId: (userId: number | null) => void;
 }
 
 const UserPageContext = createContext<UserPageContextType>({
-  schedules: [],
-  stores: [],
+  stores: null,
   selectedStoreId: null,
   setSelectedStoreId: () => {},
-  selectedUserId: null,
-  setSelectedUserId: () => {},
 });
 
 export default UserPageContext;

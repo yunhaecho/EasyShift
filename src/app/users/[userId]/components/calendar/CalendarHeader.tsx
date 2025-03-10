@@ -10,11 +10,13 @@ const CalendarHeader = ({
   currentYear,
   goToPrevMonth,
   goToNextMonth,
+  mode,
 }: {
   currentMonth: number;
   currentYear: number;
   goToPrevMonth: () => void;
   goToNextMonth: () => void;
+  mode: 'modal' | 'page';
 }) => {
   const { stores, selectedStoreId, setSelectedStoreId } =
     useContext(UserPageContext);
@@ -42,14 +44,16 @@ const CalendarHeader = ({
           <RightArrowIcon aria-hidden="true" />
         </button>
       </nav>
-      <StoresListDropdown
-        title={
-          stores.find(store => store.storeId === selectedStoreId)?.storeName ||
-          'No Store Joined'
-        }
-        stores={stores}
-        onSelect={setSelectedStoreId}
-      />
+      {mode === 'page' && (
+        <StoresListDropdown
+          title={
+            stores?.find(store => store.storeId === selectedStoreId)
+              ?.storeName || 'No Store Joined'
+          }
+          stores={stores || []}
+          onSelect={setSelectedStoreId}
+        />
+      )}
     </header>
   );
 };

@@ -45,7 +45,6 @@ const HomePageProvider = ({ children }: { children: React.ReactNode }) => {
   }, [storeData, shiftsData]);
 
   useEffect(() => {
-    console.log('currentWeekDates changed:', currentWeekDates);
     if (selectedScheduleTemplateId && currentWeekDates.length > 0) {
       fetchShifts(selectedScheduleTemplateId);
     }
