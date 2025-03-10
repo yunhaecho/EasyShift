@@ -1,31 +1,28 @@
 'use client';
 
-import { useCallback, useMemo, useState } from 'react';
-import { getCurrentWeekDates } from '@/utils/dateUtils';
-import { addWeeks, subWeeks } from 'date-fns';
+import { useMemo, useState } from 'react';
+import { format, addDays, startOfWeek } from 'date-fns';
 
 const useWeeklyCalendar = () => {
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const [currentDate, setCurrentDate] = useState(() => new Date());
 
-  const currentWeekDates = useMemo(
-    () => getCurrentWeekDates(currentDate),
-    [currentDate],
-  );
-
-  const goToPreviousWeek = useCallback(() => {
-    setCurrentDate(prevDate => subWeeks(prevDate, 1));
-  }, []);
-
-  const goToNextWeek = useCallback(() => {
-    setCurrentDate(prevDate => addWeeks(prevDate, 1));
-  }, []);
+  const currentWeekDates = useMemo(() => {
+    const weekStart = startOfWeek(currentDate, { weekStartsOn: 1 });
+    return Array.from({ length: 7 }).map((_, index) => {
+      const date = addDays(weekStart, index);
+      return {
+        day: format(date, 'd'),
+        month: format(date, 'MMM'),
+        year: format(date, 'yyyy'),
+        dayOfWeek: format(date, 'EEE'),
+        fullDate: date,
+      };
+    });
+  }, [currentDate]);
 
   return {
-    currentDate,
-    setCurrentDate,
     currentWeekDates,
-    goToPreviousWeek,
-    goToNextWeek,
+    setCurrentDate,
   };
 };
 

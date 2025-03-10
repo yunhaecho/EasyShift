@@ -80,7 +80,7 @@ export const storeHandlers = [
             endTime: '18:00',
             dates: [
               {
-                date: '2025-03-03',
+                date: '2025-03-10',
                 assignedShifts: [
                   {
                     shiftId: 301,
@@ -95,7 +95,7 @@ export const storeHandlers = [
                 ],
               },
               {
-                date: '2025-03-04',
+                date: '2025-03-11',
                 assignedShifts: [
                   {
                     shiftId: 303,
@@ -118,7 +118,7 @@ export const storeHandlers = [
             endTime: '17:00',
             dates: [
               {
-                date: '2025-03-03',
+                date: '2025-03-12',
                 assignedShifts: [
                   {
                     shiftId: 305,
@@ -141,7 +141,7 @@ export const storeHandlers = [
             endTime: '23:00',
             dates: [
               {
-                date: '2025-03-03',
+                date: '2025-03-13',
                 assignedShifts: [
                   {
                     shiftId: 307,

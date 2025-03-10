@@ -54,13 +54,7 @@ const WeeklyCalendar = () => {
                 /* TODO: 백엔드 날짜 포멧 변경 후 수정 필요 */
                 const assignedShifts = shift.dates
                   .filter(d => {
-                    const backendDate = new Date(d.date);
-                    backendDate.setHours(0, 0, 0, 0);
-
-                    const frontendDate = new Date(date.fullDate);
-                    frontendDate.setHours(0, 0, 0, 0);
-
-                    return backendDate.getTime() === frontendDate.getTime();
+                    return d.date === date.fullDate.toISOString().split('T')[0];
                   })
                   .flatMap(d => d.assignedShifts);
 
@@ -79,11 +73,7 @@ const WeeklyCalendar = () => {
                             !showMyScheduleOnly || shift.userId === mockUserId,
                         )
                         .map(shift => (
-                          <WorkerBlock
-                            key={shift.shiftId}
-                            toggleWorkerInfoModal={toggleWorkerInfoModal}
-                            shift={shift}
-                          />
+                          <WorkerBlock key={shift.shiftId} shift={shift} />
                         ))}
                     </div>
                   </td>

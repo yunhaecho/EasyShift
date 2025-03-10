@@ -8,8 +8,7 @@ const SelectedScheduleTemplateDropdown = () => {
   const {
     storeData,
     selectedScheduleTemplateId,
-    setSelectedScheduleTemplateId,
-    fetchShifts,
+    handleSelectedScheduleTemplate,
   } = useContext(HomePageContext);
   const { scheduleTemplates } = storeData || {};
 
@@ -34,10 +33,9 @@ const SelectedScheduleTemplateDropdown = () => {
             <button
               className="flex w-full justify-start px-12 py-9 data-[focus]:bg-gray-300"
               onClick={() => {
-                setSelectedScheduleTemplateId(
+                handleSelectedScheduleTemplate(
                   scheduleTemplate.scheduleTemplateId,
                 );
-                fetchShifts(scheduleTemplate.scheduleTemplateId);
               }}
             >
               {scheduleTemplate.scheduleTemplateName}
