@@ -5,6 +5,7 @@ import AddScheduleModalContent from './AddScheduleModalContent';
 import { useAddNewScheduleMutation } from '@/api/endpoints/schedule/useAddNewSchedule';
 import { useState } from 'react';
 import { AddNewScheduleParams } from '@/app/stores/[storeId]/settings/types';
+import { toast } from 'react-hot-toast';
 
 const AddScheduleModal = ({
   isOpen,
@@ -22,8 +23,8 @@ const AddScheduleModal = ({
     if (addNewScheduleParams) {
       mutate(addNewScheduleParams, {
         onSuccess: () => {
-          alert('성공');
-          // onClose();
+          toast.success('Schedule added successfully');
+          onClose();
         },
       });
     }

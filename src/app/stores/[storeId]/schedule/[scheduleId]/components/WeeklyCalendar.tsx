@@ -1,4 +1,4 @@
-import WorkerInfoModal from '@/app/workers/components/WorkerInfoModal';
+import UserInfoModal from '@/app/components/UserInfoModal';
 import { WeekDate } from '@/app/stores/[storeId]/home/types';
 
 import useToggle from '@/app/hooks/useToggle';
@@ -100,9 +100,10 @@ const WeeklyCalendar = ({
           ))}
         </tbody>
       </table>
-      <WorkerInfoModal
+      <UserInfoModal
         isOpen={isWorkerInfoModalOpen}
         onClose={toggleWorkerInfoModal}
+        userId={401}
       />
     </section>
   );

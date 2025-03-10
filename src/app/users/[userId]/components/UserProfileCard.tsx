@@ -5,12 +5,12 @@ import EmailIcon from '@/assets/icons/email.svg';
 
 const UserProfileCard = () => {
   return (
-    <aside className="h-full w-[25%] border-r border-gray-300 bg-white px-32 py-36">
+    <aside className="h-full w-[25%] bg-white px-32 py-36">
       <article className="flex flex-col">
         <header className="flex flex-col items-center justify-center">
           <Image
             src={SampleProfile}
-            alt="Sarah Johnson 프로필 이미지"
+            alt="User Profile Image"
             className="h-152 w-152 rounded-full object-cover"
           />
           <h1 className="head-24-600 mt-28">Sarah Johnson</h1>
