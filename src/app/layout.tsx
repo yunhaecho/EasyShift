@@ -7,6 +7,7 @@ import mockEnable from '@/utils/mockEnable';
 import { Providers } from '@/providers';
 import GlobalNavBarProvider from './components/GlobalNavBarProvider';
 import { Suspense } from 'react';
+import AuthSession from './components/SessionProvider';
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -30,15 +31,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${openSans.className} bg-gray-100 antialiased`}>
+      <AuthSession>
         <Providers>
-          <Suspense fallback={<div>Loading...</div>}>
-            <GlobalNavBarProvider>
-              <TopBar />
-              <div className="flex h-[calc(100vh-4rem)] w-full">{children}</div>
-              <Toaster position="top-center" />
-            </GlobalNavBarProvider>
-          </Suspense>
-        </Providers>
+            <Suspense fallback={<div>Loading...</div>}>
+              <GlobalNavBarProvider>
+                <TopBar />
+                <div className="flex h-[calc(100vh-4rem)] w-full">{children}</div>
+                <Toaster position="top-center" />
+              </GlobalNavBarProvider>
+            </Suspense>
+          </Providers>
+        </AuthSession>
       </body>
     </html>
   );
