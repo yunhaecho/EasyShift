@@ -27,7 +27,10 @@ const UserInfoContent = ({
   return (
     <div className="flex h-full w-full">
       <UserProfileCard />
-      <UserShiftCalendar schedules={userSchedulesData?.schedules} mode={mode} />
+      <UserShiftCalendar
+        schedules={userSchedulesData?.schedules ?? []}
+        mode={mode}
+      />
     </div>
   );
 };

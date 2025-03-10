@@ -4,7 +4,7 @@ import WorkerBlock from './WorkerBlock';
 import { useContext, useState } from 'react';
 import { HomePageContext } from '@/app/context/HomePageContext';
 import useToggle from '@/app/hooks/useToggle';
-import UserInfoModal from '@/app/components/UserInfoModal';
+import UserInfoModal from '@/app/components/modals/UserInfoModal';
 
 const SHIFT_COLORS = ['#EEF2FF', '#F0FDF4', '#FFF1E7'];
 

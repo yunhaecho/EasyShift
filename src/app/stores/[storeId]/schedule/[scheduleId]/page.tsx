@@ -1,6 +1,6 @@
 'use client';
 
-import WorkerInfoModal from '@/app/workers/components/WorkerInfoModal';
+import UserInfoModal from '@/app/components/modals/UserInfoModal';
 import useToggle from '@/app/hooks/useToggle';
 import WeeklyNavigator from './components/WeeklyNavigator';
 import useScheduleCalendar from './hooks/useScheduleCalendar';
@@ -11,7 +11,7 @@ import WorkersListSidebar from './components/WorkersListSidebar';
 import ScheduleDetailPageProvider from './components/ScheduleDetailPageProvider';
 
 const ScheduleDetailPage = () => {
-  const [isWorkerInfoModalOpen, toggleWorkerInfoModal] = useToggle();
+  const [isUserInfoModalOpen, toggleUserInfoModal] = useToggle();
 
   const searchParams = useSearchParams();
   const date = parse(
@@ -34,9 +34,10 @@ const ScheduleDetailPage = () => {
       </main>
       <WorkersListSidebar />
 
-      <WorkerInfoModal
-        isOpen={isWorkerInfoModalOpen}
-        onClose={toggleWorkerInfoModal}
+      <UserInfoModal
+        isOpen={isUserInfoModalOpen}
+        onClose={toggleUserInfoModal}
+        userId={401} // [TODO]: Edit this
       />
     </ScheduleDetailPageProvider>
   );

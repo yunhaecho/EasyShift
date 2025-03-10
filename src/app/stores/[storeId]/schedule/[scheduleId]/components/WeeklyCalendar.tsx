@@ -1,4 +1,4 @@
-import UserInfoModal from '@/app/components/UserInfoModal';
+import UserInfoModal from '@/app/components/modals/UserInfoModal';
 import { WeekDate } from '@/app/stores/[storeId]/home/types';
 
 import useToggle from '@/app/hooks/useToggle';
@@ -15,7 +15,7 @@ const WeeklyCalendar = ({
 }: {
   currentWeekDates: WeekDate[];
 }) => {
-  const [isWorkerInfoModalOpen, toggleWorkerInfoModal] = useToggle();
+  const [isUserInfoModalOpen, toggleUserInfoModal] = useToggle();
   const { scheduleData } = useContext(ScheduleDetailPageContext);
 
   const searchParams = useSearchParams();
@@ -101,8 +101,8 @@ const WeeklyCalendar = ({
         </tbody>
       </table>
       <UserInfoModal
-        isOpen={isWorkerInfoModalOpen}
-        onClose={toggleWorkerInfoModal}
+        isOpen={isUserInfoModalOpen}
+        onClose={toggleUserInfoModal}
         userId={401}
       />
     </section>
