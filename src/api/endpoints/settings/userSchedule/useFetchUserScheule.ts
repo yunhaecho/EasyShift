@@ -5,8 +5,8 @@ import { UserScheduleResponse } from './types';
 // 데이터 있다 가정하고 부르기
 
 type UserScheduleParams = {
-  storeId: string;
-  userId: string;
+  storeId: number;
+  userId: number;
   date: string;
 };
 
@@ -21,13 +21,17 @@ const userScheduleQueryOptions = (userScheduleParams: UserScheduleParams) =>
       }),
   });
 
-export const useUserScheduleQuery = (storeId: string, dateInfo: string) => {
+export const useUserScheduleQuery = (
+  storeId: number,
+  userId: number,
+  dateInfo: string,
+) => {
   // const params = useParams();
   const date = dateInfo;
 
   const userScheduleParams = {
     storeId,
-    userId: '2',
+    userId,
     date: date,
   };
 

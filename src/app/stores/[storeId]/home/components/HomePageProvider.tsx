@@ -44,12 +44,23 @@ const HomePageProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [storeData, shiftsData]);
 
+  useEffect(() => {
+    console.log('currentWeekDates changed:', currentWeekDates);
+    if (selectedScheduleTemplateId && currentWeekDates.length > 0) {
+      fetchShifts(selectedScheduleTemplateId);
+    }
+  }, [currentWeekDates]);
+
   const fetchShifts = async (scheduleTemplateId: number) => {
+    console.log(
+      'Fetching shifts with date:',
+      currentWeekDates[0].fullDateString,
+    );
     try {
       const response = await queryClient.fetchQuery(
         schedulesQueryOptions.getSchedulesScheduleTemplateIdDate(
           scheduleTemplateId,
-          currentWeekDates[0].fullDate.toISOString().split('T')[0],
+          currentWeekDates[0].fullDateString,
         ),
       );
       setShiftsData(response.shifts);
@@ -60,28 +71,21 @@ const HomePageProvider = ({ children }: { children: React.ReactNode }) => {
 
   const goToNextWeek = () => {
     setCurrentDate(prevDate => addDays(prevDate, 7));
-    if (selectedScheduleTemplateId) {
-      fetchShifts(selectedScheduleTemplateId);
-    }
   };
 
   const goToPreviousWeek = () => {
     setCurrentDate(prevDate => addDays(prevDate, -7));
-    if (selectedScheduleTemplateId) {
-      fetchShifts(selectedScheduleTemplateId);
-    }
   };
 
   const handleSelectedScheduleTemplate = (scheduleTemplateId: number) => {
     setSelectedScheduleTemplateId(scheduleTemplateId);
-    fetchShifts(scheduleTemplateId);
+    if (currentWeekDates.length > 0) {
+      fetchShifts(scheduleTemplateId);
+    }
   };
 
   const handleToday = () => {
     setCurrentDate(new Date());
-    if (selectedScheduleTemplateId) {
-      fetchShifts(selectedScheduleTemplateId);
-    }
   };
 
   return (

@@ -54,13 +54,13 @@ const WeeklyCalendar = () => {
                 /* TODO: 백엔드 날짜 포멧 변경 후 수정 필요 */
                 const assignedShifts = shift.dates
                   .filter(d => {
-                    return d.date === date.fullDate.toISOString().split('T')[0];
+                    return d.date === date.fullDateString;
                   })
                   .flatMap(d => d.assignedShifts);
 
                 return (
                   <td
-                    key={`${shift.shiftTemplateId}-${date.fullDate.getTime()}`}
+                    key={`${shift.shiftTemplateId}-${date.fullDateString}`}
                     style={{
                       backgroundColor: getShiftColor(shift.shiftTemplateName),
                     }}

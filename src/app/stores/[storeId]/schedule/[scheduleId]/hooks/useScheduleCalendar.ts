@@ -22,7 +22,7 @@ const useScheduleCalendar = (initialDate: Date) => {
   const currentWeekDates = useMemo(() => {
     const weekDates = getCurrentWeekDates(currentDate);
     return weekDates.some(date =>
-      isWithinInterval(date.fullDate, {
+      isWithinInterval(date.fullDateString, {
         start: initialMonthStart,
         end: initialMonthEnd,
       }),
@@ -37,7 +37,7 @@ const useScheduleCalendar = (initialDate: Date) => {
       const newWeekDates = getCurrentWeekDates(newDate);
 
       return newWeekDates.some(date =>
-        isWithinInterval(date.fullDate, {
+        isWithinInterval(date.fullDateString, {
           start: initialMonthStart,
           end: initialMonthEnd,
         }),
@@ -53,7 +53,7 @@ const useScheduleCalendar = (initialDate: Date) => {
       const newWeekDates = getCurrentWeekDates(newDate);
 
       return newWeekDates.some(date =>
-        isWithinInterval(date.fullDate, {
+        isWithinInterval(date.fullDateString, {
           start: initialMonthStart,
           end: initialMonthEnd,
         }),

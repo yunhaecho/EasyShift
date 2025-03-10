@@ -18,12 +18,18 @@ export const getCurrentWeekDates = (currentDate = new Date()) => {
 
   return Array.from({ length: 7 }).map((_, index) => {
     const date = addDays(weekStart, index);
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const fullDateString = `${year}-${month}-${day}`;
+
     return {
       day: format(date, 'd'),
       month: format(date, 'MMM'),
       year: format(date, 'yyyy'),
       dayOfWeek: format(date, 'EEE'),
-      fullDate: date,
+      fullDateString,
     };
   }) as WeekDates;
 };

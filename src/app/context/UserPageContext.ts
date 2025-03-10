@@ -9,6 +9,8 @@ interface UserPageContextType {
   stores: Store[];
   selectedStoreId: number | null;
   setSelectedStoreId: (storeId: number | null) => void;
+  selectedUserId: number | null;
+  setSelectedUserId: (userId: number | null) => void;
 }
 
 const UserPageContext = createContext<UserPageContextType>({
@@ -16,6 +18,8 @@ const UserPageContext = createContext<UserPageContextType>({
   stores: [],
   selectedStoreId: null,
   setSelectedStoreId: () => {},
+  selectedUserId: null,
+  setSelectedUserId: () => {},
 });
 
 export default UserPageContext;

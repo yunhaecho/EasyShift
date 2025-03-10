@@ -30,7 +30,7 @@ const WeeklyCalendar = ({
   };
 
   const isNotSelectedMonth = (date: WeekDate) => {
-    return date?.fullDate.getMonth() + 1 !== Number(selectedMonth);
+    return date?.fullDateString.split('-')[1] !== selectedMonth;
   };
 
   return (
@@ -68,14 +68,12 @@ const WeeklyCalendar = ({
               </td>
               {currentWeekDates.map(currentWeekDate => {
                 const assignedShifts = shift.dates.filter(
-                  date =>
-                    date.date ===
-                    currentWeekDate.fullDate.toISOString().split('T')[0],
+                  date => date.date === currentWeekDate.fullDateString,
                 );
 
                 return (
                   <td
-                    key={`${shift.shiftTemplateId}-${currentWeekDate?.fullDate?.getTime()}`}
+                    key={`${shift.shiftTemplateId}-${currentWeekDate.fullDateString}`}
                     style={{
                       backgroundColor: isNotSelectedMonth(currentWeekDate)
                         ? '#F3F4F6'
@@ -90,11 +88,7 @@ const WeeklyCalendar = ({
                             <WorkerBlock
                               key={`${assignedShift.userId}-${assignedShift.shiftId}`}
                               assignedShift={assignedShift}
-                              targetDate={
-                                currentWeekDate.fullDate
-                                  .toISOString()
-                                  .split('T')[0]
-                              }
+                              targetDate={currentWeekDate.fullDateString}
                             />
                           ),
                         )}
