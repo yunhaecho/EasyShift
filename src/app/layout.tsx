@@ -8,6 +8,7 @@ import { Providers } from '@/providers';
 import GlobalNavBarProvider from './components/GlobalNavBarProvider';
 import { Suspense } from 'react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import Loader from './components/Loader';
 const openSans = Open_Sans({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800'],
@@ -31,7 +32,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${openSans.className} bg-gray-100 antialiased`}>
         <Providers>
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loader />}>
             <GlobalNavBarProvider>
               <TopBar />
               <div className="flex h-[calc(100vh-4rem)] w-full">{children}</div>
