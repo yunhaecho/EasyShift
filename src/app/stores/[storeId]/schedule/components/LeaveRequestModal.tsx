@@ -30,7 +30,7 @@ const LeaveRequestModal = ({
 
   useEffect(() => {
     resetSelectedDates();
-  }, [isOpen]);
+  }, [isOpen, resetSelectedDates]);
 
   const handleSubmit = () => {
     createLeaveRequest({
