@@ -5,6 +5,8 @@ import UserShiftCalendar from './UserShiftCalendar';
 import { useQuery } from '@tanstack/react-query';
 import { userScheduleQueryOptions } from '@/api/endpoints/settings/userSchedule/useFetchUserScheule';
 import useMonthlyCalendar from '@/hooks/useMonthlyCalendar';
+import UserShiftCalendarSkeleton from './UserShiftCalendarSkeleton';
+import useDebounce from '@/app/hooks/useDebounce';
 
 const UserInfoContent = ({
   storeId,
@@ -18,7 +20,7 @@ const UserInfoContent = ({
   const { currentYear, currentMonth, goToPrevOrNextMonth } =
     useMonthlyCalendar();
 
-  const { data: userSchedulesData } = useQuery(
+  const { data: userSchedulesData, isLoading } = useQuery(
     userScheduleQueryOptions({
       storeId,
       userId,
@@ -26,20 +28,26 @@ const UserInfoContent = ({
     }),
   );
 
+  const isUserSchedulesLoading = useDebounce(isLoading);
+
   const goToPrevMonth = () => goToPrevOrNextMonth(-1);
   const goToNextMonth = () => goToPrevOrNextMonth(1);
 
   return (
     <div className="flex h-full w-full">
       <UserProfileCard />
-      <UserShiftCalendar
-        mode={mode}
-        schedules={userSchedulesData?.schedules ?? []}
-        currentYear={currentYear}
-        currentMonth={currentMonth}
-        goToPrevMonth={goToPrevMonth}
-        goToNextMonth={goToNextMonth}
-      />
+      {isUserSchedulesLoading ? (
+        <UserShiftCalendarSkeleton />
+      ) : (
+        <UserShiftCalendar
+          mode={mode}
+          schedules={userSchedulesData?.schedules ?? []}
+          currentYear={currentYear}
+          currentMonth={currentMonth}
+          goToPrevMonth={goToPrevMonth}
+          goToNextMonth={goToNextMonth}
+        />
+      )}
     </div>
   );
 };

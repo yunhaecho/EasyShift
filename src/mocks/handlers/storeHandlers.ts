@@ -306,7 +306,7 @@ export const storeHandlers = [
   }),
 
   /* 매장 정보 조회 */
-  http.get('/api/stores/info?storeCode=:storeCode', () => {
+  http.get('/api/stores/info', () => {
     return HttpResponse.json({
       storeId: 1,
       storeName: 'BurnToBurn Coffee',
