@@ -2,24 +2,21 @@
 
 import { storesQueryOptions } from '@/api/endpoints/stores/storesQueryOptions';
 import { schedulesQueryOptions } from '@/api/endpoints/schedule/useFetchAllSchedule';
-import {
-  GetStoresStoreIdResponse,
-  ShiftTemplateResponse,
-} from '@/api/endpoints/stores/types';
+import { GetStoresStoreIdResponse } from '@/api/endpoints/stores/types';
 import { HomePageContext } from '@/app/context/HomePageContext';
-import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 import useWeeklyCalendar from '../hooks/useWeeklyCalendar';
 import { useParams } from 'next/navigation';
 import { addDays } from 'date-fns';
+import { GetSchedulesScheduleTemplateIdDateResponse } from '@/api/endpoints/schedule/types';
 
 const HomePageProvider = ({ children }: { children: React.ReactNode }) => {
   const { storeId } = useParams();
+  const { currentWeekDates, setCurrentDate } = useWeeklyCalendar();
+
   const { data: storeData } = useSuspenseQuery<GetStoresStoreIdResponse>(
     storesQueryOptions.getStoresStoreId(parseInt(storeId as string)),
-  );
-  const [shiftsData, setShiftsData] = useState<ShiftTemplateResponse[] | null>(
-    null,
   );
 
   const [selectedScheduleTemplateId, setSelectedScheduleTemplateId] = useState<
@@ -27,46 +24,13 @@ const HomePageProvider = ({ children }: { children: React.ReactNode }) => {
   >(storeData?.selectedScheduleTemplate?.scheduleTemplateId ?? null);
   const [showMyScheduleOnly, setShowMyScheduleOnly] = useState(false);
 
-  const { currentWeekDates, setCurrentDate } = useWeeklyCalendar();
-
-  const queryClient = useQueryClient();
-
-  useEffect(() => {
-    if (storeData?.selectedScheduleTemplate?.shifts && !shiftsData) {
-      console.log(
-        'Setting initial shiftsData from storeData:',
-        storeData.selectedScheduleTemplate.shifts,
-      );
-      setShiftsData(storeData.selectedScheduleTemplate.shifts);
-      setSelectedScheduleTemplateId(
-        storeData.selectedScheduleTemplate.scheduleTemplateId,
-      );
-    }
-  }, [storeData, shiftsData]);
-
-  useEffect(() => {
-    if (selectedScheduleTemplateId && currentWeekDates.length > 0) {
-      fetchShifts(selectedScheduleTemplateId);
-    }
-  }, [currentWeekDates]);
-
-  const fetchShifts = async (scheduleTemplateId: number) => {
-    console.log(
-      'Fetching shifts with date:',
-      currentWeekDates[0].fullDateString,
+  const { data: shiftData } =
+    useSuspenseQuery<GetSchedulesScheduleTemplateIdDateResponse>(
+      schedulesQueryOptions.getSchedulesScheduleTemplateIdDate(
+        selectedScheduleTemplateId || 0,
+        currentWeekDates[0].fullDateString,
+      ),
     );
-    try {
-      const response = await queryClient.fetchQuery(
-        schedulesQueryOptions.getSchedulesScheduleTemplateIdDate(
-          scheduleTemplateId,
-          currentWeekDates[0].fullDateString,
-        ),
-      );
-      setShiftsData(response.shifts);
-    } catch (error) {
-      console.error('Error fetching shifts:', error);
-    }
-  };
 
   const goToNextWeek = () => {
     setCurrentDate(prevDate => addDays(prevDate, 7));
@@ -78,9 +42,6 @@ const HomePageProvider = ({ children }: { children: React.ReactNode }) => {
 
   const handleSelectedScheduleTemplate = (scheduleTemplateId: number) => {
     setSelectedScheduleTemplateId(scheduleTemplateId);
-    if (currentWeekDates.length > 0) {
-      fetchShifts(scheduleTemplateId);
-    }
   };
 
   const handleToday = () => {
@@ -91,7 +52,7 @@ const HomePageProvider = ({ children }: { children: React.ReactNode }) => {
     <HomePageContext.Provider
       value={{
         storeData: storeData || null,
-        shiftData: shiftsData || null,
+        shiftData: shiftData?.shifts || null,
         selectedScheduleTemplateId,
         showMyScheduleOnly,
         setShowMyScheduleOnly,
