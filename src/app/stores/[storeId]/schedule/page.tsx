@@ -16,6 +16,7 @@ import AddScheduleModal from './components/AddScheduleModal';
 import { useFetchAllScheduleQuery } from '@/api/endpoints/schedule/useFetchAllSchedule';
 import ScheduleDataTable from './components/scheduleDataTable';
 import { UserRole } from '../../components/ManageStoreButton';
+import Loader from '@/app/components/Loader';
 
 export default function Schedule() {
   const [isStatusFilter, setIsStatusFilter] = useState(false);
@@ -109,7 +110,7 @@ export default function Schedule() {
       {/* 상태 연도 드랍다운바*/}
       <div className="h-auto w-full rounded-5 shadow-sm">
         {isLoading ? (
-          'loading'
+          <Loader />
         ) : (
           <>
             <div className="flex h-71 w-full flex-row gap-16 rounded-t-sm border-b border-gray-300 bg-white p-16">
