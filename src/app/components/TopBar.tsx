@@ -94,28 +94,32 @@ const UserAvatar = () => {
 
 /* 로그인, 회원가입 버튼 */
 const AuthButtons = () => {
-  return (
-    <div className="flex gap-16">
-      <Link
-        className="body-16-500 rounded-4 text-gray-900"
-        href={`/${ROUTES.SIGNIN}`}
-      >
-        Sign In
-      </Link>
-      <Link
-        className="body-16-500 rounded-4 bg-gray-900 px-15 py-8 text-white"
-        href={`/${ROUTES.SIGNUP}`}
-      >
-        Sign Up
-      </Link>
-    </div>
-  );
+  const router = useRouter();
+  const pathname = usePathname();
+
+  if (pathname !== `/${ROUTES.SIGNUP}`)
+    return (
+      <div className="flex items-center gap-16">
+        <button
+          className="body-16-500 rounded-4 text-gray-900"
+          onClick={() => router.push(ROUTES.SIGNIN)}
+        >
+          Sign In
+        </button>
+        <Link
+          className="body-16-500 rounded-4 bg-gray-900 px-15 py-8 text-white"
+          href={`/${ROUTES.SIGNUP}`}
+        >
+          Sign Up
+        </Link>
+      </div>
+    );
 };
 
 const TopBar = () => {
   const router = useRouter();
   const pathname = usePathname();
-  const isAuthenticated = true;
+  const isAuthenticated = false;
 
   const handleLogoClick = () => {
     router.push(isAuthenticated ? `/${ROUTES.STORES}` : `/${ROUTES.LANDING}`);
