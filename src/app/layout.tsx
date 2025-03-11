@@ -34,20 +34,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${openSans.className} bg-gray-100 antialiased`}>
-      <AuthSession>
-        <Providers>
-          <Suspense fallback={<Loader />}>
-                  <KakaoUserProvider>
-          
-            <GlobalNavBarProvider>
-
-              <TopBar />
-              <div className="flex h-[calc(100vh-4rem)] w-full">{children}</div>
-              <Toaster position="top-center" />
-              <ReactQueryDevtools />
-              </GlobalNavBarProvider>
-                      </KakaoUserProvider>
-              
+      `<AuthSession>
+          <Providers>
+            <Suspense fallback={<Loader />}>
+              <KakaoUserProvider>
+                <GlobalNavBarProvider>
+                  <TopBar />
+                  <div className="flex h-[calc(100vh-4rem)] w-full">{children}</div>
+                  <Toaster position="top-center" />
+                  <ReactQueryDevtools />
+                </GlobalNavBarProvider>
+              </KakaoUserProvider>
             </Suspense>
           </Providers>
         </AuthSession>
