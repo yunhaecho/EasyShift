@@ -13,7 +13,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <QueryClientProvider client={queryClientRef.current}>
-      <MswProvider>{children}</MswProvider>
+      <MswProvider>
+          {children}
+        </MswProvider>
     </QueryClientProvider>
   );
 }

@@ -12,7 +12,8 @@ import { CheckIcon } from '@heroicons/react/16/solid';
 import { useState } from 'react';
 
 export default function SignUp() {
-  const [enabled, setEnabled] = useState(false);
+  const [ enabled, setEnabled ] = useState(false);
+
 
   return (
     <div className="flex w-full flex-col items-center justify-center">
@@ -29,46 +30,47 @@ export default function SignUp() {
         </div>
 
         {/* 회원가입 정보 기입란 */}
-        <div className="flex w-full flex-col items-center justify-center bg-white p-32 shadow-md">
-          <div className="mb-16 flex w-full flex-row items-center justify-center gap-16">
-            <RoleButton icon={<AdminIcon />} role="Administrator" />
-            <RoleButton icon={<WorkerIcon />} role="Worker" />
-          </div>
+        <div className="flex w-full h-auto flex-col items-center justify-center bg-white p-32 shadow-md mb-16">
+            <div className="mb-16 flex w-full flex-row items-center justify-center gap-16">
+              <RoleButton icon={<AdminIcon />} role="Administrator" />
+              <RoleButton icon={<WorkerIcon />} role="Worker" />
+            </div>
+    
+            <form>
+            <SignUpForm
+              icon={
+                <WorkerIcon className="ml-12 mr-12 mt-15 fill-current text-gray-500" />
+              }
+              formName="Full Name"
+              type="text"
+            />
+            <SignUpForm
+              icon={
+                <EmailIcon className="ml-12 mr-12 mt-18 fill-current text-gray-500" />
+              }
+              formName="Email address"
+              type="email"
+            />
+            <SignUpForm
+              icon={<LockIcon className="ml-12 mr-12 mt-15" />}
+              formName="Password"
+              type="password"
+            />
+            <SignUpForm
+              icon={<LockIcon className="ml-12 mr-12 mt-15" />}
+              formName="Confirm Password"
+              type="password"
+            />
+            <SignUpForm
+              icon={
+                <PhoneIcon className="ml-12 mr-12 mt-15 fill-current text-gray-500" />
+              }
+              formName="Phone Number (Optional)"
+              type="tel"
+            />
+          </form>
         </div>
 
-        <form>
-          <SignUpForm
-            icon={
-              <WorkerIcon className="ml-12 mr-12 mt-15 fill-current text-gray-500" />
-            }
-            formName="Full Name"
-            type="text"
-          />
-          <SignUpForm
-            icon={
-              <EmailIcon className="ml-12 mr-12 mt-18 fill-current text-gray-500" />
-            }
-            formName="Email address"
-            type="email"
-          />
-          <SignUpForm
-            icon={<LockIcon className="ml-12 mr-12 mt-15" />}
-            formName="Password"
-            type="password"
-          />
-          <SignUpForm
-            icon={<LockIcon className="ml-12 mr-12 mt-15" />}
-            formName="Confirm Password"
-            type="password"
-          />
-          <SignUpForm
-            icon={
-              <PhoneIcon className="ml-12 mr-12 mt-15 fill-current text-gray-500" />
-            }
-            formName="Phone Number (Optional)"
-            type="tel"
-          />
-        </form>
 
         {/* 약관동의 파트 */}
         <div className="mb-16 flex h-24 w-full flex-row items-center justify-start">
