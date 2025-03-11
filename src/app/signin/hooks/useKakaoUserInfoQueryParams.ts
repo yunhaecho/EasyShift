@@ -10,7 +10,7 @@ export interface KakaoUserInfo {
   avatarUrl: string;
 }
 
-export default function useGetKakaoUserInfoFromQueryParams(): KakaoUserInfo | null {
+export function useGetKakaoUserInfoFromQueryParams(): KakaoUserInfo | null {
   const searchParams = useSearchParams();
 
   return useMemo(() => {

@@ -11,6 +11,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import AuthSession from './components/SessionProvider';
 
 import Loader from './components/Loader';
+import { KakaoUserProvider } from './components/KakaoLoginProvider';
 const openSans = Open_Sans({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800'],
@@ -36,12 +37,17 @@ export default function RootLayout({
       <AuthSession>
         <Providers>
           <Suspense fallback={<Loader />}>
+                  <KakaoUserProvider>
+          
             <GlobalNavBarProvider>
+
               <TopBar />
               <div className="flex h-[calc(100vh-4rem)] w-full">{children}</div>
               <Toaster position="top-center" />
               <ReactQueryDevtools />
               </GlobalNavBarProvider>
+                      </KakaoUserProvider>
+              
             </Suspense>
           </Providers>
         </AuthSession>
