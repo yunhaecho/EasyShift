@@ -1,37 +1,34 @@
-import { DefaultSession } from 'next-auth';
+// import { DefaultSession } from 'next-auth';
 
-declare module 'next-auth' {
-  interface Session extends DefaultSession {
-    accessToken: string;
-    user: {
-      id: number;
-      email: string;
-      role: string;
-      needsSignup: boolean;
-    } & DefaultSession['user'];
-  }
+// declare module 'next-auth' {
+//   interface Session extends DefaultSession {
+//     accessToken: string;
+//     code: string;
+//     user: {
+//       id: number;
+//       email: string;
+//       role: string;
+//       needSignup: boolean;
+//       avatarUrl: string;
+//     } & DefaultSession['user'];
+//   }
 
-  interface User {
-    accessToken: string;
-  }
-}
+//   interface User {
+//     id: number;
+//     role: string;
+//     avatarUrl: string;
+//     email: string;
+//     token: string;
+//   }
+// }
 
-declare module 'next-auth/jwt' {
-  interface JWT {
-    accessToken: string;
-    user: {
-      id: number;
-      role: string;
-    };
-  }
-}
-
-declare module 'next-auth/redirect' {
-  interface Redirect {
-    accessToken: string;
-    user: {
-      id: number;
-      role: string;
-    };
-  }
-}
+// declare module 'next-auth/jwt' {
+//   interface JWT {
+//     user: {
+//       id: number;
+//       role: string;
+//       avatarUrl: string;
+//       needSignUp: boolean;
+//     };
+//   }
+// }
