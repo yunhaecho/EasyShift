@@ -4,9 +4,12 @@ interface SignUpFormProps {
   icon: ReactNode;
   formName: string;
   type: string;
+  name: string;
+  value: string;
+  onChange: React.ChangeEventHandler<HTMLInputElement>
 }
 
-export default function SignUpForm({ icon, formName, type }: SignUpFormProps) {
+export default function SignUpForm({ icon, formName, type , name ,value, onChange}: SignUpFormProps) {
   return (
     <div className="mb-16">
       <div className="body-14-500 mb-4 text-gray-800">{formName}</div>
@@ -15,6 +18,9 @@ export default function SignUpForm({ icon, formName, type }: SignUpFormProps) {
         <input
           className="h-full w-342 border-collapse text-gray-800 outline-none"
           type={type}
+          name={name}
+          value={value}
+          onChange={onChange}
         />
       </div>
     </div>

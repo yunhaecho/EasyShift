@@ -2,13 +2,13 @@
 
 import { ReactNode } from "react";
 import { KakaoUserContext } from "../context/kakaoUserContext";
-import { useGetKakaoUserInfoFromQueryParams } from "../signin/hooks/useKakaoUserInfoQueryParams";
+import { useGetTokenMutation } from "@/api/endpoints/signin/useEnrollUser";
 
 export function KakaoUserProvider({ children }: { children: ReactNode }) {
-    const kakaoUserInfo =  useGetKakaoUserInfoFromQueryParams();
+    const { data } =  useGetTokenMutation();
   
     return (
-      <KakaoUserContext.Provider value={kakaoUserInfo}>
+      <KakaoUserContext.Provider value ={ data }>
         {children}
       </KakaoUserContext.Provider>
     );

@@ -1,12 +1,8 @@
 'use client';
 
 import { createContext } from 'react';
+import { EnrollUserResponse } from '@/api/endpoints/signin/useEnrollUser';
 
-export interface KakaoUserInfo {
-  userId: number;
-  email: string;
-  avatarUrl: string;
-  needSignUp: boolean;
-}
-
-export const KakaoUserContext = createContext<KakaoUserInfo | null>(null);
+export const KakaoUserContext = createContext<EnrollUserResponse | undefined>(
+  undefined,
+);
