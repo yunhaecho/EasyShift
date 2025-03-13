@@ -17,7 +17,6 @@ const WorkersInformation = () => {
   const [isInviteLinkModalOpen, toggleInviteLinkModal] = useToggle(false);
   const [isUserInfoModalOpen, toggleUserInfoModal] = useToggle(false);
   const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
-  console.log(selectedUserId, 'selectedUserId');
 
   const handleWorkerClick = (userId: number) => {
     setSelectedUserId(userId);

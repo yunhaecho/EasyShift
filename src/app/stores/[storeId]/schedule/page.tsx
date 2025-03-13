@@ -15,15 +15,18 @@ import AddScheduleModal from './components/AddScheduleModal';
 
 import { useFetchAllScheduleQuery } from '@/api/endpoints/schedule/useFetchAllSchedule';
 import ScheduleDataTable from './components/scheduleDataTable';
-import { UserRole } from '../../components/ManageStoreButton';
 import Loader from '@/app/components/Loader';
-
+import { AuthContext } from '@/app/context/AuthContext';
+import { useContext } from 'react';
+import { USER_ROLE } from '@/constants/userRole';
 export default function Schedule() {
   const [isStatusFilter, setIsStatusFilter] = useState(false);
   const [isYearFilter, setIsYearFilter] = useState(false);
   const [status, setStatus] = useState('');
   const [year, setYear] = useState('');
   const [isAddScheduleModalOpen, toggleAddScheduleModal] = useToggle(false);
+
+  const { userRole } = useContext(AuthContext);
 
   const statusOption = ['All Status', 'Pending', 'Completed'];
 
@@ -61,8 +64,6 @@ export default function Schedule() {
     );
   }
 
-  const userRole = 'WORKER' as UserRole; // [TODO] 유저 역할 가져오기
-
   // 상태 필터링(응답이 소문자라 소문자로 맞추기)
   const filterStatus = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const selectedStatus = e.currentTarget.textContent ?? '';
@@ -95,7 +96,7 @@ export default function Schedule() {
       {/* Header */}
       <div className="mb-40 flex h-40 w-full flex-row justify-between">
         <span className="head-24-700">Schedule Management</span>
-        {userRole === 'ADMIN' && (
+        {userRole === USER_ROLE.ADMIN && (
           <Button
             onClick={toggleAddScheduleModal}
             className="flex h-fit items-center gap-12 rounded-4 bg-gray-900 px-16 py-8"

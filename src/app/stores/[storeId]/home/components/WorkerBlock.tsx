@@ -1,4 +1,6 @@
-import { UserRole } from '@/app/stores/components/ManageStoreButton';
+import { AuthContext } from '@/app/context/AuthContext';
+import { USER_ROLE } from '@/constants/userRole';
+import { useContext } from 'react';
 
 const WorkerBlock = ({
   shift,
@@ -11,12 +13,12 @@ const WorkerBlock = ({
   };
   onClick: () => void;
 }) => {
-  const userRole = 'ADMIN' as UserRole;
+  const { userRole } = useContext(AuthContext);
 
   return (
     <div
       className={`w-full rounded-4 border border-gray-400 bg-white p-8 ${
-        userRole === 'ADMIN' && 'cursor-pointer hover:bg-gray-100'
+        userRole === USER_ROLE.ADMIN && 'cursor-pointer hover:bg-gray-100'
       }`}
       onClick={onClick}
     >

@@ -10,8 +10,7 @@ import { Suspense } from 'react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import Loader from './components/Loader';
-import { KakaoUserProvider } from './components/KakaoLoginProvider';
-import { SignUpProvider } from './components/SignUpProvider';
+
 const openSans = Open_Sans({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700', '800'],
@@ -34,21 +33,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${openSans.className} bg-gray-100 antialiased`}>
-          <Providers>
-            <Suspense fallback={<Loader />}>
-            
-              <KakaoUserProvider>
-                <SignUpProvider>
-                  <GlobalNavBarProvider>
-                    <TopBar />
-                    <div className="flex h-[calc(100vh-4rem)] w-full">{children}</div>
-                    <Toaster position="top-center" />
-                    <ReactQueryDevtools />
-                  </GlobalNavBarProvider>
-                </SignUpProvider>
-              </KakaoUserProvider>
-            </Suspense>
-          </Providers>
+        <Providers>
+          <Suspense fallback={<Loader />}>
+            <GlobalNavBarProvider>
+              <TopBar />
+              <div className="flex h-[calc(100vh-4rem)] w-full">{children}</div>
+              <Toaster position="top-center" />
+              <ReactQueryDevtools />
+            </GlobalNavBarProvider>
+          </Suspense>
+        </Providers>
       </body>
     </html>
   );

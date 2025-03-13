@@ -1,58 +1,35 @@
-"use client"
+'use client';
 
-import { useGetTokenMutation } from '@/api/endpoints/signin/useEnrollUser';
+import { useLoginMutation } from '@/api/endpoints/user/useLoginMutation';
 import { useSearchParams } from 'next/navigation';
-import {  useEffect } from 'react';
-// import { KakaoUserContext } from '@/app/context/kakaoUserContext';
-// import KakaoLoginApi from '@/api/endpoints/signin/useGetToken';
+import { useEffect } from 'react';
+import Loader from '@/app/components/Loader';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 function CallbackPage() {
-    const searchParams = useSearchParams();
-    // const router = useRouter();
-    
-    const authorizationCode = searchParams.get('code');
-  console.log(authorizationCode);
-  
-    const { mutate, isError } = useGetTokenMutation();
-    // const kakaoUserInfo = useContext(KakaoUserContext);
-    // const [redirected, setRedirected] = useState(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-    useEffect(() => {
-      if(authorizationCode) {
-        console.log(authorizationCode);
-        mutate(authorizationCode);
-      }
-      // KakaoLoginApi();
-    }, []);
+  const authorizationCode = searchParams.get('code');
 
-    // useEffect(() => {
-    //   if(redirected) return;
+  const { mutate, isError } = useLoginMutation();
 
-    // if (kakaoUserInfo) {
-    //   if(kakaoUserInfo.needSignUp) {
-        
-    //     router.push('/signup');
-    // } else {
-    //   router.push('/stores');
-    // }
-    // setRedirected(true);
-    //   }
-  
-    // },[kakaoUserInfo, router, redirected])
-
-  
-    if (isError) {
-      return <p>로그인 중 오류가 발생했습니다.</p>;
+  useEffect(() => {
+    if (authorizationCode) {
+      mutate(authorizationCode);
+    } else {
+      toast.error('Authorization code is required');
+      router.push('/');
     }
+  }, [authorizationCode, mutate, router]);
 
-    // console.log(status);
-
-
-  return (
-    <div className="w-full h-full">
-      <p>loading...</p>
-    </div>
-  )
+  if (isError) {
+    toast.error('Login Failed');
+    router.push('/');
   }
+
+  return <Loader />;
+}
 
 export default CallbackPage;
