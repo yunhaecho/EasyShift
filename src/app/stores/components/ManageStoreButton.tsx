@@ -3,31 +3,34 @@
 import AddStoreModal from '@/app/stores/components/AddStoreModal';
 import JoinStoreModal from '@/app/stores/components/JoinStoreModal';
 import useToggle from '@/app/hooks/useToggle';
-
+import { AuthContext } from '@/app/context/AuthContext';
+import { useContext } from 'react';
 import PlusWhiteIcon from '@/assets/icons/plus-white.svg';
-export type UserRole = 'ADMIN' | 'WORKER';
+import { USER_ROLE } from '@/constants/userRole';
 
 const ManageStoreButton = () => {
   const [isAddStoreModalOpen, toggleAddStoreModal] = useToggle(false);
   const [isJoinStoreModalOpen, toggleJoinStoreModal] = useToggle(false);
-  const userRole = 'WORKER' as UserRole;
+  const { userRole } = useContext(AuthContext);
 
   return (
     <>
       <button
         className="flex items-center gap-12 rounded-4 bg-gray-900 px-16 py-8"
         onClick={
-          userRole === 'ADMIN' ? toggleAddStoreModal : toggleJoinStoreModal
+          userRole === USER_ROLE.ADMIN
+            ? toggleAddStoreModal
+            : toggleJoinStoreModal
         }
         aria-label="Add new store"
       >
         <PlusWhiteIcon />
         <p className="body-16-400 text-white">
-          {userRole === 'ADMIN' ? 'Add Store' : 'Join Store'}
+          {userRole === USER_ROLE.ADMIN ? 'Add Store' : 'Join Store'}
         </p>
       </button>
 
-      {userRole === 'ADMIN' ? (
+      {userRole === USER_ROLE.ADMIN ? (
         <AddStoreModal
           isOpen={isAddStoreModalOpen}
           onClose={toggleAddStoreModal}

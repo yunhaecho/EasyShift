@@ -1,3 +1,5 @@
+'use client';
+
 import StoreList from './components/StoreList';
 
 const StoresPage = () => {

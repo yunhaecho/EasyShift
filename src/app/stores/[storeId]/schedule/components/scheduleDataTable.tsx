@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Status from '../components/Status';
 import AdminActions from './AdminActions';
-import { UserRole } from '@/app/stores/components/ManageStoreButton';
 import WorkerActions from './WorkerActions';
+import { AuthContext } from '@/app/context/AuthContext';
+import { USER_ROLE } from '@/constants/userRole';
 
 type ScheduleDataTableProps = {
   filteredData: Array<{
@@ -20,7 +21,7 @@ function ScheduleDataTable({
   onDeleteSuccess,
 }: ScheduleDataTableProps) {
   const column = ['Name', 'Description', 'Period', 'Status', 'Actions'];
-  const userRole = 'ADMIN' as UserRole;
+  const { userRole } = useContext(AuthContext);
 
   return (
     <table className="w-full table-fixed">
@@ -36,32 +37,32 @@ function ScheduleDataTable({
 
       <tbody>
         {filteredData &&
-        filteredData.map(schedule => (
-          <tr key={schedule.id} className="border-b border-gray-300 bg-white">
-            <td className="body-14-500 px-24 py-12 text-center">
-              <span>{schedule.scheduleName}</span>
-            </td>
-            <td className="body-14-500 px-24 py-12 text-center">
-              {schedule.description}
-            </td>
-            <td className="body-14-500 px-24 py-12 text-center">
-              {schedule.shiftDate}
-            </td>
-            <td className="body-14-500 px-24 py-12 text-center">
-              <Status status={schedule.status} />
-            </td>
-            <td className="body-14-500 px-24 py-12 text-center">
-              {userRole === 'ADMIN' ? (
-                <AdminActions
-                  schedule={schedule}
-                  onDeleteSuccess={onDeleteSuccess}
-                />
-              ) : (
-                <WorkerActions status={schedule.status} />
-              )}
-            </td>
-          </tr>
-        ))}
+          filteredData.map(schedule => (
+            <tr key={schedule.id} className="border-b border-gray-300 bg-white">
+              <td className="body-14-500 px-24 py-12 text-center">
+                <span>{schedule.scheduleName}</span>
+              </td>
+              <td className="body-14-500 px-24 py-12 text-center">
+                {schedule.description}
+              </td>
+              <td className="body-14-500 px-24 py-12 text-center">
+                {schedule.shiftDate}
+              </td>
+              <td className="body-14-500 px-24 py-12 text-center">
+                <Status status={schedule.status} />
+              </td>
+              <td className="body-14-500 px-24 py-12 text-center">
+                {userRole === USER_ROLE.ADMIN ? (
+                  <AdminActions
+                    schedule={schedule}
+                    onDeleteSuccess={onDeleteSuccess}
+                  />
+                ) : (
+                  <WorkerActions status={schedule.status} />
+                )}
+              </td>
+            </tr>
+          ))}
       </tbody>
     </table>
   );

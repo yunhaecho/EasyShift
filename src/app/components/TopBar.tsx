@@ -12,18 +12,18 @@ import Logo from '@/assets/logo.svg';
 import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
 import { useContext } from 'react';
 import { GlobalNavBarContext } from '../context/GlobalNavBarContext';
-import { UserRole } from '../stores/components/ManageStoreButton';
-import { signIn } from 'next-auth/react';
+import { AuthContext } from '../context/AuthContext';
+import { UserRole } from '@/api/endpoints/user/types';
 
 /* Home, Schedule, Settings 메뉴 탭 */
 const MenuBar = () => {
   const pathname = usePathname();
   const params = useParams();
   const storeId = params.storeId;
-  const userRole = 'ADMIN' as UserRole;
+  const { userRole } = useContext(AuthContext);
 
   const filteredMenus = STORE_MENUS.filter(menu =>
-    menu.requiredRoles.includes(userRole),
+    menu.requiredRoles.includes(userRole as UserRole),
   );
 
   return (
@@ -96,14 +96,10 @@ const UserAvatar = () => {
 /* 로그인, 회원가입 버튼 */
 const AuthButtons = () => {
   return (
-    <div className="flex gap-16">
-      <a 
+    <div className="flex items-center gap-16">
+      <a
         className="body-16-500 rounded-4 text-gray-900"
-        href={`${ROUTES.SIGNIN}`}
-        onClick={(e) => {
-          e.preventDefault();
-          signIn('kakao')
-        }}
+        href={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}`}
       >
         Sign In
       </a>
@@ -120,7 +116,7 @@ const AuthButtons = () => {
 const TopBar = () => {
   const router = useRouter();
   const pathname = usePathname();
-  const isAuthenticated = false;
+  const { isAuthenticated } = useContext(AuthContext);
 
   const handleLogoClick = () => {
     router.push(isAuthenticated ? `/${ROUTES.STORES}` : `/${ROUTES.LANDING}`);

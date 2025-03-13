@@ -1,6 +1,6 @@
 export const ROUTES = {
   LANDING: 'landing',
-  SIGNIN: `${process.env.NEXT_PUBLIC_KAKAO_LOGIN_URL}/oauth2/authorization/kakao?redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}`,
+  SIGNIN: '',
   SIGNUP: 'signup',
   STORES: 'stores',
   HOME: 'home',
