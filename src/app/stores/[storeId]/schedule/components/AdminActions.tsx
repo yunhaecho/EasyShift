@@ -6,6 +6,8 @@ import Link from 'next/link';
 import EditBlackIcon from '@/assets/icons/edit-black.svg';
 import DeleteRedIcon from '@/assets/icons/delete-red.svg';
 import { useDeleteScheduleMutation } from '@/api/endpoints/schedule/useDeleteSchedule';
+import toast from 'react-hot-toast';
+import { useFetchGeneratedScheduleMutation } from '@/api/endpoints/schedule/useGeneratedScheduleMutatation';
 
 function AdminActions({
   schedule,
@@ -19,19 +21,27 @@ function AdminActions({
 }) {
   const params = useParams();
   const storeId = params.storeId;
-  const { mutate } = useDeleteScheduleMutation();
+  const { mutate : deleteSchedule } = useDeleteScheduleMutation();
 
   const handleClickDeleteScheduleButton = () => {
-    mutate(schedule.id, {
+    deleteSchedule(schedule.id, {
       onSuccess: () => {
         onDeleteSuccess(schedule.id);
       },
     });
   };
+  const { mutate : fetchGeneratedSchedule } = useFetchGeneratedScheduleMutation(schedule.id);
+
+  const handleGenerateSchedule = () => {
+    fetchGeneratedSchedule();
+    toast.loading('스케줄 생성 중입니다. 잠시만 기다려 주세요.', { id: 'generate-schedule-toast' });
+  }
 
   return (
     <div className="flex h-28 w-full flex-row items-center justify-center gap-12">
-      <Button className="body-14-500 h-full w-auto rounded-4 bg-gray-900 px-11 py-4 text-white">
+      <Button 
+        onClick={handleGenerateSchedule}
+        className="body-14-500 h-full w-auto rounded-4 bg-gray-900 px-11 py-4 text-white">
         Generate
       </Button>
 
