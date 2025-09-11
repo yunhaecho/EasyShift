@@ -12,15 +12,11 @@ const UserShiftCalendar = ({
   schedules,
   currentYear,
   currentMonth,
-  goToPrevMonth,
-  goToNextMonth,
 }: {
   mode: 'modal' | 'page';
   schedules: UserSchedule[];
   currentYear: number;
   currentMonth: number;
-  goToPrevMonth: () => void;
-  goToNextMonth: () => void;
 }) => {
   const daysInCalendar = generateCalendar(new Date(currentYear, currentMonth));
 
@@ -30,8 +26,6 @@ const UserShiftCalendar = ({
         <CalendarHeader
           currentMonth={currentMonth}
           currentYear={currentYear}
-          goToPrevMonth={goToPrevMonth}
-          goToNextMonth={goToNextMonth}
           mode={mode}
         />
 
@@ -47,10 +41,10 @@ const UserShiftCalendar = ({
               return (
                 <CalendarCell
                   key={day.kstDate.getTime()}
-                  day={day}
-                  isCurrentMonth={isCurrentMonth}
-                  isLastDayOfWeek={isLastDayOfWeek}
-                  isFirstWeek={isFirstWeek}
+                  day={day} //DD
+                  isCurrentMonth={isCurrentMonth} //날짜 색상 변경용
+                  isLastDayOfWeek={isLastDayOfWeek} //보더 색상 변경용
+                  isFirstWeek={isFirstWeek} //보더 색상 변경용
                   shifts={schedules.flatMap(schedule => schedule.shifts)}
                 />
               );

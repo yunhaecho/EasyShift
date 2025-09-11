@@ -4,22 +4,24 @@ import UserPageContext from '@/app/context/UserPageContext';
 import LeftArrowIcon from '@/assets/icons/left-arrow.svg';
 import RightArrowIcon from '@/assets/icons/right-arrow.svg';
 import StoresListDropdown from '@/app/components/StoresListDropdown';
+import useMonthlyCalendar from '@/hooks/useMonthlyCalendar';
 
 const CalendarHeader = ({
   currentMonth,
   currentYear,
-  goToPrevMonth,
-  goToNextMonth,
   mode,
 }: {
   currentMonth: number;
   currentYear: number;
-  goToPrevMonth: () => void;
-  goToNextMonth: () => void;
   mode: 'modal' | 'page';
 }) => {
   const { stores, selectedStoreId, setSelectedStoreId } =
     useContext(UserPageContext);
+
+  const { goToPrevOrNextMonth } = useMonthlyCalendar();
+
+  const goToPrevMonth = () => goToPrevOrNextMonth(-1);
+  const goToNextMonth = () => goToPrevOrNextMonth(1);
 
   return (
     <header

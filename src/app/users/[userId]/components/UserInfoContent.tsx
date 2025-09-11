@@ -17,8 +17,7 @@ const UserInfoContent = ({
   userId?: number | null;
   mode: 'modal' | 'page';
 }) => {
-  const { currentYear, currentMonth, goToPrevOrNextMonth } =
-    useMonthlyCalendar();
+  const { currentYear, currentMonth } = useMonthlyCalendar();
 
   const { data: userSchedulesData, isLoading } = useQuery(
     userScheduleQueryOptions({
@@ -29,9 +28,6 @@ const UserInfoContent = ({
   );
 
   const isUserSchedulesLoading = useDebounce(isLoading);
-
-  const goToPrevMonth = () => goToPrevOrNextMonth(-1);
-  const goToNextMonth = () => goToPrevOrNextMonth(1);
 
   return (
     <div className="flex h-full w-full">
@@ -44,8 +40,6 @@ const UserInfoContent = ({
           schedules={userSchedulesData?.schedules ?? []}
           currentYear={currentYear}
           currentMonth={currentMonth}
-          goToPrevMonth={goToPrevMonth}
-          goToNextMonth={goToNextMonth}
         />
       )}
     </div>
