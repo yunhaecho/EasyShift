@@ -1,6 +1,6 @@
-import { UserSchedule } from '@/api/endpoints/settings/userSchedule/types';
+import { CalendarContext } from '@/app/context/CalendarContext';
 import { getShiftSummaryBySchedule } from '@/utils/getShiftSummaryBySchedule';
-import { useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 
 const MonthlySummaryItem = ({
   summaryItem,
@@ -14,7 +14,7 @@ const MonthlySummaryItem = ({
   return (
     <li className={`flex-1 ${!isLastItem && 'border-r border-gray-300 pr-24'}`}>
       <h4 className="body-14-500 text-gray-800">{scheduleName}</h4>
-      <dl className="mt-12 flex flex-col gap-8">
+      <dl className="flex flex-col gap-8">
         {Object.entries(shifts).map(([shiftName, count]) => (
           <div key={shiftName} className="flex items-center justify-between">
             <dt className="body-16-400 text-gray-700">{shiftName}</dt>
@@ -26,14 +26,15 @@ const MonthlySummaryItem = ({
   );
 };
 
-const MonthlySummaryCard = ({ schedules }: { schedules: UserSchedule[] }) => {
+const MonthlySummaryCard = () => {
+  const { schedules } = useContext(CalendarContext);
   const summaryItems = useMemo(
     () => getShiftSummaryBySchedule(schedules),
     [schedules],
   );
 
   return (
-    <section className="flex flex-col gap-16">
+    <section>
       <h3 className="body-18-600">Monthly Shift Summary</h3>
       <ul className="flex gap-24">
         {Object.entries(summaryItems).map((summaryItem, index) => (

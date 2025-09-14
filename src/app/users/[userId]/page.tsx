@@ -1,30 +1,31 @@
 'use client';
-
-import { useParams } from 'next/navigation';
-import UserInfoContent from './components/UserInfoContent';
 import UserPageProvider from './components/UserPageProvider';
-import UserPageContext from '@/app/context/UserPageContext';
 import { useContext } from 'react';
-
-const UserPageContent = () => {
-  const { userId } = useParams();
-  const { selectedStoreId } = useContext(UserPageContext);
-
-  return (
-    <main className="flex w-full">
-      <UserInfoContent
-        storeId={selectedStoreId}
-        userId={Number(userId)}
-        mode="page"
-      />
-    </main>
-  );
-};
-
+import useDebounce from '@/app/hooks/useDebounce';
+import UserProfileCard from './components/UserProfileCard';
+import UserShiftCalendarSkeleton from './components/UserShiftCalendarSkeleton';
+import UserShiftCalendar from './components/UserShiftCalendar';
+import { CalendarContext } from '@/app/context/CalendarContext';
+import { MonthlySummaryCard } from './components/calendar';
 const UserPage = () => {
+  const scheduleData = useContext(CalendarContext);
+  const isUserSchedulesLoading = useDebounce(scheduleData.isLoading);
+  const mode = 'page';
   return (
     <UserPageProvider>
-      <UserPageContent />
+      <div className="grid w-full grid-cols-[1fr,2fr]">
+        <UserProfileCard />
+        {isUserSchedulesLoading ? (
+          <UserShiftCalendarSkeleton />
+        ) : (
+          <section className="grid-row-2 grid h-full gap-24 p-32">
+            <UserShiftCalendar mode={mode} />
+            <article className="rounded-8 bg-white p-24 shadow-md">
+              <MonthlySummaryCard />
+            </article>
+          </section>
+        )}
+      </div>
     </UserPageProvider>
   );
 };

@@ -2,22 +2,24 @@ import Image from 'next/image';
 import SampleProfile from '@/assets/sample.png';
 import PhoneIcon from '@/assets/icons/phone.svg';
 import EmailIcon from '@/assets/icons/email.svg';
+import { useSession } from 'next-auth/react';
 
 const UserProfileCard = () => {
+  const { data } = useSession();
   return (
-    <aside className="h-full w-[25%] bg-white px-32 py-36">
+    <aside className="h-full w-full bg-white px-32 py-36">
       <article className="flex flex-col">
         <header className="flex flex-col items-center justify-center">
           <Image
             src={SampleProfile}
             alt="User Profile Image"
-            className="h-152 w-152 rounded-full object-cover"
+            className="h-200 w-200 rounded-full object-cover"
           />
-          <h1 className="head-24-600 mt-28">Sarah Johnson</h1>
-          <p className="body-14-400 mt-4 text-gray-600">Worker</p>
+          <h1 className="head-24-600 mt-28">{data?.user.name}</h1>
+          <p className="body-14-400 mt-4 text-gray-600">{data?.user.role}</p>
         </header>
 
-        <dl className="mt-24 flex flex-col gap-24">
+        <dl className="mt-24 flex flex-col gap-24 p-10">
           {/* 가입일 정보 */}
           <div className="flex flex-col gap-8">
             <dt className="body-14-500 text-gray-600">Member since</dt>
@@ -48,7 +50,7 @@ const UserProfileCard = () => {
           {/* 역할 정보 */}
           <div className="flex flex-col gap-8">
             <dt className="body-14-500 text-gray-600">Role</dt>
-            <dd className="body-16-400 text-gray-900">worker</dd>
+            <dd className="body-16-400 text-gray-900">{data?.user.role}</dd>
           </div>
         </dl>
       </article>
