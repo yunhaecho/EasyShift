@@ -1,34 +1,27 @@
-// import { DefaultSession } from 'next-auth';
+// types/next-auth.d.ts
+import "next-auth";
+import "next-auth/jwt";
 
-// declare module 'next-auth' {
-//   interface Session extends DefaultSession {
-//     accessToken: string;
-//     code: string;
-//     user: {
-//       id: number;
-//       email: string;
-//       role: string;
-//       needSignup: boolean;
-//       avatarUrl: string;
-//     } & DefaultSession['user'];
-//   }
+declare module "next-auth/jwt" {
+  interface signIn {
+    needsSignup?: boolean;
+  }
+}
 
-//   interface User {
-//     id: number;
-//     role: string;
-//     avatarUrl: string;
-//     email: string;
-//     token: string;
-//   }
-// }
-
-// declare module 'next-auth/jwt' {
-//   interface JWT {
-//     user: {
-//       id: number;
-//       role: string;
-//       avatarUrl: string;
-//       needSignUp: boolean;
-//     };
-//   }
-// }
+declare module "next-auth/jwt" {
+  interface JWT {
+    role?: "ADMIN" | "WORKER";
+    needsSignup?: boolean;
+  }
+}
+declare module "next-auth" {
+  interface Session {
+    user: {
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+      role?: "ADMIN" | "WORKER";
+    };
+    needSignUp?: boolean;
+  }
+}
