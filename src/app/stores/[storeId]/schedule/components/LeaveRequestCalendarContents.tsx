@@ -1,4 +1,4 @@
-import { weekNames } from '@/constants/monthNames';
+import { weekNames } from '@/constants/weekNames';
 import { format } from 'date-fns';
 
 export const CalendarHeader = ({ currentMonth }: { currentMonth: Date }) => (

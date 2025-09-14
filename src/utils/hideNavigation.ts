@@ -2,7 +2,6 @@ import { ROUTES } from '@/constants/routes';
 
 export const HIDDEN_ROUTES = [
   `/${ROUTES.LANDING}`,
-  `/${ROUTES.SIGNIN}`,
   `/${ROUTES.SIGNUP}`,
   `/${ROUTES.STORES}`,
   `/${ROUTES.USERS}`,
