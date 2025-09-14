@@ -1,10 +1,29 @@
+'use client';
 import FeatureCard from './component/FeatureCard';
 import CalendarIcon from '@/assets/icons/calendar.svg';
 import PeopleIcon from '@/assets/icons/people.svg';
 import ChartIcon from '@/assets/icons/chart.svg';
 import CircleArrow from '@/assets/icons/circle-arrow.svg';
+import { useSession } from 'next-auth/react';
+import { useEffect } from 'react';
+// import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Landing() {
+  const { data } = useSession();
+  const router = useRouter();
+
+  // useEffect(() => {
+  //   if (data?.needSignUp) {
+  //     router.push('/signup');
+  //   }
+  // }, []);
+  useEffect(() => {
+    if (data?.needSignUp === true) {
+      router.push('/signup');
+    }
+  });
+
   return (
     <div className="flex h-full w-full flex-col">
       {/* 메인 phrase */}

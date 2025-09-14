@@ -5,23 +5,19 @@ import WorkerIcon from '@/assets/icons/worker.svg';
 import RoleButton from './component/RoleButton';
 import { Button, Checkbox } from '@headlessui/react';
 import { CheckIcon } from '@heroicons/react/16/solid';
-import React, { ChangeEvent, useMemo, useState } from 'react';
-import NameField from './component/NameField';
+import React, { ChangeEvent, useEffect, useMemo, useState } from 'react';
 import PhoneNumberField from './component/PhoneNumberField';
-import useSignupMutation from '@/api/endpoints/user/useSignupMutation';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 function SignUpPage() {
   const [enabled, setEnabled] = useState(false);
-  const [selectedRole, setSelectedRole] = useState<'ADMIN' | 'USER'>('ADMIN');
-  const [name, setName] = useState('');
+  const [role, setRole] = useState('ADMIN');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [phoneNumberError, setPhoneNumberError] = useState('');
-
-  const { mutate: signUp } = useSignupMutation({
-    name,
-    phoneNumber,
-    role: selectedRole,
-  });
+  const router = useRouter();
+  const { update, data } = useSession();
 
   const roles = [
     {
@@ -38,11 +34,6 @@ function SignUpPage() {
     },
   ];
 
-  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setName(value);
-  };
-
   const handlePhoneNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setPhoneNumber(value);
@@ -58,13 +49,23 @@ function SignUpPage() {
 
   const isValidForm = useMemo(() => {
     const phoneRegex = /^010-\d{3,4}-\d{4}$/;
-    return (
-      name.length > 0 &&
-      phoneRegex.test(phoneNumber) &&
-      enabled &&
-      selectedRole !== null
-    );
-  }, [name, phoneNumber, enabled, selectedRole]);
+    return phoneRegex.test(phoneNumber) && enabled && role !== null;
+  }, [phoneNumber, enabled, role]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!role) return;
+    await update({ role });
+    if (data) {
+      data.needSignUp = false;
+    }
+    // 완료 후 이동 : 여기서 역할에 따라 뭔갈 해야함.
+    router.replace('/stores');
+  };
+
+  useEffect(() => {
+    toast.success(`Welcome! Please Choose Your Position.`);
+  }, []);
 
   return (
     <div className="flex w-full flex-col items-center justify-center">
@@ -81,19 +82,18 @@ function SignUpPage() {
         {/* 회원가입 정보 기입란 */}
         <div className="mb-26 flex w-full flex-col items-center justify-center bg-white p-32 shadow-md">
           <div className="mb-16 flex w-full flex-row items-center justify-center gap-16">
-            {roles.map(role => (
+            {roles.map(roleInfo => (
               <RoleButton
-                key={role.id}
-                icon={role.icon}
-                label={role.label}
-                value={role.value}
-                selectedRole={selectedRole}
-                setSelectedRole={setSelectedRole}
+                key={roleInfo.id}
+                icon={roleInfo.icon}
+                label={roleInfo.label}
+                value={roleInfo.value}
+                role={role}
+                setRole={setRole}
               />
             ))}
           </div>
           <form>
-            <NameField name={name} onChange={handleNameChange} />
             <PhoneNumberField
               value={phoneNumber}
               onChange={handlePhoneNumberChange}
@@ -131,11 +131,7 @@ function SignUpPage() {
                 : 'cursor-not-allowed bg-gray-400 text-white'
             }`}
             disabled={!isValidForm}
-            onClick={() => {
-              if (isValidForm) {
-                signUp();
-              }
-            }}
+            onClick={e => handleSubmit(e)}
           >
             Create Account
           </Button>

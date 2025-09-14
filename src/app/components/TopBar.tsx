@@ -14,7 +14,8 @@ import { useContext } from 'react';
 import { GlobalNavBarContext } from '../context/GlobalNavBarContext';
 import { AuthContext } from '../context/AuthContext';
 import { UserRole } from '@/api/endpoints/user/types';
-
+import AcccountIcon from '@/assets/icons/user-svgrepo-com.svg';
+import { signIn, signOut, useSession } from 'next-auth/react';
 /* Home, Schedule, Settings 메뉴 탭 */
 const MenuBar = () => {
   const pathname = usePathname();
@@ -88,7 +89,9 @@ const UserAvatar = () => {
   const userId = 401; // [TODO] 유저 아이디 받아오기
   return (
     <Link href={`/${ROUTES.USERS}/${userId}`}>
-      <div className="h-32 w-32 rounded-full border border-gray-400" />
+      <div className="h-32 w-32 rounded-full border border-gray-400">
+        <AcccountIcon className="h-full w-full" />
+      </div>
     </Link>
   );
 };
@@ -97,12 +100,12 @@ const UserAvatar = () => {
 const AuthButtons = () => {
   return (
     <div className="flex items-center gap-16">
-      <a
+      <p
         className="body-16-500 rounded-4 text-gray-900"
-        href={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}`}
+        onClick={() => signIn('kakao')}
       >
         Sign In
-      </a>
+      </p>
       <Link
         className="body-16-500 rounded-4 bg-gray-900 px-15 py-8 text-white"
         href={`/${ROUTES.SIGNUP}`}
@@ -113,13 +116,34 @@ const AuthButtons = () => {
   );
 };
 
+const LogOutButtons = () => {
+  const router = useRouter();
+
+  return (
+    <button
+      className="body-16-500 rounded-4 bg-gray-900 px-15 py-8 text-white transition-opacity duration-200 ease-in-out hover:opacity-50"
+      onClick={async () => {
+        const data = await signOut({
+          redirect: false,
+          callbackUrl: '/landing',
+        });
+        router.push(data.url);
+      }}
+    >
+      Sign Out
+    </button>
+  );
+};
+
 const TopBar = () => {
   const router = useRouter();
   const pathname = usePathname();
-  const { isAuthenticated } = useContext(AuthContext);
+  const { status } = useSession();
 
   const handleLogoClick = () => {
-    router.push(isAuthenticated ? `/${ROUTES.STORES}` : `/${ROUTES.LANDING}`);
+    router.push(
+      status === 'authenticated' ? `/${ROUTES.STORES}` : `/${ROUTES.LANDING}`,
+    );
   };
 
   return (
@@ -134,7 +158,7 @@ const TopBar = () => {
           </h1>
 
           {/* Navigation Menu */}
-          {!hideNavigation(pathname, isAuthenticated) && (
+          {!hideNavigation(pathname, status === 'authenticated') && (
             <>
               <StoresListDropdown />
               <MenuBar />
@@ -142,7 +166,14 @@ const TopBar = () => {
           )}
         </div>
 
-        {isAuthenticated ? <UserAvatar /> : <AuthButtons />}
+        {status === 'authenticated' ? (
+          <section className="flex flex-row items-center gap-16">
+            <UserAvatar />
+            <LogOutButtons />
+          </section>
+        ) : (
+          <AuthButtons />
+        )}
       </div>
     </header>
   );

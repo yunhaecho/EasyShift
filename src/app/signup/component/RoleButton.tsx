@@ -5,23 +5,23 @@ const RoleButton = ({
   icon,
   label,
   value,
-  selectedRole,
-  setSelectedRole,
+  role,
+  setRole,
 }: {
   icon: ReactNode;
   label: string;
   value: string;
-  selectedRole: 'ADMIN' | 'USER';
-  setSelectedRole: (role: 'ADMIN' | 'USER') => void;
+  role: string;
+  setRole: (role: 'ADMIN' | 'USER') => void;
 }) => {
   return (
     <Button
       className={`body-16-400 flex w-full flex-col items-center justify-center rounded-8 px-30 py-17 hover:bg-[rgba(0,0,0,0.05)] ${
-        selectedRole === value
+        role === value
           ? 'border border-gray-900 bg-[rgba(0,0,0,0.05)]'
           : 'border border-gray-300'
       }`}
-      onClick={() => setSelectedRole(value as 'ADMIN' | 'USER')}
+      onClick={() => setRole(value as 'ADMIN' | 'USER')}
     >
       <div className="flex flex-row items-center gap-8">
         <div>{icon}</div>
