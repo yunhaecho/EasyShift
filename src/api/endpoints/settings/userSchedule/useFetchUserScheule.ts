@@ -6,7 +6,7 @@ import { UserScheduleResponse } from './types';
 
 interface UserScheduleParams {
   storeId: number | null | undefined;
-  userId: number | null | undefined;
+  userId: string | string[] | undefined;
   date: string;
 }
 
@@ -35,10 +35,9 @@ export const userScheduleQueryOptions = ({
     queryFn: () =>
       getUserSchedule({
         storeId: storeId as number,
-        userId: userId as number,
+        userId: userId,
         date: date,
       }),
-    enabled: !!storeId && !!userId && !!date,
   });
 
 // useWorkerScheduleQuery({

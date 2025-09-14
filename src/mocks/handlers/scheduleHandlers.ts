@@ -91,7 +91,7 @@ export const scheduleHandlers = [
           endTime: '18:00',
           dates: [
             {
-              date: '2025-03-01',
+              date: '2025-09-01',
               assignedShifts: [
                 {
                   shiftId: 12,
@@ -106,7 +106,7 @@ export const scheduleHandlers = [
               ],
             },
             {
-              date: '2025-03-02',
+              date: '2025-09-02',
               assignedShifts: [
                 {
                   shiftId: 14,
@@ -129,7 +129,7 @@ export const scheduleHandlers = [
           endTime: '18:00',
           dates: [
             {
-              date: '2025-03-01',
+              date: '2025-09-01',
               assignedShifts: [
                 {
                   shiftId: 16,
@@ -147,7 +147,7 @@ export const scheduleHandlers = [
           endTime: '22:00',
           dates: [
             {
-              date: '2025-03-01',
+              date: '2025-09-01',
               assignedShifts: [
                 {
                   shiftId: 17,
@@ -157,7 +157,7 @@ export const scheduleHandlers = [
               ],
             },
             {
-              date: '2025-03-02',
+              date: '2025-09-02',
               assignedShifts: [
                 {
                   shiftId: 18,

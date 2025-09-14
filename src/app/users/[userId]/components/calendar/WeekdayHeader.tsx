@@ -1,5 +1,4 @@
-import { weekNames } from '@/constants/monthNames';
-
+import { weekNames } from '@/constants/weekNames';
 const WeekdayHeader = () => (
   <div className="grid grid-cols-7 rounded-8 bg-gray-100 shadow-sm">
     {weekNames.map((week, index) => {
