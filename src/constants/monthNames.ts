@@ -1,1 +1,2 @@
-export const weekNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thr', 'Fri', 'Sat']; 
+export const monthNames = [  "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December" ];
