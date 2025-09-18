@@ -12,7 +12,7 @@ const RoleButton = ({
   label: string;
   value: string;
   role: string;
-  setRole: (role: 'ADMIN' | 'USER') => void;
+  setRole: (role: 'ADMIN' | 'WORKER') => void;
 }) => {
   return (
     <Button
@@ -21,7 +21,7 @@ const RoleButton = ({
           ? 'border border-gray-900 bg-[rgba(0,0,0,0.05)]'
           : 'border border-gray-300'
       }`}
-      onClick={() => setRole(value as 'ADMIN' | 'USER')}
+      onClick={() => setRole(value as 'ADMIN' | 'WORKER')}
     >
       <div className="flex flex-row items-center gap-8">
         <div>{icon}</div>
