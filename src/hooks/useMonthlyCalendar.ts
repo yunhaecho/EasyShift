@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-function useMonthlyCalendar() {
+function useCalendarNavivation() {
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth()); //0-indexed
 
@@ -25,4 +25,4 @@ function useMonthlyCalendar() {
   return { currentMonth, currentYear, goToPrevOrNextMonth };
 }
 
-export default useMonthlyCalendar;
+export default useCalendarNavivation;
