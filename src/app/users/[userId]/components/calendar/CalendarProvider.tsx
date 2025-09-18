@@ -2,15 +2,14 @@ import React, { useContext } from 'react';
 import { CalendarContext } from '@/app/context/CalendarContext';
 import { useParams } from 'next/navigation';
 import UserPageContext from '@/app/context/UserPageContext';
-import useMonthlyCalendar from '@/hooks/useMonthlyCalendar';
+import useCalendarNavivation from '@/hooks/useMonthlyCalendar';
 import { useQuery } from '@tanstack/react-query';
 import { userScheduleQueryOptions } from '@/api/endpoints/settings/userSchedule/useFetchUserScheule';
 const CalendarProvider = ({ children }: { children: React.ReactNode }) => {
   const { userId } = useParams();
   const { selectedStoreId } = useContext(UserPageContext);
   const { currentYear, currentMonth, goToPrevOrNextMonth } =
-    useMonthlyCalendar();
-  console.log(currentMonth);
+    useCalendarNavivation();
 
   const { data: userSchedulesData, isLoading } = useQuery(
     userScheduleQueryOptions({

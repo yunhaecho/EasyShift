@@ -9,7 +9,6 @@ import { CalendarContext } from '@/app/context/CalendarContext';
 const CalendarHeader = ({ mode }: { mode: 'modal' | 'page' }) => {
   const { stores, selectedStoreId, setSelectedStoreId } =
     useContext(UserPageContext);
-  console.log(stores);
 
   const { currentMonth, currentYear, goToPrevOrNextMonth } =
     useContext(CalendarContext);
