@@ -30,7 +30,7 @@ function SignUpPage() {
       id: 2,
       icon: <WorkerIcon />,
       label: 'Worker',
-      value: 'USER',
+      value: 'WORKER',
     },
   ];
 
@@ -59,8 +59,8 @@ function SignUpPage() {
     if (data) {
       data.needSignUp = false;
     }
-    // 완료 후 이동 : 여기서 역할에 따라 뭔갈 해야함.
-    router.replace('/stores');
+
+    router.replace('/landing');
   };
 
   useEffect(() => {

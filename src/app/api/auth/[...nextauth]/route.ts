@@ -8,8 +8,8 @@ const handler = NextAuth({
       name: 'Kakao',
       authorization: 'https://kauth.kakao.com/oauth/authorize',
       token: 'https://kauth.kakao.com/oauth/token',
-      clientId: process.env.AUTH_SECRET ?? '',
-      clientSecret: process.env.NEXTAUTH_SECRET ?? '',
+      clientId: process.env.AUTH_SECRET!,
+      clientSecret: process.env.NEXTAUTH_SECRET!,
     }),
   ],
   session: {
@@ -17,16 +17,16 @@ const handler = NextAuth({
   },
   callbacks: {
 
-    async jwt({ token, trigger, session, account }) {
+    async jwt({ user, token, trigger, session }) {
+      if(user && !token.role) {
+          token.needSignUp = true;
+      }
+      
       if (trigger === 'update' && session?.role) {
         token.role = session.role;
         token.needSignUp = false;
       }
-      if (account) {
-        if (!token.role) {
-          token.needSignUp = true;
-        }
-      }
+
       return token;
     },
     async session({ token, session }) {

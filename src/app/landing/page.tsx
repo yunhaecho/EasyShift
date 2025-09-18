@@ -6,18 +6,24 @@ import ChartIcon from '@/assets/icons/chart.svg';
 import CircleArrow from '@/assets/icons/circle-arrow.svg';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
-// import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import toast from 'react-hot-toast';
+import TodayBanner from './component/TodayBanner';
+import AdminTodayBanner from './component/AdminBanner';
 
 export default function Landing() {
   const { data } = useSession();
   const router = useRouter();
+  const queryString = useSearchParams();
+  const userId = 401;
 
-  // useEffect(() => {
-  //   if (data?.needSignUp) {
-  //     router.push('/signup');
-  //   }
-  // }, []);
+  useEffect(() => {
+    const reason = queryString.get('reason');
+    if (!reason) return;
+    if (reason === 'auth') toast.error('로그인이 필요합니다.');
+    if (reason === 'forbidden') toast.error('접근 권한이 없습니다.');
+  }, [queryString]);
+
   useEffect(() => {
     if (data?.needSignUp === true) {
       router.push('/signup');
@@ -26,6 +32,22 @@ export default function Landing() {
 
   return (
     <div className="flex h-full w-full flex-col">
+      {data?.user.role === 'ADMIN' ? (
+        <AdminTodayBanner
+          todayNoteTitle="오늘 업무"
+          todayNoteMain="의복 철수 작업(우산쪽 벽면 -> 이너쪽 -> 남성 순서)"
+          storesHref="/stores"
+        />
+      ) : data?.user.role === 'WORKER' ? (
+        <TodayBanner
+          shiftTime="12:00 ~ 21:00"
+          shiftName="마감조"
+          allScheduleHref={`/users/${userId}`}
+        />
+      ) : (
+        <></>
+      )}
+
       {/* 메인 phrase */}
       <div className="flex h-480 flex-col items-center justify-center bg-white pt-96">
         <div className="head-60-700 mb-24">Easy Shift</div>
@@ -39,20 +61,23 @@ export default function Landing() {
         <div className="head-20-400 mb-48">
           time, reduce errors, and keep your team synchronized.
         </div>
-        <div className="flex flex-row gap-18">
-          <button
-            type="button"
-            className="body-18-500 flex h-62 w-195 items-center justify-center rounded-4 bg-black text-white"
-          >
-            Get Started Free
-          </button>
-          <button
-            type="button"
-            className="body-18-500 mb-48 flex h-62 w-195 items-center justify-center rounded-4 border border-gray-900 bg-white text-black"
-          >
-            Learn More
-          </button>
-        </div>
+
+        {!data?.user.name && (
+          <div className="flex flex-row gap-18">
+            <button
+              type="button"
+              className="body-18-500 flex h-62 w-195 items-center justify-center rounded-4 bg-black text-white transition-opacity hover:opacity-20"
+            >
+              Get Started Free
+            </button>
+            <button
+              type="button"
+              className="body-18-500 mb-48 flex h-62 w-195 items-center justify-center rounded-4 border border-gray-900 bg-white text-black"
+            >
+              Learn More
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Feature Card */}
