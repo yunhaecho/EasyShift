@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# EasyShift - 간편 근무 스케줄 관리 서비스
 
-## Getting Started
+엑셀과 수기 작업에 의존하던 기존의 근무 스케줄 관리는 실수가 잦고 비효율적이었습니다. EasyShift는 이러한 문제를 해결하기 위해 탄생한 웹 기반 스케줄 관리 도구입니다.
 
-First, run the development server:
+관리자는 직원들의 휴무일을 취합하고, 주 2회 휴무와 같은 규칙을 반영하여 월 단위 스케줄을 손쉽게 생성할 수 있습니다. 근무자는 자신의 스케줄을 직관적으로 확인하고, 근무일 변경이나 휴무를 간편하게 신청할 수 있습니다.
+
+## ✨ 주요 기능
+
+-   **관리자**
+    -   월 단위 근무 스케줄 자동 생성 및 수정
+    -   직원별 휴무 신청 및 근무 변경 요청 승인/반려
+    -   팀 스케줄 현황 대시보드 (주간/월간 뷰)
+-   **근무자**
+    -   개인 스케줄 및 팀 전체 스케줄 조회
+    -   휴무 신청 및 근무일 교대(스왑) 요청
+    -   요청 상태에 대한 실시간 알림
+
+## 💡 주요 아키텍처 및 기술 결정
+
+이 프로젝트는 단순히 기능을 구현하는 것을 넘어, 유지보수성과 확장성, 그리고 최적의 사용자 경험을 제공하는 데 중점을 두고 설계되었습니다.
+
+### 1. API 의존성 없는 프론트엔드 개발 환경
+
+백엔드 API가 준비되지 않은 상황에서도 완성도 높은 UI와 로직을 구현하기 위해 **Mock Service Worker(MSW)** 를 도입했습니다. 이를 통해 실제 API와 동일한 명세의 Mock API를 구축하여 다음과 같은 이점을 얻었습니다.
+
+-   **독립적인 개발**: 백엔드와 독립적으로 프론트엔드 개발을 진행하여 전체 프로젝트의 생산성을 높였습니다.
+-   **안정적인 테스트**: 다양한 예외 상황(네트워크 에러, 서버 지연 등)과 시나리오를 시뮬레이션하며 UI/UX를 견고하게 다듬을 수 있었습니다.
+-   **점진적 전환**: 서비스 계층을 분리하여 설계했기 때문에, 향후 실제 API가 준비되었을 때 최소한의 수정으로 자연스럽게 이관할 수 있는 구조를 마련했습니다.
+
+### 2. 최적의 사용자 경험을 위한 설계
+
+-   **비동기 상태 관리**: **TanStack Query(React Query)** 를 사용하여 서버 상태(Server State)를 효율적으로 관리합니다. `caching`, `refetching` 전략을 통해 불필요한 API 호출을 최소화하고, 네트워크 지연 상황에서는 **스켈레톤 UI**를 함께 표시하여 사용자가 데이터 로딩을 매끄럽게 인지하도록 구현했습니다.
+-   **유연한 컴포넌트**: 특정 스타일에 종속되지 않는 **Headless UI**를 기반으로 컴포넌트를 설계하여 높은 재사용성과 확장성을 확보했습니다. 여기에 **Tailwind CSS**를 조합하여 일관된 디자인 시스템을 구축했습니다.
+
+### 3. 유지보수와 확장을 고려한 추상화
+
+복잡한 근무 정책에 유연하게 대응하기 위해 도메인을 신중하게 추상화했습니다.
+
+-   단순히 '오픈조', '마감조' 등으로 하드코딩하는 대신, 근무의 기본 템플릿을 정의하는 **`ShiftTemplate`** 과 실제 배정된 근무를 나타내는 **`Shift`** 로 역할을 분리했습니다.
+-   이러한 구조 덕분에 '제빵부', '바리스타부' 등 다양한 근무 형태나 새로운 근무조가 추가되더라도 유연하게 확장할 수 있습니다.
+
+## 🛠 기술 스택
+
+-   **Core**: Next.js 15, React 19, TypeScript
+-   **State Management**: TanStack Query
+-   **Styling**: Tailwind CSS, PostCSS (`postcss-pxtorem`)
+-   **Authentication**: NextAuth.js
+-   **API & Mocking**: Axios, Mock Service Worker (MSW)
+-   **UI Components**: Headless UI, Heroicons
+-   **Code Quality**: ESLint, Prettier
+
+## 📂 디렉토리 구조
+
+프로젝트는 기능과 역할에 따라 다음과 같이 구조화하여 관심사를 분리했습니다.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+src/
+├── app/              # Next.js의 App Router 기반 라우팅 및 페이지 레이아웃
+├── components/       # 공통 UI 컴포넌트 (Atoms, Molecules, Organisms)
+├── hooks/            # 비즈니스 로직을 분리하기 위한 커스텀 훅
+├── services/         # API 통신 계층 (실제 API, Mock API 교체 용이)
+├── mocks/            # MSW 핸들러 및 모의 데이터
+├── types/            # 프로젝트 전반에서 사용되는 도메인 타입 (Schedule, Shift 등)
+└── utils/            # 공통 유틸리티 함수 (날짜 계산, 포맷팅 등)
