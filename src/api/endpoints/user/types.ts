@@ -15,12 +15,13 @@ export type SignupRequest = {
 };
 
 export type User = {
-  userId: number;
-  email: string;
-  name: string;
-  avatarUrl: string;
-  phoneNumber: string | null;
-  role: UserRole;
+  userId?: number;
+  email: string | null | undefined;
+  name: string | null | undefined;
+  // avatarUrl: string;
+  // phoneNumber: string | null;
+  role: UserRole | undefined;
+  needsSignup: boolean | undefined;
 };
 
 export type UserRole = (typeof USER_ROLE)[keyof typeof USER_ROLE];
