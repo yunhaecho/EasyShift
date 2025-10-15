@@ -9,11 +9,8 @@ export const HIDDEN_ROUTES = [
 
 export type HiddenRoute = (typeof HIDDEN_ROUTES)[number];
 
-export const hideNavigation = (
-  path: string,
-  isAuthenticated: boolean,
-): boolean => {
-  if (!isAuthenticated) return true;
+export const hideNavigation = (path: string, status: string): boolean => {
+  if (status === 'unauthenticated') return true;
 
   if (path.match(/^\/stores\/\d+\/.+/)) {
     return false;
