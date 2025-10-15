@@ -16,12 +16,11 @@ const handler = NextAuth({
     strategy: 'jwt',
   },
   callbacks: {
-
     async jwt({ user, token, trigger, session }) {
-      if(user && !token.role) {
-          token.needSignUp = true;
+      if (user && !token.role) {
+        token.needSignUp = true;
       }
-      
+
       if (trigger === 'update' && session?.role) {
         token.role = session.role;
         token.needSignUp = false;

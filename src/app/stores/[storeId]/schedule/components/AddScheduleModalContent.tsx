@@ -5,7 +5,10 @@ import { mockSchedule } from '../../mocks';
 import { ScheduleTemplate } from '../../settings/types';
 
 import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
-import {ShiftDetail , AddNewScheduleParams} from '@/app/stores/[storeId]/settings/types';
+import {
+  ShiftDetail,
+  AddNewScheduleParams,
+} from '@/app/stores/[storeId]/settings/types';
 import { useParams } from 'next/navigation';
 
 const ScheduleTemplateDropdown = ({
@@ -120,54 +123,58 @@ const ShiftRequirementsTable = ({
 }: {
   shifts: ScheduleTemplate['shifts'];
   shiftDetails: ShiftDetail[];
-  onChange: (index: number, newValue: number) => void
+  onChange: (index: number, newValue: number) => void;
 }) => {
- return (
-  <table className="w-full table-fixed border-collapse">
-    <thead>
-      <tr className="bg-gray-100">
-        <th className="body-14-500 w-[20%] px-12 py-8 text-center text-gray-600">
-          Shift
-        </th>
-        <th className="body-14-500 w-[45%] px-24 py-12 text-center text-gray-600">
-          Time
-        </th>
-        <th className="body-14-500 w-[35%] px-24 py-12 text-center text-gray-600">
-          Num of Workers
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      {shifts.map((shift ,index) => (
-        <tr key={shift.id} className="border-t border-gray-400">
-          <td className="body-14-500 px-24 py-12 text-center text-gray-900">
-            {shift.name}
-          </td>
-          <td className="body-14-400 px-24 py-8 text-center text-gray-600">
-            {shift.startTime} - {shift.endTime}
-          </td>
-          <td className="px-24 py-8">
-            <input
-              id={`min-workers-${shift.name}`}
-              type="number"
-              min="1"
-              className="body-14-400 w-full border border-gray-400 px-12 py-8 text-gray-900 focus:outline-none"
-              name="expectedWorkers"
-              value={shiftDetails[index]?.expectedWorkers ?? 0} //
-              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+  return (
+    <table className="w-full table-fixed border-collapse">
+      <thead>
+        <tr className="bg-gray-100">
+          <th className="body-14-500 w-[20%] px-12 py-8 text-center text-gray-600">
+            Shift
+          </th>
+          <th className="body-14-500 w-[45%] px-24 py-12 text-center text-gray-600">
+            Time
+          </th>
+          <th className="body-14-500 w-[35%] px-24 py-12 text-center text-gray-600">
+            Num of Workers
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {shifts.map((shift, index) => (
+          <tr key={shift.id} className="border-t border-gray-400">
+            <td className="body-14-500 px-24 py-12 text-center text-gray-900">
+              {shift.name}
+            </td>
+            <td className="body-14-400 px-24 py-8 text-center text-gray-600">
+              {shift.startTime} - {shift.endTime}
+            </td>
+            <td className="px-24 py-8">
+              <input
+                id={`min-workers-${shift.name}`}
+                type="number"
+                min="1"
+                className="body-14-400 w-full border border-gray-400 px-12 py-8 text-gray-900 focus:outline-none"
+                name="expectedWorkers"
+                value={shiftDetails[index]?.expectedWorkers ?? 0} //
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
                   // 자식에서 값이 변경되면 부모에 index와 새로운 값을 전달
                   onChange(index, e.currentTarget.valueAsNumber);
                 }}
-            />
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-);
-}
+              />
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
 
-const AddScheduleModalContent = ( {onParamsChange } :{onParamsChange : (params: AddNewScheduleParams) => void;} ) => {
+const AddScheduleModalContent = ({
+  onParamsChange,
+}: {
+  onParamsChange: (params: AddNewScheduleParams) => void;
+}) => {
   const { storeId } = useParams();
 
   const [selectedDate, setSelectedDate] = useState<Date>(() => {
@@ -178,14 +185,17 @@ const AddScheduleModalContent = ( {onParamsChange } :{onParamsChange : (params: 
   const [selectedScheduleTemplate, setSelectedScheduleTemplate] =
     useState<ScheduleTemplate | null>(null);
 
-  const [addNewScheduleParameters, setAddNewScheduleParameters] = useState<AddNewScheduleParams>({
-    storeId: storeId as string,
-    scheduleTemplateId: selectedScheduleTemplate ? selectedScheduleTemplate.id : 0,
-    scheduleName: '',
-    scheduleMonth: format(selectedDate, 'yyyy-MM'),
-    description: '',
-    shiftDetails: [],
-  })
+  const [addNewScheduleParameters, setAddNewScheduleParameters] =
+    useState<AddNewScheduleParams>({
+      storeId: storeId as string,
+      scheduleTemplateId: selectedScheduleTemplate
+        ? selectedScheduleTemplate.id
+        : 0,
+      scheduleName: '',
+      scheduleMonth: format(selectedDate, 'yyyy-MM'),
+      description: '',
+      shiftDetails: [],
+    });
 
   // 스케줄 템플릿이 선택되면, 해당 템플릿의 shift 목록을 기반으로 shiftDetails를 초기화
   useEffect(() => {
@@ -194,7 +204,7 @@ const AddScheduleModalContent = ( {onParamsChange } :{onParamsChange : (params: 
         ...prev,
         shiftDetails: selectedScheduleTemplate.shifts.map(shift => ({
           shiftTemplateId: shift.id,
-          expectedWorkers: 0, 
+          expectedWorkers: 0,
         })),
       }));
     }
@@ -209,15 +219,19 @@ const AddScheduleModalContent = ( {onParamsChange } :{onParamsChange : (params: 
     setAddNewScheduleParameters(prev => ({
       ...prev,
       shiftDetails: prev.shiftDetails.map((detail, i) =>
-        i === index ? { ...detail, expectedWorkers: newExpectedWorkers } : detail
+        i === index
+          ? { ...detail, expectedWorkers: newExpectedWorkers }
+          : detail,
       ),
     }));
   };
 
-  const handleAddNewScheduleParamsChange = (e : ChangeEvent<HTMLInputElement>) => {
-    const {name , value} = e.currentTarget;
-    setAddNewScheduleParameters(prev => ({...prev, [name] : value }))
-  }
+  const handleAddNewScheduleParamsChange = (
+    e: ChangeEvent<HTMLInputElement>,
+  ) => {
+    const { name, value } = e.currentTarget;
+    setAddNewScheduleParameters(prev => ({ ...prev, [name]: value }));
+  };
 
   return (
     <form className="flex flex-col gap-24 px-24 py-16">
@@ -236,7 +250,7 @@ const AddScheduleModalContent = ( {onParamsChange } :{onParamsChange : (params: 
               type="text"
               placeholder="Enter Schedule Name"
               className="body-16-400 w-full border border-gray-400 px-12 py-8 text-gray-900 focus:outline-none"
-              name='scheduleName'
+              name="scheduleName"
               onChange={handleAddNewScheduleParamsChange}
             />
           </div>
@@ -263,7 +277,7 @@ const AddScheduleModalContent = ( {onParamsChange } :{onParamsChange : (params: 
           <input
             placeholder="Enter Schedule Description"
             className="body-16-400 w-full border border-gray-400 px-12 py-8 text-gray-900 focus:outline-none"
-            name='description'
+            name="description"
             onChange={handleAddNewScheduleParamsChange}
           />
         </section>
@@ -281,10 +295,11 @@ const AddScheduleModalContent = ( {onParamsChange } :{onParamsChange : (params: 
         {selectedScheduleTemplate && (
           <section className="mt-4 flex flex-col gap-16 border border-gray-300">
             <h3 className="sr-only">Shift Requirements</h3>
-            <ShiftRequirementsTable 
-              shifts={selectedScheduleTemplate.shifts} 
-              shiftDetails={addNewScheduleParameters.shiftDetails} 
-              onChange={handleShiftChange}/>
+            <ShiftRequirementsTable
+              shifts={selectedScheduleTemplate.shifts}
+              shiftDetails={addNewScheduleParameters.shiftDetails}
+              onChange={handleShiftChange}
+            />
           </section>
         )}
       </fieldset>

@@ -137,12 +137,13 @@ const UserAvatar = () => {
 const AuthButtons = () => {
   return (
     <div className="flex items-center gap-16">
-      <p
+      <button
+        type="button"
         className="body-16-500 rounded-4 text-gray-900"
         onClick={() => signIn('kakao')}
       >
         Sign In
-      </p>
+      </button>
       <Link
         className="body-16-500 rounded-4 bg-gray-900 px-15 py-8 text-white"
         href={`/${ROUTES.SIGNUP}`}

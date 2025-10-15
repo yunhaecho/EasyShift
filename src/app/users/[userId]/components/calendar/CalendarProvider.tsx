@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation';
 import UserPageContext from '@/app/context/UserPageContext';
 import useCalendarNavivation from '@/hooks/useMonthlyCalendar';
 import { useQuery } from '@tanstack/react-query';
-import { userScheduleQueryOptions } from '@/api/endpoints/settings/userSchedule/useFetchUserScheule';
+import { userScheduleQueryOptions } from '@/api/endpoints/schedule/userSchedule/useFetchUserScheule';
 const CalendarProvider = ({ children }: { children: React.ReactNode }) => {
   const { userId } = useParams();
   const { selectedStoreId } = useContext(UserPageContext);

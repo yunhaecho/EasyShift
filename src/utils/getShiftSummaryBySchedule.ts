@@ -1,4 +1,4 @@
-import { UserSchedule } from '@/api/endpoints/settings/userSchedule/types';
+import { UserSchedule } from '@/api/endpoints/schedule/userSchedule/types';
 
 /**
  * 스케줄별 쉬프트 요약

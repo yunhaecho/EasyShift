@@ -45,7 +45,7 @@ export const generateCalendar = (start: Date) => {
   const lastOfMonth = endOfMonth(start);
 
   const datesOfCurrentMonth = eachDayOfInterval({
-    start:  startOfWeek(fstOfMonth),
+    start: startOfWeek(fstOfMonth),
     end: endOfWeek(lastOfMonth),
   });
 

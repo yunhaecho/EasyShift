@@ -18,7 +18,7 @@ export const middleware = async (req: NextRequest) => {
     url.searchParams.set('reason', 'forbidden');
     return NextResponse.redirect(url);
   }
-  console.log('[middleware] : ', token);
+  // console.log('[middleware] : ', token);
 };
 export const config = {
   matcher: ['/stores/:path*'],

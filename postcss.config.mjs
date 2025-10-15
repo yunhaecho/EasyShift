@@ -13,7 +13,6 @@ const config = {
       minPixelValue: 1,
     },
   },
- 
 };
 
 export default config;

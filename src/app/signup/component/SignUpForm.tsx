@@ -6,10 +6,17 @@ interface SignUpFormProps {
   type: string;
   name: string;
   value: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement>
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-export default function SignUpForm({ icon, formName, type , name ,value, onChange}: SignUpFormProps) {
+export default function SignUpForm({
+  icon,
+  formName,
+  type,
+  name,
+  value,
+  onChange,
+}: SignUpFormProps) {
   return (
     <div className="mb-16">
       <div className="body-14-500 mb-4 text-gray-800">{formName}</div>
