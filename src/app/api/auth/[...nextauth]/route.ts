@@ -24,6 +24,7 @@ const handler = NextAuth({
       if (trigger === 'update' && session?.role) {
         token.role = session.role;
         token.needSignUp = false;
+        // token.phoneNumber = session.phoneNumber
       }
 
       return token;
@@ -31,6 +32,7 @@ const handler = NextAuth({
     async session({ token, session }) {
       session.user.role = token.role;
       session.needSignUp = token.needSignUp === true;
+      session.user.name = token.name;
       return session;
     },
   },
