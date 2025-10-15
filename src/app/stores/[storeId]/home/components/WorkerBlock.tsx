@@ -13,12 +13,12 @@ const WorkerBlock = ({
   };
   onClick: () => void;
 }) => {
-  const { userRole } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   return (
     <div
       className={`w-full rounded-4 border border-gray-400 bg-white p-8 ${
-        userRole === USER_ROLE.ADMIN && 'cursor-pointer hover:bg-gray-100'
+        user?.role === USER_ROLE.ADMIN && 'cursor-pointer hover:bg-gray-100'
       }`}
       onClick={onClick}
     >

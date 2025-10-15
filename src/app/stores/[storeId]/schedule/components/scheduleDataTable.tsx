@@ -21,7 +21,7 @@ function ScheduleDataTable({
   onDeleteSuccess,
 }: ScheduleDataTableProps) {
   const column = ['Name', 'Description', 'Period', 'Status', 'Actions'];
-  const { userRole } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   return (
     <table className="w-full table-fixed">
@@ -52,7 +52,7 @@ function ScheduleDataTable({
                 <Status status={schedule.status} />
               </td>
               <td className="body-14-500 px-24 py-12 text-center">
-                {userRole === USER_ROLE.ADMIN ? (
+                {user?.role === USER_ROLE.ADMIN ? (
                   <AdminActions
                     schedule={schedule}
                     onDeleteSuccess={onDeleteSuccess}

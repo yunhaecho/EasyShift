@@ -40,7 +40,7 @@ const useSignupMutation = (data: SignupRequest) => {
       setUser({
         ...user,
         name: data.name,
-        phoneNumber: data.phoneNumber || null,
+        // phoneNumber: data.phoneNumber || null,
         role: data.role,
       });
 

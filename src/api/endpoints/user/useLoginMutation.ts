@@ -44,13 +44,13 @@ export const useLoginMutation = () => {
       }
 
       setUser({
-        // TODO: 추후 userId만 set하고, AuthProvider에서 유저 정보 get API 호출하여 유저 정보 업데이트
         userId: data.response.userId,
         email: data.response.email,
         name: data.response.name,
-        avatarUrl: data.response.avatarUrl,
-        phoneNumber: null,
-        role: 'ADMIN',
+        needsSignup: data.response.needsSignup,
+        // avatarUrl: data.response.avatarUrl,
+        // phoneNumber: null,
+        role: data.response.role,
       });
     },
     onError: error => {
