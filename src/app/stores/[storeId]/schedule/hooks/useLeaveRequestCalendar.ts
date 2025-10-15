@@ -6,7 +6,7 @@ import {
   startOfMonth,
   startOfWeek,
 } from 'date-fns';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useCallback } from 'react';
 
 function useCalendarDays(currentMonth: Date) {
   const [selectedDates, setSelectedDates] = useState<Date[]>([]);
@@ -26,18 +26,18 @@ function useCalendarDays(currentMonth: Date) {
     return days;
   }, [calendarStart, calendarEnd]);
 
-  const resetSelectedDates = () => {
+  const resetSelectedDates = useCallback(() => {
     setSelectedDates([]);
-  };
+  }, []);
 
-  const handleDateClick = (date: Date) => {
+  const handleDateClick = useCallback((date: Date) => {
     setSelectedDates(prevDates => {
       const isSelected = prevDates.some(d => isSameDay(d, date));
       return isSelected
         ? prevDates.filter(d => !isSameDay(d, date))
         : [...prevDates, date];
     });
-  };
+  }, []);
 
   return {
     calendarDays,
