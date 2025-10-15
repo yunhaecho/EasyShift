@@ -2,7 +2,7 @@
 
 import { useContext, useState } from 'react';
 import Link from 'next/link';
-import { useDeleteStoreMutation } from '@/api/endpoints/stores/useDeleteStoreMutation';
+// import { useDeleteStoreMutation } from '@/api/endpoints/stores/useDeleteStoreMutation';
 
 import ManageStoreButton from './ManageStoreButton';
 import EmptyStoreState from './EmptyStoreState';
@@ -16,8 +16,8 @@ import { GlobalNavBarContext } from '@/app/context/GlobalNavBarContext';
 const StoreList = () => {
   const [storeToDelete, setStoreToDelete] = useState<Store | null>(null);
 
-  const { data } = useContext(GlobalNavBarContext);
-  const deleteStoreMutation = useDeleteStoreMutation();
+  const { storeMockData, deleteStore } = useContext(GlobalNavBarContext);
+  // const deleteStoreMutation = useDeleteStoreMutation();
 
   const handleDeleteStoreClick = (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -25,19 +25,21 @@ const StoreList = () => {
   ) => {
     e.preventDefault();
     e.stopPropagation();
+
     setStoreToDelete(store);
   };
 
   const handleDeleteStore = () => {
     if (storeToDelete) {
-      deleteStoreMutation.mutate({ storeId: storeToDelete.storeId });
+      deleteStore(storeToDelete.storeId);
+      // deleteStoreMutation.mutate({ storeId: storeToDelete.storeId });
       setStoreToDelete(null);
     }
   };
 
   return (
     <>
-      {data?.stores?.length === 0 ? (
+      {storeMockData?.length === 0 ? (
         <EmptyStoreState />
       ) : (
         <>
@@ -60,7 +62,7 @@ const StoreList = () => {
             <h2 id="store-list-title" className="sr-only">
               Store List
             </h2>
-            {data?.stores?.map((store: Store) => (
+            {storeMockData?.map((store: Store) => (
               <div key={store.storeId} className="relative">
                 <Link
                   href={`/stores/${store.storeId}/home`}

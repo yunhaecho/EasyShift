@@ -1,8 +1,12 @@
-import { GetStoresResponse } from '@/api/endpoints/stores/types';
+import { Store } from '@/api/endpoints/stores/types';
 import { createContext } from 'react';
 
 export const GlobalNavBarContext = createContext<{
-  data: GetStoresResponse | null;
+  storeMockData: Store[] | null;
+  addStore: (store: Store) => void;
+  deleteStore: (storeId: number) => void;
 }>({
-  data: null,
+  storeMockData: null,
+  addStore: () => {},
+  deleteStore: () => {},
 });

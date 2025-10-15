@@ -3,8 +3,10 @@
 import { DialogTitle } from '@headlessui/react';
 import { Dialog } from '@headlessui/react';
 import ModalActions from '../../components/modals/ModalActions';
-import { useEffect, useState } from 'react';
-import { useCreateStoreMutation } from '@/api/endpoints/stores/useCreateStoreMutation';
+import { useContext, useEffect, useState } from 'react';
+import { GlobalNavBarContext } from '@/app/context/GlobalNavBarContext';
+import { initialData } from '@/app/components/GlobalNavBarProvider';
+// import { useCreateStoreMutation } from '@/api/endpoints/stores/useCreateStoreMutation';
 
 const AddStoreModal = ({
   isOpen,
@@ -15,8 +17,8 @@ const AddStoreModal = ({
 }) => {
   const [storeName, setStoreName] = useState('');
   const [storeDescription, setStoreDescription] = useState('');
-  const { mutate: createStore } = useCreateStoreMutation();
-
+  const { addStore } = useContext(GlobalNavBarContext);
+  // const { mutate: createStore } = useCreateStoreMutation();
   useEffect(() => {
     if (!isOpen) {
       setStoreName('');
@@ -26,10 +28,19 @@ const AddStoreModal = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    createStore({
-      storeName,
+    const newStoreId =
+      Math.max(...initialData.stores.map(store => store.storeId), 0) + 1;
+
+    addStore({
+      storeId: newStoreId,
+      storeName: storeName,
       description: storeDescription,
     });
+
+    // createStore({
+    //   storeName,
+    //   description: storeDescription,
+    // });
     onClose();
   };
 

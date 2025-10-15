@@ -6,8 +6,7 @@
     "dev": "cross-env NEXT_PUBLIC_API_MOCKING=enabled next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "format": "prettier --write ."
+    "lint-and-format": "next lint && prettier --write ."
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",
