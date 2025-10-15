@@ -10,65 +10,65 @@ export const scheduleHandlers = [
       schedules = [
         {
           id: 101,
-          scheduleName: '새벽 근무',
-          shiftDate: '2024-12',
-          status: 'pending',
+          scheduleName: '9월 새벽 근무',
+          shiftDate: '2024-09',
+          status: 'completed',
           description: '새벽 근무 일정입니다.',
         },
         {
           id: 102,
-          scheduleName: '새벽 근무',
-          shiftDate: '2024-12',
-          status: 'pending',
+          scheduleName: '10월 새벽 근무',
+          shiftDate: '2024-10',
+          status: 'completed',
           description: '새벽 근무 일정입니다.',
         },
         {
           id: 103,
-          scheduleName: '새벽 근무',
-          shiftDate: '2024-12',
-          status: 'pending',
-          description: '새벽 근무 일정입니다.',
+          scheduleName: '11월 새벽 근무',
+          shiftDate: '2024-11',
+          status: 'completed',
+          description: '11월 새벽 근무 일정입니다.',
         },
         {
           id: 104,
-          scheduleName: '새벽 근무',
+          scheduleName: '12월 새벽 근무',
           shiftDate: '2024-12',
-          status: 'pending',
-          description: '새벽 근무 일정입니다.',
+          status: 'completed',
+          description: '12월 새벽 근무 일정입니다.',
         },
       ];
     } else if (storeId === '2') {
       schedules = [
         {
           id: 201,
-          scheduleName: ' 주간 근무',
+          scheduleName: '10월 주간 근무',
           shiftDate: '2024-10',
           status: 'completed',
-          description: '주간 근무일정입니다.',
+          description: '10월 주간 근무일정입니다.',
         },
         {
           id: 202,
-          scheduleName: '주간 근무',
+          scheduleName: '11월 주간 근무',
           shiftDate: '2024-11',
-          status: 'pending',
-          description: '주간 근무 일정입니다.',
+          status: 'completed',
+          description: '11월 주간 근무 일정입니다.',
         },
       ];
     } else if (storeId === '3') {
       schedules = [
         {
           id: 301,
-          scheduleName: '나이트 근무 ',
+          scheduleName: '10월 오픈조 스케줄',
           shiftDate: '2024-10',
           status: 'completed',
-          description: '나이트 근무  일정입니다.',
+          description: '10월 오픈조 근무 일정입니다.',
         },
         {
           id: 302,
-          scheduleName: '나이트 근무 ',
-          shiftDate: '2024-11',
-          status: 'pending',
-          description: '나이트 근무 일정입니다.',
+          scheduleName: '10월 마감조 근무 ',
+          shiftDate: '2024-10',
+          status: 'completed',
+          description: '10월 마감조 근무 일정입니다.',
         },
       ];
     }
