@@ -26,7 +26,7 @@ export default function Schedule() {
   const [year, setYear] = useState('');
   const [isAddScheduleModalOpen, toggleAddScheduleModal] = useToggle(false);
 
-  const { userRole } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const statusOption = ['All Status', 'Pending', 'Completed'];
 
@@ -96,7 +96,7 @@ export default function Schedule() {
       {/* Header */}
       <div className="mb-40 flex h-40 w-full flex-row justify-between">
         <span className="head-24-700">Schedule Management</span>
-        {userRole === USER_ROLE.ADMIN && (
+        {user?.role === USER_ROLE.ADMIN && (
           <Button
             onClick={toggleAddScheduleModal}
             className="flex h-fit items-center gap-12 rounded-4 bg-gray-900 px-16 py-8"

@@ -5,11 +5,18 @@ import WorkerIcon from '@/assets/icons/worker.svg';
 import RoleButton from './component/RoleButton';
 import { Button, Checkbox } from '@headlessui/react';
 import { CheckIcon } from '@heroicons/react/16/solid';
-import React, { ChangeEvent, useEffect, useMemo, useState } from 'react';
+import React, {
+  ChangeEvent,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import PhoneNumberField from './component/PhoneNumberField';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import { AuthContext } from '../context/AuthContext';
 
 function SignUpPage() {
   const [enabled, setEnabled] = useState(false);
@@ -17,7 +24,8 @@ function SignUpPage() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [phoneNumberError, setPhoneNumberError] = useState('');
   const router = useRouter();
-  const { update, data } = useSession();
+  const { update } = useSession();
+  const { user } = useContext(AuthContext);
 
   const roles = [
     {
@@ -56,8 +64,9 @@ function SignUpPage() {
     e.preventDefault();
     if (!role) return;
     await update({ role });
-    if (data) {
-      data.needSignUp = false;
+
+    if (user) {
+      user.needsSignup = false;
     }
 
     router.replace('/landing');

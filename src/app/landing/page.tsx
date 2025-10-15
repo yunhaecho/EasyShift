@@ -4,15 +4,15 @@ import CalendarIcon from '@/assets/icons/calendar.svg';
 import PeopleIcon from '@/assets/icons/people.svg';
 import ChartIcon from '@/assets/icons/chart.svg';
 import CircleArrow from '@/assets/icons/circle-arrow.svg';
-import { useSession } from 'next-auth/react';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import toast from 'react-hot-toast';
 import TodayBanner from './component/TodayBanner';
 import AdminTodayBanner from './component/AdminBanner';
+import { AuthContext } from '../context/AuthContext';
 
 export default function Landing() {
-  const { data } = useSession();
+  const { user } = useContext(AuthContext);
   const router = useRouter();
   const queryString = useSearchParams();
   const userId = 401;
@@ -25,20 +25,20 @@ export default function Landing() {
   }, [queryString]);
 
   useEffect(() => {
-    if (data?.needSignUp === true) {
+    if (user?.needsSignup === true) {
       router.push('/signup');
     }
   });
 
   return (
     <div className="flex h-full w-full flex-col">
-      {data?.user.role === 'ADMIN' ? (
+      {user?.role === 'ADMIN' ? (
         <AdminTodayBanner
           todayNoteTitle="오늘 업무"
           todayNoteMain="의복 철수 작업(우산쪽 벽면 -> 이너쪽 -> 남성 순서)"
           storesHref="/stores"
         />
-      ) : data?.user.role === 'WORKER' ? (
+      ) : user?.role === 'WORKER' ? (
         <TodayBanner
           shiftTime="12:00 ~ 21:00"
           shiftName="마감조"
@@ -62,7 +62,7 @@ export default function Landing() {
           time, reduce errors, and keep your team synchronized.
         </div>
 
-        {!data?.user.name && (
+        {/* {!data?.user.name && (
           <div className="flex flex-row gap-18">
             <button
               type="button"
@@ -77,7 +77,7 @@ export default function Landing() {
               Learn More
             </button>
           </div>
-        )}
+        )} */}
       </div>
 
       {/* Feature Card */}

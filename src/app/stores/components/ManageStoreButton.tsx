@@ -5,19 +5,20 @@ import JoinStoreModal from '@/app/stores/components/JoinStoreModal';
 import useToggle from '@/app/hooks/useToggle';
 import PlusWhiteIcon from '@/assets/icons/plus-white.svg';
 import { USER_ROLE } from '@/constants/userRole';
-import { useSession } from 'next-auth/react';
+import { useContext } from 'react';
+import { AuthContext } from '@/app/context/AuthContext';
 
 const ManageStoreButton = () => {
   const [isAddStoreModalOpen, toggleAddStoreModal] = useToggle(false);
   const [isJoinStoreModalOpen, toggleJoinStoreModal] = useToggle(false);
-  const { data } = useSession();
+  const { user } = useContext(AuthContext);
 
   return (
     <>
       <button
         className="flex items-center gap-12 rounded-4 bg-gray-900 px-16 py-8"
         onClick={
-          USER_ROLE.ADMIN === data?.user.role
+          USER_ROLE.ADMIN === user?.role
             ? toggleAddStoreModal
             : toggleJoinStoreModal
         }
@@ -25,11 +26,11 @@ const ManageStoreButton = () => {
       >
         <PlusWhiteIcon />
         <p className="body-16-400 text-white">
-          {USER_ROLE.ADMIN === data?.user.role ? 'Add Store' : 'Join Store'}
+          {USER_ROLE.ADMIN === user?.role ? 'Add Store' : 'Join Store'}
         </p>
       </button>
 
-      {USER_ROLE.ADMIN === data?.user.role ? (
+      {USER_ROLE.ADMIN === user?.role ? (
         <AddStoreModal
           isOpen={isAddStoreModalOpen}
           onClose={toggleAddStoreModal}
