@@ -1,51 +1,54 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 import { ROUTES } from '@/constants/routes';
-// import classNames from 'classnames';
-// import { hideNavigation } from '@/utils/hideNavigation';
+import classNames from 'classnames';
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/react';
 import Link from 'next/link';
-// import { STORE_MENUS } from '@/constants/menus';
+import { STORE_MENUS } from '@/constants/menus';
 
 import Logo from '@/assets/logo.svg';
 // import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
-// import { useContext } from 'react';
 // import { GlobalNavBarContext } from '../context/GlobalNavBarContext';
-// import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext';
 // import { UserRole } from '@/api/endpoints/user/types';
 import AcccountIcon from '@/assets/icons/account-avatar-man-svgrepo-com.svg';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signIn, signOut } from 'next-auth/react';
+import { useContext } from 'react';
+import { hideNavigation } from '@/utils/hideNavigation';
+import { UserRole } from '@/constants/userRole';
+import { User } from '@/api/endpoints/user/types';
+
 /* Home, Schedule, Settings 메뉴 탭 */
-// const MenuBar = () => {
-//   const pathname = usePathname();
-//   const params = useParams();
-//   const storeId = params.storeId;
-//   const { userRole } = useContext(AuthContext);
+const MenuBar = ({ user }: { user: User | null }) => {
+  const pathname = usePathname();
+  const params = useParams();
 
-//   const filteredMenus = STORE_MENUS.filter(menu =>
-//     menu.requiredRoles.includes(userRole as UserRole),
-//   );
+  const storeId = params.storeId;
 
-//   return (
-//     <nav aria-label="Main navigation">
-//       <ul className="flex h-full items-center gap-30">
-//         {filteredMenus.map(menu => (
-//           <li key={menu.label}>
-//             <Link
-//               href={`/${ROUTES.STORES}/${storeId}/${menu.path}`}
-//               className={classNames('body-14-500 px-14 py-21 text-gray-800', {
-//                 'border-b-2 border-gray-800': pathname.includes(menu.path),
-//               })}
-//             >
-//               {menu.label}
-//             </Link>
-//           </li>
-//         ))}
-//       </ul>
-//     </nav>
-//   );
-// };
+  const filteredMenus = STORE_MENUS.filter(menu =>
+    menu.requiredRoles.includes(user?.role as UserRole),
+  );
+
+  return (
+    <nav aria-label="Main navigation">
+      <ul className="flex h-full items-center gap-30">
+        {filteredMenus.map(menu => (
+          <li key={menu.label}>
+            <Link
+              href={`/${ROUTES.STORES}/${storeId}/${menu.path}`}
+              className={classNames('body-14-500 px-14 py-21 text-gray-800', {
+                'border-b-2 border-gray-800': pathname.includes(menu.path),
+              })}
+            >
+              {menu.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+};
 
 // /* 유저가 소속된 매장 리스트 */
 // const StoresListDropdown = () => {
@@ -140,7 +143,10 @@ const AuthButtons = () => {
       <button
         type="button"
         className="body-16-500 rounded-4 text-gray-900"
-        onClick={() => signIn('kakao')}
+        onClick={() => {
+          signIn('kakao');
+          console.log('카카오 로그인 시작');
+        }}
       >
         Sign In
       </button>
@@ -155,24 +161,24 @@ const AuthButtons = () => {
 };
 
 /* 사용자 정보 */
-const UserInfo = () => {
-  const { data } = useSession();
+const UserInfo = ({ user }: { user: User | null }) => {
+  console.log(user);
   return (
     <div className="flex flex-col">
-      <span>{data?.user.name}</span>
-      <span className="text-[10px]">{data?.user.role}</span>
+      <span>{user?.name}</span>
+      <span className="text-[10px]">{user?.role}</span>
     </div>
   );
 };
 
 const TopBar = () => {
+  const pathname = usePathname();
   const router = useRouter();
-  const { status } = useSession();
+  const { user, status } = useContext(AuthContext);
+  console.log(status);
 
   const handleLogoClick = () => {
-    router.push(
-      status === 'authenticated' ? `/${ROUTES.STORES}` : `/${ROUTES.LANDING}`,
-    );
+    router.push(`/${ROUTES.LANDING}`);
   };
 
   return (
@@ -185,12 +191,19 @@ const TopBar = () => {
               <Logo aria-label="Easy Shift" />
             </button>
           </h1>
+
+          {/* Navigation Menu */}
+          {!hideNavigation(pathname, status) && (
+            <>
+              <MenuBar user={user} />
+            </>
+          )}
         </div>
 
         {status === 'authenticated' ? (
           <section className="flex flex-row items-center gap-16">
             <UserAvatar />
-            <UserInfo />
+            <UserInfo user={user} />
           </section>
         ) : (
           <AuthButtons />
