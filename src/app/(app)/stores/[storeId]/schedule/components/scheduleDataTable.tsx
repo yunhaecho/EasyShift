@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import Status from '../components/Status';
+import Status from './Status';
 import AdminActions from './AdminActions';
 import WorkerActions from './WorkerActions';
 import { AuthContext } from '@/app/context/AuthContext';

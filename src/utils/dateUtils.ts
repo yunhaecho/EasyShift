@@ -1,4 +1,4 @@
-import { WeekDates } from '@/app/stores/[storeId]/home/types';
+import { WeekDates } from '@/app/(app)/stores/[storeId]/home/types';
 import {
   startOfWeek,
   addDays,

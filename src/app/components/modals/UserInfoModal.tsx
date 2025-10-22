@@ -2,7 +2,7 @@
 
 import { Dialog, DialogTitle } from '@headlessui/react';
 import CloseIcon from '@/assets/icons/close.svg';
-import UserShiftCalendar from '@/app/users/[userId]/components/UserShiftCalendar';
+import UserShiftCalendar from '@/app/(app)/users/[userId]/components/UserShiftCalendar';
 
 const UserInfoModal = ({
   isOpen,

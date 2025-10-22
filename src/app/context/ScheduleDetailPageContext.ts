@@ -6,7 +6,7 @@ import {
 } from '@/api/endpoints/schedule/types';
 import { GetStoresStoreIdUsersResponse } from '@/api/endpoints/stores/types';
 import { createContext } from 'react';
-import { WeekDate } from '../stores/[storeId]/home/types';
+import { WeekDate } from '../(app)/stores/[storeId]/home/types';
 
 export const ScheduleDetailPageContext = createContext<{
   scheduleData: GetSchedulesScheduleIdAllResponse | null;
