@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useContext } from 'react';
 import { CalendarContext } from '@/app/context/CalendarContext';
 import { useParams } from 'next/navigation';

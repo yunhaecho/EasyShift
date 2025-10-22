@@ -1,3 +1,5 @@
+'use client';
+
 import UserPageProvider from './components/UserPageProvider';
 import { useContext } from 'react';
 import useDebounce from '@/app/hooks/useDebounce';

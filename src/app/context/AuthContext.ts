@@ -1,3 +1,4 @@
+"use client"
 import { User } from '@/api/endpoints/user/types';
 import { createContext } from 'react';
 

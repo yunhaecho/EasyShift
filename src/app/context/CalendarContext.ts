@@ -1,3 +1,5 @@
+"use client"
+
 import { UserSchedule } from '@/api/endpoints/schedule/userSchedule/types';
 import { createContext } from 'react';
 
