@@ -4,7 +4,6 @@ import { AuthContext } from '../context/AuthContext';
 import { User } from '@/api/endpoints/user/types';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
-import Loader from '@/app/components/Loader';
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { data, status } = useSession();
@@ -40,10 +39,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
     // status가 'loading'일 때는 아무것도 하지 않음 (기존 상태 유지)
   }, [data, status]);
-
-  if (status === 'loading') {
-    return <Loader />;
-  }
 
   // TOOD: useEffect 사용하여 userId로 유저 정보 get API 호출하여 유저 정보 업데이트
 
