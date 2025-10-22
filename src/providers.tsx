@@ -2,10 +2,9 @@
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useRef } from 'react';
-import { MswProvider } from './mocks/MswProvider';
-import AuthProvider from './app/components/AuthProvider';
 import { SessionProvider } from 'next-auth/react';
-import CalendarProvider from './app/users/[userId]/components/calendar/CalendarProvider';
+import AuthProvider from './app/components/AuthProvider';
+import { MswProvider } from './mocks/MswProvider';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const queryClientRef = useRef<QueryClient | null>(null);
@@ -17,11 +16,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <SessionProvider>
       <QueryClientProvider client={queryClientRef.current}>
-        <CalendarProvider>
-          <AuthProvider>
-            <MswProvider>{children}</MswProvider>
-          </AuthProvider>
-        </CalendarProvider>
+        <AuthProvider>
+          <MswProvider>{children}</MswProvider>
+        </AuthProvider>
       </QueryClientProvider>
     </SessionProvider>
   );

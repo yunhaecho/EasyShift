@@ -1,4 +1,3 @@
-'use client';
 import UserPageProvider from './components/UserPageProvider';
 import { useContext } from 'react';
 import useDebounce from '@/app/hooks/useDebounce';
@@ -7,12 +6,22 @@ import UserShiftCalendarSkeleton from './components/UserShiftCalendarSkeleton';
 import UserShiftCalendar from './components/UserShiftCalendar';
 import { CalendarContext } from '@/app/context/CalendarContext';
 import { MonthlySummaryCard } from './components/calendar';
+import CalendarProvider from './components/calendar/CalendarProvider';
+
+const UserPageProviders = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <UserPageProvider>
+      <CalendarProvider>{children}</CalendarProvider>
+    </UserPageProvider>
+  );
+};
+
 const UserPage = () => {
   const scheduleData = useContext(CalendarContext);
   const isUserSchedulesLoading = useDebounce(scheduleData.isLoading);
   const mode = 'page';
   return (
-    <UserPageProvider>
+    <UserPageProviders>
       <div className="grid w-full grid-cols-[1fr,2fr]">
         <UserProfileCard />
         {isUserSchedulesLoading ? (
@@ -26,7 +35,7 @@ const UserPage = () => {
           </section>
         )}
       </div>
-    </UserPageProvider>
+    </UserPageProviders>
   );
 };
 
