@@ -2,7 +2,7 @@
 
 import { DialogTitle } from '@headlessui/react';
 import { Dialog } from '@headlessui/react';
-import ModalActions from '../../components/modals/ModalActions';
+import ModalActions from '../../../components/modals/ModalActions';
 import { useState } from 'react';
 import useToggle from '@/app/hooks/useToggle';
 import JoinStoreConfirmationModal from './JoinStoreConfirmationModal';

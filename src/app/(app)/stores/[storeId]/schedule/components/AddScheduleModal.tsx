@@ -4,7 +4,7 @@ import { Dialog } from '@headlessui/react';
 import AddScheduleModalContent from './AddScheduleModalContent';
 import { useAddNewScheduleMutation } from '@/api/endpoints/schedule/useAddNewSchedule';
 import { useState } from 'react';
-import { AddNewScheduleParams } from '@/app/stores/[storeId]/settings/types';
+import { AddNewScheduleParams } from '@/app/(app)/stores/[storeId]/settings/types';
 import { toast } from 'react-hot-toast';
 
 const AddScheduleModal = ({

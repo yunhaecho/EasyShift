@@ -1,5 +1,5 @@
 import UserInfoModal from '@/app/components/modals/UserInfoModal';
-import { WeekDate } from '@/app/stores/[storeId]/home/types';
+import { WeekDate } from '@/app/(app)/stores/[storeId]/home/types';
 
 import useToggle from '@/app/hooks/useToggle';
 import { useSearchParams } from 'next/navigation';

@@ -2,7 +2,7 @@
 
 import { DialogTitle } from '@headlessui/react';
 import { Dialog } from '@headlessui/react';
-import ModalActions from '../../components/modals/ModalActions';
+import ModalActions from '../../../components/modals/ModalActions';
 import { useContext, useEffect, useState } from 'react';
 import { GlobalNavBarContext } from '@/app/context/GlobalNavBarContext';
 import { initialData } from '@/app/components/GlobalNavBarProvider';

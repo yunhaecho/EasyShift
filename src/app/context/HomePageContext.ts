@@ -5,7 +5,7 @@ import {
   ShiftTemplateResponse,
 } from '@/api/endpoints/stores/types';
 import { createContext } from 'react';
-import { WeekDate } from '../stores/[storeId]/home/types';
+import { WeekDate } from '../(app)/stores/[storeId]/home/types';
 
 export const HomePageContext = createContext<{
   storeData: GetStoresStoreIdResponse | null;

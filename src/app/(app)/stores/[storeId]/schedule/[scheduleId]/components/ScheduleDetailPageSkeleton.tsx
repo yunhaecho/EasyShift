@@ -1,4 +1,4 @@
-import HomePageSkeleton from '@/app/stores/[storeId]/home/components/HomePageSkeleton';
+import HomePageSkeleton from '@/app/(app)/stores/[storeId]/home/components/HomePageSkeleton';
 
 const ScheduleDetailPageSkeleton = () => {
   return (

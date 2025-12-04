@@ -8,7 +8,7 @@ import ChevronDownIcon from '@/assets/icons/chevron-down.svg';
 import {
   ShiftDetail,
   AddNewScheduleParams,
-} from '@/app/stores/[storeId]/settings/types';
+} from '@/app/(app)/stores/[storeId]/settings/types';
 import { useParams } from 'next/navigation';
 
 const ScheduleTemplateDropdown = ({

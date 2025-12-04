@@ -1,7 +1,7 @@
 'use client';
 
-import AddStoreModal from '@/app/stores/components/AddStoreModal';
-import JoinStoreModal from '@/app/stores/components/JoinStoreModal';
+import AddStoreModal from '@/app/(app)/stores/components/AddStoreModal';
+import JoinStoreModal from '@/app/(app)/stores/components/JoinStoreModal';
 import useToggle from '@/app/hooks/useToggle';
 import PlusWhiteIcon from '@/assets/icons/plus-white.svg';
 import { USER_ROLE } from '@/constants/userRole';
